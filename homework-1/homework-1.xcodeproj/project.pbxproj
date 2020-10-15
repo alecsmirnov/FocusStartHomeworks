@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		844B0B432538A08C00D88711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B422538A08C00D88711 /* AppDelegate.swift */; };
 		844B0B452538A08C00D88711 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B442538A08C00D88711 /* SceneDelegate.swift */; };
-		844B0B472538A08C00D88711 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B462538A08C00D88711 /* CarsTableViewController.swift */; };
+		844B0B472538A08C00D88711 /* CarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B462538A08C00D88711 /* CarsViewController.swift */; };
 		844B0B4A2538A08C00D88711 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B0B482538A08C00D88711 /* Main.storyboard */; };
 		844B0B4C2538A09100D88711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844B0B4B2538A09100D88711 /* Assets.xcassets */; };
 		844B0B4F2538A09100D88711 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B0B4D2538A09100D88711 /* LaunchScreen.storyboard */; };
@@ -17,13 +17,14 @@
 		844B0B5C2538A11700D88711 /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B5B2538A11700D88711 /* Body.swift */; };
 		844B0B692538AC3000D88711 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B682538AC3000D88711 /* DropDownView.swift */; };
 		844B0B6D2538B5EC00D88711 /* DropDownViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B6C2538B5EC00D88711 /* DropDownViewDelegate.swift */; };
+		844B0B772538D27C00D88711 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B762538D27C00D88711 /* CarCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		844B0B3F2538A08C00D88711 /* homework-1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "homework-1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		844B0B422538A08C00D88711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844B0B442538A08C00D88711 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		844B0B462538A08C00D88711 /* CarsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
+		844B0B462538A08C00D88711 /* CarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewController.swift; sourceTree = "<group>"; };
 		844B0B492538A08C00D88711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		844B0B4B2538A09100D88711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		844B0B4E2538A09100D88711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -32,6 +33,7 @@
 		844B0B5B2538A11700D88711 /* Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
 		844B0B682538AC3000D88711 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		844B0B6C2538B5EC00D88711 /* DropDownViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownViewDelegate.swift; sourceTree = "<group>"; };
+		844B0B762538D27C00D88711 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +68,8 @@
 			children = (
 				844B0B422538A08C00D88711 /* AppDelegate.swift */,
 				844B0B442538A08C00D88711 /* SceneDelegate.swift */,
-				844B0B462538A08C00D88711 /* CarsTableViewController.swift */,
+				844B0B462538A08C00D88711 /* CarsViewController.swift */,
+				844B0B762538D27C00D88711 /* CarCell.swift */,
 				844B0B682538AC3000D88711 /* DropDownView.swift */,
 				844B0B6C2538B5EC00D88711 /* DropDownViewDelegate.swift */,
 				844B0B5B2538A11700D88711 /* Body.swift */,
@@ -150,12 +153,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844B0B472538A08C00D88711 /* CarsTableViewController.swift in Sources */,
+				844B0B472538A08C00D88711 /* CarsViewController.swift in Sources */,
 				844B0B6D2538B5EC00D88711 /* DropDownViewDelegate.swift in Sources */,
 				844B0B432538A08C00D88711 /* AppDelegate.swift in Sources */,
 				844B0B592538A10B00D88711 /* Car.swift in Sources */,
 				844B0B452538A08C00D88711 /* SceneDelegate.swift in Sources */,
 				844B0B5C2538A11700D88711 /* Body.swift in Sources */,
+				844B0B772538D27C00D88711 /* CarCell.swift in Sources */,
 				844B0B692538AC3000D88711 /* DropDownView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,8 +7,9 @@
 
 import UIKit
 
-class CarsTableViewController: UIViewController {
+class CarsViewController: UIViewController {
     @IBOutlet weak var dropDownView: DropDownView!
+    @IBOutlet weak var carsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,13 @@ class CarsTableViewController: UIViewController {
     }
 }
 
+extension CarsViewController: UITableViewDelegate {
+    
+}
+
 // MARK: - DropDownViewDelegate
 
-extension CarsTableViewController: DropDownViewDelegate {
+extension CarsViewController: DropDownViewDelegate {
     func dropDownViewDelegate(_ view: DropDownView, itemPressedAt row: Int) {
         print("\(row)")
     }
