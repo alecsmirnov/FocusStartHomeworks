@@ -17,17 +17,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ynf-fp-qCc">
-                                <rect key="frame" x="0.0" y="108" width="375" height="2"/>
+                                <rect key="frame" x="0.0" y="89" width="375" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.08176369863013698" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="B3w-Gs-2fT"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2bJ-i5-2gT">
-                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
+                                <rect key="frame" x="0.0" y="91" width="375" height="576"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="557" id="qcR-BI-fZ7"/>
+                                    <constraint firstAttribute="height" priority="500" constant="576" id="qcR-BI-fZ7"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CarCell" rowHeight="98" id="Xyz-U6-ed7" customClass="CarCell" customModule="homework_1" customModuleProvider="target">
@@ -102,7 +102,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r6C-T6-XPz" customClass="DropDownView" customModule="homework_1" customModuleProvider="target">
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r6C-T6-XPz" customClass="DropDownView" customModule="homework_1" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="52" width="297.5" height="0.0"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWM-BU-6qV">
@@ -124,6 +124,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ynf-fp-qCc" firstAttribute="top" secondItem="e4O-eg-nxA" secondAttribute="bottom" constant="12" id="ANw-aQ-uXb"/>
                             <constraint firstItem="e4O-eg-nxA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="DFh-wC-Or7"/>
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="F0r-ex-qWf"/>
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HpU-6g-xxC"/>
@@ -131,7 +132,6 @@
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Lja-oY-RQe"/>
                             <constraint firstItem="Ynf-fp-qCc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eTc-gb-Dm3"/>
                             <constraint firstItem="r6C-T6-XPz" firstAttribute="leading" secondItem="e4O-eg-nxA" secondAttribute="trailing" constant="10" id="hWH-6v-Ikf"/>
-                            <constraint firstAttribute="trailing" secondItem="r6C-T6-XPz" secondAttribute="trailing" constant="10" id="myB-d8-vgC"/>
                             <constraint firstAttribute="trailing" secondItem="Ynf-fp-qCc" secondAttribute="trailing" id="qSX-BK-vAl"/>
                             <constraint firstItem="e4O-eg-nxA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="uQt-B2-2tS"/>
                             <constraint firstItem="r6C-T6-XPz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="von-tq-Y8Y"/>
