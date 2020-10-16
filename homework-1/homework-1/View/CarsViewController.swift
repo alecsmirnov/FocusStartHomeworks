@@ -46,16 +46,10 @@ class CarsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segue.editCar {
-            print("SEGUE")
-            
             guard let carDetailViewController = segue.destination as? CarDetailViewController else { return }
-            
-            print("befor detail model init")
-            print("selected row: \(carsViewModel!.selectedRow)")
             
             if let carsViewModel = carsViewModel,
                let carDetailViewModel = carsViewModel.carDetailViewModel() {
-                print("INIT car detail model")
                 carDetailViewController.carDetailViewModel = carDetailViewModel
             }
         }
