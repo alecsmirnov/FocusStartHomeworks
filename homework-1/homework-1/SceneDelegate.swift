@@ -59,9 +59,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func fillModel() {
         if carService.isEmpty {
-            let car1 = Car(manufacturer: "Ford", model: "Shelby GT500", body: Body.coupe, yearOfIssue: 2001, carNumber: "Shoop")
-            let car2 = Car(manufacturer: "Porsche", model: "911", body: Body.cabriolet, yearOfIssue: 2016, carNumber: "Da")
-            let car3 = Car(manufacturer: "Lexus", model: "LX 570", body: Body.pickup, yearOfIssue: 2020, carNumber: "Whoop")
+            let car1 = Car(manufacturer: "Ford", model: "Shelby GT500", body: Body.coupe, yearOfIssue: 2001, carNumber: "A000TA")
+            let car2 = Car(manufacturer: "Porsche", model: "911", body: Body.cabriolet, yearOfIssue: 2016, carNumber: "B023BA")
+            let car3 = Car(manufacturer: "Lexus", model: "LX 570", body: Body.pickup, yearOfIssue: 2020, carNumber: "M294AK")
 
             carService.append(car: car1)
             carService.append(car: car2)

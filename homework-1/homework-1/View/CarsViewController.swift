@@ -27,11 +27,7 @@ class CarsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var data: [String] = []
-        
-        for body in Body.allCases {
-            data.append(body.rawValue)
-        }
+        carsTableView.tableFooterView = UIView()
         
         dropDownView.delegate = self
         
@@ -42,7 +38,12 @@ class CarsViewController: UIViewController {
             carsViewModel.delegate = self
         }
         
-        dropDownView.configure(data: data, fieldData: "Choose a body type")
+        var data: [String] = ["All"]
+        for body in Body.allCases {
+            data.append(body.rawValue)
+        }
+        
+        dropDownView.configure(data: data, fieldData: "All")
     }
     
     override func viewWillAppear(_ animated: Bool) {

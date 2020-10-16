@@ -16,7 +16,7 @@ class CarDetailViewModel {
     
     weak var delegate: CarDetailViewModelDelegate?
     
-    init(car: Car, delegate: CarDetailViewModelDelegate?) {
+    init(car: Car, delegate: CarDetailViewModelDelegate) {
         manufacturer = car.manufacturer
         model = car.model
         body = car.body
@@ -26,7 +26,7 @@ class CarDetailViewModel {
         self.delegate = delegate
     }
     
-    init(delegate: CarDetailViewModelDelegate?) {
+    init(delegate: CarDetailViewModelDelegate) {
         self.delegate = delegate
     }
     

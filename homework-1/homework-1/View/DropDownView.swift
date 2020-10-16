@@ -59,12 +59,18 @@ class DropDownView: UIStackView {
         fieldButton.translatesAutoresizingMaskIntoConstraints = false
         fieldButton.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
         
-        fieldButton.backgroundColor = UIColor.systemGray
+        //fieldButton.backgroundColor = UIColor.systemGray
         fieldButton.layer.cornerRadius = rowCornerRadius
         
         fieldButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         fieldButton.semanticContentAttribute = .forceRightToLeft
         fieldButton.imageEdgeInsets = UIEdgeInsets(top: .zero, left: 10, bottom: .zero, right: .zero)
+        
+        let borderColor = UIColor.black.withAlphaComponent(0.12).cgColor
+        
+        fieldButton.layer.borderWidth = 1
+        fieldButton.layer.borderColor = borderColor
+        fieldButton.setTitleColor(.black, for: .normal)
         
         if let titleLabel = fieldButton.titleLabel {
             titleLabel.font = UIFont.systemFont(ofSize: fontSize)

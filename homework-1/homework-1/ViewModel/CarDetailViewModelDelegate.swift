@@ -12,3 +12,11 @@ protocol CarDetailViewModelDelegate: AnyObject {
     func carDetailViewModelDelegateChangeCar(_ viewModel: CarDetailViewModel, car: Car)
     func carDetailViewModelDelegateDeleteCar(_ viewModel: CarDetailViewModel)
 }
+
+// MARK: - Optional Methods
+
+extension CarDetailViewModelDelegate {
+    func carDetailViewModelDelegateAddCar(_ viewModel: CarDetailViewModel, car: Car) {}
+    func carDetailViewModelDelegateChangeCar(_ viewModel: CarDetailViewModel, car: Car) {}
+    func carDetailViewModelDelegateDeleteCar(_ viewModel: CarDetailViewModel) {}
+}

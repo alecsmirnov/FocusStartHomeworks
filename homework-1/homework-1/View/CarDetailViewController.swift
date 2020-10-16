@@ -16,20 +16,20 @@ class CarDetailViewController: UIViewController {
     var carDetailViewModel: CarDetailViewModel?
     var carDetailMode = CarDetailMode.add
     
-    @IBOutlet weak var manufacturerTextField: UITextField!
-    @IBOutlet weak var modelTextField: UITextField!
-    @IBOutlet weak var dropDownView: DropDownView!
-    @IBOutlet weak var yearTextField: UITextField!
-    @IBOutlet weak var numberTextField: UITextField!
+    @IBOutlet private weak var manufacturerTextField: UITextField!
+    @IBOutlet private weak var modelTextField: UITextField!
+    @IBOutlet private weak var dropDownView: DropDownView!
+    @IBOutlet private weak var yearTextField: UITextField!
+    @IBOutlet private weak var numberTextField: UITextField!
     
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
+    @IBOutlet private weak var deleteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var fieldData = ""
+        var fieldData = "Select"
         
         switch carDetailMode {
         case .add:
