@@ -10,7 +10,7 @@ import Foundation
 struct Car {
     enum Default {
         static let yearOfIssue = 1999
-        static let carNumber   = "-"
+        static let carNumber   = ""
     }
     
     let manufacturer: String

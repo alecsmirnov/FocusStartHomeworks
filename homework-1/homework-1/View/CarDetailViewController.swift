@@ -16,6 +16,14 @@ class CarDetailViewController: UIViewController {
     var carDetailViewModel: CarDetailViewModel?
     var carDetailMode = CarDetailMode.add
     
+    private struct CarInput {
+        let manufacturer: String
+        let model: String
+        let body: Body
+        let yearOfIssue: String
+        let carNumber: String
+    }
+    
     @IBOutlet private weak var manufacturerTextField: UITextField!
     @IBOutlet private weak var modelTextField: UITextField!
     @IBOutlet private weak var dropDownView: DropDownView!
@@ -82,15 +90,36 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
+    private func showAlertMessage(title: String, message: String) {
+       let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+       self.present(alert, animated: true)
+   }
     
-    @IBAction func didTapAdd() {
+    private func showMessageBox(message: String, durationTime: Double, completion: @escaping () -> Void) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + durationTime) {
+            alert.dismiss(animated: true, completion: nil)
+            
+            completion()
+        }
+    }
+    
+    private func getCarInput() -> CarInput? {
         guard let manufacturer = manufacturerTextField.text,
-              let model = modelTextField.text else {
-            return
+              let model = modelTextField.text,
+              let selectedRow = dropDownView.selectedRow,
+              let body = Body.getCase(byId: selectedRow) else {
+            let title = "Required fields are empty!"
+            let message = "Please fill in the fields:\nManufacturer, Model, Body Type"
+            showAlertMessage(title: title, message: message)
+            return nil
         }
         
-        // TODO: Add validation of required and optional fields
         var yearOfIssue = ""
         var carNumber = ""
         
@@ -102,47 +131,44 @@ class CarDetailViewController: UIViewController {
             carNumber = carNumberText
         }
         
+        let carInput = CarInput(manufacturer: manufacturer,
+                                model: model,
+                                body: body,
+                                yearOfIssue: yearOfIssue,
+                                carNumber: carNumber)
+        
+        return carInput
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func didTapAdd() {
         if let carDetailViewModel = carDetailViewModel,
-           let selectedRow = dropDownView.selectedRow,
-           let body = Body.getCase(byId: selectedRow) {
-            carDetailViewModel.userAddedCar(manufacturer: manufacturer,
-                                            model: model,
-                                            body: body,
-                                            yearOfIssue: yearOfIssue,
-                                            carNumber: carNumber)
+           let carInput = getCarInput() {
+            carDetailViewModel.userAddedCar(manufacturer: carInput.manufacturer,
+                                            model: carInput.model,
+                                            body: carInput.body,
+                                            yearOfIssue: carInput.yearOfIssue,
+                                            carNumber: carInput.carNumber)
             
-            popViewController()
+            showMessageBox(message: "New record added successfully", durationTime: 1) {
+                self.popViewController()
+            }
         }
     }
     
     @IBAction func didTapEdit() {
-        guard let manufacturer = manufacturerTextField.text,
-              let model = modelTextField.text else {
-            return
-        }
-        
-        // TODO: Add validation of required and optional fields
-        var yearOfIssue = ""
-        var carNumber = ""
-        
-        if let yearOfIssueText = yearTextField.text {
-            yearOfIssue = yearOfIssueText
-        }
-        
-        if let carNumberText = numberTextField.text {
-            carNumber = carNumberText
-        }
-        
         if let carDetailViewModel = carDetailViewModel,
-           let selectedRow = dropDownView.selectedRow,
-           let body = Body.getCase(byId: selectedRow) {
-            carDetailViewModel.userChangedCar(manufacturer: manufacturer,
-                                              model: model,
-                                              body: body,
-                                              yearOfIssue: yearOfIssue,
-                                              carNumber: carNumber)
+           let carInput = getCarInput() {
+            carDetailViewModel.userChangedCar(manufacturer: carInput.manufacturer,
+                                              model: carInput.model,
+                                              body: carInput.body,
+                                              yearOfIssue: carInput.yearOfIssue,
+                                              carNumber: carInput.carNumber)
             
-            popViewController()
+            showMessageBox(message: "Record edited successfully", durationTime: 1) {
+                self.popViewController()
+            }
         }
     }
     
