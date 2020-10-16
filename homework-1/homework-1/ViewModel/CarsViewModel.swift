@@ -22,6 +22,14 @@ class CarsViewModel {
         self.carService = carService
     }
     
+    func filterReset() {
+        carService.filterReset()
+    }
+    
+    func filter(by body: Body) {
+        carService.filter(by: body)
+    }
+    
     func carCellViewModel(at index: Int) -> CarCellViewModel {
         return CarCellViewModel(car: carService.get(at: index))
     }

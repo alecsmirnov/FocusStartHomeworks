@@ -9,44 +9,63 @@ import Foundation
 
 class CarService {
     var isEmpty: Bool {
-        return data.isEmpty
+        return filteredData.isEmpty
     }
     
     var count: Int {
-        return data.count
+        return filteredData.count
     }
     
+    private var filteredData: [Car] = []
     private var data: [Car] = []
     
     func append(car: Car) {
-        data.append(car)
+        filteredData.append(car)
     }
     
     func get(at index: Int) -> Car {
-        guard data.indices.contains(index) else {
+        guard filteredData.indices.contains(index) else {
             fatalError("index is out of range")
         }
         
-        return data[index]
+        return filteredData[index]
     }
     
     func remove(at index: Int) {
-        guard data.indices.contains(index) else {
+        guard filteredData.indices.contains(index) else {
             fatalError("index is out of range")
         }
         
-        data.remove(at: index)
+        filteredData.remove(at: index)
     }
     
     func replace(at index: Int, with car: Car) {
-        guard data.indices.contains(index) else {
+        guard filteredData.indices.contains(index) else {
             fatalError("index is out of range")
         }
         
-        data[index] = car
+        filteredData[index] = car
+    }
+    
+    func filterReset() {
+        filteredData += data
+        data.removeAll()
+    }
+    
+    func filter(by body: Body) {
+        if data.isEmpty {
+            data = filteredData
+        }
+        else {
+            data += filteredData
+        }
+        
+        filteredData = data.filter { $0.body == body }
+        data = data.filter { !filteredData.contains($0) }
     }
     
     func removeAll() {
+        filteredData.removeAll()
         data.removeAll()
     }
     

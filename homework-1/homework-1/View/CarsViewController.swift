@@ -163,6 +163,17 @@ extension CarsViewController: CarsViewModelDisplayDelegate {
 
 extension CarsViewController: DropDownViewDelegate {
     func dropDownViewDelegate(_ view: DropDownView, itemPressedAt row: Int) {
-        print("\(row)")
+        if let carsViewModel = carsViewModel {
+            if row == 0 {
+                carsViewModel.filterReset()
+            }
+            else if let body = Body.getCase(byId: row - 1) {
+                carsViewModel.filter(by: body)
+            }
+        }
+    
+        UIView.animate(withDuration: 0.7) {
+            self.carsTableView.reloadData()
+        }
     }
 }

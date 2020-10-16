@@ -27,3 +27,5 @@ struct Car {
         self.carNumber = carNumber
     }
 }
+
+extension Car: Equatable {}
