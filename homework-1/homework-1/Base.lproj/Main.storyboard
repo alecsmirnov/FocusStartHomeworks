@@ -87,6 +87,7 @@
                                             <outlet property="manufacturerLabel" destination="YQ1-tm-Qct" id="qRz-Yi-fLb"/>
                                             <outlet property="modelLabel" destination="vHR-ak-Zbv" id="txh-Dj-gPk"/>
                                             <outlet property="yearOfIssueLabel" destination="EdQ-st-h1z" id="Fgi-tc-Ng5"/>
+                                            <segue destination="PzZ-Gw-m9h" kind="show" identifier="EditCar" id="FBm-k2-dRY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -122,6 +123,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="913" y="104"/>
+        </scene>
+        <!--Car Detail View Controller-->
+        <scene sceneID="m4H-dH-aLw">
+            <objects>
+                <viewController id="PzZ-Gw-m9h" customClass="CarDetailViewController" customModule="homework_1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H72-il-eOo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg3-to-cdg">
+                                <rect key="frame" x="172" y="368" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="didTapAdd" destination="PzZ-Gw-m9h" eventType="touchUpInside" id="j7s-dd-pUa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UER-pC-bbh">
+                                <rect key="frame" x="172" y="413" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="didTapEdit" destination="PzZ-Gw-m9h" eventType="touchUpInside" id="Enn-NF-sii"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l90-71-jOH">
+                                <rect key="frame" x="165" y="451" width="45" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="didTapDelete" destination="PzZ-Gw-m9h" eventType="touchUpInside" id="gEG-Yd-4rd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yAZ-ZG-8y0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Sun-Dj-UJh"/>
+                    <connections>
+                        <outlet property="addButton" destination="fg3-to-cdg" id="6yt-a6-18X"/>
+                        <outlet property="deleteButton" destination="l90-71-jOH" id="UYX-IH-Xu6"/>
+                        <outlet property="editButton" destination="UER-pC-bbh" id="CEm-I9-hnN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3C-RT-0hk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1666" y="104"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="j4v-lx-L0G">

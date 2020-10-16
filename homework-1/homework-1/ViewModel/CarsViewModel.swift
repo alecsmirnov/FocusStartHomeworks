@@ -8,11 +8,13 @@
 import Foundation
 
 class CarsViewModel {
-    //weak var delegate: CarsViewModelDisplayDelegate?
+    weak var delegate: CarsViewModelDisplayDelegate?
     
     var rowsCount: Int {
         return carService.count
     }
+    
+    var selectedRow: Int?
     
     private let carService: CarService
     
@@ -20,39 +22,48 @@ class CarsViewModel {
         self.carService = carService
     }
     
-    func editViewModel(at index: Int) -> EditViewModel {
-        return EditViewModel()
-    }
-    
     func carCellViewModel(at index: Int) -> CarCellViewModel {
         return CarCellViewModel(car: carService.get(at: index))
     }
+    
+    func carDetailViewModel() -> CarDetailViewModel? {
+        if let selectedRow = selectedRow {
+            return CarDetailViewModel(car: carService.get(at: selectedRow), delegate: self)
+        }
+        else {
+            return nil
+        }
+    }
 }
 
-//
-//// MARK: - EditorViewModelDelegate
-//extension CarsViewModel: EditorViewModelDelegate {
-//    func editorViewModelDelegateAddCar(_ viewModel: AnyObject, car: Car) {
-//        carsModel.append(car: car)
-//
-//        if let delegate = delegate {
-//            delegate.carsViewModelDisplayDelegateReloadData(self)
-//        }
-//    }
-//
-//    func editorViewModelDelegateEditCar(_ viewModel: AnyObject, car: Car, at index: Int) {
-//        carsModel.replace(at: index, with: car)
-//
-//        if let delegate = delegate {
-//            delegate.carsViewModelDisplayDelegateReloadRow(self, at: index)
-//        }
-//    }
-//
-//    func editorViewModelDelegateDeleteCar(_ viewModel: AnyObject, at index: Int) {
-//        carsModel.remove(at: index)
-//
-//        if let delegate = delegate {
-//            delegate.carsViewModelDisplayDelegateReloadData(self)
-//        }
-//    }
-//}
+// MARK: - CarDetailViewModelDelegate
+
+extension CarsViewModel: CarDetailViewModelDelegate {
+    func carDetailViewModelDelegateAddCar(_ viewModel: CarDetailViewModel, car: Car) {
+        carService.append(car: car)
+        
+        if let delegate = delegate {
+            delegate.carsViewModelDisplayDelegate(self, addCar: car)
+        }
+    }
+    
+    func carDetailViewModelDelegateChangeCar(_ viewModel: CarDetailViewModel, car: Car) {
+        guard let selectedRow = selectedRow else { return }
+
+        carService.replace(at: selectedRow, with: car)
+        
+        if let delegate = delegate {
+            delegate.carsViewModelDisplayDelegate(self, reloadRowAt: selectedRow)
+        }
+    }
+    
+    func carDetailViewModelDelegateDeleteCar(_ viewModel: CarDetailViewModel) {
+        guard let selectedRow = selectedRow else { return }
+        
+        carService.remove(at: selectedRow)
+        
+        if let delegate = delegate {
+            delegate.carsViewModelDisplayDelegate(self, deleteRowAt: selectedRow)
+        }
+    }
+}

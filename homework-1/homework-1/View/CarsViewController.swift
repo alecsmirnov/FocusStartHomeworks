@@ -12,6 +12,10 @@ class CarsViewController: UIViewController {
         static let carCell = "CarCell"
     }
     
+    enum Segue {
+        static let editCar = "EditCar"
+    }
+    
     var carsViewModel: CarsViewModel?
     
     @IBOutlet private weak var dropDownView: DropDownView!
@@ -31,7 +35,30 @@ class CarsViewController: UIViewController {
         carsTableView.dataSource = self
         carsTableView.delegate = self
         
+        if let carsViewModel = carsViewModel {
+            carsViewModel.delegate = self
+        }
+        
         dropDownView.configure(data: data, fieldData: "Выберете тип кузова...")
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segue.editCar {
+            print("SEGUE")
+            
+            guard let carDetailViewController = segue.destination as? CarDetailViewController else { return }
+            
+            print("befor detail model init")
+            print("selected row: \(carsViewModel!.selectedRow)")
+            
+            if let carsViewModel = carsViewModel,
+               let carDetailViewModel = carsViewModel.carDetailViewModel() {
+                print("INIT car detail model")
+                carDetailViewController.carDetailViewModel = carDetailViewModel
+            }
+        }
     }
 }
 
@@ -62,8 +89,39 @@ extension CarsViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension CarsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let carsViewModel = carsViewModel {
+            carsViewModel.selectedRow = indexPath.row
+        }
+        
+        return indexPath
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        carsTableView.deselectRow(at: indexPath, animated: true)
+    }
+}
 
+// MARK: - CarsViewModelDisplayDelegate
+
+extension CarsViewController: CarsViewModelDisplayDelegate {
+    func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, addCar: Car) {
+        let newRowIndex = carsTableView.numberOfRows(inSection: 0)
+        let rowIndexPath = IndexPath(row: newRowIndex, section: 0)
+        
+        carsTableView.insertRows(at: [rowIndexPath], with: .automatic)
+    }
+    
+    func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, reloadRowAt index: Int) {
+        let rowIndexPath = IndexPath(row: index, section: 0)
+        
+        carsTableView.reloadRows(at: [rowIndexPath], with: .automatic)
+    }
+    
+    func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, deleteRowAt index: Int) {
+        let rowIndexPath = IndexPath(row: index, section: 0)
+        
+        carsTableView.deleteRows(at: [rowIndexPath], with: .automatic)
     }
 }
 
