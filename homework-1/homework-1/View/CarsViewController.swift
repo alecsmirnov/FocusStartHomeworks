@@ -172,8 +172,8 @@ extension CarsViewController: DropDownViewDelegate {
             }
         }
     
-        UIView.animate(withDuration: 0.7) {
+        UIView.transition(with: carsTableView, duration: 0.3, options: .transitionCrossDissolve, animations: {
             self.carsTableView.reloadData()
-        }
+        }, completion: nil)
     }
 }
