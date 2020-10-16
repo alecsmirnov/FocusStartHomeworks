@@ -16,14 +16,6 @@ class CarDetailViewController: UIViewController {
     var carDetailViewModel: CarDetailViewModel?
     var carDetailMode = CarDetailMode.add
     
-    private struct CarInput {
-        let manufacturer: String
-        let model: String
-        let body: Body
-        let yearOfIssue: String
-        let carNumber: String
-    }
-    
     @IBOutlet private weak var manufacturerTextField: UITextField!
     @IBOutlet private weak var modelTextField: UITextField!
     @IBOutlet private weak var dropDownView: DropDownView!
@@ -109,7 +101,7 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    private func getCarInput() -> CarInput? {
+    private func getCarInput() -> Car? {
         guard let manufacturer = manufacturerTextField.text,
               let model = modelTextField.text,
               let selectedRow = dropDownView.selectedRow,
@@ -131,11 +123,11 @@ class CarDetailViewController: UIViewController {
             carNumber = carNumberText
         }
         
-        let carInput = CarInput(manufacturer: manufacturer,
-                                model: model,
-                                body: body,
-                                yearOfIssue: yearOfIssue,
-                                carNumber: carNumber)
+        let carInput = Car(manufacturer: manufacturer,
+                           model: model,
+                           body: body,
+                           yearOfIssue: Int(yearOfIssue) ?? 0,
+                           carNumber: carNumber)
         
         return carInput
     }
@@ -148,7 +140,7 @@ class CarDetailViewController: UIViewController {
             carDetailViewModel.userAddedCar(manufacturer: carInput.manufacturer,
                                             model: carInput.model,
                                             body: carInput.body,
-                                            yearOfIssue: carInput.yearOfIssue,
+                                            yearOfIssue: String(carInput.yearOfIssue),
                                             carNumber: carInput.carNumber)
             
             showMessageBox(message: "New record added successfully", durationTime: 1) {
@@ -163,7 +155,7 @@ class CarDetailViewController: UIViewController {
             carDetailViewModel.userChangedCar(manufacturer: carInput.manufacturer,
                                               model: carInput.model,
                                               body: carInput.body,
-                                              yearOfIssue: carInput.yearOfIssue,
+                                              yearOfIssue: String(carInput.yearOfIssue),
                                               carNumber: carInput.carNumber)
             
             showMessageBox(message: "Record edited successfully", durationTime: 1) {

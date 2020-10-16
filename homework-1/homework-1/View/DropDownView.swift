@@ -7,8 +7,20 @@
 
 import UIKit
 
+private enum Settings {
+    static let imageLeftEdgeSize: CGFloat = 10
+    static let fieldBorderAlpha:  CGFloat = 0.12
+    static let fieldBorderWidth:  CGFloat = 1
+}
+
 class DropDownView: UIStackView {
     weak var delegate: DropDownViewDelegate?
+    
+    var fieldData: String = "" {
+        didSet {
+            fieldButton.setTitle(fieldData, for: .normal)
+        }
+    }
     
     var rowCornerRadius: CGFloat = 15
     var rowSpacing:      CGFloat = 3
@@ -16,14 +28,7 @@ class DropDownView: UIStackView {
     var fontSize:        CGFloat = 17
     
     var isClosed = true
-    
     var selectedRow: Int?
-    
-    var fieldData: String = "" {
-        didSet {
-            fieldButton.setTitle(fieldData, for: .normal)
-        }
-    }
     
     private var fieldButton = UIButton()
     private var rowButtons: [UIButton] = []
@@ -38,7 +43,7 @@ class DropDownView: UIStackView {
     deinit {
         fieldButton.removeFromSuperview()
         
-       rowButtons.forEach { button in
+        rowButtons.forEach { button in
             button.removeFromSuperview()
         }
         
@@ -59,17 +64,13 @@ class DropDownView: UIStackView {
         fieldButton.translatesAutoresizingMaskIntoConstraints = false
         fieldButton.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
         
-        //fieldButton.backgroundColor = UIColor.systemGray
-        fieldButton.layer.cornerRadius = rowCornerRadius
-        
         fieldButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         fieldButton.semanticContentAttribute = .forceRightToLeft
-        fieldButton.imageEdgeInsets = UIEdgeInsets(top: .zero, left: 10, bottom: .zero, right: .zero)
+        fieldButton.imageEdgeInsets = UIEdgeInsets(top: .zero, left: Settings.imageLeftEdgeSize, bottom: .zero, right: .zero)
         
-        let borderColor = UIColor.black.withAlphaComponent(0.12).cgColor
-        
-        fieldButton.layer.borderWidth = 1
-        fieldButton.layer.borderColor = borderColor
+        fieldButton.layer.borderWidth = Settings.fieldBorderWidth
+        fieldButton.layer.borderColor = UIColor.black.withAlphaComponent(Settings.fieldBorderAlpha).cgColor
+        fieldButton.layer.cornerRadius = rowCornerRadius
         fieldButton.setTitleColor(.black, for: .normal)
         
         if let titleLabel = fieldButton.titleLabel {

@@ -8,13 +8,13 @@
 import Foundation
 
 class CarDetailViewModel {
+    weak var delegate: CarDetailViewModelDelegate?
+    
     var manufacturer = ""
     var model        = ""
     var body: Body?
     var yearOfIssue  = ""
     var carNumber    = ""
-    
-    weak var delegate: CarDetailViewModelDelegate?
     
     init(car: Car, delegate: CarDetailViewModelDelegate) {
         manufacturer = car.manufacturer
@@ -22,7 +22,7 @@ class CarDetailViewModel {
         body = car.body
         carNumber = car.carNumber
         
-        if car.yearOfIssue == 0 {
+        if car.yearOfIssue != 0 {
             yearOfIssue = String(car.yearOfIssue)
         }
         
