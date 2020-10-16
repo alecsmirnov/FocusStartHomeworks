@@ -9,12 +9,22 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    
+    private let carService = CarService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let window = window else {
+            fatalError("cannot attach window to the scene")
+        }
+        
+        fillModel()
+        
+        appSetting(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -43,5 +53,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+    
+    // MARK: App settings entry point
+    
+    private func fillModel() {
+        if carService.isEmpty {
+            let car1 = Car(manufacturer: "Ford", model: "Shelby GT500", body: Body.coupe, yearOfIssue: 2001, carNumber: "Shoop")
+            let car2 = Car(manufacturer: "Porsche", model: "9110", body: Body.cabriolet, yearOfIssue: 2016, carNumber: "Da")
+            let car3 = Car(manufacturer: "Lexus", model: "LX 570", body: Body.pickup, yearOfIssue: 2020, carNumber: "Whoop")
+
+            carService.append(car: car1)
+            carService.append(car: car2)
+            carService.append(car: car3)
+        }
+    }
+    
+    private func appSetting(window: UIWindow) {
+        let navigationController = window.rootViewController as! UINavigationController
+        let carsViewController = navigationController.viewControllers.first as! CarsViewController
+        
+        let carsViewModel = CarsViewModel(carService: carService)
+ 
+        carsViewController.carsViewModel = carsViewModel
     }
 }

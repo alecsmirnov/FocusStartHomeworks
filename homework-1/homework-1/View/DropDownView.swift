@@ -10,7 +10,7 @@ import UIKit
 class DropDownView: UIStackView {
     weak var delegate: DropDownViewDelegate?
     
-    var rowCornerRadius: CGFloat = 8.0
+    var rowCornerRadius: CGFloat = 15.0
     var rowSpacing:      CGFloat = 3.0
     var isClosed = true
     

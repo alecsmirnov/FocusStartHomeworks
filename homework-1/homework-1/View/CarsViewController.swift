@@ -12,6 +12,8 @@ class CarsViewController: UIViewController {
         static let carCell = "CarCell"
     }
     
+    var carsViewModel: CarsViewModel?
+    
     @IBOutlet private weak var dropDownView: DropDownView!
     @IBOutlet private weak var carsTableView: UITableView!
     
@@ -37,11 +39,21 @@ class CarsViewController: UIViewController {
 
 extension CarsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        var rowsCount = 0
+        
+        if let carsViewModel = carsViewModel {
+            rowsCount = carsViewModel.rowsCount
+        }
+        
+        return rowsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let carCell = carsTableView.dequeueReusableCell(withIdentifier: CarsTableView.carCell) as! CarCell
+        
+        if let carsViewModel = carsViewModel {
+            carCell.carCellViewModel = carsViewModel.carCellViewModel(at: indexPath.row)
+        }
         
         return carCell
     }

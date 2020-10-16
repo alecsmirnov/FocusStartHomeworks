@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H9x-Sl-j8O">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2bJ-i5-2gT">
-                                <rect key="frame" x="0.0" y="30" width="375" height="637"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="593"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CarCell" rowHeight="98" id="Xyz-U6-ed7" customClass="CarCell" customModule="homework_1" customModuleProvider="target">
@@ -86,13 +86,13 @@
                                             <outlet property="bodyLabel" destination="j2Y-Td-AlY" id="faO-Vn-Awp"/>
                                             <outlet property="manufacturerLabel" destination="YQ1-tm-Qct" id="qRz-Yi-fLb"/>
                                             <outlet property="modelLabel" destination="vHR-ak-Zbv" id="txh-Dj-gPk"/>
-                                            <outlet property="yearLabel" destination="EdQ-st-h1z" id="Fgi-tc-Ng5"/>
+                                            <outlet property="yearOfIssueLabel" destination="EdQ-st-h1z" id="Fgi-tc-Ng5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r6C-T6-XPz" customClass="DropDownView" customModule="homework_1" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <rect key="frame" x="10" y="44" width="355" height="0.0"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWM-BU-6qV">
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="0.0"/>
@@ -107,18 +107,37 @@
                             <constraint firstItem="r6C-T6-XPz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="05M-wa-RMa"/>
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="F0r-ex-qWf"/>
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HpU-6g-xxC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="r6C-T6-XPz" secondAttribute="trailing" id="KMc-iB-HMP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="r6C-T6-XPz" secondAttribute="trailing" constant="10" id="KMc-iB-HMP"/>
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Lja-oY-RQe"/>
                             <constraint firstItem="2bJ-i5-2gT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="TfA-tc-N25"/>
-                            <constraint firstItem="r6C-T6-XPz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xnb-6V-lhV"/>
+                            <constraint firstItem="r6C-T6-XPz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="xnb-6V-lhV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="L5g-16-LeB"/>
                     <connections>
                         <outlet property="carsTableView" destination="2bJ-i5-2gT" id="6vv-Bl-Hvo"/>
                         <outlet property="dropDownView" destination="r6C-T6-XPz" id="k9i-j9-h5s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="104"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="j4v-lx-L0G">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H9x-Sl-j8O" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rrh-YO-TO4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="n0A-Ua-XIk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KnH-Rd-doN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="141.59999999999999" y="103.89805097451276"/>
         </scene>

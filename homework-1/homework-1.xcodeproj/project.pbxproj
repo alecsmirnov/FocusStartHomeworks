@@ -18,6 +18,10 @@
 		844B0B692538AC3000D88711 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B682538AC3000D88711 /* DropDownView.swift */; };
 		844B0B6D2538B5EC00D88711 /* DropDownViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B6C2538B5EC00D88711 /* DropDownViewDelegate.swift */; };
 		844B0B772538D27C00D88711 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B0B762538D27C00D88711 /* CarCell.swift */; };
+		848A9E25253934B1007AFBE0 /* CarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A9E24253934B1007AFBE0 /* CarService.swift */; };
+		848A9E2D25393658007AFBE0 /* CarsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A9E2C25393658007AFBE0 /* CarsViewModel.swift */; };
+		848A9E30253936BD007AFBE0 /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A9E2F253936BD007AFBE0 /* EditViewModel.swift */; };
+		848A9E3325393732007AFBE0 /* CarCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A9E3225393732007AFBE0 /* CarCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		844B0B682538AC3000D88711 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		844B0B6C2538B5EC00D88711 /* DropDownViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownViewDelegate.swift; sourceTree = "<group>"; };
 		844B0B762538D27C00D88711 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
+		848A9E24253934B1007AFBE0 /* CarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarService.swift; sourceTree = "<group>"; };
+		848A9E2C25393658007AFBE0 /* CarsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewModel.swift; sourceTree = "<group>"; };
+		848A9E2F253936BD007AFBE0 /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
+		848A9E3225393732007AFBE0 /* CarCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,14 +74,12 @@
 		844B0B412538A08C00D88711 /* homework-1 */ = {
 			isa = PBXGroup;
 			children = (
+				848A9E272539352A007AFBE0 /* Model */,
+				848A9E29253935CB007AFBE0 /* ViewModel */,
+				848A9E2A253935D5007AFBE0 /* View */,
 				844B0B422538A08C00D88711 /* AppDelegate.swift */,
 				844B0B442538A08C00D88711 /* SceneDelegate.swift */,
-				844B0B462538A08C00D88711 /* CarsViewController.swift */,
-				844B0B762538D27C00D88711 /* CarCell.swift */,
-				844B0B682538AC3000D88711 /* DropDownView.swift */,
 				844B0B6C2538B5EC00D88711 /* DropDownViewDelegate.swift */,
-				844B0B5B2538A11700D88711 /* Body.swift */,
-				844B0B582538A10B00D88711 /* Car.swift */,
 				844B0B482538A08C00D88711 /* Main.storyboard */,
 				844B0B4B2538A09100D88711 /* Assets.xcassets */,
 				844B0B4D2538A09100D88711 /* LaunchScreen.storyboard */,
@@ -81,6 +87,36 @@
 				844B0B402538A08C00D88711 /* Products */,
 			);
 			path = "homework-1";
+			sourceTree = "<group>";
+		};
+		848A9E272539352A007AFBE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				844B0B5B2538A11700D88711 /* Body.swift */,
+				844B0B582538A10B00D88711 /* Car.swift */,
+				848A9E24253934B1007AFBE0 /* CarService.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		848A9E29253935CB007AFBE0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				848A9E2C25393658007AFBE0 /* CarsViewModel.swift */,
+				848A9E2F253936BD007AFBE0 /* EditViewModel.swift */,
+				848A9E3225393732007AFBE0 /* CarCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		848A9E2A253935D5007AFBE0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				844B0B462538A08C00D88711 /* CarsViewController.swift */,
+				844B0B762538D27C00D88711 /* CarCell.swift */,
+				844B0B682538AC3000D88711 /* DropDownView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +194,11 @@
 				844B0B432538A08C00D88711 /* AppDelegate.swift in Sources */,
 				844B0B592538A10B00D88711 /* Car.swift in Sources */,
 				844B0B452538A08C00D88711 /* SceneDelegate.swift in Sources */,
+				848A9E2D25393658007AFBE0 /* CarsViewModel.swift in Sources */,
 				844B0B5C2538A11700D88711 /* Body.swift in Sources */,
+				848A9E3325393732007AFBE0 /* CarCellViewModel.swift in Sources */,
+				848A9E25253934B1007AFBE0 /* CarService.swift in Sources */,
+				848A9E30253936BD007AFBE0 /* EditViewModel.swift in Sources */,
 				844B0B772538D27C00D88711 /* CarCell.swift in Sources */,
 				844B0B692538AC3000D88711 /* DropDownView.swift in Sources */,
 			);
