@@ -8,7 +8,19 @@
 import UIKit
 
 class CarDetailViewController: UIViewController {
+    enum CarDetailMode {
+        case add
+        case edit
+    }
+    
     var carDetailViewModel: CarDetailViewModel?
+    var carDetailMode = CarDetailMode.add
+    
+    @IBOutlet weak var manufacturerTextField: UITextField!
+    @IBOutlet weak var modelTextField: UITextField!
+    @IBOutlet weak var dropDownView: DropDownView!
+    @IBOutlet weak var yearTextField: UITextField!
+    @IBOutlet weak var numberTextField: UITextField!
     
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
@@ -16,16 +28,52 @@ class CarDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var fieldData = ""
+        
+        switch carDetailMode {
+        case .add:
+            setupAddMode()
+        case .edit:
+            setupEditMode()
+            
+            if let carDetailViewModel = carDetailViewModel {
+                manufacturerTextField.text = carDetailViewModel.manufacturer
+                modelTextField.text = carDetailViewModel.model
+                yearTextField.text = carDetailViewModel.yearOfIssue
+                numberTextField.text = carDetailViewModel.carNumber
+                
+                if let body = carDetailViewModel.body {
+                    dropDownView.selectedRow = body.id
+                    
+                    fieldData = body.rawValue
+                }
+            }
+        }
+        
+        var dropDownData: [String] = []
+        for body in Body.allCases {
+            dropDownData.append(body.rawValue)
+        }
+        
+        dropDownView.fontSize = 14
+        dropDownView.configure(data: dropDownData, fieldData: fieldData)
     }
     
     // MARK: - Private Methods
     
-    private func setupEditMode() {
+    private func setupAddMode() {
+        addButton.isHidden = false
         
+        editButton.isHidden = true
+        deleteButton.isHidden = true
     }
     
-    private func setupAddMode() {
+    private func setupEditMode() {
+        addButton.isHidden = true
         
+        editButton.isHidden = false
+        deleteButton.isHidden = false
     }
     
     private func popViewController() {
@@ -37,19 +85,65 @@ class CarDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func didTapAdd() {
-        if let carDetailViewModel = carDetailViewModel {
-            carDetailViewModel.userAddedCar(manufacturer: "add test", model: "add test", body: .cabriolet, yearOfIssue: "test", carNumber: "test")
+        guard let manufacturer = manufacturerTextField.text,
+              let model = modelTextField.text else {
+            return
         }
         
-        popViewController()
+        // TODO: Add validation of required and optional fields
+        var yearOfIssue = ""
+        var carNumber = ""
+        
+        if let yearOfIssueText = yearTextField.text {
+            yearOfIssue = yearOfIssueText
+        }
+        
+        if let carNumberText = numberTextField.text {
+            carNumber = carNumberText
+        }
+        
+        if let carDetailViewModel = carDetailViewModel,
+           let selectedRow = dropDownView.selectedRow,
+           let body = Body.getCase(byId: selectedRow) {
+            carDetailViewModel.userAddedCar(manufacturer: manufacturer,
+                                            model: model,
+                                            body: body,
+                                            yearOfIssue: yearOfIssue,
+                                            carNumber: carNumber)
+            
+            popViewController()
+        }
     }
     
     @IBAction func didTapEdit() {
-        if let carDetailViewModel = carDetailViewModel {
-            carDetailViewModel.userChangedCar(manufacturer: "add test", model: "add test", body: .cabriolet, yearOfIssue: "test", carNumber: "test")
+        guard let manufacturer = manufacturerTextField.text,
+              let model = modelTextField.text else {
+            return
         }
         
-        popViewController()
+        // TODO: Add validation of required and optional fields
+        var yearOfIssue = ""
+        var carNumber = ""
+        
+        if let yearOfIssueText = yearTextField.text {
+            yearOfIssue = yearOfIssueText
+        }
+        
+        if let carNumberText = numberTextField.text {
+            carNumber = carNumberText
+        }
+        
+        if let carDetailViewModel = carDetailViewModel,
+           let selectedRow = dropDownView.selectedRow,
+           let body = Body.getCase(byId: selectedRow) {
+            carDetailViewModel.userChangedCar(manufacturer: manufacturer,
+                                              model: model,
+                                              body: body,
+                                              yearOfIssue: yearOfIssue,
+                                              carNumber: carNumber)
+            
+            popViewController()
+        }
     }
     
     @IBAction func didTapDelete() {

@@ -31,7 +31,7 @@ class CarsViewModel {
             return CarDetailViewModel(car: carService.get(at: selectedRow), delegate: self)
         }
         else {
-            return nil
+            return CarDetailViewModel(delegate: self)
         }
     }
 }
@@ -45,16 +45,20 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         if let delegate = delegate {
             delegate.carsViewModelDisplayDelegate(self, addCar: car)
         }
+        
+        selectedRow = nil
     }
     
     func carDetailViewModelDelegateChangeCar(_ viewModel: CarDetailViewModel, car: Car) {
         guard let selectedRow = selectedRow else { return }
-
+        
         carService.replace(at: selectedRow, with: car)
         
         if let delegate = delegate {
             delegate.carsViewModelDisplayDelegate(self, reloadRowAt: selectedRow)
         }
+        
+        self.selectedRow = nil
     }
     
     func carDetailViewModelDelegateDeleteCar(_ viewModel: CarDetailViewModel) {
@@ -65,5 +69,7 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         if let delegate = delegate {
             delegate.carsViewModelDisplayDelegate(self, deleteRowAt: selectedRow)
         }
+        
+        self.selectedRow = nil
     }
 }

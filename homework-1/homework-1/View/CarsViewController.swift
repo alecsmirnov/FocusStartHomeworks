@@ -13,6 +13,7 @@ class CarsViewController: UIViewController {
     }
     
     enum Segue {
+        static let addCar  = "AddCar"
         static let editCar = "EditCar"
     }
     
@@ -41,7 +42,7 @@ class CarsViewController: UIViewController {
             carsViewModel.delegate = self
         }
         
-        dropDownView.configure(data: data, fieldData: "Выберете тип кузова...")
+        dropDownView.configure(data: data, fieldData: "Choose a body type")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,13 +58,21 @@ class CarsViewController: UIViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segue.editCar {
-            guard let carDetailViewController = segue.destination as? CarDetailViewController else { return }
-            
-            if let carsViewModel = carsViewModel,
-               let carDetailViewModel = carsViewModel.carDetailViewModel() {
-                carDetailViewController.carDetailViewModel = carDetailViewModel
-            }
+        guard let carDetailViewController = segue.destination as? CarDetailViewController else { return }
+        
+        switch segue.identifier {
+        case Segue.addCar:
+            carDetailViewController.carDetailMode = .add
+            break
+        case Segue.editCar:
+            carDetailViewController.carDetailMode = .edit
+        default:
+            break
+        }
+        
+        if let carsViewModel = carsViewModel,
+           let carDetailViewModel = carsViewModel.carDetailViewModel() {
+            carDetailViewController.carDetailViewModel = carDetailViewModel
         }
     }
 }
