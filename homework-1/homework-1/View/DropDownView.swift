@@ -10,9 +10,14 @@ import UIKit
 class DropDownView: UIStackView {
     weak var delegate: DropDownViewDelegate?
     
-    var rowCornerRadius: CGFloat = 15.0
-    var rowSpacing:      CGFloat = 3.0
+    var rowCornerRadius: CGFloat = 15
+    var rowSpacing:      CGFloat = 3
+    var itemHeight:      CGFloat = 30
+    var fontSize:        CGFloat = 17
+    
     var isClosed = true
+    
+    var selectedRow: Int?
     
     var fieldData: String = "" {
         didSet {
@@ -52,8 +57,18 @@ class DropDownView: UIStackView {
         self.fieldData = fieldData
         
         fieldButton.translatesAutoresizingMaskIntoConstraints = false
+        fieldButton.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
+        
         fieldButton.backgroundColor = UIColor.systemGray
         fieldButton.layer.cornerRadius = rowCornerRadius
+        
+        fieldButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        fieldButton.semanticContentAttribute = .forceRightToLeft
+        fieldButton.imageEdgeInsets = UIEdgeInsets(top: .zero, left: 10, bottom: .zero, right: .zero)
+        
+        if let titleLabel = fieldButton.titleLabel {
+            titleLabel.font = UIFont.systemFont(ofSize: fontSize)
+        }
         
         fieldButton.addTarget(self, action: #selector(didFieldPressed), for: .touchUpInside)
         
@@ -65,9 +80,15 @@ class DropDownView: UIStackView {
             let rowButton = UIButton()
             
             rowButton.translatesAutoresizingMaskIntoConstraints = false
+            rowButton.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
+            
             rowButton.setTitle(rowTitle, for: .normal)
             rowButton.backgroundColor = UIColor.systemBlue
             rowButton.layer.cornerRadius = rowCornerRadius
+            
+            if let titleLabel = rowButton.titleLabel {
+                titleLabel.font = UIFont.systemFont(ofSize: fontSize)
+            }
             
             rowButton.isHidden = isClosed
             rowButton.alpha = 0
@@ -103,9 +124,11 @@ class DropDownView: UIStackView {
             fieldData = title
         }
         
+        let row = sender.tag
+        
+        selectedRow = row
+        
         if let delegate = delegate {
-            let row = sender.tag
-            
             delegate.dropDownViewDelegate(self, itemPressedAt: row)
         }
         
