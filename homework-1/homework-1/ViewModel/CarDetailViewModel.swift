@@ -8,11 +8,11 @@
 import Foundation
 
 class CarDetailViewModel {
-    var manufacturer: String?
-    var model: String?
+    var manufacturer = ""
+    var model        = ""
     var body: Body?
-    var yearOfIssue: String?
-    var carNumber: String?
+    var yearOfIssue  = ""
+    var carNumber    = ""
     
     weak var delegate: CarDetailViewModelDelegate?
     
@@ -20,8 +20,11 @@ class CarDetailViewModel {
         manufacturer = car.manufacturer
         model = car.model
         body = car.body
-        yearOfIssue = String(car.yearOfIssue)
         carNumber = car.carNumber
+        
+        if car.yearOfIssue == 0 {
+            yearOfIssue = String(car.yearOfIssue)
+        }
         
         self.delegate = delegate
     }
@@ -35,7 +38,7 @@ class CarDetailViewModel {
             let car = Car(manufacturer: manufacturer,
                           model: model,
                           body: body,
-                          yearOfIssue: Int(yearOfIssue) ?? Car.Default.yearOfIssue,
+                          yearOfIssue: Int(yearOfIssue) ?? 0,
                           carNumber: carNumber)
             
             delegate.carDetailViewModelDelegateAddCar(self, car: car)
@@ -47,7 +50,7 @@ class CarDetailViewModel {
             let car = Car(manufacturer: manufacturer,
                           model: model,
                           body: body,
-                          yearOfIssue: Int(yearOfIssue) ?? Car.Default.yearOfIssue,
+                          yearOfIssue: Int(yearOfIssue) ?? 0,
                           carNumber: carNumber)
             
             delegate.carDetailViewModelDelegateChangeCar(self, car: car)
