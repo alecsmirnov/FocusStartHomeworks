@@ -5,8 +5,6 @@
 //  Created by Admin on 15.10.2020.
 //
 
-import Foundation
-
 enum Body: String {
     case sedan     = "Sedan"
     case coupe     = "Coupe"

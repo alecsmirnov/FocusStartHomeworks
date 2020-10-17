@@ -5,8 +5,6 @@
 //  Created by Admin on 16.10.2020.
 //
 
-import Foundation
-
 struct CarCellViewModel {
     let manufacturer: String
     let model: String
@@ -17,6 +15,12 @@ struct CarCellViewModel {
         manufacturer = car.manufacturer
         model = car.model
         body = car.body.rawValue
-        yearOfIssue = car.yearOfIssue == 0 ? "-" : String(car.yearOfIssue)
+        
+        if let carYearOfIssue = car.yearOfIssue {
+            yearOfIssue = String(carYearOfIssue)
+        }
+        else {
+            yearOfIssue = "-"
+        }
     }
 }

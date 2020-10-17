@@ -112,21 +112,17 @@ class CarDetailViewController: UIViewController {
             return nil
         }
         
-        var yearOfIssue = ""
-        var carNumber = ""
-        
+        var yearOfIssue: Int?
         if let yearOfIssueText = yearTextField.text {
-            yearOfIssue = yearOfIssueText
+            yearOfIssue = Int(yearOfIssueText)
         }
         
-        if let carNumberText = numberTextField.text {
-            carNumber = carNumberText
-        }
+        let carNumber = numberTextField.text
         
         let carInput = Car(manufacturer: manufacturer,
                            model: model,
                            body: body,
-                           yearOfIssue: Int(yearOfIssue) ?? 0,
+                           yearOfIssue: yearOfIssue,
                            carNumber: carNumber)
         
         return carInput
@@ -140,7 +136,7 @@ class CarDetailViewController: UIViewController {
             carDetailViewModel.userAddedCar(manufacturer: carInput.manufacturer,
                                             model: carInput.model,
                                             body: carInput.body,
-                                            yearOfIssue: String(carInput.yearOfIssue),
+                                            yearOfIssue: carInput.yearOfIssue,
                                             carNumber: carInput.carNumber)
             
             showMessageBox(message: "New record added successfully", durationTime: 1) {
@@ -155,7 +151,7 @@ class CarDetailViewController: UIViewController {
             carDetailViewModel.userChangedCar(manufacturer: carInput.manufacturer,
                                               model: carInput.model,
                                               body: carInput.body,
-                                              yearOfIssue: String(carInput.yearOfIssue),
+                                              yearOfIssue: carInput.yearOfIssue,
                                               carNumber: carInput.carNumber)
             
             showMessageBox(message: "Record edited successfully", durationTime: 1) {

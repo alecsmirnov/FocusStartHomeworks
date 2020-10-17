@@ -5,8 +5,6 @@
 //  Created by Admin on 16.10.2020.
 //
 
-import Foundation
-
 protocol CarsViewModelDisplayDelegate: AnyObject {
     func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, addCar: Car)
     func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, reloadRowAt index: Int)

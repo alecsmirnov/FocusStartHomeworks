@@ -5,8 +5,6 @@
 //  Created by Admin on 16.10.2020.
 //
 
-import Foundation
-
 class CarService {
     var isEmpty: Bool {
         return filteredData.isEmpty
@@ -17,7 +15,7 @@ class CarService {
     }
     
     private var filteredData: [Car] = []
-    private var data: [Car] = []
+    private var tempData: [Car] = []
     
     func append(car: Car) {
         filteredData.append(car)
@@ -48,25 +46,25 @@ class CarService {
     }
     
     func filterReset() {
-        filteredData += data
-        data.removeAll()
+        filteredData += tempData
+        tempData.removeAll()
     }
     
     func filter(by body: Body) {
-        if data.isEmpty {
-            data = filteredData
+        if tempData.isEmpty {
+            tempData = filteredData
         }
         else {
-            data += filteredData
+            tempData += filteredData
         }
         
-        filteredData = data.filter { $0.body == body }
-        data = data.filter { !filteredData.contains($0) }
+        filteredData = tempData.filter { $0.body == body }
+        tempData = tempData.filter { !filteredData.contains($0) }
     }
     
     func removeAll() {
         filteredData.removeAll()
-        data.removeAll()
+        tempData.removeAll()
     }
     
     deinit {

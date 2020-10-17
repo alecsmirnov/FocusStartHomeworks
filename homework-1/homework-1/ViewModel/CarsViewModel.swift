@@ -5,8 +5,6 @@
 //  Created by Admin on 16.10.2020.
 //
 
-import Foundation
-
 class CarsViewModel {
     weak var delegate: CarsViewModelDisplayDelegate?
     

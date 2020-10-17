@@ -5,16 +5,14 @@
 //  Created by Admin on 16.10.2020.
 //
 
-import Foundation
-
 class CarDetailViewModel {
     weak var delegate: CarDetailViewModelDelegate?
     
-    var manufacturer = ""
-    var model        = ""
-    var body: Body?
-    var yearOfIssue  = ""
-    var carNumber    = ""
+    let manufacturer: String?
+    let model: String?
+    let body: Body?
+    let yearOfIssue: String?
+    let carNumber: String?
     
     init(car: Car, delegate: CarDetailViewModelDelegate) {
         manufacturer = car.manufacturer
@@ -22,35 +20,44 @@ class CarDetailViewModel {
         body = car.body
         carNumber = car.carNumber
         
-        if car.yearOfIssue != 0 {
-            yearOfIssue = String(car.yearOfIssue)
+        if let carYearOfIssue = car.yearOfIssue {
+            yearOfIssue = String(carYearOfIssue)
+        }
+        else {
+            yearOfIssue = "-"
         }
         
         self.delegate = delegate
     }
     
     init(delegate: CarDetailViewModelDelegate) {
+        manufacturer = nil
+        model = nil
+        body = nil
+        yearOfIssue = nil
+        carNumber = nil
+        
         self.delegate = delegate
     }
     
-    func userAddedCar(manufacturer: String, model: String, body: Body, yearOfIssue: String, carNumber: String) {
+    func userAddedCar(manufacturer: String, model: String, body: Body, yearOfIssue: Int?, carNumber: String?) {
         if let delegate = delegate {
             let car = Car(manufacturer: manufacturer,
                           model: model,
                           body: body,
-                          yearOfIssue: Int(yearOfIssue) ?? 0,
+                          yearOfIssue: yearOfIssue,
                           carNumber: carNumber)
             
             delegate.carDetailViewModelDelegateAddCar(self, car: car)
         }
     }
     
-    func userChangedCar(manufacturer: String, model: String, body: Body, yearOfIssue: String, carNumber: String) {
+    func userChangedCar(manufacturer: String, model: String, body: Body, yearOfIssue: Int?, carNumber: String?) {
         if let delegate = delegate {
             let car = Car(manufacturer: manufacturer,
                           model: model,
                           body: body,
-                          yearOfIssue: Int(yearOfIssue) ?? 0,
+                          yearOfIssue: yearOfIssue,
                           carNumber: carNumber)
             
             delegate.carDetailViewModelDelegateChangeCar(self, car: car)
