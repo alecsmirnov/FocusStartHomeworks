@@ -17,6 +17,6 @@ struct CarCellViewModel {
         manufacturer = car.manufacturer
         model = car.model
         body = car.body.rawValue
-        yearOfIssue = String(car.yearOfIssue)
+        yearOfIssue = car.yearOfIssue == 0 ? "-" : String(car.yearOfIssue)
     }
 }
