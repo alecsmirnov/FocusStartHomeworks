@@ -9,8 +9,8 @@ import UIKit
 
 private enum Settings {
     static let imageLeftEdgeSize: CGFloat = 10
-    static let fieldBorderAlpha:  CGFloat = 0.12
-    static let fieldBorderWidth:  CGFloat = 1
+    static let fieldBorderAlpha: CGFloat = 0.12
+    static let fieldBorderWidth: CGFloat = 1
 }
 
 class DropDownView: UIStackView {
@@ -23,9 +23,9 @@ class DropDownView: UIStackView {
     }
     
     var rowCornerRadius: CGFloat = 15
-    var rowSpacing:      CGFloat = 3
-    var itemHeight:      CGFloat = 30
-    var fontSize:        CGFloat = 17
+    var rowSpacing: CGFloat = 3
+    var itemHeight: CGFloat = 30
+    var fontSize:CGFloat = 17
     
     var isClosed = true
     var selectedRow: Int?
@@ -42,10 +42,7 @@ class DropDownView: UIStackView {
     
     deinit {
         fieldButton.removeFromSuperview()
-        
-        rowButtons.forEach { button in
-            button.removeFromSuperview()
-        }
+        rowButtons.forEach { $0.removeFromSuperview() }
         
         rowButtons.removeAll()
     }

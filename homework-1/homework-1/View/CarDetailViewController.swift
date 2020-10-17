@@ -16,15 +16,15 @@ class CarDetailViewController: UIViewController {
     var carDetailViewModel: CarDetailViewModel?
     var carDetailMode = CarDetailMode.add
     
+    @IBOutlet private weak var addBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var editBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var deleteBarButtonItem: UIBarButtonItem!
+    
     @IBOutlet private weak var manufacturerTextField: UITextField!
     @IBOutlet private weak var modelTextField: UITextField!
     @IBOutlet private weak var dropDownView: DropDownView!
     @IBOutlet private weak var yearTextField: UITextField!
     @IBOutlet private weak var numberTextField: UITextField!
-    
-    @IBOutlet private weak var addBarButtonItem: UIBarButtonItem!
-    @IBOutlet private weak var editBarButtonItem: UIBarButtonItem!
-    @IBOutlet private weak var deleteBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +109,7 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    private func getCarInput() -> Car? {
+    private func getUSerInput() -> Car? {
         guard let manufacturer = manufacturerTextField.text,
               let model = modelTextField.text,
               let selectedRow = dropDownView.selectedRow,
@@ -138,9 +138,9 @@ class CarDetailViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func didTapAdd(_ sender: UIBarButtonItem) {
+    @IBAction private func didTapAdd(_ sender: UIBarButtonItem) {
         if let carDetailViewModel = carDetailViewModel,
-           let carInput = getCarInput() {
+           let carInput = getUSerInput() {
             carDetailViewModel.userAddedCar(manufacturer: carInput.manufacturer,
                                             model: carInput.model,
                                             body: carInput.body,
@@ -153,9 +153,9 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapEdit(_ sender: UIBarButtonItem) {
+    @IBAction private func didTapEdit(_ sender: UIBarButtonItem) {
         if let carDetailViewModel = carDetailViewModel,
-           let carInput = getCarInput() {
+           let carInput = getUSerInput() {
             carDetailViewModel.userChangedCar(manufacturer: carInput.manufacturer,
                                               model: carInput.model,
                                               body: carInput.body,
@@ -168,7 +168,7 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapDelete(_ sender: UIBarButtonItem) {
+    @IBAction private func didTapDelete(_ sender: UIBarButtonItem) {
         if let carDetailViewModel = carDetailViewModel {
             carDetailViewModel.userDeletedCar()
         }
