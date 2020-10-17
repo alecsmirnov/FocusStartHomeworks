@@ -6,7 +6,7 @@
 //
 
 protocol CarDetailViewModelDelegate: AnyObject {
-    func carDetailViewModelDelegateAddCar(_ viewModel: CarDetailViewModel, car: Car)
-    func carDetailViewModelDelegateChangeCar(_ viewModel: CarDetailViewModel, car: Car)
+    func carDetailViewModelDelegateAdd(_ viewModel: CarDetailViewModel, car: Car)
+    func carDetailViewModelDelegateChange(_ viewModel: CarDetailViewModel, car: Car)
     func carDetailViewModelDelegateDeleteCar(_ viewModel: CarDetailViewModel)
 }
