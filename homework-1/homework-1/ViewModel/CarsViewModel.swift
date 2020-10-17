@@ -28,6 +28,10 @@ class CarsViewModel {
         carService.filter(by: body)
     }
     
+    func remove(at index: Int) {
+        carService.remove(at: index)
+    }
+    
     func carCellViewModel(at index: Int) -> CarCellViewModel {
         return CarCellViewModel(car: carService.get(at: index))
     }
