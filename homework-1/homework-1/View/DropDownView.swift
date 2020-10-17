@@ -25,7 +25,7 @@ class DropDownView: UIStackView {
     var rowCornerRadius: CGFloat = 15
     var rowSpacing: CGFloat = 3
     var itemHeight: CGFloat = 30
-    var fontSize:CGFloat = 17
+    var fontSize: CGFloat = 17
     
     var isClosed = true
     var selectedRow: Int?
@@ -63,7 +63,10 @@ class DropDownView: UIStackView {
         
         fieldButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         fieldButton.semanticContentAttribute = .forceRightToLeft
-        fieldButton.imageEdgeInsets = UIEdgeInsets(top: .zero, left: Settings.imageLeftEdgeSize, bottom: .zero, right: .zero)
+        fieldButton.imageEdgeInsets = UIEdgeInsets(top: .zero,
+                                                   left: Settings.imageLeftEdgeSize,
+                                                   bottom: .zero,
+                                                   right: .zero)
         
         fieldButton.layer.borderWidth = Settings.fieldBorderWidth
         fieldButton.layer.borderColor = UIColor.black.withAlphaComponent(Settings.fieldBorderAlpha).cgColor

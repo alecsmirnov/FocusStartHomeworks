@@ -48,7 +48,7 @@ class CarDetailViewModel {
                           yearOfIssue: yearOfIssue,
                           carNumber: carNumber)
             
-            delegate.carDetailViewModelDelegateAdd(self, car: car)
+            delegate.carDetailViewModelDelegate(self, addCar: car)
         }
     }
     
@@ -60,7 +60,7 @@ class CarDetailViewModel {
                           yearOfIssue: yearOfIssue,
                           carNumber: carNumber)
             
-            delegate.carDetailViewModelDelegateChange(self, car: car)
+            delegate.carDetailViewModelDelegate(self, changeCar: car)
         }
     }
     

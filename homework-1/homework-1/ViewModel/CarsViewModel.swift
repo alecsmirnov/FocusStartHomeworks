@@ -45,7 +45,7 @@ class CarsViewModel {
 // MARK: - CarDetailViewModelDelegate
 
 extension CarsViewModel: CarDetailViewModelDelegate {
-    func carDetailViewModelDelegateAdd(_ viewModel: CarDetailViewModel, car: Car) {
+    func carDetailViewModelDelegate(_ viewModel: CarDetailViewModel, addCar car: Car) {
         carService.append(car: car)
         
         if let delegate = delegate {
@@ -55,7 +55,7 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         selectedRow = nil
     }
     
-    func carDetailViewModelDelegateChange(_ viewModel: CarDetailViewModel, car: Car) {
+    func carDetailViewModelDelegate(_ viewModel: CarDetailViewModel, changeCar car: Car) {
         guard let selectedRow = selectedRow else { return }
         
         carService.replace(at: selectedRow, with: car)
