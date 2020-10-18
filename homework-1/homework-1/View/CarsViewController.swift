@@ -13,7 +13,7 @@ class CarsViewController: UIViewController {
     }
     
     enum Segue {
-        static let addCar  = "AddCar"
+        static let addCar = "AddCar"
         static let editCar = "EditCar"
     }
     
@@ -38,12 +38,9 @@ class CarsViewController: UIViewController {
             carsViewModel.delegate = self
         }
         
-        var data: [String] = ["All"]
-        for body in Body.allCases {
-            data.append(body.rawValue)
-        }
+        let dropDownData = ["All"] + Body.allCases.map { $0.rawValue }
         
-        dropDownView.configure(data: data, fieldData: "All")
+        dropDownView.configure(data: dropDownData, fieldData: "All")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,9 +68,8 @@ class CarsViewController: UIViewController {
             break
         }
         
-        if let carsViewModel = carsViewModel,
-           let carDetailViewModel = carsViewModel.carDetailViewModel() {
-            carDetailViewController.carDetailViewModel = carDetailViewModel
+        if let carsViewModel = carsViewModel {
+            carDetailViewController.carDetailViewModel = carsViewModel.carDetailViewModel()
         }
     }
 }
@@ -118,10 +114,12 @@ extension CarsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+            guard let self = self else { return }
+            
             if let carsViewModel = self.carsViewModel {
                 carsViewModel.remove(at: indexPath.row)
-                carsTableView.deleteRows(at: [indexPath], with: .automatic)
+                self.carsTableView.deleteRows(at: [indexPath], with: .automatic)
                 
                 completionHandler(true)
             }

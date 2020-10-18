@@ -23,8 +23,8 @@ class CarDetailViewController: UIViewController {
     @IBOutlet private weak var manufacturerTextField: UITextField!
     @IBOutlet private weak var modelTextField: UITextField!
     @IBOutlet private weak var dropDownView: DropDownView!
-    @IBOutlet private weak var yearTextField: UITextField!
-    @IBOutlet private weak var numberTextField: UITextField!
+    @IBOutlet private weak var yearOfIssueTextField: UITextField!
+    @IBOutlet private weak var carNumberTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,8 @@ class CarDetailViewController: UIViewController {
             if let carDetailViewModel = carDetailViewModel {
                 manufacturerTextField.text = carDetailViewModel.manufacturer
                 modelTextField.text = carDetailViewModel.model
-                yearTextField.text = carDetailViewModel.yearOfIssue
-                numberTextField.text = carDetailViewModel.carNumber
+                yearOfIssueTextField.text = carDetailViewModel.yearOfIssue
+                carNumberTextField.text = carDetailViewModel.carNumber
                 
                 if let body = carDetailViewModel.body {
                     dropDownView.selectedRow = body.id
@@ -51,10 +51,7 @@ class CarDetailViewController: UIViewController {
             }
         }
         
-        var dropDownData: [String] = []
-        for body in Body.allCases {
-            dropDownData.append(body.rawValue)
-        }
+        let dropDownData = Body.allCases.map { $0.rawValue }
         
         dropDownView.fontSize = 14
         dropDownView.configure(data: dropDownData, fieldData: fieldData)
@@ -109,7 +106,7 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    private func getUSerInput() -> Car? {
+    private func getUserInput() -> Car? {
         guard let manufacturer = manufacturerTextField.text,
               let model = modelTextField.text,
               let selectedRow = dropDownView.selectedRow,
@@ -121,11 +118,11 @@ class CarDetailViewController: UIViewController {
         }
         
         var yearOfIssue: Int?
-        if let yearOfIssueText = yearTextField.text {
+        if let yearOfIssueText = yearOfIssueTextField.text {
             yearOfIssue = Int(yearOfIssueText)
         }
         
-        let carNumber = numberTextField.text
+        let carNumber = carNumberTextField.text
         
         let carInput = Car(manufacturer: manufacturer,
                            model: model,
@@ -140,7 +137,7 @@ class CarDetailViewController: UIViewController {
     
     @IBAction private func didTapAdd(_ sender: UIBarButtonItem) {
         if let carDetailViewModel = carDetailViewModel,
-           let carInput = getUSerInput() {
+           let carInput = getUserInput() {
             carDetailViewModel.userAddedCar(manufacturer: carInput.manufacturer,
                                             model: carInput.model,
                                             body: carInput.body,
@@ -155,7 +152,7 @@ class CarDetailViewController: UIViewController {
     
     @IBAction private func didTapEdit(_ sender: UIBarButtonItem) {
         if let carDetailViewModel = carDetailViewModel,
-           let carInput = getUSerInput() {
+           let carInput = getUserInput() {
             carDetailViewModel.userChangedCar(manufacturer: carInput.manufacturer,
                                               model: carInput.model,
                                               body: carInput.body,

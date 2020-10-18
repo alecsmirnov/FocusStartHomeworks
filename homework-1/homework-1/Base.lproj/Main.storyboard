@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H9x-Sl-j8O">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,28 +12,28 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CarsViewController" customModule="homework_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ynf-fp-qCc">
-                                <rect key="frame" x="0.0" y="89" width="375" height="2"/>
+                                <rect key="frame" x="0.0" y="89" width="600" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.08176369863013698" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="B3w-Gs-2fT"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2bJ-i5-2gT">
-                                <rect key="frame" x="0.0" y="91" width="375" height="576"/>
+                                <rect key="frame" x="0.0" y="91" width="600" height="509"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="500" constant="576" id="qcR-BI-fZ7"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CarCell" rowHeight="98" id="Xyz-U6-ed7" customClass="CarCell" customModule="homework_1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="98"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="98"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xyz-U6-ed7" id="h6e-Tg-qIu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="98"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Manufacturer)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQ1-tm-Qct">
@@ -103,7 +102,7 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r6C-T6-XPz" customClass="DropDownView" customModule="homework_1" customModuleProvider="target">
-                                <rect key="frame" x="67.5" y="52" width="297.5" height="0.0"/>
+                                <rect key="frame" x="67.5" y="52" width="522.5" height="0.0"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWM-BU-6qV">
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="0.0"/>
@@ -157,14 +156,13 @@
         <!--Car Detail View Controller-->
         <scene sceneID="m4H-dH-aLw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="r3C-RT-0hk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="PzZ-Gw-m9h" customClass="CarDetailViewController" customModule="homework_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H72-il-eOo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhb-YR-qf2">
-                                <rect key="frame" x="31.5" y="104" width="312" height="563"/>
+                                <rect key="frame" x="144" y="104" width="312" height="563"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FqQ-69-ls1">
                                         <rect key="frame" x="127" y="0.0" width="185" height="34.5"/>
@@ -300,15 +298,16 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addBarButtonItem" destination="ejH-Tb-jOq" id="nq1-bf-bwB"/>
+                        <outlet property="carNumberTextField" destination="Ycy-bd-fPK" id="wj6-jZ-Rmg"/>
                         <outlet property="deleteBarButtonItem" destination="qMZ-9t-WEH" id="nFU-8k-qGW"/>
                         <outlet property="dropDownView" destination="WD8-B0-QAR" id="aCa-XQ-bwz"/>
                         <outlet property="editBarButtonItem" destination="WOS-41-qzD" id="cFf-Qf-68P"/>
                         <outlet property="manufacturerTextField" destination="FqQ-69-ls1" id="G2W-t0-1WB"/>
                         <outlet property="modelTextField" destination="cJv-DT-nRi" id="bnX-dc-rCr"/>
-                        <outlet property="numberTextField" destination="Ycy-bd-fPK" id="wj6-jZ-Rmg"/>
-                        <outlet property="yearTextField" destination="o7S-IF-HbZ" id="2fy-MD-r8s"/>
+                        <outlet property="yearOfIssueTextField" destination="o7S-IF-HbZ" id="2fy-MD-r8s"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3C-RT-0hk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1664.8" y="103.89805097451276"/>
         </scene>
