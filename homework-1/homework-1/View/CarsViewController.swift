@@ -38,7 +38,7 @@ class CarsViewController: UIViewController {
             carsViewModel.delegate = self
         }
         
-        let dropDownData = ["All"] + Body.allCases.map { $0.rawValue }
+        let dropDownData = ["All"] + Body.allCases.map { $0.description }
         
         dropDownView.configure(data: dropDownData, fieldData: "All")
     }
@@ -180,7 +180,7 @@ extension CarsViewController: DropDownViewDelegate {
             if row == 0 {
                 carsViewModel.filterReset()
             }
-            else if let body = Body.getCase(byId: row - 1) {
+            else if let body = Body(rawValue: row - 1) {
                 carsViewModel.filter(by: body)
             }
         }

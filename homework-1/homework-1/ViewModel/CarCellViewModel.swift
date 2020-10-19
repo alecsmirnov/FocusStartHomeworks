@@ -14,7 +14,7 @@ struct CarCellViewModel {
     init(car: Car) {
         manufacturer = car.manufacturer
         model = car.model
-        body = car.body.rawValue
+        body = car.body.description
         
         if let carYearOfIssue = car.yearOfIssue {
             yearOfIssue = String(carYearOfIssue)

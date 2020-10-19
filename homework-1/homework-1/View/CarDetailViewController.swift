@@ -44,14 +44,14 @@ class CarDetailViewController: UIViewController {
                 carNumberTextField.text = carDetailViewModel.carNumber
                 
                 if let body = carDetailViewModel.body {
-                    dropDownView.selectedRow = body.id
+                    dropDownView.selectedRow = body.rawValue
                     
-                    fieldData = body.rawValue
+                    fieldData = body.description
                 }
             }
         }
         
-        let dropDownData = Body.allCases.map { $0.rawValue }
+        let dropDownData = Body.allCases.map { $0.description }
         
         dropDownView.fontSize = 14
         dropDownView.configure(data: dropDownData, fieldData: fieldData)
@@ -110,7 +110,7 @@ class CarDetailViewController: UIViewController {
         guard let manufacturer = manufacturerTextField.text,
               let model = modelTextField.text,
               let selectedRow = dropDownView.selectedRow,
-              let body = Body.getCase(byId: selectedRow) else {
+              let body = Body(rawValue: selectedRow) else {
             let title = "Required fields are empty!"
             let message = "Please fill in the fields:\nManufacturer, Model, Body Type"
             showAlertMessage(title: title, message: message)

@@ -13,6 +13,4 @@ struct Car {
     let carNumber: String?
 }
 
-// MARK: - Equatable
-
 extension Car: Equatable {}
