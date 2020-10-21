@@ -29,6 +29,12 @@ class CarDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        applyMode()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func applyMode() {
         var fieldData = "Select"
         
         switch carDetailMode {
@@ -56,8 +62,6 @@ class CarDetailViewController: UIViewController {
         dropDownView.fontSize = 14
         dropDownView.configure(data: dropDownData, fieldData: fieldData)
     }
-    
-    // MARK: - Private Methods
     
     private func setupAddMode() {
         addBarButtonItem.title = "Add"
@@ -166,9 +170,7 @@ class CarDetailViewController: UIViewController {
     }
     
     @IBAction private func didTapDelete(_ sender: UIBarButtonItem) {
-        if let carDetailViewModel = carDetailViewModel {
-            carDetailViewModel.userDeletedCar()
-        }
+        carDetailViewModel?.userDeletedCar()
         
         popViewController()
     }

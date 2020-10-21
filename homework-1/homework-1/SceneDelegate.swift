@@ -22,8 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError("cannot attach window to the scene")
         }
         
-        fillModel()
-        
         appSetting(window: window)
     }
 
@@ -70,11 +68,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func appSetting(window: UIWindow) {
-        let navigationController = window.rootViewController as! UINavigationController
-        let carsViewController = navigationController.viewControllers.first as! CarsViewController
+        guard let navigationController = window.rootViewController as? UINavigationController,
+              let carsViewController = navigationController.viewControllers.first as? CarsViewController else {
+            return
+        }
         
         let carsViewModel = CarsViewModel(carService: carService)
- 
+        
         carsViewController.carsViewModel = carsViewModel
+        
+        fillModel()
     }
 }

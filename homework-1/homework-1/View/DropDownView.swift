@@ -132,12 +132,9 @@ class DropDownView: UIStackView {
         }
         
         let row = sender.tag
-        
         selectedRow = row
         
-        if let delegate = delegate {
-            delegate.dropDownViewDelegate(self, itemPressedAt: row)
-        }
+        delegate?.dropDownViewDelegate(self, itemPressedAt: row)
         
         switchMenu()
     }

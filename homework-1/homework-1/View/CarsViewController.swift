@@ -61,7 +61,6 @@ class CarsViewController: UIViewController {
         switch segue.identifier {
         case Segue.addCar:
             carDetailViewController.carDetailMode = .add
-            break
         case Segue.editCar:
             carDetailViewController.carDetailMode = .edit
         default:

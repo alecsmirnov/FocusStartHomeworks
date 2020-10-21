@@ -36,7 +36,7 @@ class CarsViewModel {
         return CarCellViewModel(car: carService.get(at: index))
     }
     
-    func carDetailViewModel() -> CarDetailViewModel? {
+    func carDetailViewModel() -> CarDetailViewModel {
         if let selectedRow = selectedRow {
             return CarDetailViewModel(car: carService.get(at: selectedRow), delegate: self)
         }
@@ -52,11 +52,7 @@ extension CarsViewModel: CarDetailViewModelDelegate {
     func carDetailViewModelDelegate(_ viewModel: CarDetailViewModel, addCar car: Car) {
         carService.append(car: car)
         
-        if let delegate = delegate {
-            delegate.carsViewModelDisplayDelegate(self, addCar: car)
-        }
-        
-        selectedRow = nil
+        delegate?.carsViewModelDisplayDelegate(self, addCar: car)
     }
     
     func carDetailViewModelDelegate(_ viewModel: CarDetailViewModel, changeCar car: Car) {
@@ -64,9 +60,7 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         
         carService.replace(at: selectedRow, with: car)
         
-        if let delegate = delegate {
-            delegate.carsViewModelDisplayDelegate(self, reloadRowAt: selectedRow)
-        }
+        delegate?.carsViewModelDisplayDelegate(self, reloadRowAt: selectedRow)
         
         self.selectedRow = nil
     }
@@ -76,9 +70,7 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         
         carService.remove(at: selectedRow)
         
-        if let delegate = delegate {
-            delegate.carsViewModelDisplayDelegate(self, deleteRowAt: selectedRow)
-        }
+        delegate?.carsViewModelDisplayDelegate(self, deleteRowAt: selectedRow)
         
         self.selectedRow = nil
     }

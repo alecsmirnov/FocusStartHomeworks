@@ -41,32 +41,26 @@ class CarDetailViewModel {
     }
     
     func userAddedCar(manufacturer: String, model: String, body: Body, yearOfIssue: Int?, carNumber: String?) {
-        if let delegate = delegate {
-            let car = Car(manufacturer: manufacturer,
-                          model: model,
-                          body: body,
-                          yearOfIssue: yearOfIssue,
-                          carNumber: carNumber)
-            
-            delegate.carDetailViewModelDelegate(self, addCar: car)
-        }
+        let car = Car(manufacturer: manufacturer,
+                      model: model,
+                      body: body,
+                      yearOfIssue: yearOfIssue,
+                      carNumber: carNumber)
+        
+        delegate?.carDetailViewModelDelegate(self, addCar: car)
     }
     
     func userChangedCar(manufacturer: String, model: String, body: Body, yearOfIssue: Int?, carNumber: String?) {
-        if let delegate = delegate {
-            let car = Car(manufacturer: manufacturer,
-                          model: model,
-                          body: body,
-                          yearOfIssue: yearOfIssue,
-                          carNumber: carNumber)
-            
-            delegate.carDetailViewModelDelegate(self, changeCar: car)
-        }
+        let car = Car(manufacturer: manufacturer,
+                      model: model,
+                      body: body,
+                      yearOfIssue: yearOfIssue,
+                      carNumber: carNumber)
+        
+        delegate?.carDetailViewModelDelegate(self, changeCar: car)
     }
     
     func userDeletedCar() {
-        if let delegate = delegate {
-            delegate.carDetailViewModelDelegateDeleteCar(self)
-        }
+        delegate?.carDetailViewModelDelegateDeleteCar(self)
     }
 }

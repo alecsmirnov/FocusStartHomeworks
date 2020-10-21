@@ -5,7 +5,7 @@
 //  Created by Admin on 15.10.2020.
 //
 
-enum Body: Int {
+enum Body: Int, CaseIterable {
     case sedan
     case coupe
     case cabriolet
@@ -22,5 +22,3 @@ extension Body {
         }
     }
 }
-
-extension Body: CaseIterable {}

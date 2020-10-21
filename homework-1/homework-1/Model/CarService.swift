@@ -14,8 +14,8 @@ class CarService {
         return filteredData.count
     }
     
-    private var filteredData: [Car] = []
-    private var tempData: [Car] = []
+    private var filteredData = [Car]()
+    private var tempData = [Car]()
     
     func append(car: Car) {
         filteredData.append(car)
