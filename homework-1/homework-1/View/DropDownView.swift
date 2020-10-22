@@ -71,10 +71,7 @@ class DropDownView: UIStackView {
         fieldButton.layer.borderColor = UIColor.black.withAlphaComponent(Settings.fieldBorderAlpha).cgColor
         fieldButton.layer.cornerRadius = rowCornerRadius
         fieldButton.setTitleColor(.black, for: .normal)
-        
-        if let titleLabel = fieldButton.titleLabel {
-            titleLabel.font = UIFont.systemFont(ofSize: fontSize)
-        }
+        fieldButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
         
         fieldButton.addTarget(self, action: #selector(didFieldPressed), for: .touchUpInside)
         
@@ -89,12 +86,9 @@ class DropDownView: UIStackView {
             rowButton.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
             
             rowButton.setTitle(rowTitle, for: .normal)
+            rowButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
             rowButton.backgroundColor = UIColor.systemBlue
             rowButton.layer.cornerRadius = rowCornerRadius
-            
-            if let titleLabel = rowButton.titleLabel {
-                titleLabel.font = UIFont.systemFont(ofSize: fontSize)
-            }
             
             rowButton.isHidden = true
             rowButton.alpha = 0
