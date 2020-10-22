@@ -41,9 +41,7 @@ class CarsViewController: UIViewController {
         carsTableView.dataSource = self
         carsTableView.delegate = self
         
-        if let carsViewModel = carsViewModel {
-            carsViewModel.delegate = self
-        }
+        carsViewModel?.delegate = self
         
         let dropDownData = ["All"] + Body.allCases.map { $0.description }
         dropDownView.configure(data: dropDownData, fieldData: "All")
@@ -124,9 +122,7 @@ extension CarsViewController: UITableViewDataSource {
 
 extension CarsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let carsViewModel = carsViewModel {
-            carsViewModel.selectedRow = indexPath.row
-        }
+        carsViewModel?.selectedRow = indexPath.row
         
         return indexPath
     }
@@ -173,12 +169,10 @@ extension CarsViewController: CarsViewModelDisplayDelegate {
 
 extension CarsViewController: DropDownViewDelegate {
     func dropDownViewDelegate(_ view: DropDownView, itemPressedAt row: Int) {
-        if let carsViewModel = carsViewModel {
-            if row == 0 {
-                carsViewModel.filterReset()
-            } else if let body = Body(rawValue: row - 1) {
-                carsViewModel.filter(by: body)
-            }
+        if row == 0 {
+            carsViewModel?.filterReset()
+        } else if let body = Body(rawValue: row - 1) {
+            carsViewModel?.filter(by: body)
         }
     
         UIView.transition(with: carsTableView, duration: 0.3, options: .transitionCrossDissolve, animations: {

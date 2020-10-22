@@ -86,9 +86,7 @@ class CarDetailViewController: UIViewController {
     }
     
     private func popViewController() {
-        if let navigationController = navigationController {
-            navigationController.popViewController(animated: true);
-        }
+        navigationController?.popViewController(animated: true);
     }
     
     private func showAlertMessage(title: String, message: String) {
@@ -140,13 +138,12 @@ class CarDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction private func didTapAdd(_ sender: UIBarButtonItem) {
-        if let carDetailViewModel = carDetailViewModel,
-           let carInput = getUserInput() {
-            carDetailViewModel.userAddedCar(manufacturer: carInput.manufacturer,
-                                            model: carInput.model,
-                                            body: carInput.body,
-                                            yearOfIssue: carInput.yearOfIssue,
-                                            carNumber: carInput.carNumber)
+        if let carInput = getUserInput() {
+            carDetailViewModel?.userAddedCar(manufacturer: carInput.manufacturer,
+                                             model: carInput.model,
+                                             body: carInput.body,
+                                             yearOfIssue: carInput.yearOfIssue,
+                                             carNumber: carInput.carNumber)
             
             showMessageBox(message: "New record added successfully", durationTime: 1) {
                 self.popViewController()
@@ -155,13 +152,12 @@ class CarDetailViewController: UIViewController {
     }
     
     @IBAction private func didTapEdit(_ sender: UIBarButtonItem) {
-        if let carDetailViewModel = carDetailViewModel,
-           let carInput = getUserInput() {
-            carDetailViewModel.userChangedCar(manufacturer: carInput.manufacturer,
-                                              model: carInput.model,
-                                              body: carInput.body,
-                                              yearOfIssue: carInput.yearOfIssue,
-                                              carNumber: carInput.carNumber)
+        if let carInput = getUserInput() {
+            carDetailViewModel?.userChangedCar(manufacturer: carInput.manufacturer,
+                                               model: carInput.model,
+                                               body: carInput.body,
+                                               yearOfIssue: carInput.yearOfIssue,
+                                               carNumber: carInput.carNumber)
             
             showMessageBox(message: "Record edited successfully", durationTime: 1) {
                 self.popViewController()
