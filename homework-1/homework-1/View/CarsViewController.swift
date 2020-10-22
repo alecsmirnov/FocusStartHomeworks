@@ -73,7 +73,7 @@ class CarsViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    func updateTable() {
+    private func updateTable() {
         switch carsTableViewUpdateType {
         case .insertNewRow:
             let newRowIndex = carsTableView.numberOfRows(inSection: 0)
