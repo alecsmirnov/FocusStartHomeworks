@@ -51,7 +51,7 @@ extension CarsViewModel: CarDetailViewModelDelegate {
     func carDetailViewModelDelegate(_ viewModel: CarDetailViewModel, addCar car: Car) {
         carService.append(car: car)
         
-        delegate?.carsViewModelDisplayDelegate(self, addCar: car)
+        delegate?.carsViewModelDisplayDelegateInsertNewRow(self)
     }
     
     func carDetailViewModelDelegate(_ viewModel: CarDetailViewModel, changeCar car: Car) {

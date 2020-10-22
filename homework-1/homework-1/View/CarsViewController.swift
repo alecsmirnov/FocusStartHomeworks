@@ -8,18 +8,25 @@
 import UIKit
 
 class CarsViewController: UIViewController {
-    enum CarsTableView {
+    var carsViewModel: CarsViewModel?
+    
+    private enum CarsTableViewUpdateType {
+        case insertNewRow
+        case updateRow(index: Int)
+        case deleteRow(index: Int)
+        case none
+    }
+    
+    private enum CarsTableView {
         static let carCell = "CarCell"
     }
     
-    enum Segue {
+    private enum Segue {
         static let addCar = "AddCar"
         static let editCar = "EditCar"
     }
     
-    var carsViewModel: CarsViewModel?
-    
-    private var dispatchWorkItem: DispatchWorkItem?
+    private var carsTableViewUpdateType = CarsTableViewUpdateType.none
     
     @IBOutlet private weak var dropDownView: DropDownView!
     @IBOutlet private weak var carsTableView: UITableView!
@@ -39,18 +46,13 @@ class CarsViewController: UIViewController {
         }
         
         let dropDownData = ["All"] + Body.allCases.map { $0.description }
-        
         dropDownView.configure(data: dropDownData, fieldData: "All")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        if let dispatchWorkItem = dispatchWorkItem {
-            DispatchQueue.global(qos: .userInteractive).async(execute: dispatchWorkItem)
-        }
-        
-        dispatchWorkItem = nil
+        updateTable()
     }
     
     // MARK: - Navigation
@@ -67,6 +69,30 @@ class CarsViewController: UIViewController {
         if let carsViewModel = carsViewModel {
             carDetailViewController.carDetailViewModel = carsViewModel.carDetailViewModel()
         }
+    }
+    
+    // MARK: - Private Methods
+    
+    func updateTable() {
+        switch carsTableViewUpdateType {
+        case .insertNewRow:
+            let newRowIndex = carsTableView.numberOfRows(inSection: 0)
+            let rowIndexPath = IndexPath(row: newRowIndex, section: 0)
+            
+            carsTableView.insertRows(at: [rowIndexPath], with: .automatic)
+        case .updateRow(let index):
+            let rowIndexPath = IndexPath(row: index, section: 0)
+
+            carsTableView.reloadRows(at: [rowIndexPath], with: .automatic)
+        case .deleteRow(let index):
+            let rowIndexPath = IndexPath(row: index, section: 0)
+            
+            carsTableView.deleteRows(at: [rowIndexPath], with: .automatic)
+        case .none:
+            break
+        }
+        
+        carsTableViewUpdateType = .none
     }
 }
 
@@ -130,41 +156,16 @@ extension CarsViewController: UITableViewDelegate {
 // MARK: - CarsViewModelDisplayDelegate
 
 extension CarsViewController: CarsViewModelDisplayDelegate {
-    func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, addCar: Car) {
-        let newRowIndex = carsTableView.numberOfRows(inSection: 0)
-        let rowIndexPath = IndexPath(row: newRowIndex, section: 0)
-        
-        dispatchWorkItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.carsTableView.insertRows(at: [rowIndexPath], with: .automatic)
-            }
-        }
+    func carsViewModelDisplayDelegateInsertNewRow(_ viewModel: CarsViewModel) {
+        carsTableViewUpdateType = .insertNewRow
     }
     
     func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, reloadRowAt index: Int) {
-        let rowIndexPath = IndexPath(row: index, section: 0)
-        
-        dispatchWorkItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.carsTableView.reloadRows(at: [rowIndexPath], with: .automatic)
-            }
-        }
+        carsTableViewUpdateType = .updateRow(index: index)
     }
     
     func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, deleteRowAt index: Int) {
-        let rowIndexPath = IndexPath(row: index, section: 0)
-        
-        dispatchWorkItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.carsTableView.deleteRows(at: [rowIndexPath], with: .automatic)
-            }
-        }
+        carsTableViewUpdateType = .deleteRow(index: index)
     }
 }
 

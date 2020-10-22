@@ -6,7 +6,7 @@
 //
 
 protocol CarsViewModelDisplayDelegate: AnyObject {
-    func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, addCar: Car)
+    func carsViewModelDisplayDelegateInsertNewRow(_ viewModel: CarsViewModel)
     func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, reloadRowAt index: Int)
     func carsViewModelDisplayDelegate(_ viewModel: CarsViewModel, deleteRowAt index: Int)
 }
