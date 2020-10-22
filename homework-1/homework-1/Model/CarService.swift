@@ -53,8 +53,7 @@ class CarService {
     func filter(by body: Body) {
         if tempData.isEmpty {
             tempData = filteredData
-        }
-        else {
+        } else {
             tempData += filteredData
         }
         

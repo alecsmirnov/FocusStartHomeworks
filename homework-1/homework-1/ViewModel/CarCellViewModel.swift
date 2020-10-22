@@ -18,8 +18,7 @@ struct CarCellViewModel {
         
         if let carYearOfIssue = car.yearOfIssue {
             yearOfIssue = String(carYearOfIssue)
-        }
-        else {
+        } else {
             yearOfIssue = "-"
         }
     }

@@ -39,8 +39,7 @@ class CarsViewModel {
     func carDetailViewModel() -> CarDetailViewModel {
         if let selectedRow = selectedRow {
             return CarDetailViewModel(car: carService.get(at: selectedRow), delegate: self)
-        }
-        else {
+        } else {
             return CarDetailViewModel(delegate: self)
         }
     }

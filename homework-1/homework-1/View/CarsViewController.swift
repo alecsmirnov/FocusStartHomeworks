@@ -59,12 +59,9 @@ class CarsViewController: UIViewController {
         guard let carDetailViewController = segue.destination as? CarDetailViewController else { return }
         
         switch segue.identifier {
-        case Segue.addCar:
-            carDetailViewController.carDetailMode = .add
-        case Segue.editCar:
-            carDetailViewController.carDetailMode = .edit
-        default:
-            break
+        case Segue.addCar: carDetailViewController.carDetailMode = .add
+        case Segue.editCar: carDetailViewController.carDetailMode = .edit
+        default: break
         }
         
         if let carsViewModel = carsViewModel {
@@ -178,8 +175,7 @@ extension CarsViewController: DropDownViewDelegate {
         if let carsViewModel = carsViewModel {
             if row == 0 {
                 carsViewModel.filterReset()
-            }
-            else if let body = Body(rawValue: row - 1) {
+            } else if let body = Body(rawValue: row - 1) {
                 carsViewModel.filter(by: body)
             }
         }

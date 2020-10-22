@@ -27,7 +27,6 @@ class DropDownView: UIStackView {
     var itemHeight: CGFloat = 30
     var fontSize: CGFloat = 17
     
-    var isClosed = true
     var selectedRow: Int?
     
     private var fieldButton = UIButton()
@@ -97,7 +96,7 @@ class DropDownView: UIStackView {
                 titleLabel.font = UIFont.systemFont(ofSize: fontSize)
             }
             
-            rowButton.isHidden = isClosed
+            rowButton.isHidden = true
             rowButton.alpha = 0
             
             rowButton.tag = tag
@@ -110,11 +109,9 @@ class DropDownView: UIStackView {
     }
     
     private func switchMenu() {
-        isClosed = !isClosed
-
         rowButtons.forEach { rowButton in
             UIView.animate(withDuration: 0.3) {
-                rowButton.isHidden = self.isClosed
+                rowButton.isHidden.toggle()
                 rowButton.alpha = rowButton.alpha == 0 ? 1 : 0
             }
         }
