@@ -63,7 +63,7 @@ extension ThreadSafeArray: Collection {
 
     public var endIndex: Index {
         queue.sync {
-            data.endIndex
+            return data.endIndex
         }
     }
 
@@ -103,7 +103,7 @@ extension ThreadSafeArray: RangeReplaceableCollection {
     public func remove(at index: Index) -> Element {
         var element: Element!
         
-        queue.sync {
+        queue.sync(flags: .barrier) {
             element = data.remove(at: index)
         }
         
