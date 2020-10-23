@@ -7,19 +7,21 @@
 
 import Foundation
 
-final class ThreadSafeArray<T> {
-    typealias ThreadSafeArrayType = [T]
+public final class ThreadSafeArray<T> {
+    public typealias ThreadSafeArrayType = [T]
     
-    typealias Element = ThreadSafeArrayType.Element
-    typealias Index = ThreadSafeArrayType.Index
-    typealias Iterator = ThreadSafeArrayType.Iterator
+    public typealias Element = ThreadSafeArrayType.Element
+    public typealias Index = ThreadSafeArrayType.Index
+    public typealias Iterator = ThreadSafeArrayType.Iterator
     
     private var data = ThreadSafeArrayType()
     private let queue = DispatchQueue(label: "ThreadSafeArrayQueue", attributes: .concurrent)
+    
+    public init() {}
 }
 
 extension ThreadSafeArray where Element: Equatable {
-    func contains(_ element: Element) -> Bool {
+    public func contains(_ element: Element) -> Bool {
         var contains = false
 
         queue.sync {
@@ -33,7 +35,7 @@ extension ThreadSafeArray where Element: Equatable {
 // MARK: - Collection
 
 extension ThreadSafeArray: Collection {
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         var isEmpty = false
 
         queue.sync {
@@ -43,7 +45,7 @@ extension ThreadSafeArray: Collection {
         return isEmpty
     }
 
-    var count: Int {
+    public var count: Int {
         var count = 0
 
         queue.sync {
@@ -53,25 +55,25 @@ extension ThreadSafeArray: Collection {
         return count
     }
 
-    var startIndex: Index {
+    public var startIndex: Index {
         queue.sync {
             return data.startIndex
         }
     }
 
-    var endIndex: Index {
+    public var endIndex: Index {
         queue.sync {
             data.endIndex
         }
     }
 
-    func index(after i: Index) -> Index {
+    public func index(after i: Index) -> Index {
         queue.sync {
             return data.index(after: i)
         }
     }
 
-    subscript(index: Index) -> Element {
+    public subscript(index: Index) -> Element {
         get {
             var element: Element!
 
@@ -89,14 +91,16 @@ extension ThreadSafeArray: Collection {
     }
 }
 
+// MARK: - RangeReplaceableCollection
+
 extension ThreadSafeArray: RangeReplaceableCollection {
-    func append(_ element: Element) {
+    public func append(_ element: Element) {
         queue.async(flags: .barrier) {
             self.data.append(element)
         }
     }
         
-    func remove(at index: Index) -> Element {
+    public func remove(at index: Index) -> Element {
         var element: Element!
         
         queue.sync {
@@ -110,7 +114,7 @@ extension ThreadSafeArray: RangeReplaceableCollection {
 // MARK: - ExpressibleByArrayLiteral
 
 extension ThreadSafeArray: ExpressibleByArrayLiteral {
-    convenience init(arrayLiteral elements: Element...) {
+    public convenience init(arrayLiteral elements: Element...) {
         self.init()
         
         for element in elements {
@@ -124,7 +128,7 @@ extension ThreadSafeArray: ExpressibleByArrayLiteral {
 // MARK: - Sequence
 
 extension ThreadSafeArray: Sequence {
-    func makeIterator() -> Iterator {
+    public func makeIterator() -> Iterator {
         return data.makeIterator()
     }
 }
