@@ -6,27 +6,60 @@
 //
 
 import XCTest
+import homework_2
+
+private enum TestSettings {
+    static let operationsCount = 1000
+}
 
 class homework_2_tests: XCTestCase {
+    func testThreadSafeArray() throws {
+        let threadSafeArray = ThreadSafeArray<Int>()
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+        let queue = DispatchQueue(label: "ThreadSafeArrayTestQueue", qos: .background, attributes: .concurrent)
+        let group = DispatchGroup()
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+        let dispatchWorkItem = DispatchWorkItem {
+            for i in 0...TestSettings.operationsCount {
+                threadSafeArray.append(i)
+            }
+            
+            group.leave()
         }
-    }
+        
+        group.enter()
+        queue.async(execute: dispatchWorkItem)
+        
+        group.enter()
+        queue.async(execute: dispatchWorkItem)
 
+        group.wait()
+        
+        XCTAssertEqual(threadSafeArray.count, TestSettings.operationsCount * 2 + 2)
+    }
+    
+    func testArray() throws {
+        var array = [Int]()
+
+        let queue = DispatchQueue(label: "ArrayTestQueue", qos: .background, attributes: .concurrent)
+        let group = DispatchGroup()
+
+        let dispatchWorkItem = DispatchWorkItem {
+            for i in 0...TestSettings.operationsCount {
+                array.append(i)
+            }
+            
+            group.leave()
+        }
+        
+        group.enter()
+        queue.async(execute: dispatchWorkItem)
+        
+        group.enter()
+        queue.async(execute: dispatchWorkItem)
+
+        group.wait()
+        
+        XCTAssertNotEqual(array.count, TestSettings.operationsCount * 2 + 2)
+    }
 }
