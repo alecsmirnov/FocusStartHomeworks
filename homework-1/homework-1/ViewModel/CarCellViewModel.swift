@@ -15,11 +15,6 @@ struct CarCellViewModel {
         manufacturer = car.manufacturer
         model = car.model
         body = car.body.description
-        
-        if let carYearOfIssue = car.yearOfIssue {
-            yearOfIssue = String(carYearOfIssue)
-        } else {
-            yearOfIssue = "-"
-        }
+        yearOfIssue = car.yearOfIssue?.description ?? "-"
     }
 }

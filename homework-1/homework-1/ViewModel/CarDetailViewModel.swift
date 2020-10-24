@@ -19,12 +19,7 @@ class CarDetailViewModel {
         model = car.model
         body = car.body
         carNumber = car.carNumber
-        
-        if let carYearOfIssue = car.yearOfIssue {
-            yearOfIssue = String(carYearOfIssue)
-        } else {
-            yearOfIssue = nil
-        }
+        yearOfIssue = car.yearOfIssue?.description
         
         self.delegate = delegate
     }
