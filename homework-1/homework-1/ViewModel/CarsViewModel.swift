@@ -58,7 +58,6 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         guard let selectedRow = selectedRow else { return }
         
         carService.replace(at: selectedRow, with: car)
-        
         delegate?.carsViewModelDisplayDelegate(self, reloadRowAt: selectedRow)
         
         self.selectedRow = nil
@@ -68,7 +67,6 @@ extension CarsViewModel: CarDetailViewModelDelegate {
         guard let selectedRow = selectedRow else { return }
         
         carService.remove(at: selectedRow)
-        
         delegate?.carsViewModelDisplayDelegate(self, deleteRowAt: selectedRow)
         
         self.selectedRow = nil

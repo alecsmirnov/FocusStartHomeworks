@@ -14,22 +14,22 @@ class CarDetailViewModel {
     let yearOfIssue: String?
     let carNumber: String?
     
-    init(car: Car, delegate: CarDetailViewModelDelegate) {
-        manufacturer = car.manufacturer
-        model = car.model
-        body = car.body
-        carNumber = car.carNumber
-        yearOfIssue = car.yearOfIssue?.description
-        
-        self.delegate = delegate
-    }
-    
-    init(delegate: CarDetailViewModelDelegate) {
+    init(delegate: CarDetailViewModelDelegate? = nil) {
         manufacturer = nil
         model = nil
         body = nil
         yearOfIssue = nil
         carNumber = nil
+        
+        self.delegate = delegate
+    }
+    
+    init(car: Car, delegate: CarDetailViewModelDelegate? = nil) {
+        manufacturer = car.manufacturer
+        model = car.model
+        body = car.body
+        carNumber = car.carNumber
+        yearOfIssue = car.yearOfIssue?.description
         
         self.delegate = delegate
     }

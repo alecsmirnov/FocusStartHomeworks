@@ -118,12 +118,8 @@ class CarDetailViewController: UIViewController {
             showAlertMessage(title: title, message: message)
             return nil
         }
-        
-        var yearOfIssue: Int?
-        if let yearOfIssueText = yearOfIssueTextField.text {
-            yearOfIssue = Int(yearOfIssueText)
-        }
-        
+  
+        let yearOfIssue: Int? = Int(yearOfIssueTextField.text ?? "")
         let carNumber = carNumberTextField.text
         
         let carInput = Car(manufacturer: manufacturer,

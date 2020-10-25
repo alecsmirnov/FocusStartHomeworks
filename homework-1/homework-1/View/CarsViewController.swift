@@ -59,9 +59,12 @@ class CarsViewController: UIViewController {
         guard let carDetailViewController = segue.destination as? CarDetailViewController else { return }
         
         switch segue.identifier {
-        case Segue.addCar: carDetailViewController.carDetailMode = .add
-        case Segue.editCar: carDetailViewController.carDetailMode = .edit
-        default: break
+        case Segue.addCar:
+            carDetailViewController.carDetailMode = .add
+        case Segue.editCar:
+            carDetailViewController.carDetailMode = .edit
+        default:
+            break
         }
         
         if let carsViewModel = carsViewModel {
@@ -80,7 +83,7 @@ class CarsViewController: UIViewController {
             carsTableView.insertRows(at: [rowIndexPath], with: .automatic)
         case .updateRow(let index):
             let rowIndexPath = IndexPath(row: index, section: 0)
-
+            
             carsTableView.reloadRows(at: [rowIndexPath], with: .automatic)
         case .deleteRow(let index):
             let rowIndexPath = IndexPath(row: index, section: 0)
@@ -132,15 +135,13 @@ extension CarsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completionHandler in
             guard let self = self else { return }
             
-            if let carsViewModel = self.carsViewModel {
-                carsViewModel.remove(at: indexPath.row)
-                self.carsTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.carsViewModel?.remove(at: indexPath.row)
+            self.carsTableView.deleteRows(at: [indexPath], with: .automatic)
                 
-                completionHandler(true)
-            }
+            completionHandler(true)
         }
         
         delete.image = UIImage.init(systemName: "trash")

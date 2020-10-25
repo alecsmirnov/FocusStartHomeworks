@@ -9,12 +9,12 @@ struct CarCellViewModel {
     let manufacturer: String
     let model: String
     let body: String
-    let yearOfIssue: String
+    let yearOfIssue: String?
     
     init(car: Car) {
         manufacturer = car.manufacturer
         model = car.model
         body = car.body.description
-        yearOfIssue = car.yearOfIssue?.description ?? "-"
+        yearOfIssue = car.yearOfIssue?.description
     }
 }
