@@ -22,13 +22,7 @@ public final class ThreadSafeArray<T> {
 
 extension ThreadSafeArray where Element: Equatable {
     public func contains(_ element: Element) -> Bool {
-        var contains = false
-
-        queue.sync {
-            contains = data.contains(element)
-        }
-
-        return contains
+        return queue.sync { data.contains(element) }
     }
 }
 
@@ -36,55 +30,47 @@ extension ThreadSafeArray where Element: Equatable {
 
 extension ThreadSafeArray: Collection {
     public var isEmpty: Bool {
-        var isEmpty = false
-
-        queue.sync {
-            isEmpty = data.isEmpty
-        }
-
-        return isEmpty
+        return queue.sync { data.isEmpty }
     }
 
     public var count: Int {
-        var count = 0
-
-        queue.sync {
-            count = data.count
-        }
-
-        return count
+        return queue.sync { data.count }
     }
 
     public var startIndex: Index {
-        queue.sync {
-            return data.startIndex
-        }
+        return queue.sync { data.startIndex }
     }
 
     public var endIndex: Index {
-        queue.sync {
-            return data.endIndex
-        }
+        return queue.sync { data.endIndex }
     }
 
     public func index(after i: Index) -> Index {
-        queue.sync {
+        return queue.sync {
+            guard data.indices.contains(i) else {
+                fatalError("index is out of range")
+            }
+            
             return data.index(after: i)
         }
     }
 
     public subscript(index: Index) -> Element {
         get {
-            var element: Element!
-
-            queue.sync {
-                element = self.data[index]
+            return queue.sync {
+                guard self.data.indices.contains(index) else {
+                    fatalError("index is out of range")
+                }
+                
+                return data[index]
             }
-
-            return element
         }
         set {
             queue.async(flags: .barrier) {
+                guard self.data.indices.contains(index) else {
+                    fatalError("index is out of range")
+                }
+                
                 self.data[index] = newValue
             }
         }
@@ -101,13 +87,13 @@ extension ThreadSafeArray: RangeReplaceableCollection {
     }
         
     public func remove(at index: Index) -> Element {
-        var element: Element!
-        
-        queue.sync(flags: .barrier) {
-            element = data.remove(at: index)
+        return queue.sync(flags: .barrier) {
+            guard data.indices.contains(index) else {
+                fatalError("index is out of range")
+            }
+            
+            return data.remove(at: index)
         }
-        
-        return element
     }
 }
 
@@ -118,9 +104,7 @@ extension ThreadSafeArray: ExpressibleByArrayLiteral {
         self.init()
         
         for element in elements {
-            queue.async(flags: .barrier) {
-                self.data.append(element)
-            }
+            append(element)
         }
     }
 }
