@@ -5,7 +5,7 @@
 //  Created by Admin on 22.10.2020.
 //
 
-import Foundation
+import Dispatch
 
 public final class ThreadSafeArray<T> {
     public typealias ThreadSafeArrayType = [T]
@@ -15,6 +15,7 @@ public final class ThreadSafeArray<T> {
     public typealias Iterator = ThreadSafeArrayType.Iterator
     
     private var data = ThreadSafeArrayType()
+    
     private let queue = DispatchQueue(label: "ThreadSafeArrayQueue", attributes: .concurrent)
     
     public init() {}
@@ -58,7 +59,7 @@ extension ThreadSafeArray: Collection {
     public subscript(index: Index) -> Element {
         get {
             return queue.sync {
-                guard self.data.indices.contains(index) else {
+                guard data.indices.contains(index) else {
                     fatalError("index is out of range")
                 }
                 
@@ -66,12 +67,12 @@ extension ThreadSafeArray: Collection {
             }
         }
         set {
-            queue.async(flags: .barrier) {
-                guard self.data.indices.contains(index) else {
+            queue.async(flags: .barrier) { [self] in
+                guard data.indices.contains(index) else {
                     fatalError("index is out of range")
                 }
                 
-                self.data[index] = newValue
+                data[index] = newValue
             }
         }
     }
@@ -81,8 +82,8 @@ extension ThreadSafeArray: Collection {
 
 extension ThreadSafeArray: RangeReplaceableCollection {
     public func append(_ element: Element) {
-        queue.async(flags: .barrier) {
-            self.data.append(element)
+        queue.async(flags: .barrier) { [self] in
+            data.append(element)
         }
     }
         
