@@ -20,13 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let secondViewController = SecondViewController()
         let thirdViewController = ThirdViewController()
         
-        firstViewController.tabBarItem = UITabBarItem(title: "First", image: .none, tag: 0)
-        secondViewController.tabBarItem = UITabBarItem(title: "Second", image: .none, tag: 1)
-        thirdViewController.tabBarItem = UITabBarItem(title: "Third", image: .none, tag: 2)
+        firstViewController.tabBarItem = UITabBarItem(title: "First", image: UIImage(systemName: "1.circle.fill"), tag: 0)
+        secondViewController.tabBarItem = UITabBarItem(title: "Second", image: UIImage(systemName: "2.circle.fill"), tag: 1)
+        thirdViewController.tabBarItem = UITabBarItem(title: "Third", image: UIImage(systemName: "3.circle.fill"), tag: 2)
         
-//        firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
-//        secondViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 1)
-//        
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [firstViewController, secondViewController, thirdViewController]
         

@@ -21,7 +21,7 @@ class FirstView: UIView {
         label.text = "Text 1"
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.sizeToFit()
+        //label.sizeToFit()
         
         return label
     }()
@@ -33,7 +33,7 @@ class FirstView: UIView {
         label.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.sizeToFit()
+        //label.sizeToFit()
         
         return label
     }()
@@ -42,8 +42,8 @@ class FirstView: UIView {
         let label = UILabel()
         
         label.text = """
-            Very large text. Very large text. Very large text. Very large text. Very large text. Very large text.
-            Very large text. Very large text. Very large text. Very large text. Very large text. Very large text.
+            Very large text. Very large text. Very large text.
+            Very large text. Very large text. Very large text.
         """
         label.font = UIFont(name: "Courier New", size: 24)
         label.numberOfLines = 2
@@ -206,6 +206,8 @@ class FirstView: UIView {
     private func setupMediumLabelConstraints() {
         mediumLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        mediumLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        
         addConstraints([
             NSLayoutConstraint(item: mediumLabel,
                                attribute: .top,
@@ -243,6 +245,8 @@ class FirstView: UIView {
     
     private func setupLargeLabelConstraints() {
         largeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        largeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
         addConstraints([
             NSLayoutConstraint(item: largeLabel,
@@ -321,7 +325,7 @@ class FirstView: UIView {
     
     private func setupOvalButtonConstraints() {
         ovalButton.translatesAutoresizingMaskIntoConstraints = false
-
+        
         addConstraints([
             NSLayoutConstraint(item: ovalButton,
                                attribute: .top,
@@ -361,15 +365,15 @@ class FirstView: UIView {
     
     private func setupImageViewConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         addConstraints([
             NSLayoutConstraint(item: imageView,
-                               attribute: .centerX,
+                               attribute: .top,
                                relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .centerX,
+                               toItem: ovalButton,
+                               attribute: .bottom,
                                multiplier: 1,
-                               constant: 0),
+                               constant: 10),
             
             NSLayoutConstraint(item: imageView,
                                attribute: .bottom,
@@ -378,6 +382,14 @@ class FirstView: UIView {
                                attribute: .bottom,
                                multiplier: 1,
                                constant: -8),
+            
+            NSLayoutConstraint(item: imageView,
+                               attribute: .centerX,
+                               relatedBy: .equal,
+                               toItem: self.safeAreaLayoutGuide,
+                               attribute: .centerX,
+                               multiplier: 1,
+                               constant: 0),
             
             NSLayoutConstraint(item: imageView,
                                attribute: .width,

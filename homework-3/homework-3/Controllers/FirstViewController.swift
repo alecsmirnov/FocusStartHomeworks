@@ -20,6 +20,10 @@ class FirstViewController: UIViewController {
         super.loadView()
         
         view = FirstView(frame: UIScreen.main.bounds)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         firstView.roundButtonAction = { [weak self] in
             guard let _ = self else { return }
@@ -32,9 +36,5 @@ class FirstViewController: UIViewController {
             
             print("oval pressed")
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }
