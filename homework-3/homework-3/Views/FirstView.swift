@@ -55,6 +55,8 @@ final class FirstView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupActions()
+        
         setupViewAppearance()
         setupSubviews()
         setupLayout()
@@ -82,6 +84,11 @@ private extension FirstView {
 // MARK: - Private Methods
 
 private extension FirstView {
+    func setupActions() {
+        roundButton.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
+        ovalButton.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
+    }
+    
     func setupViewAppearance() {
         backgroundColor = .systemBackground
         
@@ -165,8 +172,6 @@ private extension FirstView {
         roundButton.setTitle("Round", for: .normal)
         roundButton.layer.borderWidth = 1
         roundButton.layer.borderColor = UIColor.systemGray4.cgColor
-
-        roundButton.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
     }
     
     func setupOvalButtonAppearance() {
@@ -174,8 +179,6 @@ private extension FirstView {
         ovalButton.layer.cornerRadius = 8
         ovalButton.layer.borderWidth = 1
         ovalButton.layer.borderColor = UIColor.systemGray4.cgColor
-        
-        ovalButton.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
     }
     
     func setupImageViewAppearance() {
