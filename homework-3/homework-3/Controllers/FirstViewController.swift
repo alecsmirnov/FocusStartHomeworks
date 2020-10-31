@@ -16,9 +16,7 @@ class FirstViewController: UIViewController {
         return firstView
     }
     
-    override func loadView() {
-        super.loadView()
-        
+    override func loadView() {        
         view = FirstView(frame: UIScreen.main.bounds)
     }
     

@@ -10,10 +10,10 @@ import UIKit
 final class FirstView: UIView {
     typealias actionType = () -> Void
     
+    // MARK: Properties
+    
     var roundButtonAction: actionType?
     var ovalButtonAction: actionType?
-    
-    // MARK: Properties
     
     private enum Constants {
         static let horizontalSpace: CGFloat = 16
@@ -56,7 +56,6 @@ final class FirstView: UIView {
         super.init(frame: frame)
         
         setupActions()
-        
         setupViewAppearance()
         setupSubviews()
         setupLayout()
@@ -79,16 +78,16 @@ private extension FirstView {
     @objc func didTapOvalButton() {
         ovalButtonAction?()
     }
-}
-
-// MARK: - Private Methods
-
-private extension FirstView {
+    
     func setupActions() {
         roundButton.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
         ovalButton.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
     }
-    
+}
+
+// MARK: - Appearance
+
+private extension FirstView {
     func setupViewAppearance() {
         backgroundColor = .systemBackground
         
@@ -105,39 +104,6 @@ private extension FirstView {
         setupActivityIndicatorViewAppearance()
     }
     
-    func setupSubviews() {
-        addSubview(stackView)
-        
-        stackView.addArrangedSubview(smallLabel)
-        stackView.addArrangedSubview(mediumLabel)
-        stackView.addArrangedSubview(largeLabel)
-        
-        stackView.addArrangedSubview(roundButton)
-        stackView.addArrangedSubview(ovalButton)
-        
-        stackView.addArrangedSubview(imageView)
-        
-        imageView.addSubview(activityIndicatorView)
-    }
-    
-    func setupLayout() {
-        setupStackViewLayout()
-        
-        setupSmallLabelLayout()
-        setupMediumLabelLayout()
-        setupLargeLabelLayout()
-        
-        setupRoundButtonLayout()
-        setupOvalButtonLayout()
-        
-        setupImageViewLayout()
-        setupActivityIndicatorViewLayout()
-    }
-}
-
-// MARK: - Appearance
-
-private extension FirstView {
     func setupStackViewAppearance() {
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -195,14 +161,47 @@ private extension FirstView {
 // MARK: - Layouts
 
 private extension FirstView {
+    func setupSubviews() {
+        addSubview(stackView)
+        
+        stackView.addArrangedSubview(smallLabel)
+        stackView.addArrangedSubview(mediumLabel)
+        stackView.addArrangedSubview(largeLabel)
+        
+        stackView.addArrangedSubview(roundButton)
+        stackView.addArrangedSubview(ovalButton)
+        
+        stackView.addArrangedSubview(imageView)
+        
+        imageView.addSubview(activityIndicatorView)
+    }
+    
+    func setupLayout() {
+        setupStackViewLayout()
+        
+        setupSmallLabelLayout()
+        setupMediumLabelLayout()
+        setupLargeLabelLayout()
+        
+        setupRoundButtonLayout()
+        setupOvalButtonLayout()
+        
+        setupImageViewLayout()
+        setupActivityIndicatorViewLayout()
+    }
+    
     func setupStackViewLayout() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constants.topSpace),
-            stackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.bottomSpace),
+            stackView.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                constant: Constants.topSpace),
+            stackView.bottomAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor,
+                constant: -Constants.bottomSpace),
         ])
     }
     
@@ -210,8 +209,12 @@ private extension FirstView {
         smallLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            smallLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: Constants.horizontalSpace),
-            smallLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -Constants.horizontalSpace),
+            smallLabel.leadingAnchor.constraint(
+                equalTo: stackView.leadingAnchor,
+                constant: Constants.horizontalSpace),
+            smallLabel.trailingAnchor.constraint(
+                equalTo: stackView.trailingAnchor,
+                constant: -Constants.horizontalSpace),
         ])
     }
     
@@ -220,8 +223,12 @@ private extension FirstView {
         mediumLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
         NSLayoutConstraint.activate([
-            mediumLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: Constants.horizontalSpace),
-            mediumLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -Constants.horizontalSpace),
+            mediumLabel.leadingAnchor.constraint(
+                equalTo: stackView.leadingAnchor,
+                constant: Constants.horizontalSpace),
+            mediumLabel.trailingAnchor.constraint(
+                equalTo: stackView.trailingAnchor,
+                constant: -Constants.horizontalSpace),
         ])
     }
     
@@ -230,8 +237,12 @@ private extension FirstView {
         largeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
         NSLayoutConstraint.activate([
-            largeLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: Constants.horizontalSpace),
-            largeLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -Constants.horizontalSpace),
+            largeLabel.leadingAnchor.constraint(
+                equalTo: stackView.leadingAnchor,
+                constant: Constants.horizontalSpace),
+            largeLabel.trailingAnchor.constraint(
+                equalTo: stackView.trailingAnchor,
+                constant: -Constants.horizontalSpace),
         ])
     }
     
