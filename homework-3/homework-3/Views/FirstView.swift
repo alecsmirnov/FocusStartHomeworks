@@ -7,108 +7,57 @@
 
 import UIKit
 
-class FirstView: UIView {
+final class FirstView: UIView {
     typealias actionType = () -> Void
     
     var roundButtonAction: actionType?
     var ovalButtonAction: actionType?
     
-    // MARK: - Labels
+    // MARK: Properties
     
-    private(set) lazy var smallLabel: UILabel = {
-        let label = UILabel()
+    private enum Constants {
+        static let horizontalSpace: CGFloat = 16
+        static let topSpace: CGFloat = 8
+        static let bottomSpace: CGFloat = 8
         
-        label.text = "Text 1"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        //label.sizeToFit()
+        static let roundButtonSize = CGSize(width: 48, height: 48)
+        static let ovalButtonSize = CGSize(width: 128, height: 48)
         
-        return label
-    }()
+        static let imageViewSize = CGSize(width: 128, height: 128)
+        
+        static let smallLabelFontSize: CGFloat = 12
+        static let mediumLabelFontSize: CGFloat = 18
+        static let largeLabelFontSize: CGFloat = 24
+    }
     
-    private(set) lazy var mediumLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "Text 2"
-        label.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        //label.sizeToFit()
-        
-        return label
-    }()
+    // MARK: Subviews
     
-    private(set) lazy var largeLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = """
-            Very large text. Very large text. Very large text.
-            Very large text. Very large text. Very large text.
-        """
-        label.font = UIFont(name: "Courier New", size: 24)
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        label.sizeToFit()
-        
-        return label
-    }()
+    private let stackView = UIStackView()
     
-    // MARK: - Buttons
+    private let smallLabel = UILabel()
+    private let mediumLabel = UILabel()
+    private let largeLabel = UILabel()
     
-    private(set) lazy var roundButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        button.setTitle("Round", for: .normal)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemGray4.cgColor
-
-        button.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
-        
-        return button
-    }()
+    private let roundButton = UIButton(type: .system)
+    private let ovalButton = UIButton(type: .system)
     
-    private(set) lazy var ovalButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        button.setTitle("Oval", for: .normal)
-        button.layer.cornerRadius = 8
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemGray4.cgColor
-        
-        button.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
-        
-        return button
-    }()
+    private let imageView = UIImageView()
+    private let activityIndicatorView = UIActivityIndicatorView()
     
-    // MARK: - ImageView
+    // MARK: Lifecycle
     
-    private(set) lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.image = UIImage(systemName: "square.fill")
-        
-        return imageView
-    }()
+    override func layoutSubviews() {
+        roundButton.layer.cornerRadius = roundButton.frame.size.width / 2
+    }
     
-    // MARK: - ActivityIndicator
-    
-    private(set) lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        
-        activityIndicator.color = .black
-        activityIndicator.startAnimating()
-        
-        return activityIndicator
-    }()
-    
-    // MARK: - Initialization
+    // MARK: Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViewAppearance()
         setupSubviews()
-        setupConstraints()
+        setupLayout()
         
         layoutIfNeeded()
     }
@@ -116,336 +65,206 @@ class FirstView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutSubviews() {
-        roundButton.layer.cornerRadius = roundButton.frame.size.width / 2
-    }
-    
-    // MARK: - Actions
-    
-    @objc private func didTapRoundButton() {
+}
+
+// MARK: - Actions
+
+private extension FirstView {
+    @objc func didTapRoundButton() {
         roundButtonAction?()
     }
     
-    @objc private func didTapOvalButton() {
+    @objc func didTapOvalButton() {
         ovalButtonAction?()
     }
-    
-    // MARK: - Private Methods
-    
-    private func setupViewAppearance() {
-        backgroundColor = ViewSettings.backgroundColor
+}
+
+// MARK: - Private Methods
+
+private extension FirstView {
+    func setupViewAppearance() {
+        backgroundColor = .systemBackground
+        
+        setupStackViewAppearance()
+        
+        setupSmallLabelAppearance()
+        setupMediumLabelAppearance()
+        setupLargeLabelAppearance()
+        
+        setupRoundButtonAppearance()
+        setupOvalButtonAppearance()
+        
+        setupImageViewAppearance()
+        setupActivityIndicatorViewAppearance()
     }
     
-    private func setupSubviews() {
-        addSubview(smallLabel)
-        addSubview(mediumLabel)
-        addSubview(largeLabel)
+    func setupSubviews() {
+        addSubview(stackView)
         
-        addSubview(roundButton)
-        addSubview(ovalButton)
+        stackView.addArrangedSubview(smallLabel)
+        stackView.addArrangedSubview(mediumLabel)
+        stackView.addArrangedSubview(largeLabel)
         
-        addSubview(imageView)
+        stackView.addArrangedSubview(roundButton)
+        stackView.addArrangedSubview(ovalButton)
         
-        addSubview(activityIndicator)
+        stackView.addArrangedSubview(imageView)
+        
+        imageView.addSubview(activityIndicatorView)
     }
     
-    private func setupConstraints() {
-        setupSmallLabelConstraints()
-        setupMediumLabelConstraints()
-        setupLargeLabelConstraints()
+    func setupLayout() {
+        setupStackViewLayout()
         
-        setupRoundButtonConstraints()
-        setupOvalButtonConstraints()
+        setupSmallLabelLayout()
+        setupMediumLabelLayout()
+        setupLargeLabelLayout()
         
-        setupImageViewConstraints()
+        setupRoundButtonLayout()
+        setupOvalButtonLayout()
         
-        setupActivityIndicatorConstraints()
+        setupImageViewLayout()
+        setupActivityIndicatorViewLayout()
+    }
+}
+
+// MARK: - Appearance
+
+private extension FirstView {
+    func setupStackViewAppearance() {
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
     }
     
-    // MARK: - Labels Constraints
+    func setupSmallLabelAppearance() {
+        smallLabel.text = "Text 1"
+        smallLabel.font = UIFont.systemFont(ofSize: Constants.smallLabelFontSize)
+        smallLabel.numberOfLines = 1
+        smallLabel.textAlignment = .center
+        smallLabel.sizeToFit()
+    }
     
-    private func setupSmallLabelConstraints() {
-        smallLabel.translatesAutoresizingMaskIntoConstraints = false
+    func setupMediumLabelAppearance() {
+        mediumLabel.text = "Text 2"
+        mediumLabel.font = UIFont(name: "Arial Rounded MT Bold", size: Constants.mediumLabelFontSize)
+        mediumLabel.numberOfLines = 1
+        mediumLabel.textAlignment = .center
+        mediumLabel.sizeToFit()
+    }
+    
+    func setupLargeLabelAppearance() {
+        largeLabel.text = "Very very very very very very very very very very very very very large text"
+        largeLabel.font = UIFont(name: "Courier New", size: Constants.largeLabelFontSize)
+        largeLabel.numberOfLines = 2
+        largeLabel.textAlignment = .center
+        largeLabel.sizeToFit()
+    }
+    
+    func setupRoundButtonAppearance() {
+        roundButton.setTitle("Round", for: .normal)
+        roundButton.layer.borderWidth = 1
+        roundButton.layer.borderColor = UIColor.systemGray4.cgColor
+
+        roundButton.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
+    }
+    
+    func setupOvalButtonAppearance() {
+        ovalButton.setTitle("Oval", for: .normal)
+        ovalButton.layer.cornerRadius = 8
+        ovalButton.layer.borderWidth = 1
+        ovalButton.layer.borderColor = UIColor.systemGray4.cgColor
         
-        addConstraints([
-            NSLayoutConstraint(item: smallLabel,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .top,
-                               multiplier: 1,
-                               constant: 8),
-            
-            NSLayoutConstraint(item: smallLabel,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-            
-            NSLayoutConstraint(item: smallLabel,
-                               attribute: .leading,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .leading,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: smallLabel,
-                               attribute: .trailing,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .trailing,
-                               multiplier: 1,
-                               constant: -10),
+        ovalButton.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
+    }
+    
+    func setupImageViewAppearance() {
+        imageView.image = UIImage(systemName: "square.fill")
+        imageView.contentMode = .scaleToFill
+    }
+    
+    func setupActivityIndicatorViewAppearance() {
+        activityIndicatorView.color = .black
+        activityIndicatorView.startAnimating()
+    }
+}
+
+// MARK: - Layouts
+
+private extension FirstView {
+    func setupStackViewLayout() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constants.topSpace),
+            stackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.bottomSpace),
         ])
     }
     
-    private func setupMediumLabelConstraints() {
+    func setupSmallLabelLayout() {
+        smallLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            smallLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: Constants.horizontalSpace),
+            smallLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -Constants.horizontalSpace),
+        ])
+    }
+    
+    func setupMediumLabelLayout() {
         mediumLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         mediumLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
-        addConstraints([
-            NSLayoutConstraint(item: mediumLabel,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: smallLabel,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: mediumLabel,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-            
-            NSLayoutConstraint(item: mediumLabel,
-                               attribute: .leading,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .leading,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: mediumLabel,
-                               attribute: .trailing,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .trailing,
-                               multiplier: 1,
-                               constant: -10),
+        NSLayoutConstraint.activate([
+            mediumLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: Constants.horizontalSpace),
+            mediumLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -Constants.horizontalSpace),
         ])
     }
     
-    private func setupLargeLabelConstraints() {
+    func setupLargeLabelLayout() {
         largeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         largeLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
-        addConstraints([
-            NSLayoutConstraint(item: largeLabel,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: mediumLabel,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: largeLabel,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-            
-            NSLayoutConstraint(item: largeLabel,
-                               attribute: .leading,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .leading,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: largeLabel,
-                               attribute: .trailing,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .trailing,
-                               multiplier: 1,
-                               constant: -10),
+        NSLayoutConstraint.activate([
+            largeLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: Constants.horizontalSpace),
+            largeLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -Constants.horizontalSpace),
         ])
     }
     
-    // MARK: - Buttons Constraints
-    
-    private func setupRoundButtonConstraints() {
+    func setupRoundButtonLayout() {
         roundButton.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraints([
-            NSLayoutConstraint(item: roundButton,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: largeLabel,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: roundButton,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-
-            NSLayoutConstraint(item: roundButton,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 50),
-
-            NSLayoutConstraint(item: roundButton,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 50),
+        NSLayoutConstraint.activate([
+            roundButton.widthAnchor.constraint(equalToConstant: Constants.roundButtonSize.width),
+            roundButton.heightAnchor.constraint(equalToConstant: Constants.roundButtonSize.height),
         ])
     }
     
-    private func setupOvalButtonConstraints() {
+    func setupOvalButtonLayout() {
         ovalButton.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraints([
-            NSLayoutConstraint(item: ovalButton,
-                               attribute: .top,
-                               relatedBy: .greaterThanOrEqual,
-                               toItem: roundButton,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: ovalButton,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-
-            NSLayoutConstraint(item: ovalButton,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 100),
-
-            NSLayoutConstraint(item: ovalButton,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 40),
+        NSLayoutConstraint.activate([
+            ovalButton.widthAnchor.constraint(equalToConstant: Constants.ovalButtonSize.width),
+            ovalButton.heightAnchor.constraint(equalToConstant: Constants.ovalButtonSize.height),
         ])
     }
     
-    // MARK: - ImageView Constraints
-    
-    private func setupImageViewConstraints() {
+    func setupImageViewLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraints([
-            NSLayoutConstraint(item: imageView,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: ovalButton,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: 10),
-            
-            NSLayoutConstraint(item: imageView,
-                               attribute: .bottom,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: -8),
-            
-            NSLayoutConstraint(item: imageView,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self.safeAreaLayoutGuide,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-            
-            NSLayoutConstraint(item: imageView,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 100),
-
-            NSLayoutConstraint(item: imageView,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 100),
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: Constants.imageViewSize.width),
+            imageView.heightAnchor.constraint(equalToConstant: Constants.imageViewSize.height),
         ])
     }
     
-    // MARK: - ActivityIndicator Constraints
-    
-    private func setupActivityIndicatorConstraints() {
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-
-        addConstraints([
-            NSLayoutConstraint(item: activityIndicator,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: imageView,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0),
-            
-            NSLayoutConstraint(item: activityIndicator,
-                               attribute: .centerY,
-                               relatedBy: .equal,
-                               toItem: imageView,
-                               attribute: .centerY,
-                               multiplier: 1,
-                               constant: 0),
-            
-            NSLayoutConstraint(item: activityIndicator,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 40),
-
-            NSLayoutConstraint(item: activityIndicator,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: 40),
+    func setupActivityIndicatorViewLayout() {
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
         ])
     }
 }
