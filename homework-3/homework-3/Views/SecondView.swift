@@ -10,10 +10,6 @@ import UIKit
 final class SecondView: UIView {
     // MARK: Properties
     
-    private var sharedConstraints = [NSLayoutConstraint]()
-    private var compactConstraints = [NSLayoutConstraint]()
-    private var regularConstraints = [NSLayoutConstraint]()
-    
     private enum Constants {
         static let titleLabelFontSize: CGFloat = 18
         static let textLabelFontSize: CGFloat = 18
@@ -24,11 +20,16 @@ final class SecondView: UIView {
         static let imageViewSize = CGSize(width: 200, height: 200)
     }
     
+    private var sharedConstraints = [NSLayoutConstraint]()
+    private var compactConstraints = [NSLayoutConstraint]()
+    private var regularConstraints = [NSLayoutConstraint]()
+    
     // MARK: Subviews
     
     private let scrollView = UIScrollView()
     
     private let imageView = UIImageView()
+    
     private let titleLabel = UILabel()
     private let textLabel = UILabel()
     
@@ -55,7 +56,7 @@ final class SecondView: UIView {
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Appearance
 
 private extension SecondView {
     func setupViewAppearance() {
@@ -64,31 +65,11 @@ private extension SecondView {
         setupScrollViewAppearance()
         
         setupImageViewAppearance()
+        
         setupTitleLabelAppearance()
         setupTextLabelAppearance()
     }
     
-    func setupSubviews() {
-        addSubview(scrollView)
-        
-        scrollView.addSubview(imageView)
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(textLabel)
-    }
-    
-    func setupLayout() {
-        setupSharedLayout()
-        
-        prepareCompactLayout()
-        prepareRegularLayout()
-        
-        changeViewLayout(traitCollection: traitCollection)
-    }
-}
-
-// MARK: - Appearance
-
-private extension SecondView {
     func setupScrollViewAppearance() {
         scrollView.backgroundColor = .systemBackground
     }
@@ -145,6 +126,23 @@ private extension SecondView {
 // MARK: - Applying Layouts
 
 private extension SecondView {
+    func setupSubviews() {
+        addSubview(scrollView)
+        
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(textLabel)
+    }
+    
+    func setupLayout() {
+        setupSharedLayout()
+        
+        prepareCompactLayout()
+        prepareRegularLayout()
+        
+        changeViewLayout(traitCollection: traitCollection)
+    }
+    
     func setupSharedLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -236,7 +234,9 @@ private extension SecondView {
     func prepareImageViewRegularLayout() {
         regularConstraints.append(contentsOf: [
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: Constants.verticalSpace),
-            imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Constants.horizontalSpace),
+            imageView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constants.horizontalSpace),
             imageView.widthAnchor.constraint(equalToConstant: Constants.imageViewSize.width),
             imageView.heightAnchor.constraint(equalToConstant: Constants.imageViewSize.height),
         ])
@@ -244,8 +244,12 @@ private extension SecondView {
     
     func prepareTitleLabelRegularLayout() {
         regularConstraints.append(contentsOf: [
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -Constants.horizontalSpace),
-            titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: Constants.horizontalSpace),
+            titleLabel.leadingAnchor.constraint(
+                equalTo: imageView.trailingAnchor,
+                constant: -Constants.horizontalSpace),
+            titleLabel.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constants.horizontalSpace),
             titleLabel.heightAnchor.constraint(equalTo: imageView.heightAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
         ])
