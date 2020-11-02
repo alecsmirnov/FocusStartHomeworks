@@ -8,17 +8,17 @@
 import UIKit
 
 final class ThirdView: UIView {
-    typealias actionType = () -> Void
-    
     // MARK: Properties
     
-    var enterButtonAction: actionType?
+    var enterButtonAction: LoginButtonPressCompletion?
     
     private enum Constants {
         static let horizontalSpace: CGFloat = 8
         static let verticalSpace: CGFloat = 8
         
         static let enterButtonSize = CGSize(width: 128, height: 48)
+        
+        static let animationDuration: TimeInterval = 0.3
     }
     
     private var enterButtonBottomConstraint: NSLayoutConstraint?
@@ -56,42 +56,21 @@ final class ThirdView: UIView {
 // MARK: - Actions
 
 private extension ThirdView {
-    @objc func didTapEnterButton() {
-        enterButtonAction?()
-    }
-    
     func setupAction() {
         enterButton.addTarget(self, action: #selector(didTapEnterButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapEnterButton() {
+        let login = loginTextField.text
+        let password = passwordTextField.text
+        
+        enterButtonAction?(login, password)
     }
 }
 
 // MARK: - Keyboard Events
 
 private extension ThirdView {
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        
-        if enterButtonBottomConstraint?.constant == -Constants.verticalSpace {
-            let keyboardTop = self.safeAreaInsets.bottom - keyboardSize.cgRectValue.height
-            enterButtonBottomConstraint?.constant = keyboardTop - Constants.verticalSpace
-            
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if enterButtonBottomConstraint?.constant != -Constants.verticalSpace {
-            enterButtonBottomConstraint?.constant = -Constants.verticalSpace
-            
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-        }
-    }
-    
     func setupKeyboardObservers() {
         NotificationCenter.default.addObserver(
             self,
@@ -101,6 +80,30 @@ private extension ThirdView {
             self,
             selector: #selector(keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        if enterButtonBottomConstraint?.constant == -Constants.verticalSpace {
+            let keyboardTop = self.safeAreaInsets.bottom - keyboardSize.cgRectValue.height
+            enterButtonBottomConstraint?.constant = keyboardTop - Constants.verticalSpace
+            
+            UIView.animate(withDuration: Constants.animationDuration) {
+                self.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if enterButtonBottomConstraint?.constant != -Constants.verticalSpace {
+            enterButtonBottomConstraint?.constant = -Constants.verticalSpace
+            
+            UIView.animate(withDuration: Constants.animationDuration) {
+                self.layoutIfNeeded()
+            }
+        }
     }
 }
 

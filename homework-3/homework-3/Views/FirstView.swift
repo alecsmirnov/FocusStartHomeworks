@@ -8,26 +8,23 @@
 import UIKit
 
 final class FirstView: UIView {
-    typealias actionType = () -> Void
-    
     // MARK: Properties
     
-    var roundButtonAction: actionType?
-    var ovalButtonAction: actionType?
+    var roundButtonAction: ButtonPressCompletion?
+    var ovalButtonAction: ButtonPressCompletion?
     
     private enum Constants {
-        static let horizontalSpace: CGFloat = 16
-        static let topSpace: CGFloat = 8
-        static let bottomSpace: CGFloat = 8
+        static let horizontalSpace: CGFloat = 8
+        static let verticalSpace: CGFloat = 8
+        
+        static let smallLabelFontSize: CGFloat = 12
+        static let mediumLabelFontSize: CGFloat = 18
+        static let largeLabelFontSize: CGFloat = 24
         
         static let roundButtonSize = CGSize(width: 48, height: 48)
         static let ovalButtonSize = CGSize(width: 128, height: 48)
         
         static let imageViewSize = CGSize(width: 128, height: 128)
-        
-        static let smallLabelFontSize: CGFloat = 12
-        static let mediumLabelFontSize: CGFloat = 18
-        static let largeLabelFontSize: CGFloat = 24
     }
     
     // MARK: Subviews
@@ -44,9 +41,11 @@ final class FirstView: UIView {
     private let imageView = UIImageView()
     private let activityIndicatorView = UIActivityIndicatorView()
     
-    // MARK: Lifecycle
+    // MARK: Life Cycle
     
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         roundButton.layer.cornerRadius = roundButton.frame.size.width / 2
     }
     
@@ -71,17 +70,17 @@ final class FirstView: UIView {
 // MARK: - Actions
 
 private extension FirstView {
+    func setupActions() {
+        roundButton.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
+        ovalButton.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
+    }
+    
     @objc func didTapRoundButton() {
         roundButtonAction?()
     }
     
     @objc func didTapOvalButton() {
         ovalButtonAction?()
-    }
-    
-    func setupActions() {
-        roundButton.addTarget(self, action: #selector(didTapRoundButton), for: .touchUpInside)
-        ovalButton.addTarget(self, action: #selector(didTapOvalButton), for: .touchUpInside)
     }
 }
 
@@ -111,7 +110,7 @@ private extension FirstView {
     }
     
     func setupSmallLabelAppearance() {
-        smallLabel.text = "Text 1"
+        smallLabel.text = "Single line small text"
         smallLabel.font = UIFont.systemFont(ofSize: Constants.smallLabelFontSize)
         smallLabel.numberOfLines = 1
         smallLabel.textAlignment = .center
@@ -119,7 +118,7 @@ private extension FirstView {
     }
     
     func setupMediumLabelAppearance() {
-        mediumLabel.text = "Text 2"
+        mediumLabel.text = "Single line medium text"
         mediumLabel.font = UIFont(name: "Arial Rounded MT Bold", size: Constants.mediumLabelFontSize)
         mediumLabel.numberOfLines = 1
         mediumLabel.textAlignment = .center
@@ -198,10 +197,10 @@ private extension FirstView {
             stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             stackView.topAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.topAnchor,
-                constant: Constants.topSpace),
+                constant: Constants.verticalSpace),
             stackView.bottomAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.bottomAnchor,
-                constant: -Constants.bottomSpace),
+                constant: -Constants.verticalSpace),
         ])
     }
     

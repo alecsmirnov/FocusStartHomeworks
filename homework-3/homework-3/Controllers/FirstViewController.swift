@@ -8,6 +8,8 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    // MARK: Properties
+    
     private var firstView: FirstView {
         guard let firstView = view as? FirstView else {
             fatalError("view is not a FirstView instance")
@@ -16,6 +18,8 @@ class FirstViewController: UIViewController {
         return firstView
     }
     
+    // MARK: Life Cycle
+    
     override func loadView() {        
         view = FirstView(frame: UIScreen.main.bounds)
     }
@@ -23,6 +27,14 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureButtonsActions()
+    }
+}
+
+// MARK: - Actions
+
+private extension FirstViewController {
+    func configureButtonsActions() {
         firstView.roundButtonAction = { [weak self] in
             guard let _ = self else { return }
             

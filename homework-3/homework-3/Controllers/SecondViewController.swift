@@ -8,6 +8,8 @@
 import UIKit
 
 class SecondViewController: UIViewController {
+    // MARK: Properties
+    
     private var secondView: SecondView {
         guard let secondView = view as? SecondView else {
             fatalError("view is not a SecondView instance")
@@ -15,6 +17,8 @@ class SecondViewController: UIViewController {
         
         return secondView
     }
+    
+    // MARK: Life Cycle
     
     override func loadView() {       
         view = SecondView(frame: UIScreen.main.bounds)
