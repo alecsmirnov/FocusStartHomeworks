@@ -15,6 +15,8 @@ final class TableViewCell: UITableViewCell {
     private enum Constants {
         static let horizontalSpace: CGFloat = 8
         static let verticalSpace: CGFloat = 8
+        
+        static let titleLabelSize: CGFloat = 20
     }
     
     // MARK: Subviews
@@ -44,10 +46,23 @@ final class TableViewCell: UITableViewCell {
 // MARK: - Public Methods
 
 extension TableViewCell {
-    func customize(title: String, description: String, date: String) {
-        titleLabel.text = title
-        descriptionLabel.text = description
-        dateLabel.text = date
+    func customize(record: Record) {
+        titleLabel.text = record.title
+        descriptionLabel.text = record.text
+        dateLabel.text = TableViewCell.dateToString(date: record.date)
+    }
+}
+
+// MARK: - Private Methods
+
+private extension TableViewCell {
+    static func dateToString(date: Date?) -> String? {
+        guard let date = date else { return nil }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        return dateFormatter.string(from: date)
     }
 }
 
@@ -61,6 +76,7 @@ private extension TableViewCell {
     }
     
     func setupTitleLabelAppearance() {
+        titleLabel.font = .boldSystemFont(ofSize: Constants.titleLabelSize)
         titleLabel.numberOfLines = 2
     }
     
