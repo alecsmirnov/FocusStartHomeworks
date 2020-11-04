@@ -17,6 +17,11 @@
 		845D4DFD25526B3D00165F34 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4DF925526B3D00165F34 /* DetailViewController.swift */; };
 		845D4DFE25526B3D00165F34 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4DFA25526B3D00165F34 /* TableViewCell.swift */; };
 		845D4DFF25526B3D00165F34 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4DFB25526B3D00165F34 /* TableViewController.swift */; };
+		845D4E0425526CD100165F34 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E0325526CD100165F34 /* Record.swift */; };
+		845D4E0F25528A7900165F34 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E0E25528A7900165F34 /* DataService.swift */; };
+		845D4E132552908D00165F34 /* Date+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E122552908D00165F34 /* Date+random.swift */; };
+		845D4E162552B30500165F34 /* TableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E152552B30500165F34 /* TableViewControllerDelegate.swift */; };
+		845D4E1D2552C7E300165F34 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E1C2552C7E300165F34 /* Images.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		845D4DF925526B3D00165F34 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		845D4DFA25526B3D00165F34 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		845D4DFB25526B3D00165F34 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		845D4E0325526CD100165F34 /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		845D4E0E25528A7900165F34 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		845D4E122552908D00165F34 /* Date+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+random.swift"; sourceTree = "<group>"; };
+		845D4E152552B30500165F34 /* TableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		845D4E1C2552C7E300165F34 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +74,10 @@
 		844578762551A7AD0038C813 /* homework-4 */ = {
 			isa = PBXGroup;
 			children = (
+				845D4E1B2552C7D300165F34 /* Constants */,
+				845D4E192552B4F200165F34 /* Delegates */,
+				845D4E112552907A00165F34 /* Extensions */,
+				845D4E0225526CD100165F34 /* Model */,
 				845D4DF125526B3000165F34 /* Views */,
 				845D4DF725526B3D00165F34 /* Controllers */,
 				844578772551A7AD0038C813 /* AppDelegate.swift */,
@@ -78,8 +92,9 @@
 		845D4DF125526B3000165F34 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				845D4DF225526B3000165F34 /* DetailView.swift */,
 				845D4DF325526B3000165F34 /* TableView.swift */,
+				845D4DF225526B3000165F34 /* DetailView.swift */,
+				845D4DFA25526B3D00165F34 /* TableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -87,12 +102,44 @@
 		845D4DF725526B3D00165F34 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				845D4DF825526B3D00165F34 /* SplitViewController.swift */,
-				845D4DF925526B3D00165F34 /* DetailViewController.swift */,
-				845D4DFA25526B3D00165F34 /* TableViewCell.swift */,
 				845D4DFB25526B3D00165F34 /* TableViewController.swift */,
+				845D4DF925526B3D00165F34 /* DetailViewController.swift */,
+				845D4DF825526B3D00165F34 /* SplitViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		845D4E0225526CD100165F34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				845D4E0325526CD100165F34 /* Record.swift */,
+				845D4E0E25528A7900165F34 /* DataService.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		845D4E112552907A00165F34 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				845D4E122552908D00165F34 /* Date+random.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		845D4E192552B4F200165F34 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				845D4E152552B30500165F34 /* TableViewControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		845D4E1B2552C7D300165F34 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				845D4E1C2552C7E300165F34 /* Images.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,12 +213,17 @@
 			files = (
 				845D4DFC25526B3D00165F34 /* SplitViewController.swift in Sources */,
 				844578782551A7AD0038C813 /* AppDelegate.swift in Sources */,
+				845D4E0425526CD100165F34 /* Record.swift in Sources */,
 				845D4DF525526B3000165F34 /* TableView.swift in Sources */,
+				845D4E1D2552C7E300165F34 /* Images.swift in Sources */,
+				845D4E132552908D00165F34 /* Date+random.swift in Sources */,
 				845D4DFF25526B3D00165F34 /* TableViewController.swift in Sources */,
 				845D4DFD25526B3D00165F34 /* DetailViewController.swift in Sources */,
 				845D4DF425526B3000165F34 /* DetailView.swift in Sources */,
 				845D4DFE25526B3D00165F34 /* TableViewCell.swift in Sources */,
 				8445787A2551A7AD0038C813 /* SceneDelegate.swift in Sources */,
+				845D4E162552B30500165F34 /* TableViewControllerDelegate.swift in Sources */,
+				845D4E0F25528A7900165F34 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

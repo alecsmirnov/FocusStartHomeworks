@@ -14,7 +14,7 @@ final class DetailView: UIView {
         static let horizontalSpace: CGFloat = 8
         static let verticalSpace: CGFloat = 8
         
-        static let imageViewSize = CGSize(width: 128, height: 128)
+        static let imageCornerRadius: CGFloat = 16
     }
     
     // MARK: Subviews
@@ -22,6 +22,9 @@ final class DetailView: UIView {
     private let scrollView = UIScrollView()
     
     private let textLabel = UILabel()
+    
+//    private let firstImageViewContainer = UIView()
+//    private let firstImageViewContainer = UIView()
     
     private let firstImageView = UIImageView()
     private let secondImageView = UIImageView()
@@ -46,7 +49,6 @@ final class DetailView: UIView {
 extension DetailView {
     func customize(record: Record) {
         textLabel.text = record.text
-        
         firstImageView.image = record.firstImage
         secondImageView.image = record.secondImage
     }
@@ -60,27 +62,31 @@ private extension DetailView {
         
         setupScrollViewAppearance()
         
-        setTextLabelAppearance()
-        setFirstImageViewAppearance()
-        setSecondImageViewAppearance()
+        setupTextLabelAppearance()
+        setupFirstImageViewAppearance()
+        setupSecondImageViewAppearance()
     }
     
     func setupScrollViewAppearance() {
         scrollView.backgroundColor = .systemBackground
     }
     
-    func setTextLabelAppearance() {
+    func setupTextLabelAppearance() {
         textLabel.numberOfLines = 0
     }
     
-    func setFirstImageViewAppearance() {
+    func setupFirstImageViewAppearance() {
         firstImageView.contentMode = .scaleAspectFill
         firstImageView.clipsToBounds = true
+        
+        firstImageView.layer.cornerRadius = Constants.imageCornerRadius
     }
     
-    func setSecondImageViewAppearance() {
+    func setupSecondImageViewAppearance() {
         secondImageView.contentMode = .scaleAspectFill
         secondImageView.clipsToBounds = true
+        
+        secondImageView.layer.cornerRadius = Constants.imageCornerRadius
     }
 }
 
@@ -99,8 +105,8 @@ private extension DetailView {
         setupScrollViewLayout()
         
         setupTextLabelLayout()
-        setFirstImageViewLayout()
-        setSecondImageViewLayout()
+        setupFirstImageViewLayout()
+        setupSecondImageViewLayout()
     }
     
     func setupScrollViewLayout() {
@@ -130,18 +136,16 @@ private extension DetailView {
         ])
     }
     
-    func setFirstImageViewLayout() {
+    func setupFirstImageViewLayout() {
         firstImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             firstImageView.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: Constants.verticalSpace),
             firstImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            firstImageView.widthAnchor.constraint(equalToConstant: Constants.imageViewSize.width),
-            firstImageView.heightAnchor.constraint(equalToConstant: Constants.imageViewSize.height),
         ])
     }
     
-    func setSecondImageViewLayout() {
+    func setupSecondImageViewLayout() {
         secondImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -154,8 +158,6 @@ private extension DetailView {
                 constant: -Constants.verticalSpace
             ),
             secondImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            secondImageView.widthAnchor.constraint(equalToConstant: Constants.imageViewSize.width),
-            secondImageView.heightAnchor.constraint(equalToConstant: Constants.imageViewSize.height),
         ])
     }
 }
