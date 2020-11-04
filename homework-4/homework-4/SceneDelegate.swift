@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let detailViewController = DetailViewController()
         
         let dataService = createDataService()
+        
         tableViewController.dataService = dataService
+        tableViewController.delegate = detailViewController
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = SplitViewController(
