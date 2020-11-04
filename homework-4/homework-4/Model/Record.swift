@@ -5,10 +5,14 @@
 //  Created by Admin on 04.11.2020.
 //
 
-import Foundation
+import UIKit
 
 struct Record {
     let title: String
+    
     var text: String?
     var date: Date?
+    
+    var firstImage: UIImage?
+    var secondImage: UIImage?
 }
