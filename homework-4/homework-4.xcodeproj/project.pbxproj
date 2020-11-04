@@ -22,6 +22,7 @@
 		845D4E132552908D00165F34 /* Date+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E122552908D00165F34 /* Date+random.swift */; };
 		845D4E162552B30500165F34 /* TableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E152552B30500165F34 /* TableViewControllerDelegate.swift */; };
 		845D4E1D2552C7E300165F34 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E1C2552C7E300165F34 /* Images.swift */; };
+		845D4E2B2553093500165F34 /* RoundedShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D4E2A2553093500165F34 /* RoundedShadowImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		845D4E122552908D00165F34 /* Date+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+random.swift"; sourceTree = "<group>"; };
 		845D4E152552B30500165F34 /* TableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		845D4E1C2552C7E300165F34 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		845D4E2A2553093500165F34 /* RoundedShadowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				845D4DF325526B3000165F34 /* TableView.swift */,
 				845D4DF225526B3000165F34 /* DetailView.swift */,
 				845D4DFA25526B3D00165F34 /* TableViewCell.swift */,
+				845D4E2A2553093500165F34 /* RoundedShadowImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				844578782551A7AD0038C813 /* AppDelegate.swift in Sources */,
 				845D4E0425526CD100165F34 /* Record.swift in Sources */,
 				845D4DF525526B3000165F34 /* TableView.swift in Sources */,
+				845D4E2B2553093500165F34 /* RoundedShadowImageView.swift in Sources */,
 				845D4E1D2552C7E300165F34 /* Images.swift in Sources */,
 				845D4E132552908D00165F34 /* Date+random.swift in Sources */,
 				845D4DFF25526B3D00165F34 /* TableViewController.swift in Sources */,

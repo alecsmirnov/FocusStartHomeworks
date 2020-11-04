@@ -14,6 +14,7 @@ final class DetailView: UIView {
         static let horizontalSpace: CGFloat = 8
         static let verticalSpace: CGFloat = 8
         
+        static let imageSize = CGSize(width: 200, height: 200)
         static let imageCornerRadius: CGFloat = 16
     }
     
@@ -23,11 +24,8 @@ final class DetailView: UIView {
     
     private let textLabel = UILabel()
     
-//    private let firstImageViewContainer = UIView()
-//    private let firstImageViewContainer = UIView()
-    
-    private let firstImageView = UIImageView()
-    private let secondImageView = UIImageView()
+    private let firstImageView = RoundedShadowImageView()
+    private let secondImageView = RoundedShadowImageView()
     
     // MARK: Initialization
     
@@ -49,8 +47,8 @@ final class DetailView: UIView {
 extension DetailView {
     func customize(record: Record) {
         textLabel.text = record.text
-        firstImageView.image = record.firstImage
-        secondImageView.image = record.secondImage
+        firstImageView.setImage(image: record.firstImage)
+        secondImageView.setImage(image: record.secondImage)
     }
 }
 
@@ -76,17 +74,11 @@ private extension DetailView {
     }
     
     func setupFirstImageViewAppearance() {
-        firstImageView.contentMode = .scaleAspectFill
-        firstImageView.clipsToBounds = true
-        
-        firstImageView.layer.cornerRadius = Constants.imageCornerRadius
+        firstImageView.setSize(width: Constants.imageSize.width, height: Constants.imageSize.height)
     }
     
     func setupSecondImageViewAppearance() {
-        secondImageView.contentMode = .scaleAspectFill
-        secondImageView.clipsToBounds = true
-        
-        secondImageView.layer.cornerRadius = Constants.imageCornerRadius
+        secondImageView.setSize(width: Constants.imageSize.width, height: Constants.imageSize.height)
     }
 }
 

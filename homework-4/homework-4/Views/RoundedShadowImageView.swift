@@ -11,14 +11,15 @@ class RoundedShadowImageView: UIView {
     // MARK: Properties
     
     var image: UIImage? {
-        get { imageView.image }
-        set { imageView.image = newValue }
+        return imageView.image
     }
     
     var shadowOpacity: Float = 1 { didSet { recalculateAppearance() }}
     var shadowRadius: CGFloat = 5 { didSet { recalculateAppearance() }}
     var shadowOffset: CGSize = .zero { didSet { recalculateAppearance() }}
     var cornerRadius: CGFloat = 16 { didSet { recalculateAppearance() }}
+    
+    private var calculated = false
     
     // MARK: Subviews
     
@@ -27,14 +28,16 @@ class RoundedShadowImageView: UIView {
     
     // MARK: Initialization
     
-    init(frame: CGRect, image: UIImage? = nil) {
-        super.init(frame: frame)
+    init(size: CGSize, image: UIImage? = nil) {
+        let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
-        self.image = image
+        super.init(frame: newFrame)
         
-        setupAppearance(frame: frame)
-        setupSubviews()
-        setupLayout()
+        calculate(newFrame: newFrame, image: image)
+    }
+    
+    convenience init() {
+        self.init(size: .zero)
     }
     
     required init?(coder: NSCoder) {
@@ -45,8 +48,33 @@ class RoundedShadowImageView: UIView {
 // MARK: - Public Methods
 
 extension RoundedShadowImageView {
+    func setSize(width: CGFloat, height: CGFloat) {
+        let newFrame = CGRect(x: 0, y: 0, width: width, height: height)
+        
+        calculate(newFrame: newFrame, image: image)
+    }
+    
+    func setImage(image: UIImage?) {
+        calculate(newFrame: frame, image: image)
+    }
+    
+    func calculate(newFrame: CGRect, image: UIImage?) {
+        frame = newFrame
+        imageView.image = image
+        
+        if !calculated && imageView.image != nil && frame.width != 0 && frame.height != 0 {
+            setupAppearance(frame: frame)
+            setupSubviews()
+            setupLayout()
+            
+            calculated = true
+        }
+    }
+    
     func recalculateAppearance() {
-        setupAppearance(frame: frame)
+        if !frame.isEmpty {
+            setupAppearance(frame: frame)
+        }
     }
 }
 
@@ -99,8 +127,10 @@ private extension RoundedShadowImageView {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
+            containerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            containerView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             containerView.widthAnchor.constraint(equalToConstant: frame.width),
             containerView.heightAnchor.constraint(equalToConstant: frame.height),
         ])
@@ -110,10 +140,12 @@ private extension RoundedShadowImageView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor),
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: containerView.frame.width),
+            imageView.heightAnchor.constraint(equalToConstant: containerView.frame.height),
         ])
     }
 }
