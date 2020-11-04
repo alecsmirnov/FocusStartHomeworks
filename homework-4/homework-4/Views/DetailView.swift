@@ -44,11 +44,11 @@ final class DetailView: UIView {
 // MARK: - Public Methods
 
 extension DetailView {
-    func customize(text: String?, firstImage: UIImage?, secondImage: UIImage?) {
-        textLabel.text = text
+    func customize(record: Record) {
+        textLabel.text = record.text
         
-        firstImageView.image = firstImage
-        secondImageView.image = secondImage
+        firstImageView.image = record.firstImage
+        secondImageView.image = record.secondImage
     }
 }
 
@@ -107,10 +107,10 @@ private extension DetailView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
     
@@ -118,13 +118,15 @@ private extension DetailView {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: Constants.verticalSpace),
             textLabel.leadingAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.leadingAnchor,
-                constant: Constants.horizontalSpace),
+                constant: Constants.horizontalSpace
+            ),
             textLabel.trailingAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.trailingAnchor,
-                constant: -Constants.horizontalSpace),
-            textLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: Constants.verticalSpace),
+                constant: -Constants.horizontalSpace
+            ),
         ])
     }
     
@@ -132,8 +134,8 @@ private extension DetailView {
         firstImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            firstImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             firstImageView.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: Constants.verticalSpace),
+            firstImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             firstImageView.widthAnchor.constraint(equalToConstant: Constants.imageViewSize.width),
             firstImageView.heightAnchor.constraint(equalToConstant: Constants.imageViewSize.height),
         ])
@@ -143,13 +145,15 @@ private extension DetailView {
         secondImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            secondImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             secondImageView.topAnchor.constraint(
                 equalTo: firstImageView.bottomAnchor,
-                constant: Constants.verticalSpace),
+                constant: Constants.verticalSpace
+            ),
             secondImageView.bottomAnchor.constraint(
                 equalTo: scrollView.bottomAnchor,
-                constant: -Constants.verticalSpace),
+                constant: -Constants.verticalSpace
+            ),
+            secondImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             secondImageView.widthAnchor.constraint(equalToConstant: Constants.imageViewSize.width),
             secondImageView.heightAnchor.constraint(equalToConstant: Constants.imageViewSize.height),
         ])
