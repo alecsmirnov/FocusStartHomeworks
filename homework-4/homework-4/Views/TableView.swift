@@ -57,6 +57,14 @@ extension TableView {
     func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
+    
+    func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
+        tableView.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
+    }
+    
+    func deselectRow(at indexPath: IndexPath, animated: Bool) {
+        tableView.deselectRow(at: indexPath, animated: animated)
+    }
 }
 
 // MARK: - Presentation

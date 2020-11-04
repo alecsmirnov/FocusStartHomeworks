@@ -34,6 +34,7 @@ final class TableViewController: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
+        setSelectedRow(at: 0)
     }
 }
 
@@ -55,10 +56,22 @@ extension TableViewController {
 // MARK: - Private Methods
 
 private extension TableViewController {
+    func setSelectedRow(at index: Int) {
+        if detailControllerExist() {
+            guard let dataService = dataService else { return }
+            
+            if !dataService.isEmpty {
+                let indexPath = IndexPath(row: index, section: 0)
+                let record = dataService.get(at: index)
+                
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+                delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
+            }
+        }
+    }
+    
     func detailControllerExist() -> Bool {
-        guard let splitViewController = splitViewController else { return false }
-        
-        return splitViewController.viewControllers.count == 2
+        return splitViewController?.viewControllers.count == 2
     }
 }
 
@@ -91,14 +104,16 @@ extension TableViewController: UITableViewDelegate {
         
         let record = dataService.get(at: indexPath.row)
         
-        if !detailControllerExist() {
+        if detailControllerExist() {
+            delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
+        }
+        else {
             let detailViewController = DetailViewController()
             detailViewController.customize(record: record)
             
             navigationController?.pushViewController(detailViewController, animated: true)
-        }
-        else {
-            delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
+            
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 }
