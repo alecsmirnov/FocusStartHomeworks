@@ -47,6 +47,18 @@ final class TableView: UIView {
     }
 }
 
+// MARK: - Public Methods
+
+extension TableView {
+    func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+        tableView.register(cellClass, forCellReuseIdentifier: identifier)
+    }
+    
+    func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+    }
+}
+
 // MARK: - Presentation
 
 private extension TableView {
