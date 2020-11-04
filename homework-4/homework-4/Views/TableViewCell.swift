@@ -25,10 +25,7 @@ final class TableViewCell: UITableViewCell {
     private let descriptionLabel = UILabel()
     private let dateLabel = UILabel()
     
-    // MARK: Lifecycle
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
+    // MARK: Initialization
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -123,7 +120,7 @@ private extension TableViewCell {
     
     func setupDescriptionLabelLayout() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        descriptionLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.verticalSpace),
@@ -134,14 +131,6 @@ private extension TableViewCell {
             descriptionLabel.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Constants.horizontalSpace
-            ),
-            descriptionLabel.trailingAnchor.constraint(
-                equalTo: dateLabel.leadingAnchor,
-                constant: -Constants.horizontalSpace
-            ),
-            descriptionLabel.widthAnchor.constraint(
-                lessThanOrEqualTo: contentView.widthAnchor,
-                constant: -Constants.horizontalSpace
             ),
         ])
     }
@@ -155,14 +144,11 @@ private extension TableViewCell {
             dateLabel.bottomAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             dateLabel.leadingAnchor.constraint(
                 equalTo: descriptionLabel.trailingAnchor,
-                constant: Constants.horizontalSpace * 2
+                constant: Constants.horizontalSpace
             ),
             dateLabel.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
                 constant: -Constants.horizontalSpace
-            ),
-            dateLabel.widthAnchor.constraint(
-                greaterThanOrEqualToConstant: descriptionLabel.frame.width
             ),
         ])
     }

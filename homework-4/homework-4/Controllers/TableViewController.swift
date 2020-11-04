@@ -25,7 +25,7 @@ final class TableViewController: UIViewController {
     }
     
     // MARK: Lifecycle
-    
+
     override func loadView() {
         view = TableView(frame: UIScreen.main.bounds)
     }
