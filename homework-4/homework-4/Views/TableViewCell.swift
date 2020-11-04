@@ -147,6 +147,7 @@ private extension TableViewCell {
     
     func setupDateLabelLayout() {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: descriptionLabel.topAnchor),
