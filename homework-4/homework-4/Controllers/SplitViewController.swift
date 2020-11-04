@@ -8,13 +8,6 @@
 import UIKit
 
 final class SplitViewController: UISplitViewController {
-    // MARK: Properties
-    
-    enum SplitViewDisplayMode {
-        case compact
-        case regular
-    }
-    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
