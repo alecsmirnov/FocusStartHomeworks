@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplitViewController: UISplitViewController {
+final class SplitViewController: UISplitViewController {
     // MARK: Properties
     
     enum SplitViewDisplayMode {
@@ -21,14 +21,18 @@ class SplitViewController: UISplitViewController {
         super.viewDidLoad()
         
         delegate = self
+    }
+    
+    // MARK: Initialization
+    
+    init(mainViewController: UIViewController, detailViewController: UIViewController) {
+        super.init(style: .doubleColumn)
         
-        let tableViewController = TableViewController()
-        let detailViewController = DetailViewController()
-        
-        let tableNavigationController = UINavigationController(rootViewController: tableViewController)
-        let detailNavigationController = UINavigationController(rootViewController: detailViewController)
-        
-        viewControllers = [tableNavigationController, detailNavigationController]
+        viewControllers = [mainViewController, detailViewController]
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -36,10 +40,9 @@ class SplitViewController: UISplitViewController {
 
 extension SplitViewController: UISplitViewControllerDelegate {
     func splitViewController(
-        _ splitViewController: UISplitViewController,
-        collapseSecondary secondaryViewController: UIViewController,
-        onto primaryViewController: UIViewController
-    ) -> Bool {
-        return false
+        _ svc: UISplitViewController,
+        topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column
+    ) -> UISplitViewController.Column {
+        return .primary
     }
 }

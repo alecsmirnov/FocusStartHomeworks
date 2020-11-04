@@ -28,3 +28,21 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
     }
 }
+
+// MARK: - Public Methods
+
+extension DetailViewController {
+    func customize(record: Record) {
+        navigationItem.title = record.title
+        
+        detailView.customize(record: record)
+    }
+}
+
+// MARK: - TableViewControllerDelegate
+
+extension DetailViewController: TableViewControllerDelegate {
+    func tableViewControllerDelegate(_ viewController: AnyObject, didSelectRecord record: Record) {
+        customize(record: record)
+    }
+}

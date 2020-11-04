@@ -7,12 +7,14 @@
 
 import UIKit
 
-protocol TableViewControllerDelegate: AnyObject {
-    func tableViewControllerDelegate(_ viewController: AnyObject, selectRowAt index: Int)
-}
-
 final class TableViewController: UIViewController {
+    // MARK: Delegate
+    
+    weak var delegate: TableViewControllerDelegate?
+    
     // MARK: Properties
+    
+    var dataService: DataService?
     
     private var tableView: TableView {
         guard let tableView = view as? TableView else {
@@ -30,5 +32,73 @@ final class TableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupTableView()
+    }
+}
+
+// MARK: - TableView Customization
+
+extension TableViewController {
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        registerCells()
+    }
+    
+    func registerCells() {
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
+    }
+}
+
+// MARK: - Private Methods
+
+private extension TableViewController {
+    func detailControllerExist() -> Bool {
+        guard let splitViewController = splitViewController else { return false }
+        
+        return splitViewController.viewControllers.count == 2
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension TableViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataService?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: TableViewCell.identifier,
+            for: indexPath
+        ) as! TableViewCell
+        
+        if let dataService = dataService {
+            cell.customize(record: dataService.get(at: indexPath.row))
+        }
+        
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension TableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let dataService = dataService else { return }
+        
+        let record = dataService.get(at: indexPath.row)
+        
+        if !detailControllerExist() {
+            let detailViewController = DetailViewController()
+            detailViewController.customize(record: record)
+            
+            navigationController?.pushViewController(detailViewController, animated: true)
+        }
+        else {
+            delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
+        }
     }
 }
