@@ -123,6 +123,7 @@ private extension TableViewCell {
     
     func setupDescriptionLabelLayout() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.verticalSpace),
@@ -154,7 +155,7 @@ private extension TableViewCell {
             dateLabel.bottomAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             dateLabel.leadingAnchor.constraint(
                 equalTo: descriptionLabel.trailingAnchor,
-                constant: Constants.horizontalSpace
+                constant: Constants.horizontalSpace * 2
             ),
             dateLabel.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
