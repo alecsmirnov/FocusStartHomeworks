@@ -25,13 +25,12 @@ final class RoundedShadowImageView: UIView {
     
     // MARK: Subviews
     
-    private let containerView = UIView()
     private let imageView = UIImageView()
     
     // MARK: Initialization
     
     init(size: CGSize, image: UIImage? = nil) {
-        let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let newFrame = CGRect(origin: .zero, size: size)
         
         super.init(frame: newFrame)
         
@@ -82,28 +81,23 @@ private extension RoundedShadowImageView {
 
 private extension RoundedShadowImageView {
     func setupAppearance(frame: CGRect) {
-        setupContainerViewAppearance(frame: frame)
-        setupImageViewAppearance(frame: frame)
+        setupViewLayerAppearance(frame: frame)
+        setupImageViewLayerAppearance(frame: frame)
     }
     
-    func setupContainerViewAppearance(frame: CGRect) {
-        containerView.frame = frame
-        containerView.clipsToBounds = false
+    func setupViewLayerAppearance(frame: CGRect) {
+        self.frame = frame
+        clipsToBounds = false
         
-        let path = UIBezierPath(
-            roundedRect: containerView.bounds,
-            cornerRadius: cornerRadius
-        ).cgPath
-        
-        containerView.layer.shadowPath = path
-        containerView.layer.shadowColor = shadowColor
-        containerView.layer.shadowOpacity = shadowOpacity
-        containerView.layer.shadowRadius = shadowRadius
-        containerView.layer.shadowOffset = shadowOffset
-        containerView.layer.cornerRadius = cornerRadius
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+        layer.shadowColor = shadowColor
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowRadius = shadowRadius
+        layer.shadowOffset = shadowOffset
+        layer.cornerRadius = cornerRadius
     }
     
-    func setupImageViewAppearance(frame: CGRect) {
+    func setupImageViewLayerAppearance(frame: CGRect) {
         imageView.frame = frame
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = cornerRadius
@@ -114,38 +108,23 @@ private extension RoundedShadowImageView {
 
 private extension RoundedShadowImageView {
     func setupSubviews() {
-        addSubview(containerView)
-        containerView.addSubview(imageView)
+        addSubview(imageView)
     }
     
     func setupLayout() {
-        setupContainerViewLayout()
         setupImageViewLayout()
-    }
-    
-    func setupContainerViewLayout() {
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            containerView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: frame.width),
-            containerView.heightAnchor.constraint(equalToConstant: frame.height),
-        ])
     }
     
     func setupImageViewLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: containerView.frame.width),
-            imageView.heightAnchor.constraint(equalToConstant: containerView.frame.height),
+            imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: frame.width),
+            imageView.heightAnchor.constraint(equalToConstant: frame.height),
         ])
     }
 }
