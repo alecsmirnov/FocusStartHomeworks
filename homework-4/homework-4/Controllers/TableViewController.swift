@@ -57,10 +57,10 @@ extension TableViewController {
 
 private extension TableViewController {
     func setSelectedRow(at index: Int) {
-        if detailControllerExist() {
-            guard let dataService = dataService else { return }
-            
-            if !dataService.isEmpty {
+        guard let splitViewController = splitViewController else { return }
+        
+        if !splitViewController.isCollapsed {
+            if let dataService = dataService, !dataService.isEmpty {
                 let indexPath = IndexPath(row: index, section: 0)
                 let record = dataService.get(at: index)
                 
@@ -68,10 +68,6 @@ private extension TableViewController {
                 delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
             }
         }
-    }
-    
-    func detailControllerExist() -> Bool {
-        return splitViewController?.viewControllers.count == 2
     }
 }
 
@@ -100,20 +96,21 @@ extension TableViewController: UITableViewDataSource {
 
 extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let dataService = dataService else { return }
+        guard let splitViewController = splitViewController,
+              let dataService = dataService else { return }
         
         let record = dataService.get(at: indexPath.row)
         
-        if detailControllerExist() {
-            delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
-        }
-        else {
+        if splitViewController.isCollapsed {
             let detailViewController = DetailViewController()
             detailViewController.customize(record: record)
             
-            navigationController?.pushViewController(detailViewController, animated: true)
+            let navigationController = UINavigationController(rootViewController: detailViewController)
+            splitViewController.showDetailViewController(navigationController, sender: nil)
             
             tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
         }
     }
 }
