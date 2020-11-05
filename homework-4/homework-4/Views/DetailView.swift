@@ -75,10 +75,12 @@ private extension DetailView {
     
     func setupFirstImageViewAppearance() {
         firstImageView.setSize(width: Constants.imageSize.width, height: Constants.imageSize.height)
+        firstImageView.cornerRadius = Constants.imageCornerRadius
     }
     
     func setupSecondImageViewAppearance() {
         secondImageView.setSize(width: Constants.imageSize.width, height: Constants.imageSize.height)
+        secondImageView.cornerRadius = Constants.imageCornerRadius
     }
 }
 
