@@ -7,19 +7,19 @@
 
 import UIKit
 
-class RoundedShadowImageView: UIView {
+final class RoundedShadowImageView: UIView {
     // MARK: Properties
     
     var image: UIImage? {
         return imageView.image
     }
     
-    var shadowOpacity: Float = 1 { didSet { recalculateAppearance() }}
-    var shadowRadius: CGFloat = 5 { didSet { recalculateAppearance() }}
-    var shadowOffset: CGSize = .zero { didSet { recalculateAppearance() }}
-    var cornerRadius: CGFloat = 16 { didSet { recalculateAppearance() }}
+    var shadowOpacity: Float = 1
+    var shadowRadius: CGFloat = 5
+    var shadowOffset: CGSize = .zero
+    var cornerRadius: CGFloat = 16
     
-    private var calculated = false
+    private(set) var isCalculated = false
     
     // MARK: Subviews
     
@@ -62,18 +62,12 @@ extension RoundedShadowImageView {
         frame = newFrame
         imageView.image = image
         
-        if !calculated && imageView.image != nil && frame.width != 0 && frame.height != 0 {
+        if !isCalculated && imageView.image != nil && frame.width != 0 && frame.height != 0 {
             setupAppearance(frame: frame)
             setupSubviews()
             setupLayout()
             
-            calculated = true
-        }
-    }
-    
-    func recalculateAppearance() {
-        if !frame.isEmpty {
-            setupAppearance(frame: frame)
+            isCalculated = true
         }
     }
 }
