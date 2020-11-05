@@ -57,7 +57,11 @@ extension RoundedShadowImageView {
     func setImage(image: UIImage?) {
         calculate(newFrame: frame, image: image)
     }
-    
+}
+
+// MARK: - Private Methods
+
+private extension RoundedShadowImageView {
     func calculate(newFrame: CGRect, image: UIImage?) {
         frame = newFrame
         imageView.image = image
