@@ -14,9 +14,11 @@ final class RoundedShadowImageView: UIView {
         return imageView.image
     }
     
+    var shadowColor: CGColor = UIColor.black.cgColor
     var shadowOpacity: Float = 1
     var shadowRadius: CGFloat = 5
     var shadowOffset: CGSize = .zero
+    
     var cornerRadius: CGFloat = 16
     
     private(set) var isCalculated = false
@@ -94,7 +96,7 @@ private extension RoundedShadowImageView {
         ).cgPath
         
         containerView.layer.shadowPath = path
-        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowColor = shadowColor
         containerView.layer.shadowOpacity = shadowOpacity
         containerView.layer.shadowRadius = shadowRadius
         containerView.layer.shadowOffset = shadowOffset
