@@ -43,6 +43,7 @@
 * год выпуска &mdash; отображать «-»
 * гос номер &mdash; пропускать это поле (оно не должно отображаться)  
 &nbsp;  
+&nbsp;    
 </details>
 
 <!---
@@ -84,6 +85,7 @@ for number in 0…1000 { ... }
 | 2  | count: Int                   | Возвращает количество добавленныхэлементов |
   
 &nbsp;  
+&nbsp;    
 </details> 
 
 <!---
@@ -120,6 +122,7 @@ for number in 0…1000 { ... }
 <p align="center"> <img height="300" src="images/homework-3-screen3.jpg"> </p>  
 
 &nbsp;  
+&nbsp;    
 </details>
 
 <!---
