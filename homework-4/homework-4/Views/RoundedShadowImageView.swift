@@ -10,35 +10,40 @@ import UIKit
 final class RoundedShadowImageView: UIView {
     // MARK: Properties
     
-    var image: UIImage? {
-        return imageView.image
-    }
+    var cornerRadius: CGFloat = 16
     
     var shadowColor: CGColor = UIColor.black.cgColor
     var shadowOpacity: Float = 1
     var shadowRadius: CGFloat = 5
     var shadowOffset: CGSize = .zero
     
-    var cornerRadius: CGFloat = 16
+    var image: UIImage? {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
-    private(set) var isCalculated = false
+    // MARK: Sublayers
     
-    // MARK: Subviews
+    private var imageLayer: CAShapeLayer?
+    private var shadowLayer: CAShapeLayer?
     
-    private let imageView = UIImageView()
+    // MARK: Lifecycle
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        configureSublayers()
+    }
     
     // MARK: Initialization
     
-    init(size: CGSize, image: UIImage? = nil) {
-        let newFrame = CGRect(origin: .zero, size: size)
+    init(image: UIImage? = nil) {
+        super.init(frame: .zero)
         
-        super.init(frame: newFrame)
+        self.image = image
         
-        calculate(newFrame: newFrame, image: image)
-    }
-    
-    convenience init() {
-        self.init(size: .zero)
+        configureView()
     }
     
     required init?(coder: NSCoder) {
@@ -46,85 +51,95 @@ final class RoundedShadowImageView: UIView {
     }
 }
 
-// MARK: - Public Methods
-
-extension RoundedShadowImageView {
-    func setSize(width: CGFloat, height: CGFloat) {
-        let newFrame = CGRect(x: 0, y: 0, width: width, height: height)
-        
-        calculate(newFrame: newFrame, image: image)
-    }
-    
-    func setImage(image: UIImage?) {
-        calculate(newFrame: frame, image: image)
-    }
-}
-
-// MARK: - Private Methods
-
-private extension RoundedShadowImageView {
-    func calculate(newFrame: CGRect, image: UIImage?) {
-        frame = newFrame
-        imageView.image = image
-        
-        if !isCalculated && imageView.image != nil && frame.width != 0 && frame.height != 0 {
-            setupAppearance(frame: frame)
-            setupSubviews()
-            setupLayout()
-            
-            isCalculated = true
-        }
-    }
-}
-
 // MARK: - Appearance
 
 private extension RoundedShadowImageView {
-    func setupAppearance(frame: CGRect) {
-        setupViewLayerAppearance(frame: frame)
-        setupImageViewLayerAppearance(frame: frame)
-    }
-    
-    func setupViewLayerAppearance(frame: CGRect) {
-        self.frame = frame
+    func configureView() {
+        backgroundColor = .systemBackground
         clipsToBounds = false
         
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
-        layer.shadowColor = shadowColor
-        layer.shadowOpacity = shadowOpacity
-        layer.shadowRadius = shadowRadius
-        layer.shadowOffset = shadowOffset
-        layer.cornerRadius = cornerRadius
-    }
-    
-    func setupImageViewLayerAppearance(frame: CGRect) {
-        imageView.frame = frame
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = cornerRadius
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
 
-// MARK: - Layout
+// MARK: - Sublayers
 
 private extension RoundedShadowImageView {
-    func setupSubviews() {
-        addSubview(imageView)
+    func configureSublayers() {
+        if let image = image {
+            let newImageLayer = RoundedShadowImageView.createNewImageLayer(
+                image: image,
+                roundRectBounds: bounds,
+                cornerRadius: cornerRadius
+            )
+            let newShadowLayer = RoundedShadowImageView.createNewShadowLayer(
+                roundRectBounds: bounds,
+                cornerRadius: cornerRadius,
+                shadowColor: shadowColor,
+                shadowOpacity: shadowOpacity,
+                shadowRadius: shadowRadius,
+                shadowOffset: shadowOffset
+            )
+            
+            addSublayers(newImageLayer: newImageLayer, newShadowLayer: newShadowLayer)
+        } else {
+            removeSublayers()
+        }
     }
     
-    func setupLayout() {
-        setupImageViewLayout()
-    }
-    
-    func setupImageViewLayout() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+    func addSublayers(newImageLayer: CAShapeLayer, newShadowLayer: CAShapeLayer) {
+        guard imageLayer == nil && shadowLayer == nil else { return }
         
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: frame.width),
-            imageView.heightAnchor.constraint(equalToConstant: frame.height),
-        ])
+        imageLayer = newImageLayer
+        shadowLayer = newShadowLayer
+        
+        layer.addSublayer(newShadowLayer)
+        layer.addSublayer(newImageLayer)
+    }
+    
+    func removeSublayers() {
+        imageLayer?.removeFromSuperlayer()
+        shadowLayer?.removeFromSuperlayer()
+        
+        imageLayer = nil
+        shadowLayer = nil
+    }
+}
+
+// MARK: - Static Methods
+
+private extension RoundedShadowImageView {
+    static func createNewImageLayer(image: UIImage,roundRectBounds: CGRect, cornerRadius: CGFloat) -> CAShapeLayer {
+        let imageLayer = CAShapeLayer()
+        
+        let mask = CAShapeLayer()
+        mask.path = UIBezierPath(roundedRect: roundRectBounds, cornerRadius: cornerRadius).cgPath
+        
+        imageLayer.mask = mask
+        imageLayer.contents = image.cgImage
+        imageLayer.frame = roundRectBounds
+        imageLayer.contentsGravity = .resizeAspectFill
+        
+        return imageLayer
+    }
+    
+    static func createNewShadowLayer(
+        roundRectBounds: CGRect,
+        cornerRadius: CGFloat,
+        shadowColor: CGColor,
+        shadowOpacity: Float,
+        shadowRadius: CGFloat,
+        shadowOffset: CGSize
+    ) -> CAShapeLayer {
+        let shadowLayer = CAShapeLayer()
+        
+        shadowLayer.shadowPath = UIBezierPath(roundedRect: roundRectBounds, cornerRadius: cornerRadius).cgPath
+        shadowLayer.shadowColor = shadowColor
+        shadowLayer.shadowOpacity = shadowOpacity
+        shadowLayer.shadowRadius = shadowRadius
+        shadowLayer.shadowOffset = shadowOffset
+        
+        return shadowLayer
     }
 }

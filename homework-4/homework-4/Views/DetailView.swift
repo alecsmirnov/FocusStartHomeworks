@@ -14,7 +14,7 @@ final class DetailView: UIView {
         static let horizontalSpace: CGFloat = 8
         static let verticalSpace: CGFloat = 8
         
-        static let imageSize = CGSize(width: 200, height: 200)
+        static let imageSize = CGSize(width: 300, height: 300)
         static let imageCornerRadius: CGFloat = 16
     }
     
@@ -47,8 +47,8 @@ final class DetailView: UIView {
 extension DetailView {
     func customize(record: Record) {
         textLabel.text = record.text
-        firstImageView.setImage(image: record.firstImage)
-        secondImageView.setImage(image: record.secondImage)
+        firstImageView.image = record.firstImage
+        secondImageView.image = record.secondImage
     }
 }
 
@@ -74,12 +74,10 @@ private extension DetailView {
     }
     
     func setupFirstImageViewAppearance() {
-        firstImageView.setSize(width: Constants.imageSize.width, height: Constants.imageSize.height)
         firstImageView.cornerRadius = Constants.imageCornerRadius
     }
     
     func setupSecondImageViewAppearance() {
-        secondImageView.setSize(width: Constants.imageSize.width, height: Constants.imageSize.height)
         secondImageView.cornerRadius = Constants.imageCornerRadius
     }
 }
@@ -136,6 +134,8 @@ private extension DetailView {
         NSLayoutConstraint.activate([
             firstImageView.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: Constants.verticalSpace),
             firstImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            firstImageView.widthAnchor.constraint(equalToConstant: Constants.imageSize.width),
+            firstImageView.heightAnchor.constraint(equalToConstant: Constants.imageSize.height),
         ])
     }
     
@@ -152,6 +152,8 @@ private extension DetailView {
                 constant: -Constants.verticalSpace
             ),
             secondImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            secondImageView.widthAnchor.constraint(equalToConstant: Constants.imageSize.width),
+            secondImageView.heightAnchor.constraint(equalToConstant: Constants.imageSize.height),
         ])
     }
 }
