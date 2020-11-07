@@ -38,11 +38,3 @@ extension DetailViewController {
         detailView.customize(record: record)
     }
 }
-
-// MARK: - TableViewControllerDelegate
-
-extension DetailViewController: TableViewControllerDelegate {
-    func tableViewControllerDelegate(_ viewController: AnyObject, didSelectRecord record: Record) {
-        customize(record: record)
-    }
-}

@@ -8,13 +8,9 @@
 import UIKit
 
 final class TableViewController: UIViewController {
-    // MARK: Delegate
-    
-    weak var delegate: TableViewControllerDelegate?
-    
     // MARK: Properties
     
-    var dataService: DataService?
+    var data: DataService?
     
     private var tableView: TableView {
         guard let tableView = view as? TableView else {
@@ -60,14 +56,35 @@ private extension TableViewController {
         guard let splitViewController = splitViewController else { return }
         
         if !splitViewController.isCollapsed {
-            if let dataService = dataService, !dataService.isEmpty {
-                let indexPath = IndexPath(row: index, section: 0)
-                let record = dataService.get(at: index)
+            if let data = data, !data.isEmpty {
+                let record = data.get(at: index)
                 
+                customizeDetailViewController(record: record)
+
+                let indexPath = IndexPath(row: index, section: 0)
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
-                delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
             }
         }
+    }
+    
+    func showDetailViewController(record: Record) {
+        guard let splitViewController = splitViewController else { return }
+        
+        let detailViewController = DetailViewController()
+        detailViewController.customize(record: record)
+        
+        let navigationController = UINavigationController(rootViewController: detailViewController)
+        splitViewController.showDetailViewController(navigationController, sender: nil)
+    }
+    
+    func customizeDetailViewController(record: Record) {
+        guard let splitViewController = splitViewController,
+              let navigationController = splitViewController.viewControllers.last as? UINavigationController,
+              let detailViewController = navigationController.viewControllers.first as? DetailViewController else {
+            return
+        }
+        
+        detailViewController.customize(record: record)
     }
 }
 
@@ -75,7 +92,7 @@ private extension TableViewController {
 
 extension TableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataService?.count ?? 0
+        return data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,8 +103,8 @@ extension TableViewController: UITableViewDataSource {
             fatalError("cell with the specified identifier was not found")
         }
 
-        if let dataService = dataService {
-            cell.customize(record: dataService.get(at: indexPath.row))
+        if let data = data {
+            cell.customize(record: data.get(at: indexPath.row))
         }
 
         return cell
@@ -98,21 +115,16 @@ extension TableViewController: UITableViewDataSource {
 
 extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         guard let splitViewController = splitViewController,
-              let dataService = dataService else { return }
-        
-        let record = dataService.get(at: indexPath.row)
-        
+              let record = data?.get(at: indexPath.row) else { return }
+
         if splitViewController.isCollapsed {
-            let detailViewController = DetailViewController()
-            detailViewController.customize(record: record)
-            
-            let navigationController = UINavigationController(rootViewController: detailViewController)
-            splitViewController.showDetailViewController(navigationController, sender: nil)
+            showDetailViewController(record: record)
             
             tableView.deselectRow(at: indexPath, animated: true)
         } else {
-            delegate?.tableViewControllerDelegate(self, didSelectRecord: record)
+            customizeDetailViewController(record: record)
         }
     }
 }
