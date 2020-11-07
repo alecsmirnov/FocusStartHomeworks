@@ -8,5 +8,6 @@
 import UIKit
 
 enum Images {
-    static let wainCat = UIImage(named: "wain-cat-600x600")
+    static let wainCat = UIImage(named: "wain-cat")
+    static let wainCatBouquet = UIImage(named: "wain-cat-bouquet")
 }

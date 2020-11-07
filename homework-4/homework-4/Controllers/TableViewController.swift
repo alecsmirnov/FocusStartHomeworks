@@ -27,7 +27,7 @@ final class TableViewController: UIViewController {
     // MARK: Lifecycle
 
     override func loadView() {
-        view = TableView(frame: UIScreen.main.bounds)
+        view = TableView(frame: .zero)
     }
     
     override func viewDidLoad() {
@@ -49,7 +49,7 @@ extension TableViewController {
     }
     
     func registerCells() {
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.reuseIdentifier)
     }
 }
 
@@ -79,15 +79,17 @@ extension TableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: TableViewCell.identifier,
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: TableViewCell.reuseIdentifier,
             for: indexPath
-        ) as! TableViewCell
-        
+        ) as? TableViewCell else {
+            fatalError("cell with the specified identifier was not found")
+        }
+
         if let dataService = dataService {
             cell.customize(record: dataService.get(at: indexPath.row))
         }
-        
+
         return cell
     }
 }

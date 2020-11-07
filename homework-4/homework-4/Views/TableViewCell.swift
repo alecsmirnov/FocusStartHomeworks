@@ -10,7 +10,7 @@ import UIKit
 final class TableViewCell: UITableViewCell {
     // MARK: Properties
     
-    static let identifier = "TableViewCell"
+    static let reuseIdentifier = "TableViewCell"
     
     private enum Constants {
         static let horizontalSpace: CGFloat = 8
@@ -31,7 +31,6 @@ final class TableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupAppearance()
-        setupSubviews()
         setupLayout()
     }
     
@@ -90,16 +89,18 @@ private extension TableViewCell {
 // MARK: - Layout
 
 private extension TableViewCell {
+    func setupLayout() {
+        setupSubviews()
+        
+        setupTitleLabelLayout()
+        setupDescriptionLabelLayout()
+        setupDateLabelLayout()
+    }
+    
     func setupSubviews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(dateLabel)
-    }
-    
-    func setupLayout() {
-        setupTitleLabelLayout()
-        setupDescriptionLabelLayout()
-        setupDateLabelLayout()
     }
     
     func setupTitleLabelLayout() {

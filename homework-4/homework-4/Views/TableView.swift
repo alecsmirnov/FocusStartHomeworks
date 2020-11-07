@@ -38,7 +38,6 @@ final class TableView: UIView {
         showTableView()
         
         setupAppearance()
-        setupSubviews()
         setupLayout()
     }
     
@@ -105,14 +104,16 @@ private extension TableView {
 // MARK: - Layouts
 
 private extension TableView {
+    func setupLayout() {
+        setupSubviews()
+        
+        setupTableViewLayout()
+        setupEmptyDataLabelLayout()
+    }
+    
     func setupSubviews() {
         addSubview(tableView)
         addSubview(emptyDataLabel)
-    }
-    
-    func setupLayout() {
-        setupTableViewLayout()
-        setupEmptyDataLabelLayout()
     }
     
     func setupTableViewLayout() {

@@ -1,16 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "wain-cat-1.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "wain-cat-600x600.jpg",
+      "filename" : "wain-cat.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "wain-cat-600x600-1.jpg",
+      "filename" : "wain-cat-2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

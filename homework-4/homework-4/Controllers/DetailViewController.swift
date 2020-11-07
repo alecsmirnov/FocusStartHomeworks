@@ -21,7 +21,7 @@ final class DetailViewController: UIViewController {
     // MARK: Lifecycle
     
     override func loadView() {
-        view = DetailView(frame: UIScreen.main.bounds)
+        view = DetailView(frame: .zero)
     }
     
     override func viewDidLoad() {

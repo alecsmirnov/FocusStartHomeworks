@@ -33,7 +33,6 @@ final class DetailView: UIView {
         super.init(frame: frame)
         
         setupAppearance()
-        setupSubviews()
         setupLayout()
     }
     
@@ -57,16 +56,10 @@ extension DetailView {
 private extension DetailView {
     func setupAppearance() {
         backgroundColor = .systemBackground
-        
-        setupScrollViewAppearance()
-        
+
         setupTextLabelAppearance()
         setupFirstImageViewAppearance()
         setupSecondImageViewAppearance()
-    }
-    
-    func setupScrollViewAppearance() {
-        scrollView.backgroundColor = .systemBackground
     }
     
     func setupTextLabelAppearance() {
@@ -85,20 +78,22 @@ private extension DetailView {
 // MARK: - Layouts
 
 private extension DetailView {
+    func setupLayout() {
+        setupSubviews()
+        
+        setupScrollViewLayout()
+        
+        setupTextLabelLayout()
+        setupFirstImageViewLayout()
+        setupSecondImageViewLayout()
+    }
+    
     func setupSubviews() {
         addSubview(scrollView)
         
         scrollView.addSubview(textLabel)
         scrollView.addSubview(firstImageView)
         scrollView.addSubview(secondImageView)
-    }
-    
-    func setupLayout() {
-        setupScrollViewLayout()
-        
-        setupTextLabelLayout()
-        setupFirstImageViewLayout()
-        setupSecondImageViewLayout()
     }
     
     func setupScrollViewLayout() {
