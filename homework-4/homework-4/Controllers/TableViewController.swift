@@ -115,7 +115,6 @@ extension TableViewController: UITableViewDataSource {
 
 extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         guard let splitViewController = splitViewController,
               let record = data?.get(at: indexPath.row) else { return }
 
