@@ -45,7 +45,6 @@ private extension SplitViewCoordinator {
             tableViewController.selectedRow = 0
             detailViewController.customize(record: data.get(at: 0))
         }
-        
     }
 }
 
