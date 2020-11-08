@@ -7,10 +7,20 @@
 
 import UIKit
 
+protocol TableViewControllerDelegate: AnyObject {
+    func tableViewControllerDelegate(_ tableViewController: UIViewController, didSelect record: Record)
+}
+
 final class TableViewController: UIViewController {
+    // MARK: Delegate
+    
+    weak var delegate: TableViewControllerDelegate?
+    
     // MARK: Properties
     
     var data: DataService?
+    
+    var selectedRow: Int?
     
     private var tableView: TableView {
         guard let tableView = view as? TableView else {
@@ -30,7 +40,7 @@ final class TableViewController: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
-        setSelectedRow(at: 0)
+        selectRow(at: selectedRow)
     }
 }
 
@@ -52,39 +62,20 @@ extension TableViewController {
 // MARK: - Private Methods
 
 private extension TableViewController {
-    func setSelectedRow(at index: Int) {
-        guard let splitViewController = splitViewController else { return }
-        
-        if !splitViewController.isCollapsed {
-            if let data = data, !data.isEmpty {
-                let record = data.get(at: index)
-                
-                customizeDetailViewController(record: record)
-
+    func selectRow(at index: Int?) {
+        if let index = index {
+            guard let splitViewController = splitViewController, !splitViewController.isCollapsed else { return }
+            
+            if  0 <= index && index < data?.count ?? 0 {
                 let indexPath = IndexPath(row: index, section: 0)
+            
                 tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
             }
+        } else if let previousRowIndex = selectedRow {
+            let indexPath = IndexPath(row: previousRowIndex, section: 0)
+            
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-    }
-    
-    func showDetailViewController(record: Record) {
-        guard let splitViewController = splitViewController else { return }
-        
-        let detailViewController = DetailViewController()
-        detailViewController.customize(record: record)
-        
-        let navigationController = UINavigationController(rootViewController: detailViewController)
-        splitViewController.showDetailViewController(navigationController, sender: nil)
-    }
-    
-    func customizeDetailViewController(record: Record) {
-        guard let splitViewController = splitViewController,
-              let navigationController = splitViewController.viewControllers.last as? UINavigationController,
-              let detailViewController = navigationController.viewControllers.first as? DetailViewController else {
-            return
-        }
-        
-        detailViewController.customize(record: record)
     }
 }
 
@@ -99,9 +90,7 @@ extension TableViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: TableViewCell.reuseIdentifier,
             for: indexPath
-        ) as? TableViewCell else {
-            fatalError("cell with the specified identifier was not found")
-        }
+        ) as? TableViewCell else { return UITableViewCell() }
 
         if let data = data {
             cell.customize(record: data.get(at: indexPath.row))
@@ -115,15 +104,8 @@ extension TableViewController: UITableViewDataSource {
 
 extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let splitViewController = splitViewController,
-              let record = data?.get(at: indexPath.row) else { return }
-
-        if splitViewController.isCollapsed {
-            showDetailViewController(record: record)
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-        } else {
-            customizeDetailViewController(record: record)
+        if let record = data?.get(at: indexPath.row) {
+            delegate?.tableViewControllerDelegate(self, didSelect: record)
         }
     }
 }

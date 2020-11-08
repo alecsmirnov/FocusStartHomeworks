@@ -9,20 +9,18 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    
+    private var splitViewCoordinator: SplitViewCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let tableViewController = TableViewController()
-        let detailViewController = DetailViewController()
+        let splitViewController = UISplitViewController(style: .doubleColumn)
         
-        tableViewController.data = DataService.mockObject()
+        splitViewCoordinator = SplitViewCoordinator(splitViewController: splitViewController)
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = SplitViewController(
-            mainViewController: tableViewController,
-            detailViewController: detailViewController
-        )
+        window?.rootViewController = splitViewController
         window?.makeKeyAndVisible()
     }
 }
