@@ -67,15 +67,17 @@ private extension RoundedShadowImageView {
 
 private extension RoundedShadowImageView {
     func configureSublayers() {
-        removeSublayers()
-        
         if let image = image {
-            let newImageLayer = RoundedShadowImageView.createNewImageLayer(
+            addSublayers()
+            
+            RoundedShadowImageView.configureImageLayer(
+                imageLayer,
                 image: image,
                 roundRectBounds: bounds,
                 cornerRadius: cornerRadius
             )
-            let newShadowLayer = RoundedShadowImageView.createNewShadowLayer(
+            RoundedShadowImageView.configureShadowLayer(
+                shadowLayer,
                 roundRectBounds: bounds,
                 cornerRadius: cornerRadius,
                 shadowColor: shadowColor,
@@ -83,17 +85,25 @@ private extension RoundedShadowImageView {
                 shadowRadius: shadowRadius,
                 shadowOffset: shadowOffset
             )
-            
-            addSublayers(newImageLayer: newImageLayer, newShadowLayer: newShadowLayer)
+        } else {
+            removeSublayers()
         }
     }
     
-    func addSublayers(newImageLayer: CAShapeLayer, newShadowLayer: CAShapeLayer) {
-        imageLayer = newImageLayer
-        shadowLayer = newShadowLayer
+    func addSublayers() {
+        if shadowLayer == nil {
+            let newShadowLayer = CAShapeLayer()
+            
+            shadowLayer = newShadowLayer
+            layer.addSublayer(newShadowLayer)
+        }
         
-        layer.addSublayer(newShadowLayer)
-        layer.addSublayer(newImageLayer)
+        if imageLayer == nil {
+            let newImageLayer = CAShapeLayer()
+            
+            imageLayer = newImageLayer
+            layer.addSublayer(newImageLayer)
+        }
     }
     
     func removeSublayers() {
@@ -105,39 +115,37 @@ private extension RoundedShadowImageView {
     }
 }
 
-// MARK: - Static Methods
+// MARK: - Sublayers Static Methods
 
 private extension RoundedShadowImageView {
-    static func createNewImageLayer(image: UIImage, roundRectBounds: CGRect, cornerRadius: CGFloat) -> CAShapeLayer {
-        let imageLayer = CAShapeLayer()
-        
+    static func configureImageLayer(
+        _ imageLayer: CAShapeLayer?,
+        image: UIImage,
+        roundRectBounds: CGRect,
+        cornerRadius: CGFloat
+    ) {
         let mask = CAShapeLayer()
         mask.path = UIBezierPath(roundedRect: roundRectBounds, cornerRadius: cornerRadius).cgPath
         
-        imageLayer.mask = mask
-        imageLayer.contents = image.cgImage
-        imageLayer.frame = roundRectBounds
-        imageLayer.contentsGravity = .resizeAspectFill
-        
-        return imageLayer
+        imageLayer?.mask = mask
+        imageLayer?.contents = image.cgImage
+        imageLayer?.frame = roundRectBounds
+        imageLayer?.contentsGravity = .resizeAspectFill
     }
     
-    static func createNewShadowLayer(
+    static func configureShadowLayer(
+        _ shadowLayer: CAShapeLayer?,
         roundRectBounds: CGRect,
         cornerRadius: CGFloat,
         shadowColor: CGColor,
         shadowOpacity: Float,
         shadowRadius: CGFloat,
         shadowOffset: CGSize
-    ) -> CAShapeLayer {
-        let shadowLayer = CAShapeLayer()
-        
-        shadowLayer.shadowPath = UIBezierPath(roundedRect: roundRectBounds, cornerRadius: cornerRadius).cgPath
-        shadowLayer.shadowColor = shadowColor
-        shadowLayer.shadowOpacity = shadowOpacity
-        shadowLayer.shadowRadius = shadowRadius
-        shadowLayer.shadowOffset = shadowOffset
-        
-        return shadowLayer
+    ) {
+        shadowLayer?.shadowPath = UIBezierPath(roundedRect: roundRectBounds, cornerRadius: cornerRadius).cgPath
+        shadowLayer?.shadowColor = shadowColor
+        shadowLayer?.shadowOpacity = shadowOpacity
+        shadowLayer?.shadowRadius = shadowRadius
+        shadowLayer?.shadowOffset = shadowOffset
     }
 }
