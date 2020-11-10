@@ -67,6 +67,8 @@ private extension RoundedShadowImageView {
 
 private extension RoundedShadowImageView {
     func configureSublayers() {
+        removeSublayers()
+        
         if let image = image {
             let newImageLayer = RoundedShadowImageView.createNewImageLayer(
                 image: image,
@@ -83,14 +85,10 @@ private extension RoundedShadowImageView {
             )
             
             addSublayers(newImageLayer: newImageLayer, newShadowLayer: newShadowLayer)
-        } else {
-            removeSublayers()
         }
     }
     
     func addSublayers(newImageLayer: CAShapeLayer, newShadowLayer: CAShapeLayer) {
-        guard imageLayer == nil && shadowLayer == nil else { return }
-        
         imageLayer = newImageLayer
         shadowLayer = newShadowLayer
         
@@ -110,7 +108,7 @@ private extension RoundedShadowImageView {
 // MARK: - Static Methods
 
 private extension RoundedShadowImageView {
-    static func createNewImageLayer(image: UIImage,roundRectBounds: CGRect, cornerRadius: CGFloat) -> CAShapeLayer {
+    static func createNewImageLayer(image: UIImage, roundRectBounds: CGRect, cornerRadius: CGFloat) -> CAShapeLayer {
         let imageLayer = CAShapeLayer()
         
         let mask = CAShapeLayer()
