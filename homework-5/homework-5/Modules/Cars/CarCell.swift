@@ -41,11 +41,11 @@ final class CarCell: UITableViewCell {
     }
 }
 
-// MARK: - Public Methods
+// MARK: - CarCellProtocol
 
-extension CarCell {
-    func setCar(_ car: Car) {
-        manufacturerModelLabel.text = "\(car.manufacturer)  \(car.model)"
+extension CarCell: CarCellProtocol {
+    func configure(with car: Car) {
+        manufacturerModelLabel.text = "\(car.manufacturer) \(car.model)"
         bodyLabel.text = car.body.rawValue
         yearOfIssueLabel.text = car.yearOfIssue?.description ?? "-"
     }

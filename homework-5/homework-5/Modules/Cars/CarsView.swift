@@ -7,17 +7,6 @@
 
 import UIKit
 
-protocol ICarsView {
-    var dataSource: UITableViewDataSource? { get set }
-    var delegate: UITableViewDelegate? { get set }
- 
-    func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String)
-    func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell
-    
-    func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition)
-    func deselectRow(at indexPath: IndexPath, animated: Bool)
-}
-
 final class CarsView: UIView {
     // MARK: Properties
     
@@ -37,9 +26,9 @@ final class CarsView: UIView {
     }
 }
 
-// MARK: - ICarsView
+// MARK: - CarsViewProtocol
 
-extension CarsView: ICarsView {
+extension CarsView: CarsViewProtocol {
     var dataSource: UITableViewDataSource? {
         get { tableView.dataSource }
         set { tableView.dataSource = newValue }
@@ -54,17 +43,13 @@ extension CarsView: ICarsView {
         tableView.register(cellClass, forCellReuseIdentifier: identifier)
     }
     
-    func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-    }
-    
     func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
         tableView.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
     }
     
-    func deselectRow(at indexPath: IndexPath, animated: Bool) {
-        tableView.deselectRow(at: indexPath, animated: animated)
-    }
+//    func deselectRow(at indexPath: IndexPath, animated: Bool) {
+//        tableView.deselectRow(at: indexPath, animated: animated)
+//    }
 }
 
 // MARK: - Appearance

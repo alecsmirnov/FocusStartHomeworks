@@ -7,17 +7,14 @@
 
 import UIKit
 
-class CarDetailViewController: UIViewController {
-    // MARK: Delegate
-    
-    weak var delegate: BodySelectionDelegate?
+protocol CarDetailViewControllerProtocol: AnyObject {
+    var carToEdit: Car? { get set }
+}
+
+final class CarDetailViewController: UIViewController {
+    weak var presenter: CarDetailPresenterProtocol?
     
     // MARK: Properties
-    
-    var carToEdit: Car? {
-        get { carDetailView.carToEdit }
-        set { carDetailView.carToEdit = newValue }
-    }
     
     var bodyToReceive: Body? {
         get { carDetailView.bodyToReceive }
@@ -55,6 +52,13 @@ class CarDetailViewController: UIViewController {
     }
 }
 
+extension CarDetailViewController: CarDetailViewControllerProtocol {
+    var carToEdit: Car? {
+        get { carDetailView.carToEdit }
+        set { carDetailView.carToEdit = newValue }
+    }
+}
+
 // MARK: - Actions
 
 private extension CarDetailViewController {
@@ -62,7 +66,7 @@ private extension CarDetailViewController {
         carDetailView.didSelectBody = { [weak self] body in
             guard let self = self else { return }
             
-            self.delegate?.bodySelectionDelegate(self, didSelect: body)
+            //self.delegate?.bodySelectionDelegate(self, didSelect: body)
         }
     }
     

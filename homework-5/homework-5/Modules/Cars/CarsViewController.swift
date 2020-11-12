@@ -7,13 +7,12 @@
 
 import UIKit
 
-class CarsViewController: UIViewController {
-    // MARK: Delegate
-    
-    weak var delegate: CarsViewControllerDelegate?
-    
+final class CarsViewController: UIViewController {
     // MARK: Properties
     
+    weak var presenter: CarsPresenterProtocol?
+    
+    var filter: Body?
     var data: CarService?
     
     private var carsView: CarsView {
@@ -35,6 +34,18 @@ class CarsViewController: UIViewController {
         
         setupCarsView()
         setupButtons()
+    }
+}
+
+// MARK: - CarsViewControllerProtocol
+
+extension CarsViewController: CarsViewControllerProtocol {
+    func applyFilter() {
+        
+    }
+    
+    func resetFilter() {
+        
     }
 }
 
@@ -71,7 +82,7 @@ extension CarsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = carsView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: CarCell.reuseIdentifier,
             for: indexPath
         ) as? CarCell else { return UITableViewCell() }
@@ -79,7 +90,7 @@ extension CarsViewController: UITableViewDataSource {
         if let data = data {
             let car = data.get(at: indexPath.row)
             
-            cell.setCar(car)
+            cell.configure(with: car)
         }
 
         return cell
@@ -91,10 +102,10 @@ extension CarsViewController: UITableViewDataSource {
 extension CarsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let car = data?.get(at: indexPath.row) {
-            delegate?.carsViewControllerDelegate(self, didSelect: car)
+            presenter?.didSelectRow(with: car)
         }
-        
-        carsView.deselectRow(at: indexPath, animated: true)
+
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -111,26 +122,30 @@ private extension CarsViewController {
             title: "Filter",
             style: .plain,
             target: self,
-            action: #selector(filterAction)
+            action: #selector(didPressFilterButton)
         )
-        let filterStatusBarButtonItem = UIBarButtonItem(title: "None", style: .plain, target: self, action: nil)
         
+        let filterStatusBarButtonItem = UIBarButtonItem(title: "None", style: .plain, target: self, action: nil)
         filterStatusBarButtonItem.isEnabled = false
         
         navigationItem.leftBarButtonItems = [filterBarButtonItem, filterStatusBarButtonItem]
     }
     
     func setupAddButton() {
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
+        let addBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(didPressAddButton)
+        )
         
         navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
-    @objc func filterAction() {
-        delegate?.carsViewControllerDelegateDidTapFilter(self)
+    @objc func didPressFilterButton() {
+        presenter?.didPressFilterButton(with: filter)
     }
     
-    @objc func addAction() {
-        delegate?.carsViewControllerDelegateDidTapAdd(self)
+    @objc func didPressAddButton() {
+        presenter?.didPressAddButton()
     }
 }
