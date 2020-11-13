@@ -34,12 +34,16 @@ final class CarDetailRouter: CarDetailRouterProtocol {
     }
     
     func openBodyPickerViewController(from viewController: CarDetailViewControllerProtocol, with body: Body?) {
-        guard let viewController = viewController as? UIViewController else {
-            fatalError("invalid view controller protocol")
-        }
-
         let bodyPickerViewController = BodyPickerRouter.createBodyPickerViewController(with: body)
-
-        viewController.present(bodyPickerViewController, animated: true, completion: nil)
+        
+        if let bodyPickerViewController = bodyPickerViewController as? BodyPickerViewControllerProtocol {
+            bodyPickerViewController.didSelectBody = { body in
+                viewController.bodyToReceive = body
+            }
+        }
+        
+        if let viewController = viewController as? UIViewController {
+            viewController.navigationController?.pushViewController(bodyPickerViewController, animated: true)
+        }
     }
 }

@@ -45,22 +45,24 @@ final class CarsRouter: CarsRouterProtocol {
     }
     
     func openFilterViewController(from viewController: CarsViewControllerProtocol, with body: Body?) {
-        guard let viewController = viewController as? UIViewController else {
-            fatalError("invalid view controller protocol")
-        }
-
         let bodyPickerViewController = BodyPickerRouter.createBodyPickerViewController(with: body)
-
-        viewController.navigationController?.pushViewController(bodyPickerViewController, animated: true)
+        
+        if let bodyPickerViewController = bodyPickerViewController as? BodyPickerViewControllerProtocol {
+            bodyPickerViewController.didSelectBody = { body in
+                viewController.filter = body
+            }
+        }
+        
+        if let viewController = viewController as? UIViewController {
+            viewController.present(bodyPickerViewController, animated: true, completion: nil)
+        }
     }
     
     func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?) {
-        guard let viewController = viewController as? UIViewController else {
-            fatalError("invalid view controller protocol")
-        }
-        
         let carDetailViewController = CarDetailRouter.createCarDetailViewController(with: car)
         
-        viewController.navigationController?.pushViewController(carDetailViewController, animated: true)
+        if let viewController = viewController as? UIViewController {
+            viewController.navigationController?.pushViewController(carDetailViewController, animated: true)
+        }
     }
 }

@@ -7,7 +7,11 @@
 
 import UIKit
 
-protocol BodyPickerViewControllerProtocol: AnyObject {
+protocol BodyPickerViewControllerOutputProtocol: AnyObject {
+    var didSelectBody: BodySelectAction? { get set }
+}
+
+protocol BodyPickerViewControllerProtocol: BodyPickerViewControllerOutputProtocol {
     var presenter: BodyPickerPresenterProtocol? { get set }
     
     var selectedBody: Body? { get set }
@@ -22,6 +26,8 @@ class BodyPickerViewController: UIViewController, BodyPickerViewControllerProtoc
         get { bodyPickerView.selectedBody }
         set { bodyPickerView.selectedBody = newValue }
     }
+    
+    var didSelectBody: BodySelectAction?
     
     private var bodyPickerView: BodyPickerViewProtocol {
         guard let view = view as? BodyPickerView else {
@@ -50,6 +56,8 @@ private extension BodyPickerViewController {
     func setupBodySelectionAction() {
         bodyPickerView.didSelectBody = { [weak self] body in
             self?.presenter?.didSelectBody(body)
+            
+            self?.didSelectBody?(body)
         }
     }
 }

@@ -12,6 +12,8 @@ protocol CarDetailViewControllerProtocol: AnyObject {
     
     var carToEdit: Car? { get set }
     var bodyToReceive: Body? { get set }
+    
+    var delegate: CarDetailViewControllerProtocolDelegate? { get set }
 }
 
 final class CarDetailViewController: UIViewController, CarDetailViewControllerProtocol {
@@ -28,6 +30,8 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
         get { carDetailView.bodyToReceive }
         set { carDetailView.bodyToReceive = newValue }
     }
+    
+    weak var delegate: CarDetailViewControllerProtocolDelegate?
     
     private var carDetailView: CarDetailViewProtocol {
         guard let view = view as? CarDetailView else {
@@ -82,6 +86,11 @@ private extension CarDetailViewController {
     func setupBodySelectionAction() {
         carDetailView.didSelectBody = { [weak self] body in
             self?.presenter?.didPressBodyButton(with: body)
+            
+            if let self = self,
+               let body = body {
+                self.delegate?.carDetailViewControllerProtocolDelegate(self, didSelect: body)
+            }
         }
     }
 }
