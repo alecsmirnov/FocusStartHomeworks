@@ -16,6 +16,11 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
         didSet { applyFilter(with: filter) }
     }
     
+    private enum FilterSettings {
+        static let title = "Filter"
+        static let defaultStatus = "All"
+    }
+    
     private enum CarsViewUpdateType {
         case insertNewRow
         case updateRow(index: Int)
@@ -101,13 +106,18 @@ private extension CarsViewController {
     
     func setupFilterButton() {
         let filterBarButtonItem = UIBarButtonItem(
-            title: "Filter",
+            title: FilterSettings.title,
             style: .plain,
             target: self,
             action: #selector(didPressFilterButton)
         )
         
-        let filterStatusBarButtonItem = UIBarButtonItem(title: "None", style: .plain, target: self, action: nil)
+        let filterStatusBarButtonItem = UIBarButtonItem(
+            title: FilterSettings.defaultStatus,
+            style: .plain,
+            target: self,
+            action: nil
+        )
         filterStatusBarButtonItem.isEnabled = false
         
         navigationItem.leftBarButtonItems = [filterBarButtonItem, filterStatusBarButtonItem]
@@ -151,7 +161,7 @@ private extension CarsViewController {
     
     func setFilterTitle(with body: Body?) {
         if let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last {
-            filterStatusBarButtonItem.title = body?.rawValue ?? "None"
+            filterStatusBarButtonItem.title = body?.rawValue ?? FilterSettings.defaultStatus
         }
     }
 }
