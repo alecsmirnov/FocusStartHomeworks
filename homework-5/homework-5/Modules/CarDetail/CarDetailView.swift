@@ -63,6 +63,8 @@ final class CarDetailView: UIView, CarDetailViewProtocol {
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
+    private var tapGestureRecognizer: UITapGestureRecognizer?
+    
     // MARK: Cells
     
     private let manufacturerCell = UITableViewCell()
@@ -86,6 +88,7 @@ final class CarDetailView: UIView, CarDetailViewProtocol {
 
         setupAppearance()
         setupLayout()
+        setupTapGestureRecognizer()
     }
     
     required init?(coder: NSCoder) {
@@ -223,6 +226,23 @@ private extension CarDetailView {
     }
 }
 
+// MARK: - Gesture Recognizer
+
+extension CarDetailView {
+    func setupTapGestureRecognizer() {
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGestureRecognizer?.cancelsTouchesInView = false
+        
+        if let tapGestureRecognizer = tapGestureRecognizer {
+            tableView.addGestureRecognizer(tapGestureRecognizer)
+        }
+    }
+    
+    @objc func hideKeyboard() {
+        endEditing(true)
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension CarDetailView: UITableViewDataSource {
@@ -275,12 +295,6 @@ extension CarDetailView: UITableViewDelegate {
         if let section = TableViewSection(rawValue: indexPath.section), section == .required,
            let row = TableViewRequiredSectionRow(rawValue: indexPath.row), row == .body {
             tableView.deselectRow(at: indexPath, animated: true)
-            
-            //manufacturerTextField.resignFirstResponder()
-            //modelTextField.resignFirstResponder()
-            
-            //yearOfIssueTextField.resignFirstResponder()
-            //carNumberTextField.resignFirstResponder()
             
             didSelectBody?(Body(rawValue: bodyLabel.text ?? ""))
         }
