@@ -14,6 +14,10 @@ protocol CarsInteractorInputOutputProtocol: AnyObject {
     var count: Int { get }
     
     func append(car: Car)
+    func replace(at index: Int, with car: Car)
     func remove(at index: Int)
     func get(at index: Int) -> Car
+    
+    func filter(by body: Body)
+    func filterReset()
 }

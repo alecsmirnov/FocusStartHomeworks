@@ -25,12 +25,24 @@ extension CarsPresenter {
         interactor?.append(car: car)
     }
     
+    func replace(at index: Int, with car: Car) {
+        interactor?.replace(at: index, with: car)
+    }
+    
     func remove(at index: Int) {
         interactor?.remove(at: index)
     }
     
     func get(at index: Int) -> Car? {
         return interactor?.get(at: index)
+    }
+    
+    func setFilter(by body: Body?) {
+        if let body = body {
+            interactor?.filter(by: body)
+        } else {
+            interactor?.filterReset()
+        }
     }
     
     func didPressFilterButton(with body: Body?) {

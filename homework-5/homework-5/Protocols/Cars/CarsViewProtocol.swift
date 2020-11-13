@@ -15,4 +15,10 @@ protocol CarsViewProtocol: AnyObject {
     
     func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition)
     func deselectRow(at indexPath: IndexPath, animated: Bool)
+    
+    func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation)
+    func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation)
+    func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation)
+    
+    func reloadData()
 }

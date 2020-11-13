@@ -13,7 +13,7 @@ final class BodyPickerPresenter: BodyPickerPresenterProtocol {
 }
 
 extension BodyPickerPresenter {
-    func didSelectBody(_ body: Body?) {
+    func didPressCloseButton() {
         if let viewController = viewController {
             router?.closeBodyPickerViewController(viewController)
         }

@@ -13,5 +13,5 @@ protocol BodyPickerPresenterProtocol: BodyPickerPresenterInputProtocol {
 }
 
 protocol BodyPickerPresenterInputProtocol: AnyObject {
-    func didSelectBody(_ body: Body?)
+    func didPressCloseButton()
 }

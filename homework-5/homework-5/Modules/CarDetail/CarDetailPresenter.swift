@@ -18,4 +18,10 @@ extension CarDetailPresenter {
             router?.openBodyPickerViewController(from: viewController, with: body)
         }
     }
+    
+    func didPressCloseButton() {
+        if let viewController = viewController {
+            router?.closeCarDetailViewController(viewController)
+        }
+    }
 }

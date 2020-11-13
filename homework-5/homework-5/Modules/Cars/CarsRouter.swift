@@ -37,12 +37,19 @@ final class CarsRouter: CarsRouterProtocol {
         }
         
         if let viewController = viewController as? UIViewController {
-            viewController.present(bodyPickerViewController, animated: true, completion: nil)
+            let navigationController = UINavigationController(rootViewController: bodyPickerViewController)
+            
+            viewController.present(navigationController, animated: true, completion: nil)
         }
     }
     
     func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?) {
         let carDetailViewController = CarDetailRouter.createCarDetailViewController(with: car)
+        
+        if let carDetailViewController = carDetailViewController as? CarDetailViewController,
+           let viewController = viewController as? CarsViewController {
+            carDetailViewController.delegate = viewController
+        }
         
         if let viewController = viewController as? UIViewController {
             viewController.navigationController?.pushViewController(carDetailViewController, animated: true)

@@ -38,6 +38,12 @@ class BodyPickerViewController: UIViewController, BodyPickerViewControllerProtoc
         
         setupBodySelectionAction()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupResetButton()
+    }
 }
 
 // MARK: - Private Methods
@@ -52,14 +58,37 @@ private extension BodyPickerViewController {
     }
 }
 
+// MARK: - Buttons
+
+private extension BodyPickerViewController {
+    func setupResetButton() {
+        if presentingViewController != nil {
+            let resetBarButtonItem = UIBarButtonItem(
+                title: "Reset",
+                style: .plain,
+                target: self,
+                action: #selector(didPressResetButton)
+            )
+
+            navigationItem.leftBarButtonItem = resetBarButtonItem
+        }
+    }
+}
+
 // MARK: - Actions
 
 private extension BodyPickerViewController {
     func setupBodySelectionAction() {
         bodyPickerView.didSelectBody = { [weak self] body in
-            self?.presenter?.didSelectBody(body)
+            self?.presenter?.didPressCloseButton()
             
             self?.didSelectBody?(body)
         }
+    }
+    
+    @objc func didPressResetButton() {
+        presenter?.didPressCloseButton()
+        
+        didSelectBody?(nil)
     }
 }

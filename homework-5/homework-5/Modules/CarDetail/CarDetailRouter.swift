@@ -40,4 +40,10 @@ final class CarDetailRouter: CarDetailRouterProtocol {
             viewController.navigationController?.pushViewController(bodyPickerViewController, animated: true)
         }
     }
+    
+    func closeCarDetailViewController(_ viewController: CarDetailViewControllerProtocol) {
+        if let viewController = viewController as? UIViewController {
+            viewController.navigationController?.popViewController(animated: true)
+        }
+    }
 }

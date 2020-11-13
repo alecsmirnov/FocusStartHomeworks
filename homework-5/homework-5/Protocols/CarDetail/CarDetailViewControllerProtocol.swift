@@ -16,5 +16,5 @@ protocol CarDetailViewControllerInputProtocol: AnyObject {
 }
 
 protocol CarDetailViewControllerOutputProtocol: AnyObject {
-    var didSelectCar: CarSelectAction? { get set }
+    var delegate: CarDetailViewControllerDelegate? { get set }
 }

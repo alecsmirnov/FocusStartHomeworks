@@ -17,8 +17,11 @@ protocol CarsPresenterProtocolInputOutputProtocol: AnyObject {
     var count: Int { get }
     
     func append(car: Car)
+    func replace(at index: Int, with car: Car)
     func remove(at index: Int)
     func get(at index: Int) -> Car?
+    
+    func setFilter(by body: Body?)
     
     func didPressFilterButton(with body: Body?)
     func didPressAddButton()

@@ -50,6 +50,22 @@ extension CarsView: CarsViewProtocol {
     func deselectRow(at indexPath: IndexPath, animated: Bool) {
         tableView.deselectRow(at: indexPath, animated: animated)
     }
+    
+    func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableView.insertRows(at: indexPaths, with: animation)
+    }
+    
+    func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableView.reloadRows(at: indexPaths, with: animation)
+    }
+    
+    func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        tableView.deleteRows(at: indexPaths, with: animation)
+    }
+    
+    func reloadData() {
+        tableView.reloadData()
+    }
 }
 
 // MARK: - Appearance

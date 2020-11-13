@@ -16,6 +16,13 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
         didSet { applyFilter(with: filter) }
     }
     
+    private enum CarsViewUpdateType {
+        case insertNewRow
+        case updateRow(index: Int)
+        case deleteRow(index: Int)
+        case none
+    }
+    
     private var carsView: CarsViewProtocol {
         guard let view = view as? CarsView else {
             fatalError("view is not a CarsView instance")
@@ -23,6 +30,9 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
         
         return view
     }
+    
+    private var selectedIndexRow: Int?
+    private var carsViewUpdateType = CarsViewUpdateType.none
     
     // MARK: Lifecycle
     
@@ -35,6 +45,12 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
         
         setupCarsView()
         setupButtons()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateCarsView()
     }
 }
 
@@ -50,6 +66,28 @@ extension CarsViewController {
     
     func registerCells() {
         carsView.register(CarCell.self, forCellReuseIdentifier: CarCell.reuseIdentifier)
+    }
+    
+    private func updateCarsView() {
+        switch carsViewUpdateType {
+        case .insertNewRow:
+            let rowsCount = presenter?.count ?? 0
+            let newRowIndex = rowsCount - 1
+            let rowIndexPath = IndexPath(row: newRowIndex, section: 0)
+            carsView.insertRows(at: [rowIndexPath], with: .automatic)
+        case .updateRow(let index):
+            let rowIndexPath = IndexPath(row: index, section: 0)
+
+            carsView.reloadRows(at: [rowIndexPath], with: .automatic)
+        case .deleteRow(let index):
+            let rowIndexPath = IndexPath(row: index, section: 0)
+            
+            carsView.deleteRows(at: [rowIndexPath], with: .automatic)
+        case .none:
+            break
+        }
+        
+        carsViewUpdateType = .none
     }
 }
 
@@ -101,19 +139,45 @@ extension CarsViewController {
 // MARK: - Filter
 
 private extension CarsViewController {
-    func applyFilter(with body: Body?) {
-        if let _ = body {
-            
-        } else {
-            
-        }
+    func applyFilter(with body: Body?) {        
+        presenter?.setFilter(by: body)
         
         setFilterTitle(with: body)
+        
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.carsView.reloadData()
+        }, completion: nil)
     }
     
     func setFilterTitle(with body: Body?) {
         if let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last {
             filterStatusBarButtonItem.title = body?.rawValue ?? "None"
+        }
+    }
+}
+
+// MARK: - CarDetailViewControllerDelegate
+
+extension CarsViewController: CarDetailViewControllerDelegate {
+    func carsViewControllerDelegate(_ viewController: CarDetailViewController, addNew car: Car) {
+        presenter?.append(car: car)
+        
+        carsViewUpdateType = .insertNewRow
+    }
+    
+    func carsViewControllerDelegate(_ viewController: CarDetailViewController, edit car: Car) {
+        if let index = selectedIndexRow {
+            presenter?.replace(at: index, with: car)
+            
+            carsViewUpdateType = .updateRow(index: index)
+        }
+    }
+    
+    func carsViewControllerDelegateDeleteCar(_ viewController: CarDetailViewController) {
+        if let index = selectedIndexRow {
+            presenter?.remove(at: index)
+            
+            carsViewUpdateType = .deleteRow(index: index)
         }
     }
 }
@@ -143,6 +207,8 @@ extension CarsViewController: UITableViewDataSource {
 
 extension CarsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexRow = indexPath.row
+        
         if let car = presenter?.get(at: indexPath.row) {
             presenter?.didSelectRow(with: car)
         }

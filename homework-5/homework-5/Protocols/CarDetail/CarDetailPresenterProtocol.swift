@@ -14,4 +14,6 @@ protocol CarDetailPresenterProtocol: CarDetailPresenterInputProtocol {
 
 protocol CarDetailPresenterInputProtocol: AnyObject {
     func didPressBodyButton(with body: Body?)
+    
+    func didPressCloseButton()
 }
