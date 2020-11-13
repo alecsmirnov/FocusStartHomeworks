@@ -7,24 +7,14 @@
 
 import UIKit
 
-protocol BodyPickerViewControllerOutputProtocol: AnyObject {
-    var didSelectBody: BodySelectAction? { get set }
-}
-
-protocol BodyPickerViewControllerProtocol: BodyPickerViewControllerOutputProtocol {
-    var presenter: BodyPickerPresenterProtocol? { get set }
-    
-    var selectedBody: Body? { get set }
-}
-
 class BodyPickerViewController: UIViewController, BodyPickerViewControllerProtocol {
     // MARK: Properties
     
     weak var presenter: BodyPickerPresenterProtocol?
     
     var selectedBody: Body? {
-        get { bodyPickerView.selectedBody }
-        set { bodyPickerView.selectedBody = newValue }
+        get { getSelectedBody() }
+        set { setSelectedBody(newValue) }
     }
     
     var didSelectBody: BodySelectAction?
@@ -47,6 +37,18 @@ class BodyPickerViewController: UIViewController, BodyPickerViewControllerProtoc
         super.viewDidLoad()
         
         setupBodySelectionAction()
+    }
+}
+
+// MARK: - Private Methods
+
+private extension BodyPickerViewController {
+    func getSelectedBody() -> Body? {
+        return bodyPickerView.selectedBody
+    }
+    
+    func setSelectedBody(_ body: Body?) {
+        bodyPickerView.selectedBody = body
     }
 }
 

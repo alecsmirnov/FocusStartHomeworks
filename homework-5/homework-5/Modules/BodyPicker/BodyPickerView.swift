@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol BodyPickerViewProtocol: AnyObject {
-    var selectedBody: Body? { get set }
-    
-    var didSelectBody: BodySelectAction? { get set }
-}
-
 final class BodyPickerView: UIView, BodyPickerViewProtocol {
     // MARK: Properties
     
@@ -44,7 +38,7 @@ final class BodyPickerView: UIView, BodyPickerViewProtocol {
     }
 }
 
-// MARK: TableView Settings
+// MARK: TableView
 
 private extension BodyPickerView {
     func setupTableView() {
@@ -76,7 +70,7 @@ extension BodyPickerView: UITableViewDataSource {
         
         let body = bodies[indexPath.row]
         
-        cell.bodyToSelect = body
+        cell.body = body
         
         if selectedBody == body {
             cell.checked = true

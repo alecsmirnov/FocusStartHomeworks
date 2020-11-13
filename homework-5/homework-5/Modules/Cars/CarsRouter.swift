@@ -7,23 +7,6 @@
 
 import UIKit
 
-protocol CarsRouterProtocol: AnyObject {
-    static func createCarsNavigationController() -> UINavigationController
-    
-    func openFilterViewController(from viewController: CarsViewControllerProtocol, with body: Body?)
-    func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?)
-}
-
-extension CarsRouterProtocol {
-    func openFilterViewController(from viewController: CarsViewControllerProtocol) {
-        openFilterViewController(from: viewController, with: nil)
-    }
-    
-    func openCarDetailViewController(from viewController: CarsViewControllerProtocol) {
-        openCarDetailViewController(from: viewController, with: nil)
-    }
-}
-
 final class CarsRouter: CarsRouterProtocol {
     static func createCarsNavigationController() -> UINavigationController {
         let carsViewController = CarsViewController()

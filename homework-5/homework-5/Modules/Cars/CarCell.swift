@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol CarCellProtocol: AnyObject {
-    func configure(with car: Car)
-}
-
 final class CarCell: UITableViewCell {
     // MARK: Properties
     
@@ -26,9 +22,9 @@ final class CarCell: UITableViewCell {
     // MARK: Subviews
     
     private let manufacturerModelLabel = UILabel()
-    private let bodyConstantLabel = UILabel()
+    private let bodyTitleLabel = UILabel()
     private let bodyLabel = UILabel()
-    private let yearOfIssueConstantLabel = UILabel()
+    private let yearOfIssueTitleLabel = UILabel()
     private let yearOfIssueLabel = UILabel()
     
     // MARK: Initialization
@@ -61,20 +57,20 @@ private extension CarCell {
     func setupAppearance() {
         setupManufacturerModelLabelAppearance()
         
-        setupBodyConstantLabelAppearance()
-        setupYearOfIssueConstantLabelAppearance()
+        setupBodyTitleLabelAppearance()
+        setupYearOfIssueTitleLabelAppearance()
     }
     
     func setupManufacturerModelLabelAppearance() {
         manufacturerModelLabel.font = .boldSystemFont(ofSize: Metrics.titleLabelSize)
     }
     
-    func setupBodyConstantLabelAppearance() {
-        bodyConstantLabel.text = "Body:"
+    func setupBodyTitleLabelAppearance() {
+        bodyTitleLabel.text = "Body:"
     }
     
-    func setupYearOfIssueConstantLabelAppearance() {
-        yearOfIssueConstantLabel.text = "Year:"
+    func setupYearOfIssueTitleLabelAppearance() {
+        yearOfIssueTitleLabel.text = "Year:"
     }
 }
 
@@ -85,17 +81,17 @@ private extension CarCell {
         setupSubviews()
         
         setupManufacturerModelLabelLayout()
-        setupBodyConstantLabelLayout()
+        setupBodyTitleLabelLayout()
         setupBodyLabelLayout()
-        setupYearOfIssueConstantLabelLayout()
+        setupYearOfIssueTitleLabelLayout()
         setupYearOfIssueLabel()
     }
     
     func setupSubviews() {
         contentView.addSubview(manufacturerModelLabel)
-        contentView.addSubview(bodyConstantLabel)
+        contentView.addSubview(bodyTitleLabel)
         contentView.addSubview(bodyLabel)
-        contentView.addSubview(yearOfIssueConstantLabel)
+        contentView.addSubview(yearOfIssueTitleLabel)
         contentView.addSubview(yearOfIssueLabel)
     }
     
@@ -118,16 +114,16 @@ private extension CarCell {
         ])
     }
     
-    func setupBodyConstantLabelLayout() {
-        bodyConstantLabel.translatesAutoresizingMaskIntoConstraints = false
-        bodyConstantLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    func setupBodyTitleLabelLayout() {
+        bodyTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        bodyTitleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         NSLayoutConstraint.activate([
-            bodyConstantLabel.topAnchor.constraint(
+            bodyTitleLabel.topAnchor.constraint(
                 equalTo: manufacturerModelLabel.bottomAnchor,
                 constant: Metrics.verticalSpace
             ),
-            bodyConstantLabel.leadingAnchor.constraint(
+            bodyTitleLabel.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Metrics.horizontalSpace
             ),
@@ -144,7 +140,7 @@ private extension CarCell {
                 constant: Metrics.verticalSpace
             ),
             bodyLabel.leadingAnchor.constraint(
-                equalTo: bodyConstantLabel.trailingAnchor,
+                equalTo: bodyTitleLabel.trailingAnchor,
                 constant: Metrics.horizontalSpace / 2
             ),
             bodyLabel.trailingAnchor.constraint(
@@ -154,19 +150,19 @@ private extension CarCell {
         ])
     }
     
-    func setupYearOfIssueConstantLabelLayout() {
-        yearOfIssueConstantLabel.translatesAutoresizingMaskIntoConstraints = false
+    func setupYearOfIssueTitleLabelLayout() {
+        yearOfIssueTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            yearOfIssueConstantLabel.topAnchor.constraint(
-                equalTo: bodyConstantLabel.bottomAnchor,
+            yearOfIssueTitleLabel.topAnchor.constraint(
+                equalTo: bodyTitleLabel.bottomAnchor,
                 constant: Metrics.verticalSpace
             ),
-            yearOfIssueConstantLabel.bottomAnchor.constraint(
+            yearOfIssueTitleLabel.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
                 constant: -Metrics.verticalSpace
             ),
-            yearOfIssueConstantLabel.leadingAnchor.constraint(
+            yearOfIssueTitleLabel.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
                 constant: Metrics.horizontalSpace
             ),
@@ -178,7 +174,7 @@ private extension CarCell {
         
         NSLayoutConstraint.activate([
             yearOfIssueLabel.topAnchor.constraint(
-                equalTo: bodyConstantLabel.bottomAnchor,
+                equalTo: bodyTitleLabel.bottomAnchor,
                 constant: Metrics.verticalSpace
             ),
             yearOfIssueLabel.bottomAnchor.constraint(
@@ -186,7 +182,7 @@ private extension CarCell {
                 constant: -Metrics.verticalSpace
             ),
             yearOfIssueLabel.leadingAnchor.constraint(
-                equalTo: yearOfIssueConstantLabel.trailingAnchor,
+                equalTo: yearOfIssueTitleLabel.trailingAnchor,
                 constant: Metrics.horizontalSpace / 2
             ),
             yearOfIssueLabel.trailingAnchor.constraint(

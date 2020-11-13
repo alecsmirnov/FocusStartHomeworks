@@ -7,13 +7,6 @@
 
 import UIKit
 
-protocol CarDetailViewProtocol: AnyObject {    
-    var carToEdit: Car? { get set }
-    var bodyToReceive: Body? { get set }
-    
-    var didSelectBody: BodySelectAction? { get set }
-}
-
 final class CarDetailView: UIView {
     // MARK: Public Properties
     

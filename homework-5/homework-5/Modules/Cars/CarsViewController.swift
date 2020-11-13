@@ -7,21 +7,13 @@
 
 import UIKit
 
-protocol CarsViewControllerProtocol: AnyObject {
-    var presenter: CarsPresenterProtocol? { get set }
-    
-    var filter: Body? { get set }
-}
-
 final class CarsViewController: UIViewController, CarsViewControllerProtocol {
     // MARK: Properties
     
     weak var presenter: CarsPresenterProtocol?
     
     var filter: Body? {
-        didSet {
-            applyFilter(with: filter)
-        }
+        didSet { applyFilter(with: filter) }
     }
     
     private var carsView: CarsViewProtocol {
@@ -46,7 +38,7 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
     }
 }
 
-// MARK: - CarsView Customization
+// MARK: - CarsView
 
 extension CarsViewController {
     func setupCarsView() {

@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol CarDetailRouterProtocol: AnyObject {
-    static func createCarDetailViewController(with car: Car?) -> UIViewController
-    
-    func openBodyPickerViewController(from viewController: CarDetailViewControllerProtocol, with body: Body?)
-}
-
 final class CarDetailRouter: CarDetailRouterProtocol {
     static func createCarDetailViewController(with car: Car?) -> UIViewController {
         let carDetailViewController = CarDetailViewController()

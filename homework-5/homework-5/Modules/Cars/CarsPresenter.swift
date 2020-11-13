@@ -5,30 +5,14 @@
 //  Created by Admin on 12.11.2020.
 //
 
-protocol CarsPresenterProtocol: AnyObject {
-    var viewController: CarsViewControllerProtocol? { get set }
-    
-    var interactor: CarsInteractorProtocol? { get set }
-    var router: CarsRouterProtocol? { get set }
-
-    var isEmpty: Bool { get }
-    var count: Int { get }
-    
-    func append(car: Car)
-    func remove(at index: Int)
-    func get(at index: Int) -> Car?
-    
-    func didPressFilterButton(with body: Body?)
-    func didPressAddButton()
-    func didSelectRow(with car: Car)
-}
-
 final class CarsPresenter: CarsPresenterProtocol {
     weak var viewController: CarsViewControllerProtocol?
     
     var interactor: CarsInteractorProtocol?
     var router: CarsRouterProtocol?
-    
+}
+
+extension CarsPresenter {
     var isEmpty: Bool {
         return interactor?.isEmpty ?? true
     }

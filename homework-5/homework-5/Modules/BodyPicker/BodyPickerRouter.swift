@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol BodyPickerRouterProtocol: AnyObject {
-    static func createBodyPickerViewController(with body: Body?) -> UIViewController
-    
-    func closeBodyPickerViewController(_ viewController: BodyPickerViewControllerProtocol)
-}
-
 final class BodyPickerRouter: BodyPickerRouterProtocol {
     static func createBodyPickerViewController(with body: Body?) -> UIViewController {
         let bodyPickerViewController = BodyPickerViewController()

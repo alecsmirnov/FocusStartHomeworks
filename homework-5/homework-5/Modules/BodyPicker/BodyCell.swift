@@ -7,17 +7,12 @@
 
 import UIKit
 
-protocol BodyCellProtocol {
-    var bodyToSelect: Body? { get set }    
-    var checked: Bool { get set }
-}
-
 class BodyCell: UITableViewCell, BodyCellProtocol {
     // MARK: Properties
     
-    var bodyToSelect: Body? {
-        get { Body(rawValue: bodyLabel.text ?? "") }
-        set { bodyLabel.text = newValue?.rawValue }
+    var body: Body? {
+        get { getBody() }
+        set { setBody(newValue) }
     }
     
     var checked = false {
@@ -54,11 +49,15 @@ class BodyCell: UITableViewCell, BodyCellProtocol {
 
 private extension BodyCell {
     func toggleCheckMark() {
-        if checked {
-            accessoryType = .checkmark
-        } else {
-            accessoryType = .none
-        }
+        accessoryType = checked ? .checkmark : .none
+    }
+    
+    func getBody() -> Body? {
+        return Body(rawValue: bodyLabel.text ?? "")
+    }
+    
+    func setBody(_ body: Body?) {
+        bodyLabel.text = body?.rawValue
     }
 }
 
@@ -71,18 +70,9 @@ private extension BodyCell {
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            bodyLabel.topAnchor.constraint(
-                equalTo: contentView.topAnchor,
-                constant: Metrics.verticalSpace
-            ),
-            bodyLabel.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor,
-                constant: -Metrics.verticalSpace
-            ),
-            bodyLabel.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor,
-                constant: Metrics.horizontalSpace
-            ),
+            bodyLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Metrics.verticalSpace),
+            bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Metrics.verticalSpace),
+            bodyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.horizontalSpace),
             bodyLabel.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
                 constant: -Metrics.horizontalSpace
