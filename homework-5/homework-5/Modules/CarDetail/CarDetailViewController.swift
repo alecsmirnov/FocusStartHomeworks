@@ -58,6 +58,16 @@ private extension CarDetailViewController {
     func getUserInput() -> Car? {
         return carDetailView.carToEdit
     }
+    
+    private func showAlertMessage() {
+        let title = "Required fields are empty!"
+        let message = "Please fill in the fields:\nManufacturer, Model, Body"
+        
+       let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+       self.present(alert, animated: true)
+   }
 }
 
 // MARK: - Buttons
@@ -111,7 +121,7 @@ private extension CarDetailViewController {
     }
     
     @objc func didPressAddButton() {
-        guard let car = getUserInput() else { return }
+        guard let car = getUserInput() else { showAlertMessage(); return }
     
         delegate?.carsViewControllerDelegate(self, addNew: car)
         
@@ -119,7 +129,7 @@ private extension CarDetailViewController {
     }
     
     @objc func didPressEditButton() {
-        guard let car = getUserInput() else { return }
+        guard let car = getUserInput() else { showAlertMessage(); return }
         
         delegate?.carsViewControllerDelegate(self, edit: car)
         
