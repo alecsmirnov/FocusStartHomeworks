@@ -215,4 +215,20 @@ extension CarsViewController: UITableViewDelegate {
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completionHandler in
+            self?.presenter?.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+            completionHandler(true)
+        }
+        
+        delete.image = UIImage.init(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
 }
