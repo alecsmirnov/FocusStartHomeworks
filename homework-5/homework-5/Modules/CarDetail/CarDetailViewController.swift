@@ -11,7 +11,6 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
     // MARK: Properties
     
     weak var presenter: CarDetailPresenterProtocol?
-    
     weak var delegate: CarDetailViewControllerDelegate?
     
     var carToEdit: Car? {
@@ -31,6 +30,8 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
         
         return view
     }
+    
+    private var isLoaded = false
     
     // MARK: Lifecycle
     
@@ -54,39 +55,20 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
 // MARK: - Private Methods
 
 private extension CarDetailViewController {
-//    func getUserInput() -> Car? {
-//        guard let manufacturer = manufacturerTextField.text,
-//              let model = modelTextField.text,
-//              let selectedRow = dropDownView.selectedRow,
-//              let body = Body(rawValue: selectedRow) else {
-//            let title = "Required fields are empty!"
-//            let message = "Please fill in the fields:\nManufacturer, Model, Body Type"
-//            showAlertMessage(title: title, message: message)
-//            return nil
-//        }
-//
-//        var yearOfIssue: Int?
-//        if let yearOfIssueText = yearOfIssueTextField.text {
-//            yearOfIssue = Int(yearOfIssueText)
-//        }
-//
-//        let carNumber = carNumberTextField.text
-//
-//        let carInput = Car(manufacturer: manufacturer,
-//                           model: model,
-//                           body: body,
-//                           yearOfIssue: yearOfIssue,
-//                           carNumber: carNumber)
-//
-//        return carInput
-//    }
+    func getUserInput() -> Car? {
+        return carDetailView.carToEdit
+    }
 }
 
 // MARK: - Buttons
 
 private extension CarDetailViewController {
     func setupButtons() {
-        carToEdit != nil ? setupEditButtons() : setupAddButton()
+        if !isLoaded {
+            carToEdit != nil ? setupEditButtons() : setupAddButton()
+            
+            isLoaded = true
+        }
     }
     
     func setupAddButton() {
@@ -129,15 +111,15 @@ private extension CarDetailViewController {
     }
     
     @objc func didPressAddButton() {
-        let car = Car(manufacturer: "man", model: "mod", body: .cabriolet, yearOfIssue: nil, carNumber: nil)
-        
+        guard let car = getUserInput() else { return }
+    
         delegate?.carsViewControllerDelegate(self, addNew: car)
         
         presenter?.didPressCloseButton()
     }
     
     @objc func didPressEditButton() {
-        let car = Car(manufacturer: "man", model: "mod", body: .cabriolet, yearOfIssue: nil, carNumber: nil)
+        guard let car = getUserInput() else { return }
         
         delegate?.carsViewControllerDelegate(self, edit: car)
         

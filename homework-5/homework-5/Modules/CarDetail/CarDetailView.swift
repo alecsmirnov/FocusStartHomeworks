@@ -97,12 +97,13 @@ final class CarDetailView: UIView, CarDetailViewProtocol {
 
 private extension CarDetailView {
     func getCarToEdit() -> Car? {
-        guard let manufacturer = manufacturerTextField.text,
-              let model = modelTextField.text,
-              let body = Body(rawValue: bodyLabel.text ?? ""),
-              let yearOfIssue = Int(yearOfIssueTextField.text ?? ""),
-              let carNumber = carNumberTextField.text else { return nil }
+        guard let manufacturer = manufacturerTextField.text, !manufacturer.isEmpty,
+              let model = modelTextField.text, !model.isEmpty,
+              let body = Body(rawValue: bodyLabel.text ?? "") else { return nil }
         
+        let yearOfIssue = Int(yearOfIssueTextField.text ?? "")
+        let carNumber = carNumberTextField.text
+
         let carToEdit = Car(
             manufacturer: manufacturer,
             model: model,
@@ -129,7 +130,7 @@ private extension CarDetailView {
     }
     
     func setBodyToReceive(body: Body?) {
-        bodyLabel.text = bodyToReceive?.rawValue
+        bodyLabel.text = body?.rawValue
     }
 }
 
