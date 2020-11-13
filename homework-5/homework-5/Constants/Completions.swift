@@ -6,4 +6,3 @@
 //
 
 typealias BodySelectAction = (_ body: Body?) -> Void
-typealias CarSelectAction = (_ car: Car) -> Void
