@@ -7,14 +7,12 @@
 
 import UIKit
 
-protocol IBodyCell {
-    // MARK: Input
-    
+protocol BodyCellProtocol {
     var bodyToSelect: Body? { get set }    
     var checked: Bool { get set }
 }
 
-class BodyCell: UITableViewCell, IBodyCell {
+class BodyCell: UITableViewCell, BodyCellProtocol {
     // MARK: Properties
     
     var bodyToSelect: Body? {

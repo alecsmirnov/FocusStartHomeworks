@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CarCellProtocol: AnyObject {
+    func configure(with car: Car)
+}
+
 final class CarCell: UITableViewCell {
     // MARK: Properties
     

@@ -7,6 +7,16 @@
 
 import UIKit
 
+protocol CarsViewProtocol: AnyObject {
+    var dataSource: UITableViewDataSource? { get set }
+    var delegate: UITableViewDelegate? { get set }
+ 
+    func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String)
+    
+    func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition)
+    func deselectRow(at indexPath: IndexPath, animated: Bool)
+}
+
 final class CarsView: UIView {
     // MARK: Properties
     
@@ -47,9 +57,9 @@ extension CarsView: CarsViewProtocol {
         tableView.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
     }
     
-//    func deselectRow(at indexPath: IndexPath, animated: Bool) {
-//        tableView.deselectRow(at: indexPath, animated: animated)
-//    }
+    func deselectRow(at indexPath: IndexPath, animated: Bool) {
+        tableView.deselectRow(at: indexPath, animated: animated)
+    }
 }
 
 // MARK: - Appearance

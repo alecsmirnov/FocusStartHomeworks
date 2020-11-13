@@ -7,19 +7,23 @@
 
 import UIKit
 
-class BodyPickerViewController: UIViewController {
-    // MARK: Delegate
+protocol BodyPickerViewControllerProtocol: AnyObject {
+    var presenter: BodyPickerPresenterProtocol? { get set }
     
-    weak var delegate: BodySelectionDelegate?
-    
+    var selectedBody: Body? { get set }
+}
+
+class BodyPickerViewController: UIViewController, BodyPickerViewControllerProtocol {
     // MARK: Properties
     
-    var bodyToSelect: Body?  {
-        get { bodyPickerView.bodyToSelect }
-        set { bodyPickerView.bodyToSelect = newValue }
+    weak var presenter: BodyPickerPresenterProtocol?
+    
+    var selectedBody: Body? {
+        get { bodyPickerView.selectedBody }
+        set { bodyPickerView.selectedBody = newValue }
     }
     
-    private var bodyPickerView: BodyPickerView {
+    private var bodyPickerView: BodyPickerViewProtocol {
         guard let view = view as? BodyPickerView else {
             fatalError("view is not a BodyPickerView instance")
         }
@@ -36,17 +40,16 @@ class BodyPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewBodySelectAction()
+        setupBodySelectionAction()
     }
 }
 
 // MARK: - Actions
 
-private extension BodyPickerViewController{
-    func setupViewBodySelectAction() {
+private extension BodyPickerViewController {
+    func setupBodySelectionAction() {
         bodyPickerView.didSelectBody = { [weak self] body in
-            guard let self = self else { return }
-            self.delegate?.bodySelectionDelegate(self, didSelect: body)
+            self?.presenter?.didSelectBody(body)
         }
     }
 }

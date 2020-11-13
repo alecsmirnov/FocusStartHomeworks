@@ -9,6 +9,8 @@ import UIKit
 
 protocol CarDetailRouterProtocol: AnyObject {
     static func createCarDetailViewController(with car: Car?) -> UIViewController
+    
+    func openBodyPickerViewController(from viewController: CarDetailViewControllerProtocol, with body: Body?)
 }
 
 final class CarDetailRouter: CarDetailRouterProtocol {
@@ -29,5 +31,15 @@ final class CarDetailRouter: CarDetailRouterProtocol {
         presenter.router = router
          
         return carDetailViewController
+    }
+    
+    func openBodyPickerViewController(from viewController: CarDetailViewControllerProtocol, with body: Body?) {
+        guard let viewController = viewController as? UIViewController else {
+            fatalError("invalid view controller protocol")
+        }
+
+        let bodyPickerViewController = BodyPickerRouter.createBodyPickerViewController(with: body)
+
+        viewController.present(bodyPickerViewController, animated: true, completion: nil)
     }
 }

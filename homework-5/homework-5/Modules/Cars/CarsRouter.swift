@@ -7,6 +7,23 @@
 
 import UIKit
 
+protocol CarsRouterProtocol: AnyObject {
+    static func createCarsNavigationController() -> UINavigationController
+    
+    func openFilterViewController(from viewController: CarsViewControllerProtocol, with body: Body?)
+    func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?)
+}
+
+extension CarsRouterProtocol {
+    func openFilterViewController(from viewController: CarsViewControllerProtocol) {
+        openFilterViewController(from: viewController, with: nil)
+    }
+    
+    func openCarDetailViewController(from viewController: CarsViewControllerProtocol) {
+        openCarDetailViewController(from: viewController, with: nil)
+    }
+}
+
 final class CarsRouter: CarsRouterProtocol {
     static func createCarsNavigationController() -> UINavigationController {
         let carsViewController = CarsViewController()
@@ -28,13 +45,13 @@ final class CarsRouter: CarsRouterProtocol {
     }
     
     func openFilterViewController(from viewController: CarsViewControllerProtocol, with body: Body?) {
-//        guard let viewController = viewController as? UIViewController else {
-//            fatalError("invalid view controller protocol")
-//        }
-//
-//        let bodyPickerViewController = BodyPickerRouter.createBodyPickerViewController(with: body)
-//
-//        viewController.navigationController?.pushViewController(bodyPickerViewController, animated: true)
+        guard let viewController = viewController as? UIViewController else {
+            fatalError("invalid view controller protocol")
+        }
+
+        let bodyPickerViewController = BodyPickerRouter.createBodyPickerViewController(with: body)
+
+        viewController.navigationController?.pushViewController(bodyPickerViewController, animated: true)
     }
     
     func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?) {

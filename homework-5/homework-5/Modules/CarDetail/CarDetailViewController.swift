@@ -8,20 +8,28 @@
 import UIKit
 
 protocol CarDetailViewControllerProtocol: AnyObject {
+    var presenter: CarDetailPresenterProtocol? { get set }
+    
     var carToEdit: Car? { get set }
+    var bodyToReceive: Body? { get set }
 }
 
-final class CarDetailViewController: UIViewController {
+final class CarDetailViewController: UIViewController, CarDetailViewControllerProtocol {
+    // MARK: Properties
+    
     weak var presenter: CarDetailPresenterProtocol?
     
-    // MARK: Properties
+    var carToEdit: Car? {
+        get { carDetailView.carToEdit }
+        set { carDetailView.carToEdit = newValue }
+    }
     
     var bodyToReceive: Body? {
         get { carDetailView.bodyToReceive }
         set { carDetailView.bodyToReceive = newValue }
     }
     
-    private var carDetailView: CarDetailView {
+    private var carDetailView: CarDetailViewProtocol {
         guard let view = view as? CarDetailView else {
             fatalError("view is not a CarDetailView instance")
         }
@@ -38,36 +46,21 @@ final class CarDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewBodySelectAction()
+        setupBodySelectionAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if carToEdit != nil {
-            setupEditButtons()
-        } else {
-            setupAddButton()
-        }
+        setupButtons()
     }
 }
 
-extension CarDetailViewController: CarDetailViewControllerProtocol {
-    var carToEdit: Car? {
-        get { carDetailView.carToEdit }
-        set { carDetailView.carToEdit = newValue }
-    }
-}
-
-// MARK: - Actions
+// MARK: - Buttons
 
 private extension CarDetailViewController {
-    func setupViewBodySelectAction() {
-        carDetailView.didSelectBody = { [weak self] body in
-            guard let self = self else { return }
-            
-            //self.delegate?.bodySelectionDelegate(self, didSelect: body)
-        }
+    func setupButtons() {
+        carToEdit != nil ? setupEditButtons() : setupAddButton()
     }
     
     func setupEditButtons() {
@@ -80,5 +73,15 @@ private extension CarDetailViewController {
     func setupAddButton() {
         let addBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem = addBarButtonItem
+    }
+}
+
+// MARK: - Actions
+
+private extension CarDetailViewController {
+    func setupBodySelectionAction() {
+        carDetailView.didSelectBody = { [weak self] body in
+            self?.presenter?.didPressBodyButton(with: body)
+        }
     }
 }

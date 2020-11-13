@@ -7,20 +7,16 @@
 
 import UIKit
 
-protocol IBodyPickerView {
-    // MARK: Input
-    
-    var bodyToSelect: Body? { get set }
-    
-    // MARK: Output
+protocol BodyPickerViewProtocol: AnyObject {
+    var selectedBody: Body? { get set }
     
     var didSelectBody: BodySelectAction? { get set }
 }
 
-final class BodyPickerView: UIView, IBodyPickerView {
+final class BodyPickerView: UIView, BodyPickerViewProtocol {
     // MARK: Properties
     
-    var bodyToSelect: Body?
+    var selectedBody: Body?
     
     var didSelectBody: BodySelectAction?
     
@@ -31,7 +27,7 @@ final class BodyPickerView: UIView, IBodyPickerView {
     private var selectedIndex: IndexPath?
     private let tableView = UITableView()
     
-    private let bodyCases = Body.allCases
+    private let bodies = Body.allCases
     
     // MARK: Initialization
     
@@ -48,7 +44,7 @@ final class BodyPickerView: UIView, IBodyPickerView {
     }
 }
 
-// MARK: Private Methods
+// MARK: TableView Settings
 
 private extension BodyPickerView {
     func setupTableView() {
@@ -67,7 +63,7 @@ private extension BodyPickerView {
 
 extension BodyPickerView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bodyCases.count
+        return bodies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,11 +74,11 @@ extension BodyPickerView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let body = bodyCases[indexPath.row]
+        let body = bodies[indexPath.row]
         
         cell.bodyToSelect = body
         
-        if bodyToSelect == body {
+        if selectedBody == body {
             cell.checked = true
             selectedIndex = indexPath
         }
@@ -99,21 +95,24 @@ extension BodyPickerView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let currentCell = tableView.cellForRow(at: indexPath) as? BodyCell {
+            currentCell.checked = true
+        }
+        
         if let previousSelectedIndex = selectedIndex, previousSelectedIndex != indexPath {
-            if let currentCell = tableView.cellForRow(at: indexPath) as? BodyCell {
-                currentCell.checked = true
-            }
-            
             if let previousCell = tableView.cellForRow(at: previousSelectedIndex) as? BodyCell {
                 previousCell.checked = false
             }
-            
-            selectedIndex = indexPath
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        didSelectBody?(bodyCases[indexPath.row])
+        let bodyCase = bodies[indexPath.row]
+        
+        selectedBody = bodyCase
+        selectedIndex = indexPath
+        
+        didSelectBody?(bodyCase)
     }
 }
 

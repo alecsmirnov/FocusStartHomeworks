@@ -7,15 +7,24 @@
 
 import UIKit
 
-final class CarsViewController: UIViewController {
+protocol CarsViewControllerProtocol: AnyObject {
+    var presenter: CarsPresenterProtocol? { get set }
+    
+    var filter: Body? { get set }
+}
+
+final class CarsViewController: UIViewController, CarsViewControllerProtocol {
     // MARK: Properties
     
     weak var presenter: CarsPresenterProtocol?
     
-    var filter: Body?
-    var data: CarService?
+    var filter: Body? {
+        didSet {
+            applyFilter(with: filter)
+        }
+    }
     
-    private var carsView: CarsView {
+    private var carsView: CarsViewProtocol {
         guard let view = view as? CarsView else {
             fatalError("view is not a CarsView instance")
         }
@@ -37,28 +46,6 @@ final class CarsViewController: UIViewController {
     }
 }
 
-// MARK: - CarsViewControllerProtocol
-
-extension CarsViewController: CarsViewControllerProtocol {
-    func applyFilter() {
-        
-    }
-    
-    func resetFilter() {
-        
-    }
-}
-
-// MARK: - Public Methods
-
-extension CarsViewController {
-    func setFilter(body: Body?) {
-        if let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last {
-            filterStatusBarButtonItem.title = body?.rawValue ?? "None"
-        }
-    }
-}
-
 // MARK: - CarsView Customization
 
 extension CarsViewController {
@@ -74,42 +61,7 @@ extension CarsViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
-
-extension CarsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CarCell.reuseIdentifier,
-            for: indexPath
-        ) as? CarCell else { return UITableViewCell() }
-
-        if let data = data {
-            let car = data.get(at: indexPath.row)
-            
-            cell.configure(with: car)
-        }
-
-        return cell
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension CarsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let car = data?.get(at: indexPath.row) {
-            presenter?.didSelectRow(with: car)
-        }
-
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - Actions
+// MARK: - Buttons
 
 private extension CarsViewController {
     func setupButtons() {
@@ -140,12 +92,69 @@ private extension CarsViewController {
         
         navigationItem.rightBarButtonItem = addBarButtonItem
     }
-    
+}
+
+// MARK: - Actions
+
+extension CarsViewController {
     @objc func didPressFilterButton() {
         presenter?.didPressFilterButton(with: filter)
     }
     
     @objc func didPressAddButton() {
         presenter?.didPressAddButton()
+    }
+}
+
+// MARK: - Filter
+
+private extension CarsViewController {
+    func applyFilter(with body: Body?) {
+        if let _ = body {
+            
+        } else {
+            
+        }
+        
+        setFilterTitle(with: body)
+    }
+    
+    func setFilterTitle(with body: Body?) {
+        if let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last {
+            filterStatusBarButtonItem.title = body?.rawValue ?? "None"
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension CarsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CarCell.reuseIdentifier,
+            for: indexPath
+        ) as? CarCell else { return UITableViewCell() }
+
+        if let car = presenter?.get(at: indexPath.row) {
+            cell.configure(with: car)
+        }
+
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension CarsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let car = presenter?.get(at: indexPath.row) {
+            presenter?.didSelectRow(with: car)
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

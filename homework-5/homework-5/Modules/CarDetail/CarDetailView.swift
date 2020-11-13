@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol ICarDetailView: AnyObject {
-    // MARK: Input
-    
+protocol CarDetailViewProtocol: AnyObject {    
     var carToEdit: Car? { get set }
     var bodyToReceive: Body? { get set }
-    
-    // MARK: Output
     
     var didSelectBody: BodySelectAction? { get set }
 }
@@ -112,7 +108,7 @@ final class CarDetailView: UIView {
 
 // MARK: - ICarDetailView
 
-extension CarDetailView: ICarDetailView {
+extension CarDetailView: CarDetailViewProtocol {
     private func setCarToEdit(car: Car?) {
         if let car = car {
             manufacturerTextField.text = car.manufacturer
