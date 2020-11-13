@@ -50,6 +50,9 @@
 		845BE507255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE501255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */; };
 		845BE508255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE502255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift */; };
 		845BE50D255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */; };
+		845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */; };
+		845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */; };
+		845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +101,9 @@
 		845BE501255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerViewProtocol.swift; sourceTree = "<group>"; };
 		845BE502255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerRouterProtocol.swift; sourceTree = "<group>"; };
 		845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
+		845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "homework-5.xcdatamodel"; sourceTree = "<group>"; };
+		845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,7 @@
 		84548C7F255BC53C000439CD /* homework-5 */ = {
 			isa = PBXGroup;
 			children = (
+				845BE519255EE9FE00CA38E9 /* CoreData */,
 				84548CC7255C42DB000439CD /* Constants */,
 				84548C97255BC780000439CD /* Model */,
 				84584074255D455500B7833A /* Services */,
@@ -274,6 +281,16 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		845BE519255EE9FE00CA38E9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */,
+				845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */,
+				845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -344,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84548C85255BC53C000439CD /* CarsViewController.swift in Sources */,
+				845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */,
 				845BE4D6255E96D700CA38E9 /* CarDetailViewProtocol.swift in Sources */,
 				84548C9B255BC7F1000439CD /* CarsView.swift in Sources */,
 				8458409F255D95CF00B7833A /* CarDetailRouter.swift in Sources */,
@@ -361,6 +379,7 @@
 				84584081255D545900B7833A /* CarsPresenter.swift in Sources */,
 				845BE4DA255E978000CA38E9 /* CarDetailViewControllerProtocol.swift in Sources */,
 				845BE508255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift in Sources */,
+				845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */,
 				845BE504255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift in Sources */,
 				84548C83255BC53C000439CD /* SceneDelegate.swift in Sources */,
 				84548CBB255C1ABA000439CD /* CarCell.swift in Sources */,
@@ -370,6 +389,7 @@
 				845BE4F5255E9BAF00CA38E9 /* CarsPresenterProtocol.swift in Sources */,
 				845BE4E2255E98AA00CA38E9 /* CarDetailPresenterProtocol.swift in Sources */,
 				84548CB2255BF291000439CD /* CarService.swift in Sources */,
+				845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */,
 				84548CC1255C1B3B000439CD /* BodyPickerView.swift in Sources */,
 				845840A2255D963300B7833A /* BodyPickerInteractor.swift in Sources */,
 				84548CBE255C1B22000439CD /* BodyPickerViewController.swift in Sources */,
@@ -575,6 +595,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */,
+			);
+			currentVersion = 845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */;
+			path = "homework-5.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84548C75255BC53C000439CD /* Project object */;
 }
