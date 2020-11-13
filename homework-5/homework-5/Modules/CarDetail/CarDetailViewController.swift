@@ -22,6 +22,8 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
         set { carDetailView.bodyToReceive = newValue }
     }
     
+    var didSelectCar: CarSelectAction?
+    
     private var carDetailView: CarDetailViewProtocol {
         guard let view = view as? CarDetailView else {
             fatalError("view is not a CarDetailView instance")

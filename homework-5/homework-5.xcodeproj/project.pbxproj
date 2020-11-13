@@ -240,12 +240,12 @@
 		845BE4EE255E9BAF00CA38E9 /* Cars */ = {
 			isa = PBXGroup;
 			children = (
-				845BE4EF255E9BAF00CA38E9 /* CarsPresenterProtocol.swift */,
 				845BE4F0255E9BAF00CA38E9 /* CarCellProtocol.swift */,
-				845BE4F1255E9BAF00CA38E9 /* CarsInteractorProtocol.swift */,
-				845BE4F2255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift */,
-				845BE4F3255E9BAF00CA38E9 /* CarsRouterProtocol.swift */,
 				845BE4F4255E9BAF00CA38E9 /* CarsViewProtocol.swift */,
+				845BE4F2255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift */,
+				845BE4F1255E9BAF00CA38E9 /* CarsInteractorProtocol.swift */,
+				845BE4EF255E9BAF00CA38E9 /* CarsPresenterProtocol.swift */,
+				845BE4F3255E9BAF00CA38E9 /* CarsRouterProtocol.swift */,
 			);
 			path = Cars;
 			sourceTree = "<group>";
@@ -253,11 +253,11 @@
 		845BE4FC255E9BBB00CA38E9 /* BodyPicker */ = {
 			isa = PBXGroup;
 			children = (
-				845BE4FD255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift */,
-				845BE4FE255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift */,
-				845BE4FF255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift */,
 				845BE500255E9BBB00CA38E9 /* BodyCellProtocol.swift */,
 				845BE501255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */,
+				845BE4FD255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift */,
+				845BE4FF255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift */,
+				845BE4FE255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift */,
 				845BE502255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift */,
 			);
 			path = BodyPicker;

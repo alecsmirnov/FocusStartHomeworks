@@ -14,4 +14,3 @@ protocol BodyPickerViewInputProtocol: AnyObject {
 protocol BodyPickerViewOutputProtocol: AnyObject {
     var didSelectBody: BodySelectAction? { get set }
 }
-
