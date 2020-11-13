@@ -16,9 +16,7 @@ class BodyCell: UITableViewCell, BodyCellProtocol {
     }
     
     var checked = false {
-        didSet {
-            toggleCheckMark()
-        }
+        didSet { toggleCheckMark() }
     }
     
     static let reuseIdentifier = String(describing: self)

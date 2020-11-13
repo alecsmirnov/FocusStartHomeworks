@@ -7,19 +7,17 @@
 
 import UIKit
 
-final class CarDetailView: UIView {
+final class CarDetailView: UIView, CarDetailViewProtocol {
     // MARK: Public Properties
     
     var carToEdit: Car? {
-        didSet {
-            setCarToEdit(car: carToEdit)
-        }
+        get { getCarToEdit() }
+        set { setCarToEdit(car: newValue) }
     }
     
     var bodyToReceive: Body? {
-        didSet {
-            bodyLabel.text = bodyToReceive?.rawValue
-        }
+        get { getBodyToReceive() }
+        set { setBodyToReceive(body: newValue) }
     }
     
     var didSelectBody: BodySelectAction?
@@ -33,7 +31,7 @@ final class CarDetailView: UIView {
         static let verticalSpace: CGFloat = 8
     }
     
-    private enum TableViewSection: Int {
+    private enum TableViewSection: Int, CaseIterable {
         case required
         case optional
         
@@ -49,10 +47,6 @@ final class CarDetailView: UIView {
             case .required: return "Required"
             case .optional: return "Optional"
             }
-        }
-        
-        static func count() -> Int {
-            return 2
         }
     }
     
@@ -99,10 +93,28 @@ final class CarDetailView: UIView {
     }
 }
 
-// MARK: - ICarDetailView
+// MARK: - Private Methods
 
-extension CarDetailView: CarDetailViewProtocol {
-    private func setCarToEdit(car: Car?) {
+private extension CarDetailView {
+    func getCarToEdit() -> Car? {
+        guard let manufacturer = manufacturerTextField.text,
+              let model = modelTextField.text,
+              let body = Body(rawValue: bodyLabel.text ?? ""),
+              let yearOfIssue = Int(yearOfIssueTextField.text ?? ""),
+              let carNumber = carNumberTextField.text else { return nil }
+        
+        let carToEdit = Car(
+            manufacturer: manufacturer,
+            model: model,
+            body: body,
+            yearOfIssue: yearOfIssue,
+            carNumber: carNumber
+        )
+        
+        return carToEdit
+    }
+    
+    func setCarToEdit(car: Car?) {
         if let car = car {
             manufacturerTextField.text = car.manufacturer
             modelTextField.text = car.model
@@ -110,6 +122,14 @@ extension CarDetailView: CarDetailViewProtocol {
             yearOfIssueTextField.text = car.yearOfIssue?.description
             carNumberTextField.text = car.carNumber?.description
         }
+    }
+    
+    func getBodyToReceive() -> Body? {
+        return Body(rawValue: bodyLabel.text ?? "")
+    }
+    
+    func setBodyToReceive(body: Body?) {
+        bodyLabel.text = bodyToReceive?.rawValue
     }
 }
 
@@ -206,7 +226,7 @@ private extension CarDetailView {
 
 extension CarDetailView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return TableViewSection.count()
+        return TableViewSection.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -51,6 +51,37 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
     }
 }
 
+// MARK: - Private Methods
+
+private extension CarDetailViewController {
+//    func getUserInput() -> Car? {
+//        guard let manufacturer = manufacturerTextField.text,
+//              let model = modelTextField.text,
+//              let selectedRow = dropDownView.selectedRow,
+//              let body = Body(rawValue: selectedRow) else {
+//            let title = "Required fields are empty!"
+//            let message = "Please fill in the fields:\nManufacturer, Model, Body Type"
+//            showAlertMessage(title: title, message: message)
+//            return nil
+//        }
+//
+//        var yearOfIssue: Int?
+//        if let yearOfIssueText = yearOfIssueTextField.text {
+//            yearOfIssue = Int(yearOfIssueText)
+//        }
+//
+//        let carNumber = carNumberTextField.text
+//
+//        let carInput = Car(manufacturer: manufacturer,
+//                           model: model,
+//                           body: body,
+//                           yearOfIssue: yearOfIssue,
+//                           carNumber: carNumber)
+//
+//        return carInput
+//    }
+}
+
 // MARK: - Buttons
 
 private extension CarDetailViewController {
