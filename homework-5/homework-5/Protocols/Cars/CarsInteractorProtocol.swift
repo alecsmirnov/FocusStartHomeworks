@@ -5,11 +5,9 @@
 //  Created by Admin on 13.11.2020.
 //
 
-protocol CarsInteractorProtocol: CarsInteractorInputOutputProtocol {
+protocol CarsInteractorProtocol: AnyObject {
     var presenter: CarsPresenterProtocol? { get set }
-}
-
-protocol CarsInteractorInputOutputProtocol: AnyObject {
+    
     var isEmpty: Bool { get }
     var count: Int { get }
     

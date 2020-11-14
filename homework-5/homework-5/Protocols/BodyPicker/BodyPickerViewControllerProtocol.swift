@@ -5,15 +5,9 @@
 //  Created by Admin on 13.11.2020.
 //
 
-protocol BodyPickerViewControllerProtocol: BodyPickerViewControllerInputProtocol,
-                                           BodyPickerViewControllerOutputProtocol {
+protocol BodyPickerViewControllerProtocol: AnyObject {
     var presenter: BodyPickerPresenterProtocol? { get set }
-}
-
-protocol BodyPickerViewControllerInputProtocol: AnyObject {
+    
     var selectedBody: Body? { get set }
-}
-
-protocol BodyPickerViewControllerOutputProtocol: AnyObject {
     var didSelectBody: BodySelectAction? { get set }
 }
