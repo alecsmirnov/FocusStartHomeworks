@@ -8,27 +8,8 @@
 import UIKit
 
 final class CarsRouter: CarsRouterProtocol {
-    static func createCarsNavigationController() -> UINavigationController {
-        let carsViewController = CarsViewController()
-        let carsNavigationController = UINavigationController(rootViewController: carsViewController)
-        
-        let interactor = CarsInteractor()
-        let presenter = CarsPresenter()
-        let router = CarsRouter()
-        
-        carsViewController.presenter = presenter
-        
-        interactor.presenter = presenter
-        
-        presenter.viewController = carsViewController
-        presenter.interactor = interactor
-        presenter.router = router
-         
-        return carsNavigationController
-    }
-    
     func openFilterViewController(from viewController: CarsViewControllerProtocol, with body: Body?) {
-        let bodyPickerViewController = BodyPickerRouter.createBodyPickerViewController(with: body)
+        let bodyPickerViewController = Assembly.createBodyPickerViewController(with: body)
         
         if let bodyPickerViewController = bodyPickerViewController as? BodyPickerViewControllerProtocol {
             bodyPickerViewController.didSelectBody = { body in
@@ -44,7 +25,7 @@ final class CarsRouter: CarsRouterProtocol {
     }
     
     func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?) {
-        let carDetailViewController = CarDetailRouter.createCarDetailViewController(with: car)
+        let carDetailViewController = Assembly.createCarDetailViewController(with: car)
         
         if let carDetailViewController = carDetailViewController as? CarDetailViewController,
            let viewController = viewController as? CarsViewController {

@@ -53,6 +53,7 @@
 		845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */; };
 		845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */; };
 		845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */; };
+		84E8D1D0255FFBBB00048A9C /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D1CF255FFBBB00048A9C /* Assembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "homework-5.xcdatamodel"; sourceTree = "<group>"; };
 		845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		84E8D1CF255FFBBB00048A9C /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		84584070255D44A200B7833A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				84E8D1CF255FFBBB00048A9C /* Assembly.swift */,
 				84584071255D44C400B7833A /* Cars */,
 				84584072255D44CC00B7833A /* CarDetail */,
 				84584073255D44D600B7833A /* BodyPicker */,
@@ -391,6 +394,7 @@
 				84548CB2255BF291000439CD /* CarService.swift in Sources */,
 				845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */,
 				84548CC1255C1B3B000439CD /* BodyPickerView.swift in Sources */,
+				84E8D1D0255FFBBB00048A9C /* Assembly.swift in Sources */,
 				845840A2255D963300B7833A /* BodyPickerInteractor.swift in Sources */,
 				84548CBE255C1B22000439CD /* BodyPickerViewController.swift in Sources */,
 				8458409C255D95C300B7833A /* CarDetailPresenter.swift in Sources */,

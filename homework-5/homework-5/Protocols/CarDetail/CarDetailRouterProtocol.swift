@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol CarDetailRouterProtocol: AnyObject {
-    static func createCarDetailViewController(with car: Car?) -> UIViewController
-    
+protocol CarDetailRouterProtocol: AnyObject {    
     func openBodyPickerViewController(from viewController: CarDetailViewControllerProtocol, with body: Body?)
     func closeCarDetailViewController(_ viewController: CarDetailViewControllerProtocol)
 }
