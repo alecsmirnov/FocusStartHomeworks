@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class BodyPickerView: UIView {
+protocol IBodyPickerView: AnyObject {
+    var selectedBody: Body? { get set }
+    
+    var didSelectBody: BodySelectAction? { get set }
+}
+
+final class BodyPickerView: UIView, IBodyPickerView {
     // MARK: Properties
     
     var selectedBody: Body?
@@ -38,7 +44,7 @@ final class BodyPickerView: UIView {
     }
 }
 
-// MARK: TableView
+// MARK: - TableView
 
 private extension BodyPickerView {
     func setupTableView() {

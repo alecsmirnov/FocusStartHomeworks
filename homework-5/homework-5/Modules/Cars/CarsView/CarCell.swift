@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class CarCell: UITableViewCell {
+protocol ICarCell: AnyObject {}
+
+final class CarCell: UITableViewCell, ICarCell {
     // MARK: Properties
     
     static let reuseIdentifier = String(describing: self)

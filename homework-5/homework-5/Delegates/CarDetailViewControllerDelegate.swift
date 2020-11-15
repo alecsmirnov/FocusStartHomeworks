@@ -6,7 +6,7 @@
 //
 
 protocol CarDetailViewControllerDelegate: AnyObject {
-    func carsViewControllerDelegate(_ viewController: CarDetailViewController, addNew car: Car)
-    func carsViewControllerDelegate(_ viewController: CarDetailViewController, edit car: Car)
-    func carsViewControllerDelegateDeleteCar(_ viewController: CarDetailViewController)
+    func carsViewControllerDelegate(_ anyObject: AnyObject, addNew car: Car)
+    func carsViewControllerDelegate(_ anyObject: AnyObject, edit car: Car)
+    func carsViewControllerDelegateDeleteCar(_ anyObject: AnyObject)
 }

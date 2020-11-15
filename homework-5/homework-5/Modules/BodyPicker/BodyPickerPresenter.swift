@@ -5,13 +5,54 @@
 //  Created by Admin on 12.11.2020.
 //
 
-final class BodyPickerPresenter: BodyPickerPresenterProtocol {
-    weak var view: BodyPickerViewProtocol?
-    var router: BodyPickerRouterProtocol?
+protocol IBodyPickerPresenter: AnyObject {
+    func viewDidLoad(view: IBodyPickerView)
+    
+    func didPressResetButton()
 }
 
-extension BodyPickerPresenter {
-    func didPressCloseButton() {
+final class BodyPickerPresenter {
+    weak var view: IBodyPickerViewController?
+    var interactor: IBodyPickerInteractor?
+    var router: IBodyPickerRouter?
+    
+    weak var delegate: BodyPickerViewControllerDelegate?
+    
+    private var selectedBody: Body?
+}
+
+// MARK: - IBodyPickerPresenter
+
+extension BodyPickerPresenter: IBodyPickerPresenter {
+    func viewDidLoad(view: IBodyPickerView) {
+        view.selectedBody = selectedBody
+        
+        view.didSelectBody = { [weak self] body in
+            self?.didSelectBody(body)
+        }
+    }
+    
+    func didPressResetButton() {
+        delegate?.bodyPickerViewControllerDelegate(self, didSelect: nil)
+        
         router?.closeBodyPickerView()
+    }
+}
+
+// MARK: - Private Methods
+
+private extension BodyPickerPresenter {
+    func didSelectBody(_ body: Body?) {
+        delegate?.bodyPickerViewControllerDelegate(self, didSelect: body)
+        
+        router?.closeBodyPickerView()
+    }
+}
+
+// MARK: - IBodyPickerInteractorOutput
+
+extension BodyPickerPresenter: IBodyPickerInteractorOutput {
+    func bodyReceived(_ body: Body?) {
+        selectedBody = body
     }
 }

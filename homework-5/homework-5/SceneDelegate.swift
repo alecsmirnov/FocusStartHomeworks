@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = Assembly.createCarsNavigationController()
+        window?.rootViewController = CarsAssembly.createCarsNavigationController()
         window?.makeKeyAndVisible()
     }
 }

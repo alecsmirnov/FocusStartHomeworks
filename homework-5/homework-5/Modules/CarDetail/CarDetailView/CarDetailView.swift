@@ -7,17 +7,16 @@
 
 import UIKit
 
-final class CarDetailView: UIView {
-    // MARK: Public Properties
+protocol ICarDetailView: AnyObject {
+    var didSelectBody: BodySelectAction? { get set }
     
-    var body: Body? {
-        get { Body(rawValue: bodyLabel.text ?? "") }
-        set { bodyLabel.text = newValue?.rawValue }
-    }
+    func setCarToEdit(_ car: Car?)
+}
+
+final class CarDetailView: UIView {
+    // MARK: Properties
     
     var didSelectBody: BodySelectAction?
-    
-    // MARK: Private Properties
     
     private enum Metrics {       
         static let rowHeight: CGFloat = 50
@@ -113,7 +112,15 @@ extension CarDetailView {
         return carToEdit
     }
     
-    func setCarToEdit(car: Car?) {
+    func setBody(_ body: Body?) {
+        bodyLabel.text = body?.rawValue
+    }
+}
+
+// MARK: - ICarDetailView
+
+extension CarDetailView: ICarDetailView {
+    func setCarToEdit(_ car: Car?) {
         if let car = car {
             manufacturerTextField.text = car.manufacturer
             modelTextField.text = car.model

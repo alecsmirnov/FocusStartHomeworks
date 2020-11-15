@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol ICarsView: AnyObject {    
+    func insertNewRow()
+    func reloadRow(at index: Int)
+    func deleteRow(at index: Int)
+    func reloadData()
+}
+
 final class CarsView: UIView {
-    // MARK: Properties
+    // MARK: Subviews
     
     private let tableView = UITableView()
     
@@ -17,6 +24,7 @@ final class CarsView: UIView {
     init() {
         super.init(frame: .zero)
 
+        registerCells()
         setupAppearance()
         setupLayout()
     }
@@ -26,45 +34,48 @@ final class CarsView: UIView {
     }
 }
 
-// MARK: - Public Methods
+// MARK: - ICarsView Protocol
 
-extension CarsView {
-    var dataSource: UITableViewDataSource? {
+extension CarsView: ICarsView {
+    var tableViewDataSource: UITableViewDataSource? {
         get { tableView.dataSource }
         set { tableView.dataSource = newValue }
     }
     
-    var delegate: UITableViewDelegate? {
+    var tableViewDelegate: UITableViewDelegate? {
         get { tableView.delegate }
         set { tableView.delegate = newValue }
     }
     
-    func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
-        tableView.register(cellClass, forCellReuseIdentifier: identifier)
+    func insertNewRow() {
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        let lastRowIndexPath = IndexPath(row: lastRowIndex, section: 0)
+        
+        tableView.insertRows(at: [lastRowIndexPath], with: .automatic)
     }
     
-    func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
-        tableView.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
+    func reloadRow(at index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
-    func deselectRow(at indexPath: IndexPath, animated: Bool) {
-        tableView.deselectRow(at: indexPath, animated: animated)
-    }
-    
-    func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        tableView.insertRows(at: indexPaths, with: animation)
-    }
-    
-    func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        tableView.reloadRows(at: indexPaths, with: animation)
-    }
-    
-    func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
-        tableView.deleteRows(at: indexPaths, with: animation)
+    func deleteRow(at index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     func reloadData() {
         tableView.reloadData()
+    }
+}
+
+// MARK: - Private Methods
+
+private extension CarsView {
+    func registerCells() {
+        tableView.register(CarCell.self, forCellReuseIdentifier: CarCell.reuseIdentifier)
     }
 }
 

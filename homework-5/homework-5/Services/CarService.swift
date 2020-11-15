@@ -17,6 +17,10 @@ final class CarService {
         return filteredData.count
     }
     
+    var filter: Body? {
+        didSet { setFilter(by: filter) }
+    }
+    
     private var filteredData = [CarEntity]()
     private var tempData = [CarEntity]()
     
@@ -116,22 +120,6 @@ final class CarService {
         }
     }
     
-    func filterReset() {
-        filteredData += tempData
-        tempData.removeAll()
-    }
-    
-    func filter(by body: Body) {
-        if tempData.isEmpty {
-            tempData = filteredData
-        } else {
-            tempData += filteredData
-        }
-        
-        filteredData = tempData.filter { $0.body == body.rawValue }
-        tempData = tempData.filter { !filteredData.contains($0) }
-    }
-    
     func removeAll() {
         filteredData.removeAll()
         tempData.removeAll()
@@ -153,6 +141,26 @@ final class CarService {
     
     deinit {
         removeAll()
+    }
+}
+
+// MARK: - Private Methods
+
+extension CarService {
+    func setFilter(by body: Body?) {
+        if let body = body {
+            if tempData.isEmpty {
+                tempData = filteredData
+            } else {
+                tempData += filteredData
+            }
+            
+            filteredData = tempData.filter { $0.body == body.rawValue }
+            tempData = tempData.filter { !filteredData.contains($0) }
+        } else {
+            filteredData += tempData
+            tempData.removeAll()
+        }
     }
 }
 

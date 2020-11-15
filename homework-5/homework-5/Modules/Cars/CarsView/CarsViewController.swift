@@ -7,10 +7,16 @@
 
 import UIKit
 
-final class CarsViewController: UIViewController, CarsViewProtocol {
+protocol ICarsViewController: AnyObject {
+    func setFilter(with body: Body?)
+    
+    //func updateCarsView()
+}
+
+final class CarsViewController: UIViewController {
     // MARK: Properties
     
-    var presenter: CarsPresenterProtocol?
+    var presenter: ICarsPresenter?
     
     private enum FilterSettings {
         static let title = "Filter"
@@ -58,14 +64,22 @@ final class CarsViewController: UIViewController, CarsViewProtocol {
 // MARK: - Public Methods
 
 extension CarsViewController {
-    func setFilter(with body: Body?) {
-        presenter?.setFilter(by: body)
-        
-        setFilterStatus(body: body)
-        
+    func reloadData() {
         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
             self?.carsView.reloadData()
         }, completion: nil)
+    }
+}
+
+// MARK: - ICarsViewController Protocol
+
+extension CarsViewController: ICarsViewController {
+    func setFilter(with body: Body?) {
+        presenter?.filter = body
+        
+        setFilterStatus(body: body)
+        
+        reloadData()
     }
 }
 
@@ -73,33 +87,16 @@ extension CarsViewController {
 
 private extension CarsViewController {
     func setupCarsView() {
-        carsView.dataSource = self
-        carsView.delegate = self
-        
-        registerCells()
+        carsView.tableViewDataSource = self
+        carsView.tableViewDelegate = self
     }
-    
-    func registerCells() {
-        carsView.register(CarCell.self, forCellReuseIdentifier: CarCell.reuseIdentifier)
-    }
-    
+
     func updateCarsView() {
         switch carsViewUpdateType {
-        case .insertNewRow:
-            let rowsCount = presenter?.count ?? 0
-            let newRowIndex = rowsCount - 1
-            let rowIndexPath = IndexPath(row: newRowIndex, section: 0)
-            carsView.insertRows(at: [rowIndexPath], with: .automatic)
-        case .updateRow(let index):
-            let rowIndexPath = IndexPath(row: index, section: 0)
-
-            carsView.reloadRows(at: [rowIndexPath], with: .automatic)
-        case .deleteRow(let index):
-            let rowIndexPath = IndexPath(row: index, section: 0)
-            
-            carsView.deleteRows(at: [rowIndexPath], with: .automatic)
-        case .none:
-            break
+        case .insertNewRow: carsView.insertNewRow()
+        case .updateRow(let index): carsView.reloadRow(at: index)
+        case .deleteRow(let index): carsView.deleteRow(at: index)
+        case .none: break
         }
         
         carsViewUpdateType = .none
@@ -171,13 +168,13 @@ extension CarsViewController {
 // MARK: - CarDetailViewControllerDelegate
 
 extension CarsViewController: CarDetailViewControllerDelegate {
-    func carsViewControllerDelegate(_ viewController: CarDetailViewController, addNew car: Car) {
+    func carsViewControllerDelegate(_ anyObject: AnyObject, addNew car: Car) {
         presenter?.append(car: car)
         
         carsViewUpdateType = .insertNewRow
     }
     
-    func carsViewControllerDelegate(_ viewController: CarDetailViewController, edit car: Car) {
+    func carsViewControllerDelegate(_ anyObject: AnyObject, edit car: Car) {
         if let index = selectedIndexRow {
             presenter?.replace(at: index, with: car)
             
@@ -185,12 +182,20 @@ extension CarsViewController: CarDetailViewControllerDelegate {
         }
     }
     
-    func carsViewControllerDelegateDeleteCar(_ viewController: CarDetailViewController) {
+    func carsViewControllerDelegateDeleteCar(_ anyObject: AnyObject) {
         if let index = selectedIndexRow {
             presenter?.remove(at: index)
             
             carsViewUpdateType = .deleteRow(index: index)
         }
+    }
+}
+
+// MARK: - BodyPickerViewControllerDelegate
+
+extension CarsViewController: BodyPickerViewControllerDelegate {
+    func bodyPickerViewControllerDelegate(_ anyObject: AnyObject, didSelect body: Body?) {
+        presenter?.filter = body
     }
 }
 

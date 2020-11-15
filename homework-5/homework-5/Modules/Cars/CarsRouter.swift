@@ -7,30 +7,49 @@
 
 import UIKit
 
-final class CarsRouter: CarsRouterProtocol {
-    func openFilterView(from view: CarsViewProtocol, with body: Body?) {
-        let bodyPickerViewController = Assembly.createBodyPickerViewController(with: body)
-        
-        bodyPickerViewController.didSelectBody = { body in
-            view.setFilter(with: body)
-        }
-        
-        if let viewController = view as? UIViewController {
-            let navigationController = UINavigationController(rootViewController: bodyPickerViewController)
-            
-            viewController.present(navigationController, animated: true, completion: nil)
-        }
+protocol ICarsRouter: AnyObject {
+    func openFilterView(with body: Body?)
+    func openCarDetailView(with car: Car?)
+}
+
+extension ICarsRouter {
+    func openFilterView() {
+        openFilterView(with: nil)
     }
     
-    func openCarDetailView(from view: CarsViewProtocol, with car: Car?) {
-        let carDetailViewController = Assembly.createCarDetailViewController(with: car)
+    func openCarDetailView() {
+        openCarDetailView(with: nil)
+    }
+}
+
+final class CarsRouter {
+    private weak var viewController: CarsViewController?
+    
+    init(viewController: CarsViewController) {
+        self.viewController = viewController
+    }
+}
+
+// MARK: - ICarsRouter
+
+extension CarsRouter: ICarsRouter {
+    func openFilterView(with body: Body?) {
+        let bodyPickerViewController = BodyPickerAssembly.createBodyPickerViewController(
+            with: body,
+            delegate: viewController
+        )
         
-        if let viewController = view as? CarsViewController {
-            carDetailViewController.delegate = viewController
-        }
+        let navigationController = UINavigationController(rootViewController: bodyPickerViewController)
+    
+        viewController?.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func openCarDetailView(with car: Car?) {
+        let carDetailViewController = CarDetailAssembly.createCarDetailViewController(
+            with: car,
+            delegate: viewController
+        )
         
-        if let viewController = view as? UIViewController {
-            viewController.navigationController?.pushViewController(carDetailViewController, animated: true)
-        }
+        viewController?.navigationController?.pushViewController(carDetailViewController, animated: true)
     }
 }

@@ -7,17 +7,12 @@
 
 import UIKit
 
-final class BodyPickerViewController: UIViewController, BodyPickerViewProtocol {
+protocol IBodyPickerViewController: AnyObject {}
+
+final class BodyPickerViewController: UIViewController, IBodyPickerViewController  {
     // MARK: Properties
     
-    var presenter: BodyPickerPresenterProtocol?
-    
-    var selectedBody: Body? {
-        get { bodyPickerView.selectedBody }
-        set { bodyPickerView.selectedBody = newValue }
-    }
-    
-    var didSelectBody: BodySelectAction?
+    var presenter: IBodyPickerPresenter?
     
     private var bodyPickerView: BodyPickerView {
         guard let view = view as? BodyPickerView else {
@@ -36,7 +31,7 @@ final class BodyPickerViewController: UIViewController, BodyPickerViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBodySelectionAction()
+        presenter?.viewDidLoad(view: bodyPickerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +41,7 @@ final class BodyPickerViewController: UIViewController, BodyPickerViewProtocol {
     }
 }
 
-// MARK: - Buttons
+// MARK: - Button
 
 private extension BodyPickerViewController {
     func setupResetButton() {
@@ -61,22 +56,8 @@ private extension BodyPickerViewController {
             navigationItem.leftBarButtonItem = resetBarButtonItem
         }
     }
-}
-
-// MARK: - Actions
-
-private extension BodyPickerViewController {
-    func setupBodySelectionAction() {
-        bodyPickerView.didSelectBody = { [weak self] body in
-            self?.presenter?.didPressCloseButton()
-            
-            self?.didSelectBody?(body)
-        }
-    }
     
     @objc func didPressResetButton() {
-        presenter?.didPressCloseButton()
-        
-        didSelectBody?(nil)
+        presenter?.didPressResetButton()
     }
 }

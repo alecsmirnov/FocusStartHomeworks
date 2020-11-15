@@ -7,22 +7,34 @@
 
 import UIKit
 
-final class CarDetailRouter: CarDetailRouterProtocol {
-    func openBodyPickerView(from view: CarDetailViewProtocol, with body: Body?) {
-        let bodyPickerViewController = Assembly.createBodyPickerViewController(with: body)
-        
-        bodyPickerViewController.didSelectBody = { body in
-            view.setBody(body)
-        }
-        
-        if let viewController = view as? UIViewController {
+protocol ICarDetailRouter: AnyObject {
+    func openBodyPickerView(with body: Body?)
+    func closeCarDetailView()
+}
+
+final class CarDetailRouter {
+    private weak var viewController: CarDetailViewController?
+    
+    init(viewController: CarDetailViewController) {
+        self.viewController = viewController
+    }
+}
+
+// MARK: - ICarDetailRouter
+
+extension CarDetailRouter: ICarDetailRouter {
+    func openBodyPickerView(with body: Body?) {
+        if let viewController = viewController {
+            let bodyPickerViewController = BodyPickerAssembly.createBodyPickerViewController(
+                with: body,
+                delegate: viewController
+            )
+            
             viewController.navigationController?.pushViewController(bodyPickerViewController, animated: true)
         }
     }
     
-    func closeCarDetailView(_ view: CarDetailViewProtocol) {
-        if let viewController = view as? UIViewController {
-            viewController.navigationController?.popViewController(animated: true)
-        }
+    func closeCarDetailView() {
+        viewController?.navigationController?.popViewController(animated: true)
     }
 }

@@ -7,17 +7,12 @@
 
 import UIKit
 
-final class CarDetailViewController: UIViewController, CarDetailViewProtocol {
+protocol ICarDetailViewController: AnyObject {}
+
+final class CarDetailViewController: UIViewController, ICarDetailViewController {
     // MARK: Properties
     
-    weak var delegate: CarDetailViewControllerDelegate?
-    
-    var presenter: CarDetailPresenterProtocol?
-    
-    var carToEdit: Car? {
-        get { carDetailView.getCarToEdit() }
-        set { carDetailView.setCarToEdit(car: newValue) }
-    }
+    var presenter: ICarDetailPresenter?
     
     private var carDetailView: CarDetailView {
         guard let view = view as? CarDetailView else {
@@ -38,21 +33,13 @@ final class CarDetailViewController: UIViewController, CarDetailViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBodySelectionAction()
+        presenter?.viewDidLoad(view: carDetailView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupButtons()
-    }
-}
-
-// MARK: - Public Methods
-
-extension CarDetailViewController {
-    func setBody(_ body: Body?) {
-        carDetailView.body = body
     }
 }
 
@@ -75,7 +62,7 @@ private extension CarDetailViewController {
 private extension CarDetailViewController {
     func setupButtons() {
         if !isLoaded {
-            carToEdit != nil ? setupEditButtons() : setupAddButton()
+            carDetailView.getCarToEdit() != nil ? setupEditButtons() : setupAddButton()
             
             isLoaded = true
         }
@@ -114,31 +101,31 @@ private extension CarDetailViewController {
 // MARK: - Actions
 
 private extension CarDetailViewController {
-    func setupBodySelectionAction() {
-        carDetailView.didSelectBody = { [weak self] body in
-            self?.presenter?.didPressBodyButton(with: body)
+    @objc func didPressAddButton() {
+        if let car = carDetailView.getCarToEdit() {
+            presenter?.didPressAddButton(with: car)
+        } else {
+            showAlertMessage()
         }
     }
     
-    @objc func didPressAddButton() {
-        guard let car = carDetailView.getCarToEdit() else { showAlertMessage(); return }
-    
-        delegate?.carsViewControllerDelegate(self, addNew: car)
-        
-        presenter?.didPressCloseButton()
-    }
-    
     @objc func didPressEditButton() {
-        guard let car = carDetailView.getCarToEdit() else { showAlertMessage(); return }
-        
-        delegate?.carsViewControllerDelegate(self, edit: car)
-        
-        presenter?.didPressCloseButton()
+        if let car = carDetailView.getCarToEdit() {
+            presenter?.didPressEditButton(with: car)
+        } else {
+            showAlertMessage()
+        }
     }
     
     @objc func didPressDeleteButton() {
-        delegate?.carsViewControllerDelegateDeleteCar(self)
-        
-        presenter?.didPressCloseButton()
+        presenter?.didPressDeleteButton()
+    }
+}
+
+// MARK: - BodyPickerViewControllerDelegate
+
+extension CarDetailViewController: BodyPickerViewControllerDelegate {
+    func bodyPickerViewControllerDelegate(_ anyObject: AnyObject, didSelect body: Body?) {
+        carDetailView.setBody(body)
     }
 }
