@@ -6,16 +6,14 @@
 //
 
 final class BodyPickerPresenter: BodyPickerPresenterProtocol {
-    weak var viewController: BodyPickerViewControllerProtocol?
-    
-    var interactor: BodyPickerInteractorProtocol?
+    weak var view: BodyPickerViewProtocol?
     var router: BodyPickerRouterProtocol?
 }
 
 extension BodyPickerPresenter {
     func didPressCloseButton() {
-        if let viewController = viewController {
-            router?.closeBodyPickerViewController(viewController)
+        if let view = view {
+            router?.closeBodyPickerView(view)
         }
     }
 }

@@ -6,22 +6,20 @@
 //
 
 final class CarDetailPresenter: CarDetailPresenterProtocol {
-    weak var viewController: CarDetailViewControllerProtocol?
-    
-    var interactor: CarDetailInteractorProtocol?
+    weak var view: CarDetailViewProtocol?
     var router: CarDetailRouterProtocol?
 }
 
 extension CarDetailPresenter {
     func didPressBodyButton(with body: Body?) {
-        if let viewController = viewController {
-            router?.openBodyPickerViewController(from: viewController, with: body)
+        if let view = view {
+            router?.openBodyPickerView(from: view, with: body)
         }
     }
     
     func didPressCloseButton() {
-        if let viewController = viewController {
-            router?.closeCarDetailViewController(viewController)
+        if let view = view {
+            router?.closeCarDetailView(view)
         }
     }
 }

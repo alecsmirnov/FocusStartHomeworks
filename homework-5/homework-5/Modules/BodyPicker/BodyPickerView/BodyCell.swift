@@ -11,12 +11,12 @@ class BodyCell: UITableViewCell {
     // MARK: Properties
     
     var body: Body? {
-        get { getBody() }
-        set { setBody(newValue) }
+        get { Body(rawValue: bodyLabel.text ?? "") }
+        set { bodyLabel.text = newValue?.rawValue }
     }
     
     var checked = false {
-        didSet { toggleCheckMark() }
+        didSet { accessoryType = checked ? .checkmark : .none }
     }
     
     static let reuseIdentifier = String(describing: self)
@@ -40,22 +40,6 @@ class BodyCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: - Private Methods
-
-private extension BodyCell {
-    func toggleCheckMark() {
-        accessoryType = checked ? .checkmark : .none
-    }
-    
-    func getBody() -> Body? {
-        return Body(rawValue: bodyLabel.text ?? "")
-    }
-    
-    func setBody(_ body: Body?) {
-        bodyLabel.text = body?.rawValue
     }
 }
 

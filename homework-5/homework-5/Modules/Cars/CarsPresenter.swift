@@ -6,8 +6,7 @@
 //
 
 final class CarsPresenter: CarsPresenterProtocol {
-    weak var viewController: CarsViewControllerProtocol?
-    
+    weak var view: CarsViewProtocol?
     var interactor: CarsInteractorProtocol?
     var router: CarsRouterProtocol?
 }
@@ -20,7 +19,9 @@ extension CarsPresenter {
     var count: Int {
         return interactor?.count ?? 0
     }
-    
+}
+
+extension CarsPresenter {
     func append(car: Car) {
         interactor?.append(car: car)
     }
@@ -44,22 +45,24 @@ extension CarsPresenter {
             interactor?.filterReset()
         }
     }
-    
+}
+
+extension CarsPresenter {
     func didPressFilterButton(with body: Body?) {
-        if let viewController = viewController {
-            router?.openFilterViewController(from: viewController, with: body)
+        if let view = view {
+            router?.openFilterView(from: view, with: body)
         }
     }
     
     func didPressAddButton() {
-        if let viewController = viewController {
-            router?.openCarDetailViewController(from: viewController)
+        if let view = view {
+            router?.openCarDetailView(from: view)
         }
     }
     
     func didSelectRow(with car: Car) {
-        if let viewController = viewController {
-            router?.openCarDetailViewController(from: viewController, with: car)
+        if let view = view {
+            router?.openCarDetailView(from: view, with: car)
         }
     }
 }

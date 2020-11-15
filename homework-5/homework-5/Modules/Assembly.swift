@@ -9,59 +9,51 @@ import UIKit
 
 enum Assembly {
     static func createCarsNavigationController() -> UINavigationController {
-        let carsViewController = CarsViewController()
-        let carsNavigationController = UINavigationController(rootViewController: carsViewController)
+        let view = CarsViewController()
+        let navigationController = UINavigationController(rootViewController: view)
         
         let interactor = CarsInteractor()
         let presenter = CarsPresenter()
         let router = CarsRouter()
         
-        carsViewController.presenter = presenter
+        view.presenter = presenter
         
         interactor.presenter = presenter
         
-        presenter.viewController = carsViewController
+        presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
          
-        return carsNavigationController
+        return navigationController
     }
     
     static func createCarDetailViewController(with car: Car?) -> UIViewController {
-        let carDetailViewController = CarDetailViewController()
+        let view = CarDetailViewController()
         
-        let interactor = CarDetailInteractor()
         let presenter = CarDetailPresenter()
         let router = CarDetailRouter()
         
-        carDetailViewController.presenter = presenter
-        carDetailViewController.carToEdit = car
+        view.presenter = presenter
+        view.carToEdit = car
         
-        interactor.presenter = presenter
-        
-        presenter.viewController = carDetailViewController
-        presenter.interactor = interactor
+        presenter.view = view
         presenter.router = router
          
-        return carDetailViewController
+        return view
     }
     
     static func createBodyPickerViewController(with body: Body?) -> UIViewController {
-        let bodyPickerViewController = BodyPickerViewController()
+        let view = BodyPickerViewController()
         
-        let interactor = BodyPickerInteractor()
         let presenter = BodyPickerPresenter()
         let router = BodyPickerRouter()
         
-        bodyPickerViewController.presenter = presenter
-        bodyPickerViewController.selectedBody = body
+        view.presenter = presenter
+        view.selectedBody = body
         
-        interactor.presenter = presenter
-        
-        presenter.viewController = bodyPickerViewController
-        presenter.interactor = interactor
+        presenter.view = view
         presenter.router = router
          
-        return bodyPickerViewController
+        return view
     }
 }

@@ -1,12 +1,10 @@
 //
-//  CarsViewControllerProtocol.swift
+//  CarsViewProtocol.swift
 //  homework-5
 //
 //  Created by Admin on 13.11.2020.
 //
 
-protocol CarsViewControllerProtocol: AnyObject {   
-    var filter: Body? { get set }
-    
-    init(presenter: CarsPresenterProtocol)
+protocol CarsViewProtocol: AnyObject {    
+    func setFilter(with body: Body?)
 }

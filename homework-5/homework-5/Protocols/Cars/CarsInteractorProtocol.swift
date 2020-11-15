@@ -6,8 +6,6 @@
 //
 
 protocol CarsInteractorProtocol: AnyObject {
-    var presenter: CarsPresenterProtocol? { get set }
-    
     var isEmpty: Bool { get }
     var count: Int { get }
     

@@ -6,16 +6,16 @@
 //
 
 protocol CarsRouterProtocol: AnyObject {    
-    func openFilterViewController(from viewController: CarsViewControllerProtocol, with body: Body?)
-    func openCarDetailViewController(from viewController: CarsViewControllerProtocol, with car: Car?)
+    func openFilterView(from view: CarsViewProtocol, with body: Body?)
+    func openCarDetailView(from view: CarsViewProtocol, with car: Car?)
 }
 
 extension CarsRouterProtocol {
-    func openFilterViewController(from viewController: CarsViewControllerProtocol) {
-        openFilterViewController(from: viewController, with: nil)
+    func openFilterView(from view: CarsViewProtocol) {
+        openFilterView(from: view, with: nil)
     }
     
-    func openCarDetailViewController(from viewController: CarsViewControllerProtocol) {
-        openCarDetailViewController(from: viewController, with: nil)
+    func openCarDetailView(from view: CarsViewProtocol) {
+        openCarDetailView(from: view, with: nil)
     }
 }

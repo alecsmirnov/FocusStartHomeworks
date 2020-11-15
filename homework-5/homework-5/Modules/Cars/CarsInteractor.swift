@@ -19,7 +19,9 @@ extension CarsInteractor {
     var count: Int {
         data.count
     }
-    
+}
+
+extension CarsInteractor {
     func append(car: Car) {
         data.append(car: car)
     }

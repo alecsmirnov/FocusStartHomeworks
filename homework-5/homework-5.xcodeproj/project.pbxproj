@@ -26,28 +26,19 @@
 		8458407E255D522100B7833A /* CarsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458407D255D522100B7833A /* CarsInteractor.swift */; };
 		84584081255D545900B7833A /* CarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84584080255D545900B7833A /* CarsPresenter.swift */; };
 		84584084255D546C00B7833A /* CarsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84584083255D546B00B7833A /* CarsRouter.swift */; };
-		84584099255D95B400B7833A /* CarDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84584098255D95B400B7833A /* CarDetailInteractor.swift */; };
 		8458409C255D95C300B7833A /* CarDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458409B255D95C300B7833A /* CarDetailPresenter.swift */; };
 		8458409F255D95CF00B7833A /* CarDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458409E255D95CF00B7833A /* CarDetailRouter.swift */; };
-		845840A2255D963300B7833A /* BodyPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845840A1255D963300B7833A /* BodyPickerInteractor.swift */; };
 		845840A5255D964C00B7833A /* BodyPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845840A4255D964C00B7833A /* BodyPickerPresenter.swift */; };
 		845840A8255D965800B7833A /* BodyPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845840A7255D965800B7833A /* BodyPickerRouter.swift */; };
-		845BE4D6255E96D700CA38E9 /* CarDetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4D5255E96D700CA38E9 /* CarDetailViewProtocol.swift */; };
-		845BE4DA255E978000CA38E9 /* CarDetailViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4D9255E978000CA38E9 /* CarDetailViewControllerProtocol.swift */; };
-		845BE4DF255E988900CA38E9 /* CarDetailInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4DE255E988900CA38E9 /* CarDetailInteractorProtocol.swift */; };
+		845BE4DA255E978000CA38E9 /* CarDetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4D9255E978000CA38E9 /* CarDetailViewProtocol.swift */; };
 		845BE4E2255E98AA00CA38E9 /* CarDetailPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4E1255E98AA00CA38E9 /* CarDetailPresenterProtocol.swift */; };
 		845BE4E5255E991B00CA38E9 /* CarDetailRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4E4255E991B00CA38E9 /* CarDetailRouterProtocol.swift */; };
 		845BE4F5255E9BAF00CA38E9 /* CarsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4EF255E9BAF00CA38E9 /* CarsPresenterProtocol.swift */; };
-		845BE4F6255E9BAF00CA38E9 /* CarCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4F0255E9BAF00CA38E9 /* CarCellProtocol.swift */; };
 		845BE4F7255E9BAF00CA38E9 /* CarsInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4F1255E9BAF00CA38E9 /* CarsInteractorProtocol.swift */; };
-		845BE4F8255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4F2255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift */; };
+		845BE4F8255E9BAF00CA38E9 /* CarsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4F2255E9BAF00CA38E9 /* CarsViewProtocol.swift */; };
 		845BE4F9255E9BAF00CA38E9 /* CarsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4F3255E9BAF00CA38E9 /* CarsRouterProtocol.swift */; };
-		845BE4FA255E9BAF00CA38E9 /* CarsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4F4255E9BAF00CA38E9 /* CarsViewProtocol.swift */; };
-		845BE503255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4FD255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift */; };
+		845BE503255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4FD255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */; };
 		845BE504255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4FE255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift */; };
-		845BE505255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE4FF255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift */; };
-		845BE506255E9BBB00CA38E9 /* BodyCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE500255E9BBB00CA38E9 /* BodyCellProtocol.swift */; };
-		845BE507255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE501255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */; };
 		845BE508255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE502255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift */; };
 		845BE50D255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */; };
 		845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */; };
@@ -78,28 +69,19 @@
 		8458407D255D522100B7833A /* CarsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsInteractor.swift; sourceTree = "<group>"; };
 		84584080255D545900B7833A /* CarsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsPresenter.swift; sourceTree = "<group>"; };
 		84584083255D546B00B7833A /* CarsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsRouter.swift; sourceTree = "<group>"; };
-		84584098255D95B400B7833A /* CarDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailInteractor.swift; sourceTree = "<group>"; };
 		8458409B255D95C300B7833A /* CarDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailPresenter.swift; sourceTree = "<group>"; };
 		8458409E255D95CF00B7833A /* CarDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailRouter.swift; sourceTree = "<group>"; };
-		845840A1255D963300B7833A /* BodyPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerInteractor.swift; sourceTree = "<group>"; };
 		845840A4255D964C00B7833A /* BodyPickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerPresenter.swift; sourceTree = "<group>"; };
 		845840A7255D965800B7833A /* BodyPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerRouter.swift; sourceTree = "<group>"; };
-		845BE4D5255E96D700CA38E9 /* CarDetailViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewProtocol.swift; sourceTree = "<group>"; };
-		845BE4D9255E978000CA38E9 /* CarDetailViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewControllerProtocol.swift; sourceTree = "<group>"; };
-		845BE4DE255E988900CA38E9 /* CarDetailInteractorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailInteractorProtocol.swift; sourceTree = "<group>"; };
+		845BE4D9255E978000CA38E9 /* CarDetailViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewProtocol.swift; sourceTree = "<group>"; };
 		845BE4E1255E98AA00CA38E9 /* CarDetailPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailPresenterProtocol.swift; sourceTree = "<group>"; };
 		845BE4E4255E991B00CA38E9 /* CarDetailRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailRouterProtocol.swift; sourceTree = "<group>"; };
 		845BE4EF255E9BAF00CA38E9 /* CarsPresenterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsPresenterProtocol.swift; sourceTree = "<group>"; };
-		845BE4F0255E9BAF00CA38E9 /* CarCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarCellProtocol.swift; sourceTree = "<group>"; };
 		845BE4F1255E9BAF00CA38E9 /* CarsInteractorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsInteractorProtocol.swift; sourceTree = "<group>"; };
-		845BE4F2255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsViewControllerProtocol.swift; sourceTree = "<group>"; };
+		845BE4F2255E9BAF00CA38E9 /* CarsViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsViewProtocol.swift; sourceTree = "<group>"; };
 		845BE4F3255E9BAF00CA38E9 /* CarsRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsRouterProtocol.swift; sourceTree = "<group>"; };
-		845BE4F4255E9BAF00CA38E9 /* CarsViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsViewProtocol.swift; sourceTree = "<group>"; };
-		845BE4FD255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerViewControllerProtocol.swift; sourceTree = "<group>"; };
+		845BE4FD255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerViewProtocol.swift; sourceTree = "<group>"; };
 		845BE4FE255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerPresenterProtocol.swift; sourceTree = "<group>"; };
-		845BE4FF255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerInteractorProtocol.swift; sourceTree = "<group>"; };
-		845BE500255E9BBB00CA38E9 /* BodyCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyCellProtocol.swift; sourceTree = "<group>"; };
-		845BE501255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerViewProtocol.swift; sourceTree = "<group>"; };
 		845BE502255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPickerRouterProtocol.swift; sourceTree = "<group>"; };
 		845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
 		845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "homework-5.xcdatamodel"; sourceTree = "<group>"; };
@@ -185,9 +167,7 @@
 		84584071255D44C400B7833A /* Cars */ = {
 			isa = PBXGroup;
 			children = (
-				84548CBA255C1ABA000439CD /* CarCell.swift */,
-				84548C9A255BC7F1000439CD /* CarsView.swift */,
-				84548C84255BC53C000439CD /* CarsViewController.swift */,
+				8460171F25610C9D007B8EF7 /* CarsView */,
 				8458407D255D522100B7833A /* CarsInteractor.swift */,
 				84584080255D545900B7833A /* CarsPresenter.swift */,
 				84584083255D546B00B7833A /* CarsRouter.swift */,
@@ -198,9 +178,7 @@
 		84584072255D44CC00B7833A /* CarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				84548CA2255BCE9D000439CD /* CarDetailView.swift */,
-				84548C9E255BCE80000439CD /* CarDetailViewController.swift */,
-				84584098255D95B400B7833A /* CarDetailInteractor.swift */,
+				8460172025610CBA007B8EF7 /* CarDetailView */,
 				8458409B255D95C300B7833A /* CarDetailPresenter.swift */,
 				8458409E255D95CF00B7833A /* CarDetailRouter.swift */,
 			);
@@ -210,10 +188,7 @@
 		84584073255D44D600B7833A /* BodyPicker */ = {
 			isa = PBXGroup;
 			children = (
-				84548CC3255C3048000439CD /* BodyCell.swift */,
-				84548CC0255C1B3B000439CD /* BodyPickerView.swift */,
-				84548CBD255C1B22000439CD /* BodyPickerViewController.swift */,
-				845840A1255D963300B7833A /* BodyPickerInteractor.swift */,
+				8460172125610CCD007B8EF7 /* BodyPickerView */,
 				845840A4255D964C00B7833A /* BodyPickerPresenter.swift */,
 				845840A7255D965800B7833A /* BodyPickerRouter.swift */,
 			);
@@ -241,9 +216,7 @@
 		845BE4A9255E92D100CA38E9 /* CarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				845BE4D5255E96D700CA38E9 /* CarDetailViewProtocol.swift */,
-				845BE4D9255E978000CA38E9 /* CarDetailViewControllerProtocol.swift */,
-				845BE4DE255E988900CA38E9 /* CarDetailInteractorProtocol.swift */,
+				845BE4D9255E978000CA38E9 /* CarDetailViewProtocol.swift */,
 				845BE4E1255E98AA00CA38E9 /* CarDetailPresenterProtocol.swift */,
 				845BE4E4255E991B00CA38E9 /* CarDetailRouterProtocol.swift */,
 			);
@@ -253,9 +226,7 @@
 		845BE4EE255E9BAF00CA38E9 /* Cars */ = {
 			isa = PBXGroup;
 			children = (
-				845BE4F0255E9BAF00CA38E9 /* CarCellProtocol.swift */,
-				845BE4F4255E9BAF00CA38E9 /* CarsViewProtocol.swift */,
-				845BE4F2255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift */,
+				845BE4F2255E9BAF00CA38E9 /* CarsViewProtocol.swift */,
 				845BE4F1255E9BAF00CA38E9 /* CarsInteractorProtocol.swift */,
 				845BE4EF255E9BAF00CA38E9 /* CarsPresenterProtocol.swift */,
 				845BE4F3255E9BAF00CA38E9 /* CarsRouterProtocol.swift */,
@@ -266,10 +237,7 @@
 		845BE4FC255E9BBB00CA38E9 /* BodyPicker */ = {
 			isa = PBXGroup;
 			children = (
-				845BE500255E9BBB00CA38E9 /* BodyCellProtocol.swift */,
-				845BE501255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */,
-				845BE4FD255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift */,
-				845BE4FF255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift */,
+				845BE4FD255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift */,
 				845BE4FE255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift */,
 				845BE502255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift */,
 			);
@@ -292,6 +260,35 @@
 				845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		8460171F25610C9D007B8EF7 /* CarsView */ = {
+			isa = PBXGroup;
+			children = (
+				84548CBA255C1ABA000439CD /* CarCell.swift */,
+				84548C9A255BC7F1000439CD /* CarsView.swift */,
+				84548C84255BC53C000439CD /* CarsViewController.swift */,
+			);
+			path = CarsView;
+			sourceTree = "<group>";
+		};
+		8460172025610CBA007B8EF7 /* CarDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				84548CA2255BCE9D000439CD /* CarDetailView.swift */,
+				84548C9E255BCE80000439CD /* CarDetailViewController.swift */,
+			);
+			path = CarDetailView;
+			sourceTree = "<group>";
+		};
+		8460172125610CCD007B8EF7 /* BodyPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				84548CC3255C3048000439CD /* BodyCell.swift */,
+				84548CC0255C1B3B000439CD /* BodyPickerView.swift */,
+				84548CBD255C1B22000439CD /* BodyPickerViewController.swift */,
+			);
+			path = BodyPickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,22 +362,16 @@
 			files = (
 				84548C85255BC53C000439CD /* CarsViewController.swift in Sources */,
 				845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */,
-				845BE4D6255E96D700CA38E9 /* CarDetailViewProtocol.swift in Sources */,
 				84548C9B255BC7F1000439CD /* CarsView.swift in Sources */,
 				8458409F255D95CF00B7833A /* CarDetailRouter.swift in Sources */,
 				845BE50D255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift in Sources */,
 				8458407E255D522100B7833A /* CarsInteractor.swift in Sources */,
-				845BE506255E9BBB00CA38E9 /* BodyCellProtocol.swift in Sources */,
 				84548C81255BC53C000439CD /* AppDelegate.swift in Sources */,
-				845BE4F6255E9BAF00CA38E9 /* CarCellProtocol.swift in Sources */,
-				845BE505255E9BBB00CA38E9 /* BodyPickerInteractorProtocol.swift in Sources */,
-				845BE4FA255E9BAF00CA38E9 /* CarsViewProtocol.swift in Sources */,
-				84584099255D95B400B7833A /* CarDetailInteractor.swift in Sources */,
 				845BE4E5255E991B00CA38E9 /* CarDetailRouterProtocol.swift in Sources */,
 				84548CB1255BF291000439CD /* Body.swift in Sources */,
-				845BE4F8255E9BAF00CA38E9 /* CarsViewControllerProtocol.swift in Sources */,
+				845BE4F8255E9BAF00CA38E9 /* CarsViewProtocol.swift in Sources */,
 				84584081255D545900B7833A /* CarsPresenter.swift in Sources */,
-				845BE4DA255E978000CA38E9 /* CarDetailViewControllerProtocol.swift in Sources */,
+				845BE4DA255E978000CA38E9 /* CarDetailViewProtocol.swift in Sources */,
 				845BE508255E9BBB00CA38E9 /* BodyPickerRouterProtocol.swift in Sources */,
 				845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */,
 				845BE504255E9BBB00CA38E9 /* BodyPickerPresenterProtocol.swift in Sources */,
@@ -395,14 +386,11 @@
 				845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */,
 				84548CC1255C1B3B000439CD /* BodyPickerView.swift in Sources */,
 				84E8D1D0255FFBBB00048A9C /* Assembly.swift in Sources */,
-				845840A2255D963300B7833A /* BodyPickerInteractor.swift in Sources */,
 				84548CBE255C1B22000439CD /* BodyPickerViewController.swift in Sources */,
 				8458409C255D95C300B7833A /* CarDetailPresenter.swift in Sources */,
-				845BE507255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift in Sources */,
 				84548CB0255BF291000439CD /* Car.swift in Sources */,
 				845840A8255D965800B7833A /* BodyPickerRouter.swift in Sources */,
-				845BE503255E9BBB00CA38E9 /* BodyPickerViewControllerProtocol.swift in Sources */,
-				845BE4DF255E988900CA38E9 /* CarDetailInteractorProtocol.swift in Sources */,
+				845BE503255E9BBB00CA38E9 /* BodyPickerViewProtocol.swift in Sources */,
 				84548C9F255BCE80000439CD /* CarDetailViewController.swift in Sources */,
 				84548CB6255BFC5D000439CD /* Completions.swift in Sources */,
 				845840A5255D964C00B7833A /* BodyPickerPresenter.swift in Sources */,

@@ -6,6 +6,6 @@
 //
 
 protocol CarDetailRouterProtocol: AnyObject {    
-    func openBodyPickerViewController(from viewController: CarDetailViewControllerProtocol, with body: Body?)
-    func closeCarDetailViewController(_ viewController: CarDetailViewControllerProtocol)
+    func openBodyPickerView(from view: CarDetailViewProtocol, with body: Body?)
+    func closeCarDetailView(_ view: CarDetailViewProtocol)
 }

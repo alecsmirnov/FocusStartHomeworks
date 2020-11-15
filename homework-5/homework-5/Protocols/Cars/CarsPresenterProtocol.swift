@@ -5,11 +5,7 @@
 //  Created by Admin on 13.11.2020.
 //
 
-protocol CarsPresenterProtocol: AnyObject {
-    var viewController: CarsViewControllerProtocol? { get set }
-    var interactor: CarsInteractorProtocol? { get set }
-    var router: CarsRouterProtocol? { get set }
-    
+protocol CarsPresenterProtocol: AnyObject {    
     var isEmpty: Bool { get }
     var count: Int { get }
     
