@@ -7,5 +7,6 @@
 
 protocol CarDetailViewProtocol: AnyObject {
     var carToEdit: Car? { get set }
-    var bodyToReceive: Body? { get set }
+    
+    func setBody(_ body: Body?)
 }

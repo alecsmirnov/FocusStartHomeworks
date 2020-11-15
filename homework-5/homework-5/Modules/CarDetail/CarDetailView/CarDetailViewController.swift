@@ -19,11 +19,6 @@ final class CarDetailViewController: UIViewController, CarDetailViewProtocol {
         set { carDetailView.setCarToEdit(car: newValue) }
     }
     
-    var bodyToReceive: Body? {
-        get { carDetailView.bodyToReceive }
-        set { carDetailView.bodyToReceive = newValue }
-    }
-    
     private var carDetailView: CarDetailView {
         guard let view = view as? CarDetailView else {
             fatalError("view is not a CarDetailView instance")
@@ -50,6 +45,14 @@ final class CarDetailViewController: UIViewController, CarDetailViewProtocol {
         super.viewWillAppear(animated)
         
         setupButtons()
+    }
+}
+
+// MARK: - Public Methods
+
+extension CarDetailViewController {
+    func setBody(_ body: Body?) {
+        carDetailView.body = body
     }
 }
 

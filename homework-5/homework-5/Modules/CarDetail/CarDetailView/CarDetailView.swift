@@ -10,7 +10,7 @@ import UIKit
 final class CarDetailView: UIView {
     // MARK: Public Properties
     
-    var bodyToReceive: Body? {
+    var body: Body? {
         get { Body(rawValue: bodyLabel.text ?? "") }
         set { bodyLabel.text = newValue?.rawValue }
     }

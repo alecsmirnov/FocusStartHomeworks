@@ -13,7 +13,7 @@ final class CarDetailRouter: CarDetailRouterProtocol {
         
         if let bodyPickerView = bodyPickerViewController as? BodyPickerViewProtocol {
             bodyPickerView.didSelectBody = { body in
-                view.bodyToReceive = body
+                view.setBody(body)
             }
         }
         
