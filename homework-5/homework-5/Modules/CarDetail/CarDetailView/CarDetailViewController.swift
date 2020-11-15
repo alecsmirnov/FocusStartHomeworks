@@ -7,15 +7,16 @@
 
 import UIKit
 
-final class CarDetailViewController: UIViewController, CarDetailViewControllerProtocol {
+final class CarDetailViewController: UIViewController, CarDetailViewProtocol {
     // MARK: Properties
     
-    weak var presenter: CarDetailPresenterProtocol?
     weak var delegate: CarDetailViewControllerDelegate?
     
+    var presenter: CarDetailPresenterProtocol?
+    
     var carToEdit: Car? {
-        get { carDetailView.carToEdit }
-        set { carDetailView.carToEdit = newValue }
+        get { carDetailView.getCarToEdit() }
+        set { carDetailView.setCarToEdit(car: newValue) }
     }
     
     var bodyToReceive: Body? {
@@ -23,7 +24,7 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
         set { carDetailView.bodyToReceive = newValue }
     }
     
-    private var carDetailView: CarDetailViewProtocol {
+    private var carDetailView: CarDetailView {
         guard let view = view as? CarDetailView else {
             fatalError("view is not a CarDetailView instance")
         }
@@ -55,10 +56,6 @@ final class CarDetailViewController: UIViewController, CarDetailViewControllerPr
 // MARK: - Private Methods
 
 private extension CarDetailViewController {
-    func getUserInput() -> Car? {
-        return carDetailView.carToEdit
-    }
-    
     private func showAlertMessage() {
         let title = "Required fields are empty!"
         let message = "Please fill in the fields:\nManufacturer, Model, Body"
@@ -121,7 +118,7 @@ private extension CarDetailViewController {
     }
     
     @objc func didPressAddButton() {
-        guard let car = getUserInput() else { showAlertMessage(); return }
+        guard let car = carDetailView.getCarToEdit() else { showAlertMessage(); return }
     
         delegate?.carsViewControllerDelegate(self, addNew: car)
         
@@ -129,7 +126,7 @@ private extension CarDetailViewController {
     }
     
     @objc func didPressEditButton() {
-        guard let car = getUserInput() else { showAlertMessage(); return }
+        guard let car = carDetailView.getCarToEdit() else { showAlertMessage(); return }
         
         delegate?.carsViewControllerDelegate(self, edit: car)
         

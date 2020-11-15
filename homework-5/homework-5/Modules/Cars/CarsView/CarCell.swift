@@ -41,9 +41,9 @@ final class CarCell: UITableViewCell {
     }
 }
 
-// MARK: - CarCellProtocol
+// MARK: - Public Methods
 
-extension CarCell: CarCellProtocol {
+extension CarCell {
     func configure(with car: Car) {
         manufacturerModelLabel.text = "\(car.manufacturer) \(car.model)"
         bodyLabel.text = car.body.rawValue

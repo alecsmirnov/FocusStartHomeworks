@@ -7,14 +7,10 @@
 
 import UIKit
 
-final class CarsViewController: UIViewController, CarsViewControllerProtocol {
+final class CarsViewController: UIViewController, CarsViewProtocol {
     // MARK: Properties
     
-    weak var presenter: CarsPresenterProtocol?
-    
-    var filter: Body? {
-        didSet { applyFilter(with: filter) }
-    }
+    var presenter: CarsPresenterProtocol?
     
     private enum FilterSettings {
         static let title = "Filter"
@@ -28,7 +24,7 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
         case none
     }
     
-    private var carsView: CarsViewProtocol {
+    private var carsView: CarsView {
         guard let view = view as? CarsView else {
             fatalError("view is not a CarsView instance")
         }
@@ -59,9 +55,23 @@ final class CarsViewController: UIViewController, CarsViewControllerProtocol {
     }
 }
 
-// MARK: - CarsView
+// MARK: - Public Methods
 
 extension CarsViewController {
+    func setFilter(with body: Body?) {
+        presenter?.setFilter(by: body)
+        
+        setFilterStatus(body: body)
+        
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.carsView.reloadData()
+        }, completion: nil)
+    }
+}
+
+// MARK: - CarsView
+
+private extension CarsViewController {
     func setupCarsView() {
         carsView.dataSource = self
         carsView.delegate = self
@@ -73,7 +83,7 @@ extension CarsViewController {
         carsView.register(CarCell.self, forCellReuseIdentifier: CarCell.reuseIdentifier)
     }
     
-    private func updateCarsView() {
+    func updateCarsView() {
         switch carsViewUpdateType {
         case .insertNewRow:
             let rowsCount = presenter?.count ?? 0
@@ -132,37 +142,29 @@ private extension CarsViewController {
         
         navigationItem.rightBarButtonItem = addBarButtonItem
     }
+    
+    func setFilterStatus(body: Body?) {
+        if let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last {
+            filterStatusBarButtonItem.title = body?.rawValue ?? FilterSettings.defaultStatus
+        }
+    }
+    
+    func getFilterStatus() -> Body? {
+        guard let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last else { return nil }
+        
+        return Body(rawValue: filterStatusBarButtonItem.title ?? "")
+    }
 }
 
 // MARK: - Actions
 
 extension CarsViewController {
     @objc func didPressFilterButton() {
-        presenter?.didPressFilterButton(with: filter)
+        presenter?.didPressFilterButton(with: getFilterStatus())
     }
     
     @objc func didPressAddButton() {
         presenter?.didPressAddButton()
-    }
-}
-
-// MARK: - Filter
-
-private extension CarsViewController {
-    func applyFilter(with body: Body?) {        
-        presenter?.setFilter(by: body)
-        
-        setFilterTitle(with: body)
-        
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-            self.carsView.reloadData()
-        }, completion: nil)
-    }
-    
-    func setFilterTitle(with body: Body?) {
-        if let filterStatusBarButtonItem = navigationItem.leftBarButtonItems?.last {
-            filterStatusBarButtonItem.title = body?.rawValue ?? FilterSettings.defaultStatus
-        }
     }
 }
 

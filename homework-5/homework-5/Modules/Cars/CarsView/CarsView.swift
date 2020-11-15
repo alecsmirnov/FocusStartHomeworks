@@ -26,9 +26,9 @@ final class CarsView: UIView {
     }
 }
 
-// MARK: - CarsViewProtocol
+// MARK: - Public Methods
 
-extension CarsView: CarsViewProtocol {
+extension CarsView {
     var dataSource: UITableViewDataSource? {
         get { tableView.dataSource }
         set { tableView.dataSource = newValue }

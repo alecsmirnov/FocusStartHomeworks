@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BodyPickerView: UIView, BodyPickerViewProtocol {
+final class BodyPickerView: UIView {
     // MARK: Properties
     
     var selectedBody: Body?

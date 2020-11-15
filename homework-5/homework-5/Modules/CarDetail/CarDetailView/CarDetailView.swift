@@ -7,17 +7,12 @@
 
 import UIKit
 
-final class CarDetailView: UIView, CarDetailViewProtocol {
+final class CarDetailView: UIView {
     // MARK: Public Properties
     
-    var carToEdit: Car? {
-        get { getCarToEdit() }
-        set { setCarToEdit(car: newValue) }
-    }
-    
     var bodyToReceive: Body? {
-        get { getBodyToReceive() }
-        set { setBodyToReceive(body: newValue) }
+        get { Body(rawValue: bodyLabel.text ?? "") }
+        set { bodyLabel.text = newValue?.rawValue }
     }
     
     var didSelectBody: BodySelectAction?
@@ -96,9 +91,9 @@ final class CarDetailView: UIView, CarDetailViewProtocol {
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Public Methods
 
-private extension CarDetailView {
+extension CarDetailView {
     func getCarToEdit() -> Car? {
         guard let manufacturer = manufacturerTextField.text, !manufacturer.isEmpty,
               let model = modelTextField.text, !model.isEmpty,
@@ -126,14 +121,6 @@ private extension CarDetailView {
             yearOfIssueTextField.text = car.yearOfIssue?.description
             carNumberTextField.text = car.carNumber?.description
         }
-    }
-    
-    func getBodyToReceive() -> Body? {
-        return Body(rawValue: bodyLabel.text ?? "")
-    }
-    
-    func setBodyToReceive(body: Body?) {
-        bodyLabel.text = body?.rawValue
     }
 }
 
