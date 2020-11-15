@@ -11,10 +11,21 @@ protocol ICarsView: AnyObject {
     func insertNewRow()
     func reloadRow(at index: Int)
     func deleteRow(at index: Int)
-    func reloadData()
 }
 
 final class CarsView: UIView {
+    // MARK: Properties
+    
+    var tableViewDataSource: UITableViewDataSource? {
+        get { tableView.dataSource }
+        set { tableView.dataSource = newValue }
+    }
+    
+    var tableViewDelegate: UITableViewDelegate? {
+        get { tableView.delegate }
+        set { tableView.delegate = newValue }
+    }
+    
     // MARK: Subviews
     
     private let tableView = UITableView()
@@ -34,19 +45,17 @@ final class CarsView: UIView {
     }
 }
 
+// MARK: - Public Methods
+
+extension CarsView {
+    func reloadData() {
+        tableView.reloadData()
+    }
+}
+
 // MARK: - ICarsView Protocol
 
 extension CarsView: ICarsView {
-    var tableViewDataSource: UITableViewDataSource? {
-        get { tableView.dataSource }
-        set { tableView.dataSource = newValue }
-    }
-    
-    var tableViewDelegate: UITableViewDelegate? {
-        get { tableView.delegate }
-        set { tableView.delegate = newValue }
-    }
-    
     func insertNewRow() {
         let lastRowIndex = tableView.numberOfRows(inSection: 0)
         let lastRowIndexPath = IndexPath(row: lastRowIndex, section: 0)
@@ -64,10 +73,6 @@ extension CarsView: ICarsView {
         let indexPath = IndexPath(row: index, section: 0)
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
-    
-    func reloadData() {
-        tableView.reloadData()
     }
 }
 

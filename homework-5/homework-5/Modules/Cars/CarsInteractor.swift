@@ -8,7 +8,7 @@
 protocol ICarsInteractor: AnyObject {
     var count: Int { get }
     
-    func setFilter(by body: Body?)
+    func setFilter(with body: Body?)
     func getFilter() -> Body?
     
     func append(car: Car)
@@ -19,10 +19,6 @@ protocol ICarsInteractor: AnyObject {
 }
 
 protocol ICarsInteractorOutput {
-    func rowAdded()
-    func rowEdited(at index: Int)
-    func rowDeleted(at index: Int)
-    
     func dataFiltered()
 }
 
@@ -35,13 +31,15 @@ final class CarsInteractor {
 // MARK: - ICarsInteractor
 
 extension CarsInteractor: ICarsInteractor {
+    // MARK: Properties
+    
     var count: Int {
         data.count
     }
-}
+    
+    // MARK: Methods
 
-extension CarsInteractor {
-    func setFilter(by body: Body?) {
+    func setFilter(with body: Body?) {
         data.filter = body
         
         presenter?.dataFiltered()
@@ -53,20 +51,14 @@ extension CarsInteractor {
     
     func append(car: Car) {
         data.append(car: car)
-        
-        presenter?.rowAdded()
     }
     
     func replace(at index: Int, with car: Car) {
         data.replace(at: index, with: car)
-        
-        presenter?.rowEdited(at: index)
     }
     
     func remove(at index: Int) {
         data.remove(at: index)
-        
-        presenter?.rowDeleted(at: index)
     }
     
     func get(at index: Int) -> Car {

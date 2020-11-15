@@ -26,6 +26,18 @@ final class CarDetailPresenter {
 // MARK: - ICarDetailPresenter
 
 extension CarDetailPresenter: ICarDetailPresenter {
+    // MARK: Lifecycle
+    
+    func viewDidLoad(view: ICarDetailView) {
+        view.setCarToEdit(carToEdit)
+        
+        view.didSelectBody = { [weak self] body in
+            self?.didPressBodyButton(with: body)
+        }
+    }
+    
+    // MARK: Methods
+    
     func didPressAddButton(with car: Car) {
         delegate?.carsViewControllerDelegate(self, addNew: car)
         
@@ -43,15 +55,9 @@ extension CarDetailPresenter: ICarDetailPresenter {
         
         router?.closeCarDetailView()
     }
-    
-    func viewDidLoad(view: ICarDetailView) {
-        view.setCarToEdit(carToEdit)
-        
-        view.didSelectBody = { [weak self] body in
-            self?.didPressBodyButton(with: body)
-        }
-    }
 }
+
+// MARK: - Private Methods
 
 private extension CarDetailPresenter {
     func didPressBodyButton(with body: Body?) {

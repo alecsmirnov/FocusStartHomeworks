@@ -7,69 +7,99 @@
 
 protocol ICarsPresenter: AnyObject {
     var count: Int { get }
-    var filter: Body? { get set }
     
-    func viewDidLoad(view: ICarsView)
-    func viewDidAppear()
+    func viewDidAppear(view: ICarsView)
     
-    func append(car: Car)
-    func replace(at index: Int, with car: Car)
-    func remove(at index: Int)
     func get(at index: Int) -> Car?
+    func remove(at index: Int)
+    func addNewCar(_ car: Car)
+    func editCar(_ car: Car)
+    func deleteCar()
+    
+    func setFilter(with body: Body?)
     
     func didPressFilterButton(with body: Body?)
     func didPressAddButton()
-    func didSelectRow(with car: Car)
+    func didSelectRow(at index: Int)
 }
 
 final class CarsPresenter {
     weak var view: ICarsViewController?
     var interactor: ICarsInteractor?
     var router: ICarsRouter?
+    
+    private enum CarsViewUpdateType {
+        case insertNewRow
+        case updateRow(index: Int)
+        case deleteRow(index: Int)
+        case none
+    }
+    
+    private var carsViewUpdateType = CarsViewUpdateType.none
+    
+    private var selectedRowIndex: Int?
 }
 
 // MARK: - ICarsPresenter
 
 extension CarsPresenter: ICarsPresenter {
+    // MARK: Properties
+    
     var count: Int {
         return interactor?.count ?? 0
     }
-    
-    var filter: Body? {
-        get { interactor?.getFilter() }
-        set { interactor?.setFilter(by: newValue) }
-    }
-}
 
-extension CarsPresenter {
-    func viewDidLoad(view: ICarsView) {
+    // MARK: Lifecycle
+    
+    func viewDidAppear(view: ICarsView) {
+        switch carsViewUpdateType {
+        case .insertNewRow: view.insertNewRow()
+        case .updateRow(let index): view.reloadRow(at: index)
+        case .deleteRow(let index): view.deleteRow(at: index)
+        case .none: break
+        }
         
+        carsViewUpdateType = .none
     }
     
-    func viewDidAppear() {
-        
-    }
-}
+    // MARK: Input
 
-extension CarsPresenter {
-    func append(car: Car) {
-        interactor?.append(car: car)
-    }
-    
-    func replace(at index: Int, with car: Car) {
-        interactor?.replace(at: index, with: car)
+    func get(at index: Int) -> Car? {
+        return interactor?.get(at: index)
     }
     
     func remove(at index: Int) {
         interactor?.remove(at: index)
     }
     
-    func get(at index: Int) -> Car? {
-        return interactor?.get(at: index)
+    func addNewCar(_ car: Car) {
+        interactor?.append(car: car)
+        
+        carsViewUpdateType = .insertNewRow
     }
-}
+    
+    func editCar(_ car: Car) {
+        if let index = selectedRowIndex {
+            interactor?.replace(at: index, with: car)
+            
+            carsViewUpdateType = .updateRow(index: index)
+        }
+    }
+    
+    func deleteCar() {
+        if let index = selectedRowIndex {
+            interactor?.remove(at: index)
+            
+            carsViewUpdateType = .deleteRow(index: index)
+        }
+    }
+    
+    func setFilter(with body: Body?) {
+        interactor?.setFilter(with: body)
+    }
 
-extension CarsPresenter {
+    // MARK: Actions
+    
     func didPressFilterButton(with body: Body?) {
         router?.openFilterView(with: body)
     }
@@ -78,27 +108,19 @@ extension CarsPresenter {
         router?.openCarDetailView()
     }
     
-    func didSelectRow(with car: Car) {
-        router?.openCarDetailView(with: car)
+    func didSelectRow(at index: Int) {
+        selectedRowIndex = index
+        
+        if let car = interactor?.get(at: index) {
+            router?.openCarDetailView(with: car)
+        }
     }
 }
 
 // MARK: - ICarsInteractorOutput
 
-extension CarsPresenter: ICarsInteractorOutput {
-    func rowAdded() {
-        
-    }
-    
-    func rowEdited(at index: Int) {
-        
-    }
-    
-    func rowDeleted(at index: Int) {
-        
-    }
-    
+extension CarsPresenter: ICarsInteractorOutput {    
     func dataFiltered() {
-        
+        view?.applyFilter(with: interactor?.getFilter())
     }
 }

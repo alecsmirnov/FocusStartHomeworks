@@ -24,6 +24,8 @@ final class BodyPickerPresenter {
 // MARK: - IBodyPickerPresenter
 
 extension BodyPickerPresenter: IBodyPickerPresenter {
+    // MARK: Lifecycle
+    
     func viewDidLoad(view: IBodyPickerView) {
         view.selectedBody = selectedBody
         
@@ -31,6 +33,8 @@ extension BodyPickerPresenter: IBodyPickerPresenter {
             self?.didSelectBody(body)
         }
     }
+    
+    // MARK: Actions
     
     func didPressResetButton() {
         delegate?.bodyPickerViewControllerDelegate(self, didSelect: nil)

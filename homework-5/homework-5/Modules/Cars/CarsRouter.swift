@@ -13,10 +13,6 @@ protocol ICarsRouter: AnyObject {
 }
 
 extension ICarsRouter {
-    func openFilterView() {
-        openFilterView(with: nil)
-    }
-    
     func openCarDetailView() {
         openCarDetailView(with: nil)
     }

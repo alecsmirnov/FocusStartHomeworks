@@ -8,9 +8,7 @@
 import UIKit
 
 protocol ICarsViewController: AnyObject {
-    func setFilter(with body: Body?)
-    
-    //func updateCarsView()
+    func applyFilter(with body: Body?)
 }
 
 final class CarsViewController: UIViewController {
@@ -23,13 +21,6 @@ final class CarsViewController: UIViewController {
         static let defaultStatus = "All"
     }
     
-    private enum CarsViewUpdateType {
-        case insertNewRow
-        case updateRow(index: Int)
-        case deleteRow(index: Int)
-        case none
-    }
-    
     private var carsView: CarsView {
         guard let view = view as? CarsView else {
             fatalError("view is not a CarsView instance")
@@ -39,7 +30,6 @@ final class CarsViewController: UIViewController {
     }
     
     private var selectedIndexRow: Int?
-    private var carsViewUpdateType = CarsViewUpdateType.none
     
     // MARK: Lifecycle
     
@@ -57,49 +47,32 @@ final class CarsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        updateCarsView()
+        presenter?.viewDidAppear(view: carsView)
     }
 }
 
-// MARK: - Public Methods
-
-extension CarsViewController {
-    func reloadData() {
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
-            self?.carsView.reloadData()
-        }, completion: nil)
-    }
-}
-
-// MARK: - ICarsViewController Protocol
+// MARK: - ICarsViewController
 
 extension CarsViewController: ICarsViewController {
-    func setFilter(with body: Body?) {
-        presenter?.filter = body
-        
+    func applyFilter(with body: Body?) {
         setFilterStatus(body: body)
         
         reloadData()
     }
 }
 
-// MARK: - CarsView
+// MARK: - Private Methods
 
 private extension CarsViewController {
     func setupCarsView() {
         carsView.tableViewDataSource = self
         carsView.tableViewDelegate = self
     }
-
-    func updateCarsView() {
-        switch carsViewUpdateType {
-        case .insertNewRow: carsView.insertNewRow()
-        case .updateRow(let index): carsView.reloadRow(at: index)
-        case .deleteRow(let index): carsView.deleteRow(at: index)
-        case .none: break
-        }
-        
-        carsViewUpdateType = .none
+    
+    func reloadData() {
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
+            self?.carsView.reloadData()
+        }, completion: nil)
     }
 }
 
@@ -165,40 +138,6 @@ extension CarsViewController {
     }
 }
 
-// MARK: - CarDetailViewControllerDelegate
-
-extension CarsViewController: CarDetailViewControllerDelegate {
-    func carsViewControllerDelegate(_ anyObject: AnyObject, addNew car: Car) {
-        presenter?.append(car: car)
-        
-        carsViewUpdateType = .insertNewRow
-    }
-    
-    func carsViewControllerDelegate(_ anyObject: AnyObject, edit car: Car) {
-        if let index = selectedIndexRow {
-            presenter?.replace(at: index, with: car)
-            
-            carsViewUpdateType = .updateRow(index: index)
-        }
-    }
-    
-    func carsViewControllerDelegateDeleteCar(_ anyObject: AnyObject) {
-        if let index = selectedIndexRow {
-            presenter?.remove(at: index)
-            
-            carsViewUpdateType = .deleteRow(index: index)
-        }
-    }
-}
-
-// MARK: - BodyPickerViewControllerDelegate
-
-extension CarsViewController: BodyPickerViewControllerDelegate {
-    func bodyPickerViewControllerDelegate(_ anyObject: AnyObject, didSelect body: Body?) {
-        presenter?.filter = body
-    }
-}
-
 // MARK: - UITableViewDataSource
 
 extension CarsViewController: UITableViewDataSource {
@@ -224,12 +163,8 @@ extension CarsViewController: UITableViewDataSource {
 
 extension CarsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndexRow = indexPath.row
+        presenter?.didSelectRow(at: indexPath.row)
         
-        if let car = presenter?.get(at: indexPath.row) {
-            presenter?.didSelectRow(with: car)
-        }
-
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -239,13 +174,37 @@ extension CarsViewController: UITableViewDelegate {
     ) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completionHandler in
             self?.presenter?.remove(at: indexPath.row)
+
             tableView.deleteRows(at: [indexPath], with: .automatic)
-                
             completionHandler(true)
         }
-        
+
         delete.image = UIImage.init(systemName: "trash")
-        
+
         return UISwipeActionsConfiguration(actions: [delete])
+    }
+}
+
+// MARK: - CarDetailViewControllerDelegate
+
+extension CarsViewController: CarDetailViewControllerDelegate {
+    func carsViewControllerDelegate(_ anyObject: AnyObject, addNew car: Car) {
+        presenter?.addNewCar(car)
+    }
+    
+    func carsViewControllerDelegate(_ anyObject: AnyObject, edit car: Car) {
+        presenter?.editCar(car)
+    }
+    
+    func carsViewControllerDelegateDeleteCar(_ anyObject: AnyObject) {
+        presenter?.deleteCar()
+    }
+}
+
+// MARK: - BodyPickerViewControllerDelegate
+
+extension CarsViewController: BodyPickerViewControllerDelegate {
+    func bodyPickerViewControllerDelegate(_ anyObject: AnyObject, didSelect body: Body?) {
+        presenter?.setFilter(with: body)
     }
 }

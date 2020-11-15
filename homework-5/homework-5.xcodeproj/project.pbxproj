@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8446BEA525614F9B00685898 /* CarsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEA425614F9B00685898 /* CarsViewControllerDelegate.swift */; };
-		8446BEA825614FA800685898 /* CarsViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEA725614FA800685898 /* CarsViewControllerDataSource.swift */; };
 		8446BEAD256159A700685898 /* BodyPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEAC256159A700685898 /* BodyPickerInteractor.swift */; };
 		8446BEB0256159F200685898 /* CarDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEAF256159F200685898 /* CarDetailInteractor.swift */; };
 		8446BEBA2561717500685898 /* BodyPickerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEB92561717500685898 /* BodyPickerViewControllerDelegate.swift */; };
@@ -45,8 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8446BEA425614F9B00685898 /* CarsViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewControllerDelegate.swift; sourceTree = "<group>"; };
-		8446BEA725614FA800685898 /* CarsViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewControllerDataSource.swift; sourceTree = "<group>"; };
 		8446BEAC256159A700685898 /* BodyPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerInteractor.swift; sourceTree = "<group>"; };
 		8446BEAF256159F200685898 /* CarDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailInteractor.swift; sourceTree = "<group>"; };
 		8446BEB92561717500685898 /* BodyPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -225,8 +221,6 @@
 				84548CBA255C1ABA000439CD /* CarCell.swift */,
 				84548C9A255BC7F1000439CD /* CarsView.swift */,
 				84548C84255BC53C000439CD /* CarsViewController.swift */,
-				8446BEA725614FA800685898 /* CarsViewControllerDataSource.swift */,
-				8446BEA425614F9B00685898 /* CarsViewControllerDelegate.swift */,
 			);
 			path = CarsView;
 			sourceTree = "<group>";
@@ -329,8 +323,6 @@
 				84548CB1255BF291000439CD /* Body.swift in Sources */,
 				84584081255D545900B7833A /* CarsPresenter.swift in Sources */,
 				845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */,
-				8446BEA825614FA800685898 /* CarsViewControllerDataSource.swift in Sources */,
-				8446BEA525614F9B00685898 /* CarsViewControllerDelegate.swift in Sources */,
 				84548C83255BC53C000439CD /* SceneDelegate.swift in Sources */,
 				84548CBB255C1ABA000439CD /* CarCell.swift in Sources */,
 				84584084255D546C00B7833A /* CarsRouter.swift in Sources */,
