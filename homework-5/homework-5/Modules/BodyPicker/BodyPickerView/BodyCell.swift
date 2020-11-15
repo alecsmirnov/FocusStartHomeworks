@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BodyCell: UITableViewCell {
+final class BodyCell: UITableViewCell {
     // MARK: Properties
     
     var body: Body? {

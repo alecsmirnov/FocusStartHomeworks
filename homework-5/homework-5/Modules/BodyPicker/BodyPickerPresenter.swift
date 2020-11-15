@@ -12,8 +12,6 @@ final class BodyPickerPresenter: BodyPickerPresenterProtocol {
 
 extension BodyPickerPresenter {
     func didPressCloseButton() {
-        if let view = view {
-            router?.closeBodyPickerView(view)
-        }
+        router?.closeBodyPickerView()
     }
 }

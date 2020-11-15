@@ -63,8 +63,8 @@ extension CarsViewController {
         
         setFilterStatus(body: body)
         
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-            self.carsView.reloadData()
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
+            self?.carsView.reloadData()
         }, completion: nil)
     }
 }

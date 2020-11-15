@@ -6,5 +6,5 @@
 //
 
 protocol BodyPickerRouterProtocol: AnyObject {
-    func closeBodyPickerView(_ view: BodyPickerViewProtocol)
+    func closeBodyPickerView()
 }

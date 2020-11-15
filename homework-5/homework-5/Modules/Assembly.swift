@@ -46,7 +46,7 @@ enum Assembly {
         let view = BodyPickerViewController()
         
         let presenter = BodyPickerPresenter()
-        let router = BodyPickerRouter()
+        let router = BodyPickerRouter(viewController: view)
         
         view.presenter = presenter
         view.selectedBody = body

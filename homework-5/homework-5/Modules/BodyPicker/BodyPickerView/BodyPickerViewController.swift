@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BodyPickerViewController: UIViewController, BodyPickerViewProtocol {
+final class BodyPickerViewController: UIViewController, BodyPickerViewProtocol {
     // MARK: Properties
     
     var presenter: BodyPickerPresenterProtocol?

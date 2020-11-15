@@ -8,13 +8,17 @@
 import UIKit
 
 final class BodyPickerRouter: BodyPickerRouterProtocol {
-    func closeBodyPickerView(_ view: BodyPickerViewProtocol) {
-        guard let viewController = view as? UIViewController else { return }
-        
-        if viewController.presentingViewController != nil {
-            viewController.dismiss(animated: true, completion: nil)
+    private weak var viewController: BodyPickerViewController?
+    
+    init(viewController: BodyPickerViewController) {
+        self.viewController = viewController
+    }
+    
+    func closeBodyPickerView() {
+        if viewController?.presentingViewController != nil {
+            viewController?.dismiss(animated: true, completion: nil)
         } else {
-            viewController.navigationController?.popViewController(animated: true)
+            viewController?.navigationController?.popViewController(animated: true)
         }
     }
 }
