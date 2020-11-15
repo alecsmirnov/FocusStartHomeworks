@@ -11,10 +11,8 @@ final class CarDetailRouter: CarDetailRouterProtocol {
     func openBodyPickerView(from view: CarDetailViewProtocol, with body: Body?) {
         let bodyPickerViewController = Assembly.createBodyPickerViewController(with: body)
         
-        if let bodyPickerView = bodyPickerViewController as? BodyPickerViewProtocol {
-            bodyPickerView.didSelectBody = { body in
-                view.setBody(body)
-            }
+        bodyPickerViewController.didSelectBody = { body in
+            view.setBody(body)
         }
         
         if let viewController = view as? UIViewController {

@@ -27,7 +27,7 @@ enum Assembly {
         return navigationController
     }
     
-    static func createCarDetailViewController(with car: Car?) -> UIViewController {
+    static func createCarDetailViewController(with car: Car?) -> CarDetailViewController {
         let view = CarDetailViewController()
         
         let presenter = CarDetailPresenter()
@@ -42,7 +42,7 @@ enum Assembly {
         return view
     }
     
-    static func createBodyPickerViewController(with body: Body?) -> UIViewController {
+    static func createBodyPickerViewController(with body: Body?) -> BodyPickerViewController {
         let view = BodyPickerViewController()
         
         let presenter = BodyPickerPresenter()

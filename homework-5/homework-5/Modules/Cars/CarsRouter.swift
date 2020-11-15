@@ -11,10 +11,8 @@ final class CarsRouter: CarsRouterProtocol {
     func openFilterView(from view: CarsViewProtocol, with body: Body?) {
         let bodyPickerViewController = Assembly.createBodyPickerViewController(with: body)
         
-        if let bodyPickerView = bodyPickerViewController as? BodyPickerViewProtocol {
-            bodyPickerView.didSelectBody = { body in
-                view.setFilter(with: body)
-            }
+        bodyPickerViewController.didSelectBody = { body in
+            view.setFilter(with: body)
         }
         
         if let viewController = view as? UIViewController {
@@ -27,8 +25,7 @@ final class CarsRouter: CarsRouterProtocol {
     func openCarDetailView(from view: CarsViewProtocol, with car: Car?) {
         let carDetailViewController = Assembly.createCarDetailViewController(with: car)
         
-        if let carDetailViewController = carDetailViewController as? CarDetailViewController,
-           let viewController = view as? CarsViewController {
+        if let viewController = view as? CarsViewController {
             carDetailViewController.delegate = viewController
         }
         
