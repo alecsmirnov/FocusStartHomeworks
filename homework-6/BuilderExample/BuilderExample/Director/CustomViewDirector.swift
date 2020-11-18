@@ -29,7 +29,11 @@ final class CustomViewDirector {
     init(customViewBuilder: CustomViewBuilder) {
         self.customViewBuilder = customViewBuilder
     }
-    
+}
+
+// MARK: Public Methods
+
+extension CustomViewDirector {
     func createCustomViewExample(with action: Selector) {
         let titleLabel = CustomLabelBuilder()
             .setText("Title")
