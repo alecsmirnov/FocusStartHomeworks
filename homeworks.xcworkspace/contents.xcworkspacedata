@@ -16,4 +16,14 @@
    <FileRef
       location = "group:homework-5/homework-5.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "homework-6">
+      <FileRef
+         location = "group:homework-6/BuilderExample/BuilderExample.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:homework-6/ObserverExample/ObserverExample.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>
