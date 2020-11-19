@@ -17,7 +17,6 @@
 		845C9C4C25651363001254A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845C9C4B25651363001254A9 /* Assets.xcassets */; };
 		845C9C4F25651363001254A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845C9C4D25651363001254A9 /* LaunchScreen.storyboard */; };
 		845C9C592565156F001254A9 /* CustomViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C9C582565156F001254A9 /* CustomViewBuilder.swift */; };
-		845C9C5C25651599001254A9 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C9C5B25651599001254A9 /* CustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		845C9C4E25651363001254A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		845C9C5025651363001254A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845C9C582565156F001254A9 /* CustomViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewBuilder.swift; sourceTree = "<group>"; };
-		845C9C5B25651599001254A9 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,12 +56,12 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
-		84455ADC256572C900B9659D /* Controllers */ = {
+		84455ADC256572C900B9659D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				845C9C462565135F001254A9 /* CustomViewController.swift */,
 			);
-			path = Controllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		84455AE225657A1F00B9659D /* Director */ = {
@@ -93,12 +91,11 @@
 		845C9C412565135F001254A9 /* BuilderExample */ = {
 			isa = PBXGroup;
 			children = (
-				84455AE225657A1F00B9659D /* Director */,
 				84455AD42565492700B9659D /* Builders */,
-				84455ADC256572C900B9659D /* Controllers */,
+				84455AE225657A1F00B9659D /* Director */,
+				84455ADC256572C900B9659D /* Controller */,
 				845C9C422565135F001254A9 /* AppDelegate.swift */,
 				845C9C442565135F001254A9 /* SceneDelegate.swift */,
-				845C9C5B25651599001254A9 /* CustomView.swift */,
 				845C9C4B25651363001254A9 /* Assets.xcassets */,
 				845C9C4D25651363001254A9 /* LaunchScreen.storyboard */,
 				845C9C5025651363001254A9 /* Info.plist */,
@@ -176,7 +173,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84455AD22565491200B9659D /* CustomTextViewBuilder.swift in Sources */,
-				845C9C5C25651599001254A9 /* CustomView.swift in Sources */,
 				845C9C472565135F001254A9 /* CustomViewController.swift in Sources */,
 				845C9C432565135F001254A9 /* AppDelegate.swift in Sources */,
 				845C9C592565156F001254A9 /* CustomViewBuilder.swift in Sources */,
