@@ -54,8 +54,8 @@ private extension FavoriteView {
     func showHintLabel() {
         animateLabel(alpha: 1)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.hintLabelDeadline) { [weak self] in
-            self?.animateLabel(alpha: 0)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.hintLabelDeadline) {
+            self.animateLabel(alpha: 0)
         }
     }
     

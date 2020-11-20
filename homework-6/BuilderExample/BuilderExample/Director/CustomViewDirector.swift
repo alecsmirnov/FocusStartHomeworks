@@ -59,7 +59,7 @@ extension CustomViewDirector {
             .addTarget(self, action: action, for: .touchUpInside)
             .build()
         
-        _ = customViewBuilder
+        customViewBuilder
             .addSubview(titleLabel, topSpace: Metrics.titleTopSpace)
             .addButton(normalButton)
             .addSubview(textView)

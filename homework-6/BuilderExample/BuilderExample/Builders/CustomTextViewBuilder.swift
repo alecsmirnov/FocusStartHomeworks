@@ -27,24 +27,28 @@ final class CustomTextViewBuilder {
 // MARK: - ICustomTextViewBuilder
 
 extension CustomTextViewBuilder: ICustomTextViewBuilder {
+    @discardableResult
     func setText(_ text: String?) -> Self {
         textView.text = text
         
         return self
     }
     
+    @discardableResult
     func setTextAlignment(_ textAlignment: NSTextAlignment) -> Self {
         textView.textAlignment = textAlignment
         
         return self
     }
     
+    @discardableResult
     func setTextColor(_ textColor: UIColor) -> Self {
         textView.textColor = textColor
         
         return self
     }
     
+    @discardableResult
     func setFont(name: String, size: CGFloat?) -> Self {
         var textViewFont: UIFont?
         
@@ -59,12 +63,14 @@ extension CustomTextViewBuilder: ICustomTextViewBuilder {
         return self
     }
     
+    @discardableResult
     func setFontSize(_ fontSize: CGFloat) -> Self {
         textView.font = textView.font?.withSize(fontSize)
         
         return self
     }
     
+    @discardableResult
     func setEditable(_ editable: Bool) -> Self {
         textView.isEditable = editable
         

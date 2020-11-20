@@ -37,24 +37,28 @@ final class CustomLabelBuilder {
 // MARK: - ICustomLabelBuilder
 
 extension CustomLabelBuilder: ICustomLabelBuilder {
+    @discardableResult
     func setText(_ text: String?) -> Self {
         label.text = text
         
         return self
     }
     
+    @discardableResult
     func setTextAlignment(_ textAlignment: NSTextAlignment) -> Self {
         label.textAlignment = textAlignment
         
         return self
     }
     
+    @discardableResult
     func setTextColor(_ textColor: UIColor) -> Self {
         label.textColor = textColor
         
         return self
     }
     
+    @discardableResult
     func setFont(name: String, size: CGFloat? = nil) -> Self {
         let labelSize: CGFloat
         
@@ -69,12 +73,14 @@ extension CustomLabelBuilder: ICustomLabelBuilder {
         return self
     }
     
+    @discardableResult
     func setFontSize(_ fontSize: CGFloat) -> Self {
         label.font = label.font.withSize(fontSize)
         
         return self
     }
     
+    @discardableResult
     func setNumberOfLines(_ numberOfLines: Int) -> Self {
         label.numberOfLines = numberOfLines
         

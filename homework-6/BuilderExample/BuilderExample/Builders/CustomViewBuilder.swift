@@ -34,12 +34,14 @@ final class CustomViewBuilder {
 // MARK: - ICustomViewBuilder
 
 extension CustomViewBuilder: ICustomViewBuilder {
+    @discardableResult
     func addButton(_ button: UIButton, topSpace: CGFloat) -> Self {
         setupButtonLayout(button, topSpace: topSpace)
         
         return self
     }
     
+    @discardableResult
     func addSubview(_ subview: UIView, topSpace: CGFloat, horizontalSpace: CGFloat) -> Self {
         setupSubviewLayout(subview, topSpace: topSpace, horizontalSpace: horizontalSpace)
         
@@ -52,14 +54,17 @@ extension CustomViewBuilder: ICustomViewBuilder {
 }
 
 extension CustomViewBuilder {
+    @discardableResult
     func addButton(_ button: UIButton) -> Self {
         return addSubview(button, topSpace: Metrics.topSpace, horizontalSpace: Metrics.horizontalSpace)
     }
     
+    @discardableResult
     func addSubview(_ subview: UIView) -> Self {
         return addSubview(subview, topSpace: Metrics.topSpace, horizontalSpace: Metrics.horizontalSpace)
     }
     
+    @discardableResult
     func addSubview(_ subview: UIView, topSpace: CGFloat) -> Self {
         return addSubview(subview, topSpace: topSpace, horizontalSpace: Metrics.horizontalSpace)
     }
