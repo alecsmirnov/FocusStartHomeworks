@@ -54,8 +54,8 @@ final class DataLoadingService: NSObject {
     
     weak var delegate: DataLoadingServiceDelegate?
     
-    private enum Constants {
-        static let canceledErrorCode = -999
+    private enum AvoidErrorCodes {
+        static let canceled = -999
     }
     
     private var session: URLSession!
@@ -142,7 +142,7 @@ extension DataLoadingService: URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if let error = error as NSError?, error.code != Constants.canceledErrorCode {
+        if let error = error as NSError?, error.code != AvoidErrorCodes.canceled {
             delegate?.dataLoadingService(self, didCompleteWithError: .invalidURL)
         }
     }
