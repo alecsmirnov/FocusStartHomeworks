@@ -85,11 +85,9 @@ extension DataLoadingService {
         
         if dataLoadingTasks[url] == nil {
             downloadTask = session.downloadTask(with: url)
-            
             dataLoadingTasks[url] = DataLoadingTask(downloadTask: downloadTask)
         } else if let resumeData = dataLoadingTasks[url]?.data {
             downloadTask = session.downloadTask(withResumeData: resumeData)
-            
             dataLoadingTasks[url]?.downloadTask = downloadTask
         }
         
@@ -156,8 +154,16 @@ extension DataLoadingService: URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if let error = error as NSError?, error.code != AvoidErrorCodes.canceled,
-           let url = task.originalRequest?.url {
+        guard let error = error as NSError?, error.code != AvoidErrorCodes.canceled else { return }
+        
+        var url = task.originalRequest?.url
+        if url == nil, let urlString = error.userInfo["NSErrorFailingURLStringKey"] as? String {
+            url = URL(string: urlString)
+        }
+
+        if let url = url {
+            dataLoadingTasks[url] = nil
+            
             DispatchQueue.main.async {
                 self.delegate?.dataLoadingService(self, didCompleteWithError: .invalidURL, toURL: url)
             }
