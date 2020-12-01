@@ -26,6 +26,10 @@ final class ImageLoaderCell: UITableViewCell {
         case loading
         case presentation
     }
+    
+    private enum Constants {
+        static let progressFormatPercentage: Float = 100
+    }
 
     private enum ImageNames {
         static let pause = "pause.circle"
@@ -89,7 +93,7 @@ final class ImageLoaderCell: UITableViewCell {
 extension ImageLoaderCell {
     func updateLoading(progress: Float, totalSize: String) {
         progressView.progress = progress
-        progressLabel.text = totalSize
+        progressLabel.text = String(format: "%.1f%% of %@", progress * Constants.progressFormatPercentage, totalSize)
     }
     
     func setImage(_ image: UIImage) {
@@ -319,7 +323,5 @@ private extension ImageLoaderCell {
                                                     constant: -Metrics.horizontalSpace),
             mainImageView.heightAnchor.constraint(equalToConstant: Metrics.imageViewHeight),
         ])
-        
-
     }
 }
