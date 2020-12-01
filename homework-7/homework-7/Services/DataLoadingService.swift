@@ -23,6 +23,7 @@ protocol DataLoadingServiceDelegate: AnyObject {
 enum DataLoadingError: Error {
     case invalidURL
     case fileNotFound
+    case websiteUnavailable
 }
 
 extension DataLoadingError: LocalizedError {
@@ -32,6 +33,8 @@ extension DataLoadingError: LocalizedError {
             return NSLocalizedString("Invalid URL address", comment: "")
         case .fileNotFound:
             return NSLocalizedString("File not found or does not exist", comment: "")
+        case .websiteUnavailable:
+            return NSLocalizedString("Website unavailable", comment: "")
         }
     }
 }
@@ -40,6 +43,8 @@ extension DataLoadingError: LocalizedError {
 
 final class DataLoadingService: NSObject {
     typealias LoadingCompletion = (Data) -> Void
+    
+    private typealias WebsiteReachableCompletion = (Bool) -> Void
     
     // MARK: Properties
     
@@ -79,19 +84,27 @@ final class DataLoadingService: NSObject {
 
 extension DataLoadingService {
     func resume(with urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        
-        var downloadTask: URLSessionDownloadTask?
-        
-        if dataLoadingTasks[url] == nil {
-            downloadTask = session.downloadTask(with: url)
-            dataLoadingTasks[url] = DataLoadingTask(downloadTask: downloadTask)
-        } else if let resumeData = dataLoadingTasks[url]?.data {
-            downloadTask = session.downloadTask(withResumeData: resumeData)
-            dataLoadingTasks[url]?.downloadTask = downloadTask
+        DataLoadingService.checkWebsite(urlString: urlString) { status in
+            guard let url = URL(string: urlString) else { return }
+            
+            if status {
+                var downloadTask: URLSessionDownloadTask?
+                
+                if self.dataLoadingTasks[url] == nil {
+                    downloadTask = self.session.downloadTask(with: url)
+                    self.dataLoadingTasks[url] = DataLoadingTask(downloadTask: downloadTask)
+                } else if let resumeData = self.dataLoadingTasks[url]?.data {
+                    downloadTask = self.session.downloadTask(withResumeData: resumeData)
+                    self.dataLoadingTasks[url]?.downloadTask = downloadTask
+                }
+                
+                downloadTask?.resume()
+            } else {
+                DispatchQueue.main.async {
+                    self.delegate?.dataLoadingService(self, didCompleteWithError: .websiteUnavailable, toURL: url)
+                }
+            }
         }
-        
-        downloadTask?.resume()
     }
     
     func pause(with urlString: String) {
@@ -106,6 +119,27 @@ extension DataLoadingService {
         
         dataLoadingTasks[url]?.downloadTask?.cancel()
         dataLoadingTasks[url] = nil
+    }
+}
+
+// MARK: - Private Methods
+
+private extension DataLoadingService {
+    private static func checkWebsite(urlString: String, completion: @escaping WebsiteReachableCompletion) {
+        guard let url = URL(string: urlString) else { return }
+
+        let request = URLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completion(false)
+            }
+            
+            if response != nil {
+                completion(true)
+            }
+        }
+        
+        task.resume()
     }
 }
 
@@ -131,7 +165,7 @@ extension DataLoadingService: URLSessionDownloadDelegate {
                     totalBytesWritten: Int64,
                     totalBytesExpectedToWrite: Int64) {
         guard let url = downloadTask.originalRequest?.url else { return }
-
+        
         if totalBytesExpectedToWrite < 0 || bytesWritten == totalBytesExpectedToWrite {
             downloadTask.cancel()
             
