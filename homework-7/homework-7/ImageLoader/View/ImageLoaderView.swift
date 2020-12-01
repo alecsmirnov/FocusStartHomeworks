@@ -184,6 +184,6 @@ extension ImageLoaderView: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchBar.showsCancelButton = searchText.isEmpty ? false : true
+        searchBar.setShowsCancelButton(!searchText.isEmpty, animated: true)
     }
 }

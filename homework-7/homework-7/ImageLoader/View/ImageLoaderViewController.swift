@@ -151,7 +151,6 @@ extension ImageLoaderViewController: UITableViewDataSource {
             for: indexPath
         ) as? ImageLoaderCell else { return UITableViewCell() }
         
-        cell.setType(.loading)
         cell.delegate = self
         
         return cell

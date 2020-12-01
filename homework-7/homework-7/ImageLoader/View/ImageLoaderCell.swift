@@ -7,6 +7,8 @@
 
 import UIKit
 
+protocol IImageLoaderCell: AnyObject {}
+
 protocol ImageLoaderCellDelegate: AnyObject {
     func imageLoaderPauseButtonPressed(_ imageLoaderCell: ImageLoaderCell)
     func imageLoaderResumeButtonPressed(_ imageLoaderCell: ImageLoaderCell)
@@ -29,6 +31,8 @@ final class ImageLoaderCell: UITableViewCell {
     
     private enum Constants {
         static let progressFormatPercentage: Float = 100
+        
+        static let animationDuration = 0.3
     }
 
     private enum ImageNames {
@@ -88,6 +92,10 @@ final class ImageLoaderCell: UITableViewCell {
     }
 }
 
+// MARK: - IImageLoaderCell
+
+extension ImageLoaderCell: IImageLoaderCell {}
+
 // MARK: - Public Methods
 
 extension ImageLoaderCell {
@@ -104,6 +112,10 @@ extension ImageLoaderCell {
         self.type = type
         
         applyLayout()
+        
+        UIView.animate(withDuration: Constants.animationDuration) {
+            self.contentView.layoutIfNeeded()
+        }
     }
 }
 

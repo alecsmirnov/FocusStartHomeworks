@@ -76,6 +76,8 @@ final class DataLoadingService: NSObject {
         super.init()
         
         let configuration = URLSessionConfiguration.background(withIdentifier: Constants.sessionIdentifier)
+        configuration.sessionSendsLaunchEvents = true
+        
         session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
 }
@@ -148,7 +150,7 @@ private extension DataLoadingService {
 extension DataLoadingService: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,
-                    didFinishDownloadingTo location: URL) {
+                    didFinishDownloadingTo location: URL) {        
         guard let data = try? Data(contentsOf: location),
               let url = downloadTask.currentRequest?.url else { return }
         
