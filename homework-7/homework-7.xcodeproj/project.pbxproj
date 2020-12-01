@@ -14,8 +14,10 @@
 		8449C3BB25741F3900F8AE11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8449C3B925741F3900F8AE11 /* LaunchScreen.storyboard */; };
 		8449C3CA2574204A00F8AE11 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C3C92574204A00F8AE11 /* ImageLoaderView.swift */; };
 		8449C3CE2574252100F8AE11 /* ImageLoaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C3CD2574252100F8AE11 /* ImageLoaderCell.swift */; };
-		8449C3D7257429E300F8AE11 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C3D6257429E300F8AE11 /* ImageLoader.swift */; };
-		8449C3DA2574325000F8AE11 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C3D92574325000F8AE11 /* Download.swift */; };
+		84544A122574A33A00C43698 /* DataLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84544A112574A33A00C43698 /* DataLoadingService.swift */; };
+		845994D6257535080057E3D6 /* ImageLoaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845994D5257535080057E3D6 /* ImageLoaderPresenter.swift */; };
+		845994DA257536650057E3D6 /* ImageLoaderAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845994D9257536650057E3D6 /* ImageLoaderAssembly.swift */; };
+		845994E0257539B80057E3D6 /* ImageLoaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845994DF257539B80057E3D6 /* ImageLoaderInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +30,10 @@
 		8449C3BC25741F3900F8AE11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8449C3C92574204A00F8AE11 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		8449C3CD2574252100F8AE11 /* ImageLoaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderCell.swift; sourceTree = "<group>"; };
-		8449C3D6257429E300F8AE11 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		8449C3D92574325000F8AE11 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		84544A112574A33A00C43698 /* DataLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingService.swift; sourceTree = "<group>"; };
+		845994D5257535080057E3D6 /* ImageLoaderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderPresenter.swift; sourceTree = "<group>"; };
+		845994D9257536650057E3D6 /* ImageLoaderAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderAssembly.swift; sourceTree = "<group>"; };
+		845994DF257539B80057E3D6 /* ImageLoaderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +69,7 @@
 				8449C3D12574253700F8AE11 /* Application */,
 				8449C3D22574256700F8AE11 /* Resources */,
 				8449C3D5257428D100F8AE11 /* Services */,
-				8449C3CD2574252100F8AE11 /* ImageLoaderCell.swift */,
-				8449C3C92574204A00F8AE11 /* ImageLoaderView.swift */,
-				8449C3B225741F3400F8AE11 /* ImageLoaderViewController.swift */,
+				845994E2257539C30057E3D6 /* ImageLoader */,
 			);
 			path = "homework-7";
 			sourceTree = "<group>";
@@ -94,10 +96,30 @@
 		8449C3D5257428D100F8AE11 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8449C3D92574325000F8AE11 /* Download.swift */,
-				8449C3D6257429E300F8AE11 /* ImageLoader.swift */,
+				84544A112574A33A00C43698 /* DataLoadingService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		845994D3257534D00057E3D6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8449C3CD2574252100F8AE11 /* ImageLoaderCell.swift */,
+				8449C3C92574204A00F8AE11 /* ImageLoaderView.swift */,
+				8449C3B225741F3400F8AE11 /* ImageLoaderViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		845994E2257539C30057E3D6 /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				845994D3257534D00057E3D6 /* View */,
+				845994DF257539B80057E3D6 /* ImageLoaderInteractor.swift */,
+				845994D5257535080057E3D6 /* ImageLoaderPresenter.swift */,
+				845994D9257536650057E3D6 /* ImageLoaderAssembly.swift */,
+			);
+			path = ImageLoader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,12 +191,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845994D6257535080057E3D6 /* ImageLoaderPresenter.swift in Sources */,
 				8449C3B325741F3400F8AE11 /* ImageLoaderViewController.swift in Sources */,
 				8449C3CA2574204A00F8AE11 /* ImageLoaderView.swift in Sources */,
-				8449C3D7257429E300F8AE11 /* ImageLoader.swift in Sources */,
+				84544A122574A33A00C43698 /* DataLoadingService.swift in Sources */,
+				845994E0257539B80057E3D6 /* ImageLoaderInteractor.swift in Sources */,
 				8449C3AF25741F3400F8AE11 /* AppDelegate.swift in Sources */,
 				8449C3CE2574252100F8AE11 /* ImageLoaderCell.swift in Sources */,
-				8449C3DA2574325000F8AE11 /* Download.swift in Sources */,
+				845994DA257536650057E3D6 /* ImageLoaderAssembly.swift in Sources */,
 				8449C3B125741F3400F8AE11 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
