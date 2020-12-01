@@ -116,6 +116,7 @@ private extension ImageLoaderView {
     
     func setupSearchBarAppearance() {
         searchBar.setValue("Search", forKey: "cancelButtonText")
+        searchBar.placeholder = "Enter image URL"
     }
     
     func setupTableViewAppearance() {
