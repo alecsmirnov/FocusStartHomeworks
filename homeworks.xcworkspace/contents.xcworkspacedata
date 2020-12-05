@@ -26,4 +26,7 @@
          location = "group:homework-6/ObserverExample/ObserverExample.xcodeproj">
       </FileRef>
    </Group>
+   <FileRef
+      location = "group:homework-8/homework-8.xcodeproj">
+   </FileRef>
 </Workspace>
