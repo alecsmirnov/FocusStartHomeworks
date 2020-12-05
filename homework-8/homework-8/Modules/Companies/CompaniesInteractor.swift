@@ -10,8 +10,7 @@ protocol ICompaniesInteractor: AnyObject {
     
     func createCompany(name: String)
     func append(company: Company)
-    func replace(at index: Int, with company: Company)
-    func remove(at index: Int)
+    func removeCompany(at index: Int)
     
     func get(at index: Int) -> Company
 }
@@ -45,11 +44,7 @@ extension CompaniesInteractor: ICompaniesInteractor {
         data.append(company: company)
     }
     
-    func replace(at index: Int, with company: Company) {
-        data.replaceCompany(at: index, with: company)
-    }
-    
-    func remove(at index: Int) {
+    func removeCompany(at index: Int) {
         data.removeCompany(at: index)
     }
     

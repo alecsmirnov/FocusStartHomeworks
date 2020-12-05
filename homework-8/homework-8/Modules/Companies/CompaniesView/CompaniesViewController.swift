@@ -12,6 +12,7 @@ protocol ICompaniesViewController: AnyObject {
     func updateDeletedData(at index: Int)
     
     func reloadData(at index: Int)
+    func reloadData()
 }
 
 final class CompaniesViewController: UIViewController {
@@ -62,6 +63,14 @@ extension CompaniesViewController: ICompaniesViewController {
     func reloadData(at index: Int) {
         companiesView.reloadRow(at: index)
     }
+    
+    func reloadData() {
+        func reloadData() {
+            UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
+                self?.companiesView.reloadData()
+            }, completion: nil)
+        }
+    }
 }
 
 // MARK: - Private Methods
@@ -74,12 +83,6 @@ private extension CompaniesViewController {
     func setupCompaniesView() {
         companiesView.tableViewDataSource = self
         companiesView.tableViewDelegate = self
-    }
-    
-    func reloadData() {
-        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
-            self?.companiesView.reloadData()
-        }, completion: nil)
     }
 }
 

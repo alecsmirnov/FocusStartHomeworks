@@ -6,7 +6,7 @@
 //
 
 protocol ICompaniesRouter: AnyObject {
-    func openEmployeesViewController(with employees: [Employee]?)
+    func openEmployeesViewController(delegate: IEmployeesPresenterDelegate, with employees: [Employee])
     func openNewCompanyViewController(delegate: INewCompanyPresenterDelegate)
 }
 
@@ -21,8 +21,11 @@ final class CompaniesRouter {
 // MARK: - ICarsRouter
 
 extension CompaniesRouter: ICompaniesRouter {
-    func openEmployeesViewController(with employees: [Employee]?) {
+    func openEmployeesViewController(delegate: IEmployeesPresenterDelegate, with employees: [Employee]) {
+        let employeesViewController = EmployeesAssembly.createEmployeesViewController(delegate: delegate,
+                                                                                      with: employees)
         
+        viewController?.navigationController?.pushViewController(employeesViewController, animated: true)
     }
     
     func openNewCompanyViewController(delegate: INewCompanyPresenterDelegate) {

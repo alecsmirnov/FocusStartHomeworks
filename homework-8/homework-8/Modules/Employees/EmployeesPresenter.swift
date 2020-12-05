@@ -14,10 +14,15 @@ protocol IEmployeesPresenter: AnyObject {
     func remove(at index: Int)
     func addNewEmployee(_ employee: Employee)
     func editEmployee(_ employee: Employee)
-    func deleteEmployee()
     
     func didPressAddButton()
     func didSelectRow(at index: Int)
+}
+
+protocol IEmployeesPresenterDelegate: AnyObject {
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, addedNewEmployee employee: Employee)
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, editEmployee employee: Employee)
+    func iEmployeesPresenterDeleteEmployee(_ presenter: IEmployeesPresenter)
 }
 
 final class EmployeesPresenter {
@@ -25,19 +30,21 @@ final class EmployeesPresenter {
     var interactor: IEmployeesInteractor?
     var router: IEmployeesRouter?
     
-    var employees: [Employee]?
+    weak var delegate: IEmployeesPresenterDelegate?
+    
+    var employees = [Employee]()
     
     private var employeesViewUpdateType = TableViewUpdateType.none
     private var selectedRowIndex: Int?
 }
 
-// MARK: - ICarsPresenter
+// MARK: - IEmployeesPresenter
 
 extension EmployeesPresenter: IEmployeesPresenter {
     // MARK: Properties
 
     var count: Int {
-        return employees?.count ?? 0
+        return employees.count
     }
 
     // MARK: Lifecycle
@@ -47,6 +54,7 @@ extension EmployeesPresenter: IEmployeesPresenter {
         case .insertNewRow: viewController?.updateAddingData()
         case .updateRow(let index): viewController?.reloadData(at: index)
         case .deleteRow(let index): viewController?.updateDeletedData(at: index)
+        case .reloadData: break
         case .none: break
         }
 
@@ -56,31 +64,33 @@ extension EmployeesPresenter: IEmployeesPresenter {
     // MARK: Input
 
     func get(at index: Int) -> Employee? {
-        return employees?[index]
+        return employees[index]
     }
 
     func remove(at index: Int) {
-        employees?.remove(at: index)
+        employees.remove(at: index)
+        
+        viewController?.updateDeletedData(at: index)
     }
 
     func addNewEmployee(_ employee: Employee) {
-        employees?.append(employee)
+        employees.append(employee)
 
         employeesViewUpdateType = .insertNewRow
     }
 
     func editEmployee(_ employee: Employee) {
         if let index = selectedRowIndex {
-            employees?[index] = employee
+            employees[index] = employee
 
             employeesViewUpdateType = .updateRow(index: index)
         }
     }
-
+    
     func deleteEmployee() {
         if let index = selectedRowIndex {
-            employees?.remove(at: index)
-
+            employees.remove(at: index)
+            
             employeesViewUpdateType = .deleteRow(index: index)
         }
     }
@@ -88,15 +98,13 @@ extension EmployeesPresenter: IEmployeesPresenter {
     // MARK: Actions
 
     func didPressAddButton() {
-        //router?.openNewCompanyViewController(delegate: self)
+        router?.openEmployeeDetailViewController(delegate: self, with: nil)
     }
 
     func didSelectRow(at index: Int) {
         selectedRowIndex = index
 
-        if let employee = employees?[index] {
-            //router?.openEmployeesViewController(with: <#T##[Employee]?#>)
-        }
+        router?.openEmployeeDetailViewController(delegate: self, with: employees[index])
     }
 }
 
@@ -104,12 +112,24 @@ extension EmployeesPresenter: IEmployeesPresenter {
 
 extension EmployeesPresenter: IEmployeesInteractorOutput {}
 
-//// MARK: - INewCompanyPresenterDelegate
-//
-//extension EmployeesPresenter: INewCompanyPresenterDelegate {
-//    func iNewCompanyPresenter(_ presenter: INewCompanyPresenter, addedNewCompany companyName: String) {
-//        interactor?.createCompany(name: companyName)
-//
-//        employeesViewUpdateType = .insertNewRow
-//    }
-//}
+// MARK: - IEmployeeDetailPresenterDelegate
+
+extension EmployeesPresenter: IEmployeeDetailPresenterDelegate {
+    func iEmployeeDetailPresenter(_ presenter: IEmployeeDetailPresenter, addedNewEmployee employee: Employee) {
+        addNewEmployee(employee)
+        
+        delegate?.iEmployeesPresenter(self, addedNewEmployee: employee)
+    }
+    
+    func iEmployeeDetailPresenter(_ presenter: IEmployeeDetailPresenter, editEmployee employee: Employee) {
+        editEmployee(employee)
+        
+        delegate?.iEmployeesPresenter(self, editEmployee: employee)
+    }
+    
+    func iEmployeeDetailPresenterDeleteEmployee(_ presenter: IEmployeeDetailPresenter) {
+        deleteEmployee()
+        
+        delegate?.iEmployeesPresenterDeleteEmployee(self)
+    }
+}

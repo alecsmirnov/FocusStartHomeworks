@@ -82,30 +82,6 @@ final class EmployeeDetailView: UIView {
     }
 }
 
-// MARK: - Public Properties
-
-extension EmployeeDetailView {
-    var name: String? {
-        return nameTextField.text
-    }
-    
-    var age: String? {
-        return ageTextField.text
-    }
-    
-    var post: String? {
-        return postTextField.text
-    }
-    
-    var workExperience: String? {
-        return workExperienceTextField.text
-    }
-    
-    var education: String? {
-        return educationTextField.text
-    }
-}
-
 // MARK: - Public Methods
 
 extension EmployeeDetailView {
@@ -118,6 +94,21 @@ extension EmployeeDetailView {
         
         workExperienceTextField.text = employee.workExperience
         educationTextField.text = employee.education
+    }
+    
+    func getEmployee() -> Employee? {
+        guard let name = nameTextField.text, !name.isEmpty,
+              let age = ageTextField.text, !age.isEmpty,
+              let post = postTextField.text, !post.isEmpty else { return nil }
+        
+        let workExperience = workExperienceTextField.text
+        let education = educationTextField.text
+        
+        return Employee(name: name,
+                        age: Int(age) ?? 0,
+                        post: post,
+                        workExperience: workExperience,
+                        education: education)
     }
 }
 
@@ -142,8 +133,8 @@ private extension EmployeeDetailView {
     }
     
     func setupTableViewSubviewsCellsAppearance() {
-        nameTextField.placeholder = "Manufacturer"
-        ageTextField.placeholder = "Model"
+        nameTextField.placeholder = "Name"
+        ageTextField.placeholder = "Age"
         postTextField.placeholder = "Post"
         
         workExperienceTextField.placeholder = "Work experience"
@@ -151,10 +142,15 @@ private extension EmployeeDetailView {
     }
     
     func setupTableViewCellsAppearance() {
+        nameTextField.autocorrectionType = .no
+        ageTextField.autocorrectionType = .no
+        postTextField.autocorrectionType = .no
+        workExperienceTextField.autocorrectionType = .no
+        educationTextField.autocorrectionType = .no
+        
         nameCell.selectionStyle = .none
         ageCell.selectionStyle = .none
         postCell.selectionStyle = .none
-        
         workExperienceCell.selectionStyle = .none
         educationCell.selectionStyle = .none
     }

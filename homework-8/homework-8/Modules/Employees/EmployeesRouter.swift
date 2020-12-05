@@ -6,7 +6,7 @@
 //
 
 protocol IEmployeesRouter: AnyObject {
-    func openEmployeeDetailViewController(with employee: Employee?)
+    func openEmployeeDetailViewController(delegate: IEmployeeDetailPresenterDelegate, with employee: Employee?)
 }
 
 final class EmployeesRouter {
@@ -20,7 +20,10 @@ final class EmployeesRouter {
 // MARK: - IEmployeesRouter
 
 extension EmployeesRouter: IEmployeesRouter {
-    func openEmployeeDetailViewController(with employee: Employee?) {
+    func openEmployeeDetailViewController(delegate: IEmployeeDetailPresenterDelegate, with employee: Employee?) {
+        let employeeDetailViewController = EmployeeDetailAssembly.createEmployeeDetailViewController(delegate: delegate,
+                                                                                                     with: employee)
         
+        viewController?.navigationController?.pushViewController(employeeDetailViewController, animated: true)
     }
 }

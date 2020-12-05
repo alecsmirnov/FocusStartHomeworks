@@ -7,11 +7,7 @@
 
 import UIKit
 
-protocol ICompaniesView: AnyObject {
-    func insertNewRow()
-    func reloadRow(at index: Int)
-    func deleteRow(at index: Int)
-}
+protocol ICompaniesView: AnyObject {}
 
 final class CompaniesView: UIView {
     // MARK: Properties
@@ -48,14 +44,6 @@ final class CompaniesView: UIView {
 // MARK: - Public Methods
 
 extension CompaniesView {
-    func reloadData() {
-        tableView.reloadData()
-    }
-}
-
-// MARK: - ICompaniesView
-
-extension CompaniesView: ICompaniesView {
     func insertNewRow() {
         let lastRowIndex = tableView.numberOfRows(inSection: 0)
         let lastRowIndexPath = IndexPath(row: lastRowIndex, section: 0)
@@ -74,7 +62,15 @@ extension CompaniesView: ICompaniesView {
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
+    
+    func reloadData() {
+        tableView.reloadData()
+    }
 }
+
+// MARK: - ICompaniesView
+
+extension CompaniesView: ICompaniesView {}
 
 // MARK: - Private Methods
 

@@ -19,8 +19,6 @@ final class NewCompanyPresenter {
     var router: INewCompanyRouter?
     
     weak var delegate: INewCompanyPresenterDelegate?
-    
-    private var newName: String?
 }
 
 // MARK: - INewCompanyPresenter

@@ -13,7 +13,6 @@ protocol ICompaniesPresenter: AnyObject {
     func get(at index: Int) -> Company?
     func remove(at index: Int)
     func addNewCompany(_ company: Company)
-    func editCompany(_ company: Company)
     
     func didPressAddButton()
     func didSelectRow(at index: Int)
@@ -28,7 +27,7 @@ final class CompaniesPresenter {
     private var selectedRowIndex: Int?
 }
 
-// MARK: - ICarsPresenter
+// MARK: - ICompaniesPresenter
 
 extension CompaniesPresenter: ICompaniesPresenter {
     // MARK: Properties
@@ -44,6 +43,7 @@ extension CompaniesPresenter: ICompaniesPresenter {
         case .insertNewRow: viewController?.updateAddingData()
         case .updateRow(let index): viewController?.reloadData(at: index)
         case .deleteRow(let index): viewController?.updateDeletedData(at: index)
+        case .reloadData: break
         case .none: break
         }
         
@@ -57,21 +57,13 @@ extension CompaniesPresenter: ICompaniesPresenter {
     }
     
     func remove(at index: Int) {
-        interactor?.remove(at: index)
+        interactor?.removeCompany(at: index)
     }
     
     func addNewCompany(_ company: Company) {
         interactor?.append(company: company)
         
         companiesViewUpdateType = .insertNewRow
-    }
-    
-    func editCompany(_ company: Company) {
-        if let index = selectedRowIndex {
-            interactor?.replace(at: index, with: company)
-            
-            companiesViewUpdateType = .updateRow(index: index)
-        }
     }
 
     // MARK: Actions
@@ -84,7 +76,7 @@ extension CompaniesPresenter: ICompaniesPresenter {
         selectedRowIndex = index
         
         if let company = interactor?.get(at: index) {
-            //router?.openEmployeesViewController(with: <#T##[Employee]?#>)
+            router?.openEmployeesViewController(delegate: self, with: company.employees)
         }
     }
 }
@@ -105,6 +97,16 @@ extension CompaniesPresenter: INewCompanyPresenterDelegate {
 
 // MARK: - IEmployeesPresenterDelegate
 
-extension CompaniesPresenter {
+extension CompaniesPresenter: IEmployeesPresenterDelegate {
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, addedNewEmployee employee: Employee) {
+        print("add")
+    }
     
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, editEmployee employee: Employee) {
+        print("edit")
+    }
+    
+    func iEmployeesPresenterDeleteEmployee(_ presenter: IEmployeesPresenter) {
+        print("delete")
+    }
 }

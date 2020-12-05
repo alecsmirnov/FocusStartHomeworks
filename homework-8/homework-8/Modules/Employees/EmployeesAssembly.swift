@@ -6,7 +6,8 @@
 //
 
 enum EmployeesAssembly {
-    static func createEmployeesViewController(with employees: [Employee]?) -> EmployeesViewController {
+    static func createEmployeesViewController(delegate: IEmployeesPresenterDelegate,
+                                              with employees: [Employee]) -> EmployeesViewController {
         let viewController = EmployeesViewController()
         
         let interactor = EmployeesInteractor()
@@ -21,6 +22,7 @@ enum EmployeesAssembly {
         presenter.interactor = interactor
         presenter.router = router
         
+        presenter.delegate = delegate
         presenter.employees = employees
         
         return viewController

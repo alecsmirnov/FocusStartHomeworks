@@ -9,5 +9,6 @@ enum TableViewUpdateType {
     case insertNewRow
     case updateRow(index: Int)
     case deleteRow(index: Int)
+    case reloadData
     case none
 }

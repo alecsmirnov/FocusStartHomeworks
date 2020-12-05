@@ -36,6 +36,7 @@ final class EmployeesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupAppearance()
         setupEmployeesView()
         setupButtons()
     }
@@ -66,6 +67,10 @@ extension EmployeesViewController: IEmployeesViewController {
 // MARK: - Private Methods
 
 private extension EmployeesViewController {
+    func setupAppearance() {
+        navigationItem.title = "Employees"
+    }
+    
     func setupEmployeesView() {
         employeesView.tableViewDataSource = self
         employeesView.tableViewDelegate = self
@@ -140,8 +145,7 @@ extension EmployeesViewController: UITableViewDelegate {
     ) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completionHandler in
             self?.presenter?.remove(at: indexPath.row)
-
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
             completionHandler(true)
         }
 
@@ -150,19 +154,3 @@ extension EmployeesViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [delete])
     }
 }
-
-//// MARK: - CarDetailViewControllerDelegate
-//
-//extension EmployeesViewController: CarDetailViewControllerDelegate {
-//    func carsViewControllerDelegate(_ anyObject: AnyObject, addNew car: Car) {
-//        presenter?.addNewCar(car)
-//    }
-//
-//    func carsViewControllerDelegate(_ anyObject: AnyObject, edit car: Car) {
-//        presenter?.editCar(car)
-//    }
-//
-//    func carsViewControllerDelegateDeleteCar(_ anyObject: AnyObject) {
-//        presenter?.deleteCar()
-//    }
-//}
