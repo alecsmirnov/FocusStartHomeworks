@@ -27,7 +27,6 @@ protocol IEmployeesPresenterDelegate: AnyObject {
 
 final class EmployeesPresenter {
     weak var viewController: IEmployeesViewController?
-    var interactor: IEmployeesInteractor?
     var router: IEmployeesRouter?
     
     weak var delegate: IEmployeesPresenterDelegate?
@@ -108,10 +107,6 @@ extension EmployeesPresenter: IEmployeesPresenter {
         router?.openEmployeeDetailViewController(delegate: self, with: employees[index])
     }
 }
-
-// MARK: - IEmployeesInteractorOutput
-
-extension EmployeesPresenter: IEmployeesInteractorOutput {}
 
 // MARK: - IEmployeeDetailPresenterDelegate
 

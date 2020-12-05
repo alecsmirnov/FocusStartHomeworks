@@ -15,7 +15,6 @@ protocol INewCompanyPresenterDelegate: AnyObject {
 
 final class NewCompanyPresenter {
     weak var viewController: INewCompanyViewController?
-    var interactor: INewCompanyInteractor?
     var router: INewCompanyRouter?
     
     weak var delegate: INewCompanyPresenterDelegate?
@@ -36,7 +35,3 @@ extension NewCompanyPresenter: INewCompanyPresenter {
         }
     }
 }
-
-// MARK: - ICarDetailInteractorOutput
-
-extension NewCompanyPresenter: INewCompanyInteractorOutput {}

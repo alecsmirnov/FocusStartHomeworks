@@ -11,16 +11,12 @@ enum NewCompanyAssembly {
     ) -> NewCompanyViewController {
         let viewController = NewCompanyViewController()
         
-        let interactor = NewCompanyInteractor()
         let presenter = NewCompanyPresenter()
         let router = NewCompanyRouter(viewController: viewController)
         
         viewController.presenter = presenter
         
-        interactor.presenter = presenter
-        
         presenter.viewController = viewController
-        presenter.interactor = interactor
         presenter.router = router
         
         presenter.delegate = delegate

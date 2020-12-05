@@ -10,16 +10,12 @@ enum EmployeesAssembly {
                                               with employees: [Employee]) -> EmployeesViewController {
         let viewController = EmployeesViewController()
         
-        let interactor = EmployeesInteractor()
         let presenter = EmployeesPresenter()
         let router = EmployeesRouter(viewController: viewController)
         
         viewController.presenter = presenter
         
-        interactor.presenter = presenter
-        
         presenter.viewController = viewController
-        presenter.interactor = interactor
         presenter.router = router
         
         presenter.delegate = delegate

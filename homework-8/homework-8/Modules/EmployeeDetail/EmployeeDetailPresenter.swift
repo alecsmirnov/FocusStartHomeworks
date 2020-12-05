@@ -21,7 +21,6 @@ protocol IEmployeeDetailPresenterDelegate: AnyObject {
 
 final class EmployeeDetailPresenter {
     weak var viewController: IEmployeeDetailViewController?
-    var interactor: IEmployeeDetailInteractor?
     var router: IEmployeeDetailRouter?
     
     weak var delegate: IEmployeeDetailPresenterDelegate?
@@ -69,7 +68,3 @@ extension EmployeeDetailPresenter: IEmployeeDetailPresenter {
         router?.closeEmployeeDetailViewController()
     }
 }
-
-// MARK: - IEmployeeDetailInteractorOutput
-
-extension EmployeeDetailPresenter: IEmployeeDetailInteractorOutput {}
