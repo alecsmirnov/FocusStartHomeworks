@@ -6,7 +6,7 @@
 //
 
 enum NewCompanyAssembly {
-    static func createNewCompanyNavigationController(
+    static func createNewCompanyViewController(
         delegate: INewCompanyPresenterDelegate
     ) -> NewCompanyViewController {
         let viewController = NewCompanyViewController()

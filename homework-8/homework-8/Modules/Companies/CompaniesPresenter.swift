@@ -8,13 +8,12 @@
 protocol ICompaniesPresenter: AnyObject {
     var count: Int { get }
     
-    func viewDidAppear(view: ICompaniesView)
+    func viewDidAppear()
     
     func get(at index: Int) -> Company?
     func remove(at index: Int)
     func addNewCompany(_ company: Company)
     func editCompany(_ company: Company)
-    func deleteCompany()
     
     func didPressAddButton()
     func didSelectRow(at index: Int)
@@ -25,15 +24,7 @@ final class CompaniesPresenter {
     var interactor: ICompaniesInteractor?
     var router: ICompaniesRouter?
     
-    private enum CompaniesViewUpdateType {
-        case insertNewRow
-        case updateRow(index: Int)
-        case deleteRow(index: Int)
-        case none
-    }
-    
-    private var companiesViewUpdateType = CompaniesViewUpdateType.none
-    
+    private var companiesViewUpdateType = TableViewUpdateType.none
     private var selectedRowIndex: Int?
 }
 
@@ -48,11 +39,11 @@ extension CompaniesPresenter: ICompaniesPresenter {
 
     // MARK: Lifecycle
     
-    func viewDidAppear(view: ICompaniesView) {
+    func viewDidAppear() {
         switch companiesViewUpdateType {
-        case .insertNewRow: view.insertNewRow()
-        case .updateRow(let index): view.reloadRow(at: index)
-        case .deleteRow(let index): view.deleteRow(at: index)
+        case .insertNewRow: viewController?.updateAddingData()
+        case .updateRow(let index): viewController?.reloadData(at: index)
+        case .deleteRow(let index): viewController?.updateDeletedData(at: index)
         case .none: break
         }
         
@@ -82,14 +73,6 @@ extension CompaniesPresenter: ICompaniesPresenter {
             companiesViewUpdateType = .updateRow(index: index)
         }
     }
-    
-    func deleteCompany() {
-        if let index = selectedRowIndex {
-            interactor?.remove(at: index)
-            
-            companiesViewUpdateType = .deleteRow(index: index)
-        }
-    }
 
     // MARK: Actions
     
@@ -115,6 +98,13 @@ extension CompaniesPresenter: ICompaniesInteractorOutput {}
 extension CompaniesPresenter: INewCompanyPresenterDelegate {
     func iNewCompanyPresenter(_ presenter: INewCompanyPresenter, addedNewCompany companyName: String) {
         interactor?.createCompany(name: companyName)
-        viewController?.updateAddingData()
+        
+        companiesViewUpdateType = .insertNewRow
     }
+}
+
+// MARK: - IEmployeesPresenterDelegate
+
+extension CompaniesPresenter {
+    
 }

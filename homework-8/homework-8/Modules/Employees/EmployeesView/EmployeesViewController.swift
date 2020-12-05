@@ -1,27 +1,27 @@
 //
-//  CompaniesViewController.swift
+//  EmployeesViewController.swift
 //  homework-8
 //
-//  Created by Admin on 04.12.2020.
+//  Created by Admin on 05.12.2020.
 //
 
 import UIKit
 
-protocol ICompaniesViewController: AnyObject {
+protocol IEmployeesViewController: AnyObject {
     func updateAddingData()
     func updateDeletedData(at index: Int)
     
     func reloadData(at index: Int)
 }
 
-final class CompaniesViewController: UIViewController {
+final class EmployeesViewController: UIViewController {
     // MARK: Properties
     
-    var presenter: ICompaniesPresenter?
+    var presenter: IEmployeesPresenter?
     
-    private var companiesView: CompaniesView {
-        guard let view = view as? CompaniesView else {
-            fatalError("view is not a CompaniesView instance")
+    private var employeesView: EmployeesView {
+        guard let view = view as? EmployeesView else {
+            fatalError("view is not a EmployeesView instance")
         }
         
         return view
@@ -30,14 +30,13 @@ final class CompaniesViewController: UIViewController {
     // MARK: Lifecycle
     
     override func loadView() {
-        view = CompaniesView()
+        view = EmployeesView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupAppearance()
-        setupCompaniesView()
+        setupEmployeesView()
         setupButtons()
     }
     
@@ -48,44 +47,40 @@ final class CompaniesViewController: UIViewController {
     }
 }
 
-// MARK: - ICompaniesViewController
+// MARK: - IEmployeesViewController
 
-extension CompaniesViewController: ICompaniesViewController {
+extension EmployeesViewController: IEmployeesViewController {
     func updateAddingData() {
-        companiesView.insertNewRow()
+        employeesView.insertNewRow()
     }
     
     func updateDeletedData(at index: Int) {
-        companiesView.deleteRow(at: index)
+        employeesView.deleteRow(at: index)
     }
     
     func reloadData(at index: Int) {
-        companiesView.reloadRow(at: index)
+        employeesView.reloadRow(at: index)
     }
 }
 
 // MARK: - Private Methods
 
-private extension CompaniesViewController {
-    func setupAppearance() {
-        navigationItem.title = "Companies"
-    }
-    
-    func setupCompaniesView() {
-        companiesView.tableViewDataSource = self
-        companiesView.tableViewDelegate = self
+private extension EmployeesViewController {
+    func setupEmployeesView() {
+        employeesView.tableViewDataSource = self
+        employeesView.tableViewDelegate = self
     }
     
     func reloadData() {
         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] in
-            self?.companiesView.reloadData()
+            self?.employeesView.reloadData()
         }, completion: nil)
     }
 }
 
 // MARK: - Buttons
 
-private extension CompaniesViewController {
+private extension EmployeesViewController {
     func setupButtons() {
         setupAddButton()
     }
@@ -103,7 +98,7 @@ private extension CompaniesViewController {
 
 // MARK: - Actions
 
-extension CompaniesViewController {
+extension EmployeesViewController {
     @objc func didPressAddButton() {
         presenter?.didPressAddButton()
     }
@@ -111,19 +106,19 @@ extension CompaniesViewController {
 
 // MARK: - UITableViewDataSource
 
-extension CompaniesViewController: UITableViewDataSource {
+extension EmployeesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CompanyCell.reuseIdentifier,
+            withIdentifier: EmployeeCell.reuseIdentifier,
             for: indexPath
-        ) as? CompanyCell else { return UITableViewCell() }
+        ) as? EmployeeCell else { return UITableViewCell() }
 
-        if let company = presenter?.get(at: indexPath.row) {
-            cell.configure(with: company)
+        if let employee = presenter?.get(at: indexPath.row) {
+            cell.configure(with: employee)
         }
 
         return cell
@@ -132,7 +127,7 @@ extension CompaniesViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension CompaniesViewController: UITableViewDelegate {
+extension EmployeesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didSelectRow(at: indexPath.row)
         
@@ -155,3 +150,19 @@ extension CompaniesViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [delete])
     }
 }
+
+//// MARK: - CarDetailViewControllerDelegate
+//
+//extension EmployeesViewController: CarDetailViewControllerDelegate {
+//    func carsViewControllerDelegate(_ anyObject: AnyObject, addNew car: Car) {
+//        presenter?.addNewCar(car)
+//    }
+//
+//    func carsViewControllerDelegate(_ anyObject: AnyObject, edit car: Car) {
+//        presenter?.editCar(car)
+//    }
+//
+//    func carsViewControllerDelegateDeleteCar(_ anyObject: AnyObject) {
+//        presenter?.deleteCar()
+//    }
+//}

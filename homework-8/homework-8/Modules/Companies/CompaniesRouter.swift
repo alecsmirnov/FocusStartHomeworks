@@ -26,28 +26,8 @@ extension CompaniesRouter: ICompaniesRouter {
     }
     
     func openNewCompanyViewController(delegate: INewCompanyPresenterDelegate) {
-        let newCompanyViewController = NewCompanyAssembly.createNewCompanyNavigationController(delegate: delegate)
+        let newCompanyViewController = NewCompanyAssembly.createNewCompanyViewController(delegate: delegate)
         
         viewController?.navigationController?.pushViewController(newCompanyViewController, animated: true)
     }
-    
-//    func openFilterView(with body: Body?) {
-//        let bodyPickerViewController = BodyPickerAssembly.createBodyPickerViewController(
-//            with: body,
-//            delegate: viewController
-//        )
-//        
-//        let navigationController = UINavigationController(rootViewController: bodyPickerViewController)
-//    
-//        viewController?.present(navigationController, animated: true, completion: nil)
-//    }
-//    
-//    func openCarDetailView(with car: Car?) {
-//        let carDetailViewController = CarDetailAssembly.createCarDetailViewController(
-//            with: car,
-//            delegate: viewController
-//        )
-//        
-//        viewController?.navigationController?.pushViewController(carDetailViewController, animated: true)
-//    }
 }

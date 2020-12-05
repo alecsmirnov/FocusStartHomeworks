@@ -1,19 +1,19 @@
 //
-//  CompaniesView.swift
+//  EmployeesView.swift
 //  homework-8
 //
-//  Created by Admin on 04.12.2020.
+//  Created by Admin on 05.12.2020.
 //
 
 import UIKit
 
-protocol ICompaniesView: AnyObject {
+protocol IEmployeesView: AnyObject {
     func insertNewRow()
     func reloadRow(at index: Int)
     func deleteRow(at index: Int)
 }
 
-final class CompaniesView: UIView {
+final class EmployeesView: UIView {
     // MARK: Properties
     
     var tableViewDataSource: UITableViewDataSource? {
@@ -47,15 +47,15 @@ final class CompaniesView: UIView {
 
 // MARK: - Public Methods
 
-extension CompaniesView {
+extension EmployeesView {
     func reloadData() {
         tableView.reloadData()
     }
 }
 
-// MARK: - ICompaniesView
+// MARK: - IEmployeesView
 
-extension CompaniesView: ICompaniesView {
+extension EmployeesView: IEmployeesView {
     func insertNewRow() {
         let lastRowIndex = tableView.numberOfRows(inSection: 0)
         let lastRowIndexPath = IndexPath(row: lastRowIndex, section: 0)
@@ -78,15 +78,15 @@ extension CompaniesView: ICompaniesView {
 
 // MARK: - Private Methods
 
-private extension CompaniesView {
+private extension EmployeesView {
     func registerCells() {
-        tableView.register(CompanyCell.self, forCellReuseIdentifier: CompanyCell.reuseIdentifier)
+        tableView.register(EmployeeCell.self, forCellReuseIdentifier: EmployeeCell.reuseIdentifier)
     }
 }
 
 // MARK: - Appearance
 
-private extension CompaniesView {
+private extension EmployeesView {
     func setupAppearance() {
         backgroundColor = .systemBackground
         
@@ -100,7 +100,7 @@ private extension CompaniesView {
 
 // MARK: - Layouts
 
-private extension CompaniesView {
+private extension EmployeesView {
     func setupLayout() {
         setupSubviews()
         
