@@ -21,6 +21,12 @@
 		8454FCE9257B5669009F3FE1 /* EmployeesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FCE8257B5669009F3FE1 /* EmployeesRouter.swift */; };
 		8454FCEC257B5675009F3FE1 /* EmployeesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FCEB257B5675009F3FE1 /* EmployeesAssembly.swift */; };
 		8454FCF4257B5941009F3FE1 /* TableViewUpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FCF3257B5941009F3FE1 /* TableViewUpdateType.swift */; };
+		8454FCFE257B6479009F3FE1 /* EmployeeDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FCFD257B6479009F3FE1 /* EmployeeDetailInteractor.swift */; };
+		8454FD01257B6480009F3FE1 /* EmployeeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FD00257B6480009F3FE1 /* EmployeeDetailPresenter.swift */; };
+		8454FD04257B648D009F3FE1 /* EmployeeDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FD03257B648D009F3FE1 /* EmployeeDetailRouter.swift */; };
+		8454FD07257B649D009F3FE1 /* EmployeeDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FD06257B649D009F3FE1 /* EmployeeDetailAssembly.swift */; };
+		8454FD0A257B6535009F3FE1 /* EmployeeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FD09257B6535009F3FE1 /* EmployeeDetailView.swift */; };
+		8454FD0D257B6545009F3FE1 /* EmployeeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454FD0C257B6545009F3FE1 /* EmployeeDetailViewController.swift */; };
 		84553CC8257A807C003C272A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84553CC7257A807C003C272A /* AppDelegate.swift */; };
 		84553CCA257A807C003C272A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84553CC9257A807C003C272A /* SceneDelegate.swift */; };
 		84553CD2257A807C003C272A /* homework_8.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84553CD0257A807C003C272A /* homework_8.xcdatamodeld */; };
@@ -57,6 +63,12 @@
 		8454FCE8257B5669009F3FE1 /* EmployeesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesRouter.swift; sourceTree = "<group>"; };
 		8454FCEB257B5675009F3FE1 /* EmployeesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesAssembly.swift; sourceTree = "<group>"; };
 		8454FCF3257B5941009F3FE1 /* TableViewUpdateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewUpdateType.swift; sourceTree = "<group>"; };
+		8454FCFD257B6479009F3FE1 /* EmployeeDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailInteractor.swift; sourceTree = "<group>"; };
+		8454FD00257B6480009F3FE1 /* EmployeeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailPresenter.swift; sourceTree = "<group>"; };
+		8454FD03257B648D009F3FE1 /* EmployeeDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailRouter.swift; sourceTree = "<group>"; };
+		8454FD06257B649D009F3FE1 /* EmployeeDetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailAssembly.swift; sourceTree = "<group>"; };
+		8454FD09257B6535009F3FE1 /* EmployeeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailView.swift; sourceTree = "<group>"; };
+		8454FD0C257B6545009F3FE1 /* EmployeeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailViewController.swift; sourceTree = "<group>"; };
 		84553CC4257A807C003C272A /* homework-8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "homework-8.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84553CC7257A807C003C272A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84553CC9257A807C003C272A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +154,27 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		8454FCF6257B6431009F3FE1 /* EmployeeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8454FCF7257B644F009F3FE1 /* EmployeeDetailView */,
+				8454FCFD257B6479009F3FE1 /* EmployeeDetailInteractor.swift */,
+				8454FD00257B6480009F3FE1 /* EmployeeDetailPresenter.swift */,
+				8454FD03257B648D009F3FE1 /* EmployeeDetailRouter.swift */,
+				8454FD06257B649D009F3FE1 /* EmployeeDetailAssembly.swift */,
+			);
+			path = EmployeeDetail;
+			sourceTree = "<group>";
+		};
+		8454FCF7257B644F009F3FE1 /* EmployeeDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				8454FD09257B6535009F3FE1 /* EmployeeDetailView.swift */,
+				8454FD0C257B6545009F3FE1 /* EmployeeDetailViewController.swift */,
+			);
+			path = EmployeeDetailView;
+			sourceTree = "<group>";
+		};
 		84553CBB257A807C003C272A = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +241,7 @@
 				84553D16257A84BC003C272A /* Companies */,
 				8454FCBE257B4296009F3FE1 /* NewCompany */,
 				8454FCD4257B55D4009F3FE1 /* Employees */,
+				8454FCF6257B6431009F3FE1 /* EmployeeDetail */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -320,21 +354,27 @@
 				8454FCF4257B5941009F3FE1 /* TableViewUpdateType.swift in Sources */,
 				8454FCD0257B433D009F3FE1 /* NewCompanyAssembly.swift in Sources */,
 				84553D2A257A8552003C272A /* CompaniesViewController.swift in Sources */,
+				8454FCFE257B6479009F3FE1 /* EmployeeDetailInteractor.swift in Sources */,
 				84553D1C257A84F1003C272A /* CompaniesPresenter.swift in Sources */,
 				8454FCE2257B5650009F3FE1 /* EmployeesInteractor.swift in Sources */,
 				8454FCDB257B5612009F3FE1 /* EmployeesView.swift in Sources */,
 				84553D1F257A84FA003C272A /* CompaniesRouter.swift in Sources */,
 				84553D3B257A8AC5003C272A /* CompanyEntity+CoreDataClass.swift in Sources */,
+				8454FD07257B649D009F3FE1 /* EmployeeDetailAssembly.swift in Sources */,
 				84553CC8257A807C003C272A /* AppDelegate.swift in Sources */,
 				84553CD2257A807C003C272A /* homework_8.xcdatamodeld in Sources */,
+				8454FD04257B648D009F3FE1 /* EmployeeDetailRouter.swift in Sources */,
 				84553D39257A8AC5003C272A /* EmployeeEntity+CoreDataClass.swift in Sources */,
 				8454FCE6257B565D009F3FE1 /* EmployeesPresenter.swift in Sources */,
 				8454FCC7257B431C009F3FE1 /* NewCompanyInteractor.swift in Sources */,
 				84553D3F257A8F86003C272A /* Employee.swift in Sources */,
+				8454FD0A257B6535009F3FE1 /* EmployeeDetailView.swift in Sources */,
 				8454FCEC257B5675009F3FE1 /* EmployeesAssembly.swift in Sources */,
 				84553D18257A84DB003C272A /* CompaniesInteractor.swift in Sources */,
 				84553D2D257A857A003C272A /* CompanyCell.swift in Sources */,
 				84553D42257A8F90003C272A /* Company.swift in Sources */,
+				8454FD01257B6480009F3FE1 /* EmployeeDetailPresenter.swift in Sources */,
+				8454FD0D257B6545009F3FE1 /* EmployeeDetailViewController.swift in Sources */,
 				84553CCA257A807C003C272A /* SceneDelegate.swift in Sources */,
 				8454FCDF257B5636009F3FE1 /* EmployeeCell.swift in Sources */,
 				8454FCE9257B5669009F3FE1 /* EmployeesRouter.swift in Sources */,
