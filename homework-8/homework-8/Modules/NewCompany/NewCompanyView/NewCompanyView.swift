@@ -94,6 +94,7 @@ private extension NewCompanyView {
     
     func setupTableViewSubviewsCellsAppearance() {
         nameTextField.placeholder = "Name"
+        nameTextField.autocorrectionType = .no
     }
     
     func setupTableViewCellsAppearance() {

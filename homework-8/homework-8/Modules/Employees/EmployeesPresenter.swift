@@ -21,8 +21,8 @@ protocol IEmployeesPresenter: AnyObject {
 
 protocol IEmployeesPresenterDelegate: AnyObject {
     func iEmployeesPresenter(_ presenter: IEmployeesPresenter, addedNewEmployee employee: Employee)
-    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, editEmployee employee: Employee)
-    func iEmployeesPresenterDeleteEmployee(_ presenter: IEmployeesPresenter)
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, editEmployee employee: Employee, by index: Int)
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, deleteEmployeeAt index: Int)
 }
 
 final class EmployeesPresenter {
@@ -54,7 +54,6 @@ extension EmployeesPresenter: IEmployeesPresenter {
         case .insertNewRow: viewController?.updateAddingData()
         case .updateRow(let index): viewController?.reloadData(at: index)
         case .deleteRow(let index): viewController?.updateDeletedData(at: index)
-        case .reloadData: break
         case .none: break
         }
 
@@ -71,6 +70,8 @@ extension EmployeesPresenter: IEmployeesPresenter {
         employees.remove(at: index)
         
         viewController?.updateDeletedData(at: index)
+        
+        delegate?.iEmployeesPresenter(self, deleteEmployeeAt: index)
     }
 
     func addNewEmployee(_ employee: Employee) {
@@ -122,14 +123,18 @@ extension EmployeesPresenter: IEmployeeDetailPresenterDelegate {
     }
     
     func iEmployeeDetailPresenter(_ presenter: IEmployeeDetailPresenter, editEmployee employee: Employee) {
-        editEmployee(employee)
+        if let index = selectedRowIndex {
+            editEmployee(employee)
         
-        delegate?.iEmployeesPresenter(self, editEmployee: employee)
+            delegate?.iEmployeesPresenter(self, editEmployee: employee, by: index)
+        }
     }
     
     func iEmployeeDetailPresenterDeleteEmployee(_ presenter: IEmployeeDetailPresenter) {
-        deleteEmployee()
+        if let index = selectedRowIndex {
+            deleteEmployee()
         
-        delegate?.iEmployeesPresenterDeleteEmployee(self)
+            delegate?.iEmployeesPresenter(self, deleteEmployeeAt: index)
+        }
     }
 }

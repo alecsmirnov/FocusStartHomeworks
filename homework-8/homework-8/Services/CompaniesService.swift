@@ -42,7 +42,7 @@ final class CompaniesService {
 // MARK: - Methods for working with Companies
 
 extension CompaniesService {
-    func append(company: Company) {
+    func appendCompany(_ company: Company) {
         let companyEntity = CompanyEntity(context: managedContext)
         
         companyEntity.name = company.name
@@ -113,33 +113,12 @@ extension CompaniesService {
             fatalError("could not fetch. \(error), \(error.userInfo)")
         }
     }
-    
-    func replaceCompany(at index: Int, with company: Company) {
-//        guard data.indices.contains(index) else {
-//            fatalError("index is out of range")
-//        }
-//
-//        let companyEntity = data[index]
-//        companyEntity.name = company.name
-//
-//        if !company.employees.isEmpty {
-//            if let employees = companyEntity.employees {
-//
-//            }
-//        }
-//
-//        do {
-//            try managedContext.save()
-//        } catch let error as NSError {
-//            fatalError("could not fetch. \(error), \(error.userInfo)")
-//        }
-    }
 }
 
 // MARK: - Methods for working with Employees
 
 extension CompaniesService {
-    func append(employee: Employee, by companyIndex: Int) {
+    func appendEmployee(_ employee: Employee, by companyIndex: Int) {
         guard data.indices.contains(companyIndex) else {
             fatalError("index is out of range")
         }
@@ -182,7 +161,7 @@ extension CompaniesService {
         }
     }
     
-    func replaceEmployee(at index: Int, with employee: Employee, by companyIndex: Int) {
+    func replaceEmployee(_ employee: Employee, at index: Int, by companyIndex: Int) {
         guard data.indices.contains(companyIndex),
               let employeesEntityArray = data[companyIndex].employees?.allObjects as? [EmployeeEntity],
               employeesEntityArray.indices.contains(index) else {

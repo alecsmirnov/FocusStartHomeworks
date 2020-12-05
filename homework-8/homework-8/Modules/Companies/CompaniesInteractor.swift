@@ -9,10 +9,14 @@ protocol ICompaniesInteractor: AnyObject {
     var count: Int { get }
     
     func createCompany(name: String)
-    func append(company: Company)
+    func appendCompany(_ company: Company)
     func removeCompany(at index: Int)
     
-    func get(at index: Int) -> Company
+    func getCompany(at index: Int) -> Company
+    
+    func appendEmployee(_ employee: Employee, by index: Int)
+    func replaceEmployee(_ employee: Employee, at index: Int, by companyIndex: Int)
+    func removeEmployee(at index: Int, by companyIndex: Int)
 }
 
 protocol ICompaniesInteractorOutput {}
@@ -26,29 +30,45 @@ final class CompaniesInteractor {
 // MARK: - ICarsInteractor
 
 extension CompaniesInteractor: ICompaniesInteractor {
-    // MARK: Properties
-    
     var count: Int {
         data.count
     }
-    
-    // MARK: Methods
-    
+}
+
+// MARK: - Methods for working with Companies
+
+extension CompaniesInteractor {
     func createCompany(name: String) {
         let company = Company(name: name, employees: [])
         
-        append(company: company)
+        data.appendCompany(company)
     }
     
-    func append(company: Company) {
-        data.append(company: company)
+    func appendCompany(_ company: Company) {
+        data.appendCompany(company)
     }
     
     func removeCompany(at index: Int) {
         data.removeCompany(at: index)
     }
     
-    func get(at index: Int) -> Company {
+    func getCompany(at index: Int) -> Company {
         return data.getCompany(at: index)
+    }
+}
+
+// MARK: - Methods for working with Employees
+
+extension CompaniesInteractor {
+    func appendEmployee(_ employee: Employee, by index: Int) {
+        data.appendEmployee(employee, by: index)
+    }
+    
+    func replaceEmployee(_ employee: Employee, at index: Int, by companyIndex: Int) {
+        data.replaceEmployee(employee, at: index, by: companyIndex)
+    }
+    
+    func removeEmployee(at index: Int, by companyIndex: Int) {
+        data.removeEmployee(at: index, by: companyIndex)
     }
 }

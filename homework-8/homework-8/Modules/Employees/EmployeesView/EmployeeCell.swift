@@ -33,7 +33,6 @@ final class EmployeeCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupAppearance()
         setupLayout()
     }
     
@@ -46,29 +45,21 @@ final class EmployeeCell: UITableViewCell {
 
 extension EmployeeCell {
     func configure(with employee: Employee) {
-        nameLabel.text = "Name: \(employee.name)"
-        ageLabel.text = "Age: \(employee.age)"
-        postLabel.text = "Post: \(employee.post)"
+        nameLabel.text = "Name:\t\t\t\t\(employee.name)"
+        ageLabel.text = "Age:\t\t\t\t\(employee.age)"
+        postLabel.text = "Post:\t\t\t\t\(employee.post)"
         
-        let workExperience = employee.workExperience == nil ? "-" : employee.workExperience ?? ""
-        let education = employee.education == nil ? "-" : employee.education ?? ""
+        let workExperience = employee.workExperience == nil ? "-" : employee.workExperience ?? "-"
+        let education = employee.education == nil ? "-" : employee.education ?? "-"
         
-        workExperienceLabel.text = "Work experience: \(workExperience)"
-        educationLabel.text = "Education: \(education)"
+        workExperienceLabel.text = "Work experience:  \(workExperience)"
+        educationLabel.text = "Education:\t\t\t\(education)"
     }
 }
 
 // MARK: - IEmployeeCell
 
 extension EmployeeCell: IEmployeeCell {}
-
-// MARK: - Appearance
-
-private extension EmployeeCell {
-    func setupAppearance() {
-        
-    }
-}
 
 // MARK: - Layout
 

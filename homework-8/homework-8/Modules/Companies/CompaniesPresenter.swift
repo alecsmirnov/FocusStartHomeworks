@@ -43,7 +43,6 @@ extension CompaniesPresenter: ICompaniesPresenter {
         case .insertNewRow: viewController?.updateAddingData()
         case .updateRow(let index): viewController?.reloadData(at: index)
         case .deleteRow(let index): viewController?.updateDeletedData(at: index)
-        case .reloadData: break
         case .none: break
         }
         
@@ -53,7 +52,7 @@ extension CompaniesPresenter: ICompaniesPresenter {
     // MARK: Input
 
     func get(at index: Int) -> Company? {
-        return interactor?.get(at: index)
+        return interactor?.getCompany(at: index)
     }
     
     func remove(at index: Int) {
@@ -61,7 +60,7 @@ extension CompaniesPresenter: ICompaniesPresenter {
     }
     
     func addNewCompany(_ company: Company) {
-        interactor?.append(company: company)
+        interactor?.appendCompany(company)
         
         companiesViewUpdateType = .insertNewRow
     }
@@ -75,7 +74,7 @@ extension CompaniesPresenter: ICompaniesPresenter {
     func didSelectRow(at index: Int) {
         selectedRowIndex = index
         
-        if let company = interactor?.get(at: index) {
+        if let company = interactor?.getCompany(at: index) {
             router?.openEmployeesViewController(delegate: self, with: company.employees)
         }
     }
@@ -99,14 +98,26 @@ extension CompaniesPresenter: INewCompanyPresenterDelegate {
 
 extension CompaniesPresenter: IEmployeesPresenterDelegate {
     func iEmployeesPresenter(_ presenter: IEmployeesPresenter, addedNewEmployee employee: Employee) {
-        print("add")
+        if let companyIndex = selectedRowIndex {
+            interactor?.appendEmployee(employee, by: companyIndex)
+            
+            companiesViewUpdateType = .updateRow(index: companyIndex)
+        }
     }
     
-    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, editEmployee employee: Employee) {
-        print("edit")
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, editEmployee employee: Employee, by index: Int) {
+        if let companyIndex = selectedRowIndex {
+            interactor?.replaceEmployee(employee, at: index, by: companyIndex)
+            
+            companiesViewUpdateType = .updateRow(index: index)
+        }
     }
     
-    func iEmployeesPresenterDeleteEmployee(_ presenter: IEmployeesPresenter) {
-        print("delete")
+    func iEmployeesPresenter(_ presenter: IEmployeesPresenter, deleteEmployeeAt index: Int) {
+        if let companyIndex = selectedRowIndex {
+            interactor?.removeEmployee(at: index, by: companyIndex)
+            
+            companiesViewUpdateType = .updateRow(index: companyIndex)
+        }
     }
 }

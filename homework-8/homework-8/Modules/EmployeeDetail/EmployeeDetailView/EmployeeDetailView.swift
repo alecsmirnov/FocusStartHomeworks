@@ -101,8 +101,16 @@ extension EmployeeDetailView {
               let age = ageTextField.text, !age.isEmpty,
               let post = postTextField.text, !post.isEmpty else { return nil }
         
-        let workExperience = workExperienceTextField.text
-        let education = educationTextField.text
+        var workExperience: String?
+        var education: String?
+        
+        if let workExperienceText = workExperienceTextField.text, !workExperienceText.isEmpty {
+            workExperience = workExperienceText
+        }
+        
+        if let educationText = educationTextField.text, !educationText.isEmpty {
+            education = educationText
+        }
         
         return Employee(name: name,
                         age: Int(age) ?? 0,
