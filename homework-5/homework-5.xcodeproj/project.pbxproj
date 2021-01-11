@@ -1,0 +1,553 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8446BEAD256159A700685898 /* BodyPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEAC256159A700685898 /* BodyPickerInteractor.swift */; };
+		8446BEB0256159F200685898 /* CarDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEAF256159F200685898 /* CarDetailInteractor.swift */; };
+		8446BEBA2561717500685898 /* BodyPickerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEB92561717500685898 /* BodyPickerViewControllerDelegate.swift */; };
+		8446BEBD2561765200685898 /* CarsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEBC2561765200685898 /* CarsAssembly.swift */; };
+		8446BEC02561766100685898 /* CarDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEBF2561766100685898 /* CarDetailAssembly.swift */; };
+		8446BEC32561767300685898 /* BodyPickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BEC22561767300685898 /* BodyPickerAssembly.swift */; };
+		84548C81255BC53C000439CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548C80255BC53C000439CD /* AppDelegate.swift */; };
+		84548C83255BC53C000439CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548C82255BC53C000439CD /* SceneDelegate.swift */; };
+		84548C85255BC53C000439CD /* CarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548C84255BC53C000439CD /* CarsViewController.swift */; };
+		84548C8A255BC541000439CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84548C89255BC541000439CD /* Assets.xcassets */; };
+		84548C8D255BC541000439CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84548C8B255BC541000439CD /* LaunchScreen.storyboard */; };
+		84548C9B255BC7F1000439CD /* CarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548C9A255BC7F1000439CD /* CarsView.swift */; };
+		84548C9F255BCE80000439CD /* CarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548C9E255BCE80000439CD /* CarDetailViewController.swift */; };
+		84548CA3255BCE9D000439CD /* CarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CA2255BCE9D000439CD /* CarDetailView.swift */; };
+		84548CB0255BF291000439CD /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CAD255BF291000439CD /* Car.swift */; };
+		84548CB1255BF291000439CD /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CAE255BF291000439CD /* Body.swift */; };
+		84548CB2255BF291000439CD /* CarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CAF255BF291000439CD /* CarService.swift */; };
+		84548CB6255BFC5D000439CD /* Completions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CB5255BFC5D000439CD /* Completions.swift */; };
+		84548CBB255C1ABA000439CD /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CBA255C1ABA000439CD /* CarCell.swift */; };
+		84548CBE255C1B22000439CD /* BodyPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CBD255C1B22000439CD /* BodyPickerViewController.swift */; };
+		84548CC1255C1B3B000439CD /* BodyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CC0255C1B3B000439CD /* BodyPickerView.swift */; };
+		84548CC4255C3048000439CD /* BodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84548CC3255C3048000439CD /* BodyCell.swift */; };
+		8458407E255D522100B7833A /* CarsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458407D255D522100B7833A /* CarsInteractor.swift */; };
+		84584081255D545900B7833A /* CarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84584080255D545900B7833A /* CarsPresenter.swift */; };
+		84584084255D546C00B7833A /* CarsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84584083255D546B00B7833A /* CarsRouter.swift */; };
+		8458409C255D95C300B7833A /* CarDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458409B255D95C300B7833A /* CarDetailPresenter.swift */; };
+		8458409F255D95CF00B7833A /* CarDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458409E255D95CF00B7833A /* CarDetailRouter.swift */; };
+		845840A5255D964C00B7833A /* BodyPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845840A4255D964C00B7833A /* BodyPickerPresenter.swift */; };
+		845840A8255D965800B7833A /* BodyPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845840A7255D965800B7833A /* BodyPickerRouter.swift */; };
+		845BE50D255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */; };
+		845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */; };
+		845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */; };
+		845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8446BEAC256159A700685898 /* BodyPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerInteractor.swift; sourceTree = "<group>"; };
+		8446BEAF256159F200685898 /* CarDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailInteractor.swift; sourceTree = "<group>"; };
+		8446BEB92561717500685898 /* BodyPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
+		8446BEBC2561765200685898 /* CarsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsAssembly.swift; sourceTree = "<group>"; };
+		8446BEBF2561766100685898 /* CarDetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailAssembly.swift; sourceTree = "<group>"; };
+		8446BEC22561767300685898 /* BodyPickerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerAssembly.swift; sourceTree = "<group>"; };
+		84548C7D255BC53C000439CD /* homework-5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "homework-5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84548C80255BC53C000439CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		84548C82255BC53C000439CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		84548C84255BC53C000439CD /* CarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsViewController.swift; sourceTree = "<group>"; };
+		84548C89255BC541000439CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84548C8C255BC541000439CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84548C8E255BC541000439CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84548C9A255BC7F1000439CD /* CarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsView.swift; sourceTree = "<group>"; };
+		84548C9E255BCE80000439CD /* CarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewController.swift; sourceTree = "<group>"; };
+		84548CA2255BCE9D000439CD /* CarDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailView.swift; sourceTree = "<group>"; };
+		84548CAD255BF291000439CD /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		84548CAE255BF291000439CD /* Body.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
+		84548CAF255BF291000439CD /* CarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarService.swift; sourceTree = "<group>"; };
+		84548CB5255BFC5D000439CD /* Completions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completions.swift; sourceTree = "<group>"; };
+		84548CBA255C1ABA000439CD /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
+		84548CBD255C1B22000439CD /* BodyPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerViewController.swift; sourceTree = "<group>"; };
+		84548CC0255C1B3B000439CD /* BodyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerView.swift; sourceTree = "<group>"; };
+		84548CC3255C3048000439CD /* BodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyCell.swift; sourceTree = "<group>"; };
+		8458407D255D522100B7833A /* CarsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsInteractor.swift; sourceTree = "<group>"; };
+		84584080255D545900B7833A /* CarsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsPresenter.swift; sourceTree = "<group>"; };
+		84584083255D546B00B7833A /* CarsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsRouter.swift; sourceTree = "<group>"; };
+		8458409B255D95C300B7833A /* CarDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailPresenter.swift; sourceTree = "<group>"; };
+		8458409E255D95CF00B7833A /* CarDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailRouter.swift; sourceTree = "<group>"; };
+		845840A4255D964C00B7833A /* BodyPickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerPresenter.swift; sourceTree = "<group>"; };
+		845840A7255D965800B7833A /* BodyPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPickerRouter.swift; sourceTree = "<group>"; };
+		845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
+		845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "homework-5.xcdatamodel"; sourceTree = "<group>"; };
+		845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84548C7A255BC53C000439CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		84548C74255BC53C000439CD = {
+			isa = PBXGroup;
+			children = (
+				84548C7F255BC53C000439CD /* homework-5 */,
+				84548C7E255BC53C000439CD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		84548C7E255BC53C000439CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84548C7D255BC53C000439CD /* homework-5.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84548C7F255BC53C000439CD /* homework-5 */ = {
+			isa = PBXGroup;
+			children = (
+				845BE519255EE9FE00CA38E9 /* CoreData */,
+				84548CC7255C42DB000439CD /* Constants */,
+				84548C97255BC780000439CD /* Model */,
+				84584074255D455500B7833A /* Services */,
+				845BE50B255EA38A00CA38E9 /* Delegates */,
+				84584070255D44A200B7833A /* Modules */,
+				84548C80255BC53C000439CD /* AppDelegate.swift */,
+				84548C82255BC53C000439CD /* SceneDelegate.swift */,
+				84548C89255BC541000439CD /* Assets.xcassets */,
+				84548C8B255BC541000439CD /* LaunchScreen.storyboard */,
+				84548C8E255BC541000439CD /* Info.plist */,
+			);
+			path = "homework-5";
+			sourceTree = "<group>";
+		};
+		84548C97255BC780000439CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84548CAE255BF291000439CD /* Body.swift */,
+				84548CAD255BF291000439CD /* Car.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84548CC7255C42DB000439CD /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				84548CB5255BFC5D000439CD /* Completions.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		84584070255D44A200B7833A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				84584071255D44C400B7833A /* Cars */,
+				84584072255D44CC00B7833A /* CarDetail */,
+				84584073255D44D600B7833A /* BodyPicker */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		84584071255D44C400B7833A /* Cars */ = {
+			isa = PBXGroup;
+			children = (
+				8460171F25610C9D007B8EF7 /* CarsView */,
+				8458407D255D522100B7833A /* CarsInteractor.swift */,
+				84584080255D545900B7833A /* CarsPresenter.swift */,
+				84584083255D546B00B7833A /* CarsRouter.swift */,
+				8446BEBC2561765200685898 /* CarsAssembly.swift */,
+			);
+			path = Cars;
+			sourceTree = "<group>";
+		};
+		84584072255D44CC00B7833A /* CarDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8460172025610CBA007B8EF7 /* CarDetailView */,
+				8446BEAF256159F200685898 /* CarDetailInteractor.swift */,
+				8458409B255D95C300B7833A /* CarDetailPresenter.swift */,
+				8458409E255D95CF00B7833A /* CarDetailRouter.swift */,
+				8446BEBF2561766100685898 /* CarDetailAssembly.swift */,
+			);
+			path = CarDetail;
+			sourceTree = "<group>";
+		};
+		84584073255D44D600B7833A /* BodyPicker */ = {
+			isa = PBXGroup;
+			children = (
+				8460172125610CCD007B8EF7 /* BodyPickerView */,
+				8446BEAC256159A700685898 /* BodyPickerInteractor.swift */,
+				845840A4255D964C00B7833A /* BodyPickerPresenter.swift */,
+				845840A7255D965800B7833A /* BodyPickerRouter.swift */,
+				8446BEC22561767300685898 /* BodyPickerAssembly.swift */,
+			);
+			path = BodyPicker;
+			sourceTree = "<group>";
+		};
+		84584074255D455500B7833A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				84548CAF255BF291000439CD /* CarService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		845BE50B255EA38A00CA38E9 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				845BE50C255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift */,
+				8446BEB92561717500685898 /* BodyPickerViewControllerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		845BE519255EE9FE00CA38E9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */,
+				845BE51E255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift */,
+				845BE51F255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		8460171F25610C9D007B8EF7 /* CarsView */ = {
+			isa = PBXGroup;
+			children = (
+				84548CBA255C1ABA000439CD /* CarCell.swift */,
+				84548C9A255BC7F1000439CD /* CarsView.swift */,
+				84548C84255BC53C000439CD /* CarsViewController.swift */,
+			);
+			path = CarsView;
+			sourceTree = "<group>";
+		};
+		8460172025610CBA007B8EF7 /* CarDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				84548CA2255BCE9D000439CD /* CarDetailView.swift */,
+				84548C9E255BCE80000439CD /* CarDetailViewController.swift */,
+			);
+			path = CarDetailView;
+			sourceTree = "<group>";
+		};
+		8460172125610CCD007B8EF7 /* BodyPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				84548CC3255C3048000439CD /* BodyCell.swift */,
+				84548CC0255C1B3B000439CD /* BodyPickerView.swift */,
+				84548CBD255C1B22000439CD /* BodyPickerViewController.swift */,
+			);
+			path = BodyPickerView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84548C7C255BC53C000439CD /* homework-5 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84548C91255BC541000439CD /* Build configuration list for PBXNativeTarget "homework-5" */;
+			buildPhases = (
+				84548C79255BC53C000439CD /* Sources */,
+				84548C7A255BC53C000439CD /* Frameworks */,
+				84548C7B255BC53C000439CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "homework-5";
+			productName = "homework-5";
+			productReference = 84548C7D255BC53C000439CD /* homework-5.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84548C75255BC53C000439CD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					84548C7C255BC53C000439CD = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 84548C78255BC53C000439CD /* Build configuration list for PBXProject "homework-5" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 84548C74255BC53C000439CD;
+			productRefGroup = 84548C7E255BC53C000439CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84548C7C255BC53C000439CD /* homework-5 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84548C7B255BC53C000439CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84548C8D255BC541000439CD /* LaunchScreen.storyboard in Resources */,
+				84548C8A255BC541000439CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84548C79255BC53C000439CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84548C85255BC53C000439CD /* CarsViewController.swift in Sources */,
+				845BE51C255EEA1400CA38E9 /* homework-5.xcdatamodeld in Sources */,
+				84548C9B255BC7F1000439CD /* CarsView.swift in Sources */,
+				8458409F255D95CF00B7833A /* CarDetailRouter.swift in Sources */,
+				845BE50D255EA3B700CA38E9 /* CarDetailViewControllerDelegate.swift in Sources */,
+				8458407E255D522100B7833A /* CarsInteractor.swift in Sources */,
+				84548C81255BC53C000439CD /* AppDelegate.swift in Sources */,
+				84548CB1255BF291000439CD /* Body.swift in Sources */,
+				84584081255D545900B7833A /* CarsPresenter.swift in Sources */,
+				845BE521255EEAC800CA38E9 /* CarEntity+CoreDataProperties.swift in Sources */,
+				84548C83255BC53C000439CD /* SceneDelegate.swift in Sources */,
+				84548CBB255C1ABA000439CD /* CarCell.swift in Sources */,
+				84584084255D546C00B7833A /* CarsRouter.swift in Sources */,
+				8446BEB0256159F200685898 /* CarDetailInteractor.swift in Sources */,
+				84548CA3255BCE9D000439CD /* CarDetailView.swift in Sources */,
+				8446BEC32561767300685898 /* BodyPickerAssembly.swift in Sources */,
+				8446BEC02561766100685898 /* CarDetailAssembly.swift in Sources */,
+				84548CB2255BF291000439CD /* CarService.swift in Sources */,
+				845BE520255EEAC800CA38E9 /* CarEntity+CoreDataClass.swift in Sources */,
+				8446BEBA2561717500685898 /* BodyPickerViewControllerDelegate.swift in Sources */,
+				84548CC1255C1B3B000439CD /* BodyPickerView.swift in Sources */,
+				8446BEBD2561765200685898 /* CarsAssembly.swift in Sources */,
+				84548CBE255C1B22000439CD /* BodyPickerViewController.swift in Sources */,
+				8458409C255D95C300B7833A /* CarDetailPresenter.swift in Sources */,
+				84548CB0255BF291000439CD /* Car.swift in Sources */,
+				845840A8255D965800B7833A /* BodyPickerRouter.swift in Sources */,
+				84548C9F255BCE80000439CD /* CarDetailViewController.swift in Sources */,
+				8446BEAD256159A700685898 /* BodyPickerInteractor.swift in Sources */,
+				84548CB6255BFC5D000439CD /* Completions.swift in Sources */,
+				845840A5255D964C00B7833A /* BodyPickerPresenter.swift in Sources */,
+				84548CC4255C3048000439CD /* BodyCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		84548C8B255BC541000439CD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84548C8C255BC541000439CD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		84548C8F255BC541000439CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		84548C90255BC541000439CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		84548C92255BC541000439CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "homework-5/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alec.homework-5";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84548C93255BC541000439CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "homework-5/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alec.homework-5";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84548C78255BC53C000439CD /* Build configuration list for PBXProject "homework-5" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84548C8F255BC541000439CD /* Debug */,
+				84548C90255BC541000439CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84548C91255BC541000439CD /* Build configuration list for PBXNativeTarget "homework-5" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84548C92255BC541000439CD /* Debug */,
+				84548C93255BC541000439CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		845BE51A255EEA1400CA38E9 /* homework-5.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */,
+			);
+			currentVersion = 845BE51B255EEA1400CA38E9 /* homework-5.xcdatamodel */;
+			path = "homework-5.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 84548C75255BC53C000439CD /* Project object */;
+}

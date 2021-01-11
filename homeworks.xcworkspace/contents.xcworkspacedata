@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:homework-1/homework-1.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:homework-1/../homework-2/homework-2.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:homework-3/homework-3.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:homework-4/homework-4.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:homework-5/homework-5.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "homework-6">
+      <FileRef
+         location = "group:homework-6/BuilderExample/BuilderExample.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:homework-6/ObserverExample/ObserverExample.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:homework-7/homework-7.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:homework-8/homework-8.xcodeproj">
+   </FileRef>
+</Workspace>
